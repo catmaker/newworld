@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+ ## 📆 프로젝트 기간
+#### 2024.1.03 ~ 2024.2.03 (4주)  | (배포 주소 예정)
 
-## Getting Started
+<br/>
 
-First, run the development server:
+## 📑 소개
+#### <blockquote>퀴즈를 풀고 유저가 직접 출제도 가능하며 커뮤니티 기능이 있는 사이트 입니다. <br/> 퀴즈를 풀어보거나 퀴즈를 내는 호스트가 되어보세요!</blockquote>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<br/>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 💇‍♂️팀원  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<br/>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<table>
+    <tr align="center">
+        <th><B>신지수<B></th>
+        <th><B>전병일<B></th>
+    </tr>
+    <tr align="center">
+        <td>
+            <img src="https://avatars.githubusercontent.com/u/114233139?v=4?size=150">
+            <br>
+            <a href="https://github.com/catmaker"><I>신지수</I></a>
+        </td>
+        <td>
+            <img src="#">
+            <br>
+            <a href="https://github.com/"><I>전병일</I></a>
+        </td>
+</table>
 
-## Learn More
+<br/>
 
-To learn more about Next.js, take a look at the following resources:
+## ⚒ 기술 스택
+<img src="https://camo.githubusercontent.com/494b0f23952229478851f520adfe3e140e629a5f0423e7c9d6c333ed88be65a0/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f52656163742d3631444146423f7374796c653d666c61742d737175617265266c6f676f3d5265616374266c6f676f436f6c6f723d7768697465" /><img src="https://img.shields.io/badge/Next.js-000?style=for-the-badge&logo=Next.js&logoColor=fff" height="20px"/><img src="https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=TypeScript&logoColor=fff"/><img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=fff" height="20px"/><img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=fff" height="20px"/>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<br/>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 👨‍👩‍👧‍👦 협업 방식
+저희는 팀원간 협업을 통해 현재 프로젝트의 진행 상황 및 이슈를 관리하고자 Github Project랑 Github Issue를 활용해 프로젝트를 관리했습니다.
+![Untitled (5)](https://github.com/hyun0509-iva/final_project_sub/assets/151101433/7052a74c-4559-4d8b-b96c-015437b5d770)
+![Untitled (4)](https://github.com/hyun0509-iva/final_project_sub/assets/151101433/c02cfdcb-cf80-4f61-be08-35bfd194592b)
 
-## Deploy on Vercel
+<br/>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚀 주요 기능
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 로그인 기능
+● 로그인을 통해 회원가입 이후 사용할 수 있도록 합니다.
+
