@@ -19,7 +19,7 @@
     </tr>
     <tr align="center">
         <td>
-            <img src="https://avatars.githubusercontent.com/u/114233139?v=4?size=150">
+            <img src="https://avatars.githubusercontent.com/u/114233139?v=4?size=100">
             <br>
             <a href="https://github.com/catmaker"><I>신지수</I></a>
         </td>
@@ -33,8 +33,14 @@
 <br/>
 
 ## ⚒ 기술 스택
-  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/Next.js-000?style=for-the-badge&logo=Next.js&logoColor=fff" height="20px"/><img src="https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=TypeScript&logoColor=fff"/><img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=fff" height="20px"/><img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=fff" height="20px"/>
-
+  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
+  <img src="https://img.shields.io/badge/tailwind-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
+  <img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white">
+  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+  <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
+  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/socket.io-010101?style=for-the-badge&logo=socket.io&logoColor=white">
+  
 <br/>
 
 ## 👨‍👩‍👧‍👦 협업 방식
