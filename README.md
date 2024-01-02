@@ -33,7 +33,7 @@
 <br/>
 
 ## ⚒ 기술 스택
-<img src="https://img.shields.io/badge/MySql-#4479A1?style=flat-square&logo=mysql&logoColor=white" /><img src="https://img.shields.io/badge/Next.js-000?style=for-the-badge&logo=Next.js&logoColor=fff" height="20px"/><img src="https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=TypeScript&logoColor=fff"/><img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=fff" height="20px"/><img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=fff" height="20px"/>
+  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/Next.js-000?style=for-the-badge&logo=Next.js&logoColor=fff" height="20px"/><img src="https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=TypeScript&logoColor=fff"/><img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=fff" height="20px"/><img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=fff" height="20px"/>
 
 <br/>
 
