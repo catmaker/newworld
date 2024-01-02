@@ -39,8 +39,6 @@
 
 ## 👨‍👩‍👧‍👦 협업 방식
 저희는 팀원간 협업을 통해 현재 프로젝트의 진행 상황 및 이슈를 관리하고자 Github Project랑 Github Issue를 활용해 프로젝트를 관리했습니다.
-![Untitled (5)](https://github.com/hyun0509-iva/final_project_sub/assets/151101433/7052a74c-4559-4d8b-b96c-015437b5d770)
-![Untitled (4)](https://github.com/hyun0509-iva/final_project_sub/assets/151101433/c02cfdcb-cf80-4f61-be08-35bfd194592b)
 
 <br/>
 
