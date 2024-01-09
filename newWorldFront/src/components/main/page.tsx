@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./mainpage.module.scss";
-
+import Link from "next/link";
 const Mainpage = () => {
   const [text, setText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
@@ -58,7 +58,9 @@ const Mainpage = () => {
         </button>
         <div className={styles.text}>{text}</div>
         {showButton && (
-          <button className={styles.button}>모험을 시작하기</button>
+          <Link href={`/intro`}>
+            <button className={styles.button}>모험을 시작하기</button>
+          </Link>
         )}
       </div>
       <audio ref={audioRef} src="/mp3/mainbgm.mp3" loop />
