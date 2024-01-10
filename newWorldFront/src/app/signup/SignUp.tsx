@@ -40,14 +40,46 @@ const SignUp = () => {
   };
 
   const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    // 모든 인풋 필드가 채워져 있는지 확인
     if (
-      NameField.value.length > 13 ||
-      PasswordField.value.length > 13 ||
-      ConfirmPasswordField.value.length > 13
+      !NameField.value ||
+      !EmailField.value ||
+      !PasswordField.value ||
+      !ConfirmPasswordField.value
     ) {
-      e.preventDefault();
-      alert("13자 이내로 작성해주세요.");
+      alert("모든 필드를 채워주세요.");
+      return;
     }
+
+    // 패스워드가 8자 이상인지 확인
+    if (PasswordField.value.length < 8) {
+      alert("패스워드는 8자 이상이어야 합니다.");
+      return;
+    }
+
+    // 패스워드가 서로 일치하는지 확인
+    if (PasswordField.value !== ConfirmPasswordField.value) {
+      alert("패스워드가 일치하지 않습니다.");
+      return;
+    }
+
+    // 이름과 패스워드가 13자 이하인지 확인
+    if (NameField.value.length > 13 || PasswordField.value.length > 13) {
+      alert("이름과 패스워드는 13자 이내로 작성해주세요.");
+      return;
+    }
+
+    // 이메일 형식이 올바른지 확인
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(EmailField.value)) {
+      alert("이메일 형식이 올바르지 않습니다.");
+      return;
+    }
+
+    // 모든 조건이 충족되면, 폼 제출 처리를 계속 진행
+    // ...
   };
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
