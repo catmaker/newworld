@@ -9,8 +9,10 @@ import { useEmailField, useInputField } from "./useInputField";
 type LanguageKeys = "en" | "ko";
 
 const SignUp = () => {
+  // 언어 선택
   const [language, setLanguage] = useState<LanguageKeys>("en");
-
+  // 패스워드 보이기/숨기기
+  const [showPassword, setShowPassword] = useState(false);
   // 이름 입력시 13자 제한 커스텀 훅
   const NameField = useInputField(13);
   const PasswordField = useInputField(13);
@@ -31,6 +33,9 @@ const SignUp = () => {
       e.preventDefault();
       alert("13자 이내로 작성해주세요.");
     }
+  };
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
   return (
     <div className={styles.container}>
@@ -90,7 +95,7 @@ const SignUp = () => {
                 )}
                 <input
                   className={styles.content_input_box}
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder={translations[language].password}
                   onChange={PasswordField.handleChange}
                 />
@@ -99,7 +104,7 @@ const SignUp = () => {
                 )}
                 <input
                   className={styles.content_input_box}
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder={translations[language].confirmPassword}
                   onChange={ConfirmPasswordField.handleChange}
                 />
@@ -107,7 +112,10 @@ const SignUp = () => {
                   <p className={styles.warning}>
                     {ConfirmPasswordField.warning}
                   </p>
-                )}
+                )}{" "}
+                <button type="button" onClick={toggleShowPassword}>
+                  {showPassword ? "Hide" : "Show"}
+                </button>
               </div>
               <input
                 className={styles.signUp_button}
