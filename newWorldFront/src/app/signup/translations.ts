@@ -30,7 +30,7 @@ export const translations = {
     confirmPassword: "Confirm Password",
     signUp: "Sign Up",
     changeToKorean: "Change to Korean", // 추가
-    changeToEnglish: "Change to ENG",
+    changeToEnglish: "Change to EN",
   },
   ko: {
     startForFree: "무료로 시작하기",
