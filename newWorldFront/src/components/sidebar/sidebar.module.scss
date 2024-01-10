@@ -10,11 +10,13 @@
   transition: transform 0.3s ease-in-out;
   overflow: auto;
 }
+.first_ul {
+  margin-top: 3rem;
+}
 
 .sidebar ul {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
 .sidebar ul li {
@@ -35,4 +37,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.sidebar a {
+  text-decoration: none;
+  color: black;
 }

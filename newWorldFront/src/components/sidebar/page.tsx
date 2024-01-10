@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./sidebar.module.scss";
+import Link from "next/link";
 
 export const Sidebar = () => {
   const [isSidebarVisible, setSidebarVisible] = useState(true);
@@ -15,13 +16,22 @@ export const Sidebar = () => {
       </button>
       {isSidebarVisible && (
         <div className={`${styles.sidebar} ${styles.flex}`}>
-          <ul>
-            <li>labyrinth</li>
-            <li>community</li>
-            <li>ranking</li>
-            <li>newworld</li>
+          <ul className={styles.first_ul}>
+            <Link href={"/labyrinth"}>
+              <li>labyrinth</li>
+            </Link>
+            <Link href={"/community"}>
+              <li>community</li>
+            </Link>
+            <Link href={"/ranking"}>
+              <li>ranking</li>
+            </Link>
+            <Link href={"/newworld"}>
+              <li>newworld</li>
+            </Link>
           </ul>
           <ul>
+            <li>mypage</li>
             <li>instagram</li>
             <li>youtube</li>
             <li>github</li>
