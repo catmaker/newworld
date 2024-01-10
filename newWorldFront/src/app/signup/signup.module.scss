@@ -67,7 +67,7 @@
 .flex {
   display: flex;
 }
-.flex > ul > li {
+.flex > ul > a {
   margin-left: 9rem;
 }
 .flex > h1 {
@@ -130,8 +130,9 @@
   width: 34rem;
 }
 .input_wrapper {
-  position: relative;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .password_toggle {
   width: 20px;

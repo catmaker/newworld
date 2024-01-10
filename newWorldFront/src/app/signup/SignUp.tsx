@@ -63,8 +63,12 @@ const SignUp = () => {
             <div className={styles.flex}>
               <h1>New World</h1>
               <ul className={styles.flex}>
-                <li>Home</li>
-                <li>Main</li>
+                <Link href={`/intro`}>
+                  <li>Home</li>
+                </Link>
+                <Link href={`/intro`}>
+                  <li>Home</li>
+                </Link>
               </ul>
             </div>
           </header>
