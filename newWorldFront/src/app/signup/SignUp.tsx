@@ -9,7 +9,9 @@ import {
   useInputField,
   usePasswordField,
 } from "./useInputField";
-
+import Image from "next/image";
+import hide from "/public/img/hide-password.png";
+import show from "/public/img/show-password.png";
 type LanguageKeys = "en" | "ko";
 
 const SignUp = () => {
@@ -106,21 +108,41 @@ const SignUp = () => {
                 {EmailField.warning && (
                   <p className={styles.warning}>{EmailField.warning}</p>
                 )}
-                <input
-                  className={styles.content_input_box}
-                  type={showPassword ? "text" : "password"}
-                  placeholder={translations[language].password}
-                  onChange={PasswordField.handleChange}
-                />
+                <div className={styles.input_wrapper}>
+                  <input
+                    className={styles.content_input_box}
+                    type={showPassword ? "text" : "password"}
+                    placeholder={translations[language].password}
+                    onChange={PasswordField.handleChange}
+                  />
+                  <Image
+                    width={20}
+                    height={20}
+                    src={showPassword ? hide : show}
+                    className={styles.password_toggle}
+                    onClick={toggleShowPassword}
+                    alt="hide-password"
+                  />
+                </div>
                 {PasswordField.warning && (
                   <p className={styles.warning}>{PasswordField.warning}</p>
                 )}
-                <input
-                  className={styles.content_input_box}
-                  type={showPassword ? "text" : "password"}
-                  placeholder={translations[language].confirmPassword}
-                  onChange={ConfirmPasswordField.handleChange}
-                />
+                <div className={styles.input_wrapper}>
+                  <input
+                    className={styles.content_input_box}
+                    type={showPassword ? "text" : "password"}
+                    placeholder={translations[language].confirmPassword}
+                    onChange={ConfirmPasswordField.handleChange}
+                  />
+                  <Image
+                    width={20}
+                    height={20}
+                    src={showPassword ? hide : show}
+                    className={styles.password_toggle}
+                    onClick={toggleShowPassword}
+                    alt="hide-password"
+                  />
+                </div>
                 {ConfirmPasswordField.warning && (
                   <p className={styles.warning}>
                     {ConfirmPasswordField.warning}
@@ -135,9 +157,6 @@ const SignUp = () => {
                       : "비밀번호가 일치하지 않습니다."}
                   </p>
                 )}
-                <button type="button" onClick={toggleShowPassword}>
-                  {showPassword ? "Hide" : "Show"}
-                </button>
               </div>
               <input
                 className={styles.signUp_button}

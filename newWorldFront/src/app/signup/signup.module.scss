@@ -116,6 +116,10 @@
   width: 15rem;
 }
 .content_input_box {
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  padding-right: 40px;
   display: flex;
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -124,6 +128,20 @@
   border-radius: 1.5rem;
   margin-right: 1rem;
   width: 34rem;
+}
+.input_wrapper {
+  position: relative;
+  display: inline-block;
+}
+.password_toggle {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 22px;
+  top: calc(
+    50% - 10px
+  ); // 인풋 필드의 높이의 절반에서 이미지 높이의 절반을 뺀 값
+  cursor: pointer;
 }
 .signUp_button {
   margin-top: 1rem;
