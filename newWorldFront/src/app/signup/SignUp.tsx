@@ -1,10 +1,19 @@
 "use client";
-
-import React from "react";
+import React, { useState } from "react";
 import styles from "./signup.module.scss";
 import "@/app/globals.scss";
 import Link from "next/link";
+import { translations } from "./translations";
+
+type LanguageKeys = "en" | "ko";
+
 const SignUp = () => {
+  const [language, setLanguage] = useState<LanguageKeys>("en");
+
+  const changeLanguage = () => {
+    setLanguage(language === "en" ? "ko" : "en");
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.flexbox}>
@@ -23,48 +32,56 @@ const SignUp = () => {
           </header>
           <div className={styles.content}>
             <div>
-              <p className={styles.content_p}>START FOR FREE</p>
-              <h1>Create new account</h1>
-              <span>
-                Already A Member? <Link href={`/login`}>Log In</Link>
-              </span>
+              <p className={styles.content_p}>
+                {translations[language].startForFree}
+              </p>
+              <h1>{translations[language].createNewAccount}</h1>
+              <p className={styles.content_p}>
+                {translations[language].alreadyAMember}
+                <Link href={`/login`}>{translations[language].logIn}</Link>
+              </p>
             </div>
             <form action="">
               <div className={styles.box_size}>
                 <input
                   className={styles.content_input_name_box}
                   type="text"
-                  placeholder="First Name"
+                  placeholder={translations[language].firstName}
                 />
                 <input
                   className={styles.content_input_name_box}
                   type="text"
-                  placeholder="Last Name"
+                  placeholder={translations[language].lastName}
                 />
               </div>
               <div>
                 <input
                   className={styles.content_input_box}
                   type="text"
-                  placeholder="Email"
+                  placeholder={translations[language].email}
                 />
                 <input
                   className={styles.content_input_box}
                   type="text"
-                  placeholder="Password"
+                  placeholder={translations[language].password}
                 />
                 <input
                   className={styles.content_input_box}
                   type="text"
-                  placeholder="Confirm Password"
+                  placeholder={translations[language].confirmPassword}
                 />
               </div>
               <input
                 className={styles.signUp_button}
                 type="submit"
-                value="Sign Up"
+                value={translations[language].signUp}
               />
-            </form>
+            </form>{" "}
+            <button className={styles.signUp_button} onClick={changeLanguage}>
+              {language === "en"
+                ? translations["ko"].changeToKorean
+                : translations["en"].changeToEnglish}
+            </button>
           </div>
         </div>
       </div>
