@@ -1,10 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./signup.module.scss";
 import "@/app/globals.scss";
 import Link from "next/link";
 import { translations } from "./translations";
-import { useEmailField, useInputField } from "./useInputField";
+import {
+  useEmailField,
+  useInputField,
+  usePasswordField,
+} from "./useInputField";
 
 type LanguageKeys = "en" | "ko";
 
@@ -15,10 +19,19 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   // 이름 입력시 13자 제한 커스텀 훅
   const NameField = useInputField(13);
-  const PasswordField = useInputField(13);
+  const PasswordField = usePasswordField(8, 13);
   const ConfirmPasswordField = useInputField(13);
   // 이메일 정규식 확인 커스텀 훅
   const EmailField = useEmailField();
+  // 패스워드 일치 여부 확인
+  const [passwordMatch, setPasswordMatch] = useState(true);
+
+  useEffect(() => {
+    if (PasswordField.value && ConfirmPasswordField.value) {
+      setPasswordMatch(PasswordField.value === ConfirmPasswordField.value);
+    }
+  }, [PasswordField.value, ConfirmPasswordField.value]);
+
   // 사용자 ko, en 선택
   const changeLanguage = () => {
     setLanguage(language === "en" ? "ko" : "en");
@@ -112,7 +125,16 @@ const SignUp = () => {
                   <p className={styles.warning}>
                     {ConfirmPasswordField.warning}
                   </p>
-                )}{" "}
+                )}
+                {PasswordField.value && ConfirmPasswordField.value && (
+                  <p
+                    className={passwordMatch ? styles.success : styles.warning}
+                  >
+                    {passwordMatch
+                      ? "비밀번호가 일치합니다."
+                      : "비밀번호가 일치하지 않습니다."}
+                  </p>
+                )}
                 <button type="button" onClick={toggleShowPassword}>
                   {showPassword ? "Hide" : "Show"}
                 </button>

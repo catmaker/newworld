@@ -33,3 +33,21 @@ export const useEmailField = () => {
 
   return { value, warning, handleChange };
 };
+
+export const usePasswordField = (minLength: number, maxLength: number) => {
+  const [value, setValue] = useState("");
+  const [warning, setWarning] = useState("");
+
+  const handleChange = (e: any) => {
+    setValue(e.target.value);
+    if (e.target.value.length < minLength) {
+      setWarning("비밀번호는 최소 8자 이상이어야 합니다.");
+    } else if (e.target.value.length > maxLength) {
+      setWarning("비밀번호는 최대 13자까지 가능합니다.");
+    } else {
+      setWarning("");
+    }
+  };
+
+  return { value, warning, handleChange };
+};
