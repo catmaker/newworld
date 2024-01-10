@@ -4,7 +4,7 @@ import styles from "./signup.module.scss";
 import "@/app/globals.scss";
 import Link from "next/link";
 import { translations } from "./translations";
-import { useInputField } from "./useInputField";
+import { useEmailField, useInputField } from "./useInputField";
 
 type LanguageKeys = "en" | "ko";
 
@@ -13,9 +13,10 @@ const SignUp = () => {
 
   // 이름 입력시 13자 제한 커스텀 훅
   const NameField = useInputField(13);
-  const passwordField = useInputField(13);
-  const confirmPasswordField = useInputField(13);
-
+  const PasswordField = useInputField(13);
+  const ConfirmPasswordField = useInputField(13);
+  // 이메일 정규식 확인 커스텀 훅
+  const EmailField = useEmailField();
   // 사용자 ko, en 선택
   const changeLanguage = () => {
     setLanguage(language === "en" ? "ko" : "en");
@@ -24,8 +25,8 @@ const SignUp = () => {
   const handleSubmit = (e: any) => {
     if (
       NameField.value.length > 13 ||
-      passwordField.value.length > 13 ||
-      confirmPasswordField.value.length > 13
+      PasswordField.value.length > 13 ||
+      ConfirmPasswordField.value.length > 13
     ) {
       e.preventDefault();
       alert("13자 이내로 작성해주세요.");
@@ -80,27 +81,31 @@ const SignUp = () => {
               <div>
                 <input
                   className={styles.content_input_box}
-                  type="text"
+                  type="email"
                   placeholder={translations[language].email}
+                  onChange={EmailField.handleChange}
                 />
+                {EmailField.warning && (
+                  <p className={styles.warning}>{EmailField.warning}</p>
+                )}
                 <input
                   className={styles.content_input_box}
                   type="password"
                   placeholder={translations[language].password}
-                  onChange={passwordField.handleChange}
+                  onChange={PasswordField.handleChange}
                 />
-                {passwordField.warning && (
-                  <p className={styles.warning}>{passwordField.warning}</p>
+                {PasswordField.warning && (
+                  <p className={styles.warning}>{PasswordField.warning}</p>
                 )}
                 <input
                   className={styles.content_input_box}
                   type="password"
                   placeholder={translations[language].confirmPassword}
-                  onChange={confirmPasswordField.handleChange}
+                  onChange={ConfirmPasswordField.handleChange}
                 />
-                {confirmPasswordField.warning && (
+                {ConfirmPasswordField.warning && (
                   <p className={styles.warning}>
-                    {confirmPasswordField.warning}
+                    {ConfirmPasswordField.warning}
                   </p>
                 )}
               </div>
