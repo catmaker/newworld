@@ -144,40 +144,42 @@ const SignUp = () => {
                 {EmailField.warning && (
                   <p className={styles.warning}>{EmailField.warning}</p>
                 )}
-                <div className={styles.input_wrapper}>
-                  <input
-                    className={styles.content_input_box}
-                    type={showPassword ? "text" : "password"}
-                    placeholder={translations[language].password}
-                    onChange={PasswordField.handleChange}
-                  />
-                  <Image
-                    width={20}
-                    height={20}
-                    src={showPassword ? hide : show}
-                    className={styles.password_toggle}
-                    onClick={toggleShowPassword}
-                    alt="hide-password"
-                  />
-                </div>
-                {PasswordField.warning && (
-                  <p className={styles.warning}>{PasswordField.warning}</p>
-                )}
-                <div className={styles.input_wrapper}>
-                  <input
-                    className={styles.content_input_box}
-                    type={showPassword ? "text" : "password"}
-                    placeholder={translations[language].confirmPassword}
-                    onChange={ConfirmPasswordField.handleChange}
-                  />
-                  <Image
-                    width={20}
-                    height={20}
-                    src={showPassword ? hide : show}
-                    className={styles.password_toggle}
-                    onClick={toggleShowPassword}
-                    alt="hide-password"
-                  />
+                <div className={styles.password_wrapper}>
+                  <div className={styles.input_wrapper}>
+                    <input
+                      className={styles.content_input_box}
+                      type={showPassword ? "text" : "password"}
+                      placeholder={translations[language].password}
+                      onChange={PasswordField.handleChange}
+                    />
+                    <Image
+                      width={20}
+                      height={20}
+                      src={showPassword ? hide : show}
+                      className={styles.password_toggle}
+                      onClick={toggleShowPassword}
+                      alt="hide-password"
+                    />
+                  </div>
+                  {PasswordField.warning && (
+                    <p className={styles.warning}>{PasswordField.warning}</p>
+                  )}
+                  <div className={styles.input_wrapper}>
+                    <input
+                      className={styles.content_input_box}
+                      type={showPassword ? "text" : "password"}
+                      placeholder={translations[language].confirmPassword}
+                      onChange={ConfirmPasswordField.handleChange}
+                    />
+                    <Image
+                      width={20}
+                      height={20}
+                      src={showPassword ? hide : show}
+                      className={styles.password_toggle}
+                      onClick={toggleShowPassword}
+                      alt="hide-password"
+                    />
+                  </div>
                 </div>
                 {ConfirmPasswordField.warning && (
                   <p className={styles.warning}>
