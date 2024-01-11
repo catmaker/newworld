@@ -1,1 +1,2 @@
-Nextjs13 + SpringBoot
+Nextjs13 + SpringBoot 프로젝트
+
