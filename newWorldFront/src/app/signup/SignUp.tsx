@@ -93,13 +93,19 @@ const SignUp = () => {
               <img src="/img/logo2.png" alt="" />
             </div>
             <div className={styles.flex}>
-              <h1>New World</h1>
+              <h1>
+                {Array.from("New World").map((char, i) => (
+                  <span key={i} style={{ animationDelay: `${i * 0.5}s` }}>
+                    {char}
+                  </span>
+                ))}
+              </h1>
               <ul className={styles.flex}>
                 <Link href={`/intro`}>
-                  <li>Home</li>
+                  <li>🏠 Home</li>
                 </Link>
                 <Link href={`/intro`}>
-                  <li>Home</li>
+                  <li>⚔︎ Guide</li>
                 </Link>
               </ul>
             </div>

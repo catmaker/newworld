@@ -21,7 +21,7 @@ export const translations = {
   en: {
     startForFree: "START FOR FREE",
     createNewAccount: "Create new account",
-    alreadyAMember: "Already A Member?",
+    alreadyAMember: "Have you ever been to our town?",
     logIn: "Log In",
     firstName: "First Name",
     lastName: "Last Name",
@@ -35,7 +35,7 @@ export const translations = {
   ko: {
     startForFree: "무료로 시작하기",
     createNewAccount: "새 계정 만들기",
-    alreadyAMember: "이미 회원이신가요?",
+    alreadyAMember: "저희 마을에 오신 적이 있나요?",
     logIn: "로그인",
     firstName: "이름",
     lastName: "성",
