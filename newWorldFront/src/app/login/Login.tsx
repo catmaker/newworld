@@ -4,10 +4,36 @@ import styles from "./login.module.scss";
 import Link from "next/link";
 const Login = () => {
   const [typing, setTyping] = useState(false);
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleInputChange = (event: any) => {
+  const handleIdChange = (event: any) => {
+    setId(event.target.value);
     setTyping(event.target.value !== "");
   };
+
+  const handlePasswordChange = (event: any) => {
+    setPassword(event.target.value);
+    setTyping(event.target.value !== "");
+  };
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+
+    if (id === "" && password === "") {
+      alert("아이디와 비밀번호를 모두 입력해주세요.");
+      return;
+    } else if (id === "") {
+      alert("아이디를 입력해주세요.");
+      return;
+    } else if (password === "") {
+      alert("비밀번호를 입력해주세요.");
+      return;
+    }
+
+    // 아이디와 비밀번호가 모두 채워져 있는 경우, 로그인 처리를 수행합니다.
+    // ...
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.flexbox}>
@@ -42,7 +68,7 @@ const Login = () => {
               <h1>환영해요!</h1>
               <p className={styles.content_p}>저희 마을에 오신 적이 있나요?</p>
             </div>
-            <form action="">
+            <form action="" onSubmit={handleSubmit}>
               <div className={styles.input_box}>
                 <input
                   className={`${styles.content_input_box} ${
@@ -50,7 +76,7 @@ const Login = () => {
                   }`}
                   type="text"
                   placeholder="아이디"
-                  onChange={handleInputChange}
+                  onChange={handleIdChange}
                 />
                 <input
                   className={`${styles.content_input_box} ${
@@ -58,11 +84,13 @@ const Login = () => {
                   }`}
                   type="password"
                   placeholder="비밀번호"
-                  onChange={handleInputChange}
+                  onChange={handlePasswordChange}
                 />
               </div>
               <div className={styles.btn_box}>
-                <button className={styles.button}>입장하기</button>
+                <button className={styles.button} type="submit">
+                  입장하기
+                </button>
                 <Link href={`/signup`}>
                   <button className={styles.button}>처음입니다.</button>
                 </Link>
