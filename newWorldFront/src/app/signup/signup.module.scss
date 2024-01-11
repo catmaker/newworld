@@ -129,11 +129,16 @@
   margin-right: 1rem;
   width: 34rem;
 }
-.input_wrapper {
-  display: flex;
+.password_wrapper {
+  display: inline-flex;
   flex-direction: column;
-  gap: 10px;
 }
+.input_wrapper {
+  position: relative;
+  display: inline-block;
+  flex-basis: 100%;
+}
+
 .password_toggle {
   width: 20px;
   height: 20px;
