@@ -1,0 +1,110 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+.flexbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.main_box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+
+  &::before {
+    content: "";
+    background-image: url("/img/intro.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1; // 원하는 투명도
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+  }
+}
+.header {
+  width: 100%;
+  height: 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+  font-size: 1.5rem;
+  margin-top: 0.8rem;
+}
+.img_box {
+  width: 300px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  overflow: hidden;
+}
+.img_box > img {
+  width: 300px;
+  height: 30px;
+  object-fit: contain;
+  cursor: pointer;
+}
+.img_box img:hover {
+  scale: (1.007);
+}
+.flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  gap: 8rem;
+}
+.ul_box {
+  flex-grow: 0.5;
+}
+.flex > span {
+  width: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.flex_column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.text {
+  font-size: 1.5rem;
+}
+.text_en {
+  margin-top: 0.8rem;
+  font-size: 0.8rem;
+}
+.flex_column:hover {
+  color: #db6f39;
+}
