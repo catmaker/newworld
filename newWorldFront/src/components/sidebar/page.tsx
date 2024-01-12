@@ -3,7 +3,7 @@ import styles from "./sidebar.module.scss";
 import Link from "next/link";
 
 export const Sidebar = () => {
-  const [isSidebarVisible, setSidebarVisible] = useState(true);
+  const [isSidebarVisible, setSidebarVisible] = useState(false);
 
   const handleToggleClick = () => {
     setSidebarVisible(!isSidebarVisible);
