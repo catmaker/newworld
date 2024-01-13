@@ -1,0 +1,23 @@
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.second-path {
+  animation: rotate 10s linear infinite;
+  transform-origin: 50% 50%;
+}
+.svg {
+  cursor: pointer;
+  margin-top: 1rem;
+}
+.svg:hover {
+  scale: (1.1);
+  .second-path {
+    animation: rotate 3s linear infinite;
+  }
+}
