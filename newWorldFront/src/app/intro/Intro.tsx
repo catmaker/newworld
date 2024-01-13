@@ -1,17 +1,19 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./intro.module.scss";
 import Playbutton from "./Playbutton";
 import Link from "next/link";
 import { Link as ScrollLink, Element, scroller } from "react-scroll";
 
 const Intro = () => {
+  const [key, setKey] = useState(0);
   useEffect(() => {
     window.addEventListener("wheel", handleScroll);
     return () => window.removeEventListener("wheel", handleScroll);
   }, []);
 
   const handleScroll = (e: any) => {
+    setKey((prevKey) => prevKey + 1);
     if (e.deltaY > 0) {
       scroller.scrollTo("container2", {
         duration: 150,
@@ -62,7 +64,7 @@ const Intro = () => {
                 </div>
               </header>
               <div className={styles.contents}>
-                <div className={styles.title}>
+                <div key={key} className={styles.title}>
                   <div className={styles.title_text}>
                     <div>
                       <p>붉은 망토 ,</p>
@@ -84,7 +86,9 @@ const Intro = () => {
         </div>
       </Element>
       <Element name="container2">
-        <div className={styles.container}></div>
+        <div className={styles.container}>
+          <div className={styles.main_box2}></div>
+        </div>
       </Element>
     </div>
   );
