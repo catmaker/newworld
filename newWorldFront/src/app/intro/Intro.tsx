@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
 import styles from "./intro.module.scss";
-import { titles } from "./dummy";
 import Playbutton from "./Playbutton";
 import Link from "next/link";
 import { Link as ScrollLink, Element, scroller } from "react-scroll";
