@@ -145,3 +145,12 @@ a {
   text-decoration: none;
   color: inherit;
 }
+/* Chrome, Edge, and Safari */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+body {
+  scrollbar-width: none;
+}

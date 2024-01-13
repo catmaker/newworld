@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "DNFForgedBlade-Bold";
+  src: url("/font/DNFForgedBlade-Bold.TTF") format("TTF");
+}
 .container {
   width: 100vw;
   height: 100vh;
@@ -49,7 +53,7 @@
   align-items: center;
   justify-content: space-between;
   z-index: 1;
-  font-size: 1.5rem;
+  font-size: 1.5vw;
   margin-top: 0.8rem;
 }
 .img_box {
@@ -60,6 +64,7 @@
   justify-content: center;
   z-index: 0;
   overflow: hidden;
+  color: blue;
 }
 .img_box > img {
   width: 300px;
@@ -77,7 +82,7 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  gap: 8rem;
+  gap: 8vw;
 }
 .ul_box {
   flex-grow: 0.5;
@@ -99,12 +104,101 @@
   transition: all 0.3s ease-in-out;
 }
 .text {
-  font-size: 1.5rem;
+  white-space: nowrap;
+  font-size: clamp(11px, 1.5vw, 18px);
 }
+
 .text_en {
-  margin-top: 0.8rem;
-  font-size: 0.8rem;
+  white-space: nowrap;
+  margin-top: 0.4rem;
+  font-size: clamp(5px, 0.8vw, 12px);
 }
 .flex_column:hover {
   color: #db6f39;
+}
+// contents
+.contents {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.title {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20rem;
+}
+.title_text {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title_text > div > p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(20px, 8vw, 70px);
+  font-weight: bold;
+  font-family: "DNFForgedBlade-Bold";
+  background: linear-gradient(
+    90deg,
+    rgb(255, 92, 92) 0%,
+    rgb(255, 148, 109) 50%,
+    rgb(143, 98, 98) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1.5px 1.5px 2px rgba(0, 0, 0, 0.3);
+}
+
+.title_text > div > p:nth-child(2) {
+  margin-left: 15rem;
+  font-size: clamp(20px, 8vw, 70px);
+}
+.title_text > div > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  font-size: clamp(10px, 1.5vw, 18px);
+  font-weight: bold;
+  font-family: "DNFForgedBlade-Bold";
+  background: linear-gradient(
+    90deg,
+    rgb(160, 160, 160) 0%,
+    rgb(143, 143, 143) 50%,
+    rgb(133, 133, 133) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 5px 1.5px 2px rgba(0, 0, 0, 0.4);
+}
+.play {
+  width: 300px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  overflow: hidden;
+  color: blue;
+}
+.play > img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  cursor: pointer;
+}
+.play img:hover {
+  scale: (1.1);
+}
+.second_path:hover {
+  fill: #ff0000; /* 변경할 색상 */
 }
