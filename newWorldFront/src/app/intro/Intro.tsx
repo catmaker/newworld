@@ -16,7 +16,7 @@ const Intro = () => {
   const [facebookData, setFacebookData] = useState<FacebookData | null>(null);
   useEffect(() => {
     fetch(
-      "https://graph.facebook.com/v18.0/4780344565524119/feed?fields=attachments%2Cmessage%2Cpicture%2Clink%2Cname%2Ccaption%2Cdescription%2Csource&limit=5&access_token=EAAKqjJo7xBEBO8dD3BDD68ZCezg7YxYpHULnRLqv50ZBZAf8IGGbZBvgOOfa3I8PzGZBqVwuB649MNtKNReJH00rnEZAVb7V9oLg7pMrBL53nIZBDpNXKEjtZAejCXnKboSRlJuEr7pivILjESFG6PA7iAkaFppnpTLHavUkm3NWrVabF1oS8tYsTmF99mzvYoUFzcxWy841LX8J81XhzVXCuTAzW4mMidGZCg1NbcCKi83ioUZBMP3LuGAlMSVGxXpieyfiEZD"
+      "https://graph.facebook.com/v18.0/4780344565524119/feed?fields=attachments%2Cmessage%2Cpicture%2Clink%2Cname%2Ccaption%2Cdescription%2Csource&limit=5&access_token=EAAKqjJo7xBEBO2GJWGjGDZCrjPiBk3eYOv18E14juf6or9eGZC1kdXpZC0smHkQKbFZBu66UH8Ps2rZAx6qJ5hYr849l1w1DmZB42zZCcVxKsfQbW3ztj1Ge2ctyPndkPD86WUn539I2cQifxZAd9xbbQmUEJgY4vHBCu1OH5ehjqZCsLJSYK0zC1tAPFtRBDHtbDjzO1hUsdoLoYoOiToBjEcr0GBmy1ryBvYz8ZC39qQwDJXujBVwZCb3eIXiewp2sbZCfiwZDZD"
     )
       .then((response) => response.json())
       .then((data) => {
@@ -30,21 +30,26 @@ const Intro = () => {
     return () => window.removeEventListener("wheel", handleScroll);
   }, []);
 
+  let scrollPosition = 0;
+
   const handleScroll = (e: any) => {
     setKey((prevKey) => prevKey + 1);
     if (e.deltaY > 0) {
-      scroller.scrollTo("container2", {
-        duration: 150,
-        delay: 0,
-        smooth: "easeInOutQuart",
-      });
+      scrollPosition += 1;
     } else if (e.deltaY < 0) {
-      scroller.scrollTo("container1", {
-        duration: 150,
-        delay: 0,
-        smooth: "easeInOutQuart",
-      });
+      scrollPosition -= 1;
     }
+
+    scrollPosition = Math.max(0, scrollPosition); // scrollPosition이 0보다 작아지지 않도록 합니다.
+
+    const container = ["container1", "container2", "container3"][
+      scrollPosition
+    ];
+    scroller.scrollTo(container, {
+      duration: 150,
+      delay: 0,
+      smooth: "easeInOutQuart",
+    });
   };
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -133,7 +138,7 @@ const Intro = () => {
                     className={styles.box2_contents}
                     onWheel={(e) => e.stopPropagation()}
                   >
-                    {facebookData ? (
+                    {facebookData && facebookData.data ? (
                       facebookData.data.map((post, index) => (
                         <div key={index}>
                           <a href={post.link}>
@@ -143,11 +148,21 @@ const Intro = () => {
                         </div>
                       ))
                     ) : (
-                      <div>Loading...</div> // facebookData가 없는 경우 로딩 표시를 합니다.
+                      <div>Loading...</div>
                     )}
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </Element>
+      <Element name="container3">
+        <div className={styles.container3}>
+          <div className={styles.main_box3}>
+            <div className={styles.main_box3_container}>
+              <div className={styles.flex1}>1</div>
+              <div className={styles.flex2}>1</div>
             </div>
           </div>
         </div>
