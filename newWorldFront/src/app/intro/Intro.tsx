@@ -8,6 +8,8 @@ import FacebookFeed from "@/components/facebookfeed/page";
 import TypingAnimation from "@/components/useTypingAnimation/page";
 import { useTypingAnimation } from "@/components/useTypingAnimation/useTypingAnimation";
 import { useScrollToContainer } from "@/components/useScrollPosition/useScrollPosition";
+import { ImageElement } from "@/components/imageElement/page";
+
 const Intro = () => {
   const lines = [
     '"당신의 동화 같은 이야기를 기다리고 있어요."',
@@ -69,38 +71,26 @@ const Intro = () => {
           <div className={styles.main_box3}>
             <div className={styles.main_box3_container}>
               <div className={styles.flex1}>
-                <div>
-                  <img
-                    className={styles["img-left"]}
-                    src="/img/yourstory.jpg"
-                    alt=""
-                    draggable="false"
-                  />
-                </div>
-                <div>
-                  <img
-                    className={styles["img-right"]}
-                    src="/img/yourstory2.jpg"
-                    alt=""
-                    draggable="false"
-                  />
-                </div>
-                <div>
-                  <img
-                    className={styles["img-left"]}
-                    src="/img/yourstory3.jpg"
-                    alt=""
-                    draggable="false"
-                  />
-                </div>
-                <div>
-                  <img
-                    className={styles["img-right"]}
-                    src="/img/yourstory4.jpg"
-                    alt=""
-                    draggable="false"
-                  />
-                </div>
+                <ImageElement
+                  className="img-left"
+                  src="/img/yourstory.jpg"
+                  alt=""
+                />
+                <ImageElement
+                  className="img-right"
+                  src="/img/yourstory2.jpg"
+                  alt=""
+                />
+                <ImageElement
+                  className="img-left"
+                  src="/img/yourstory3.jpg"
+                  alt=""
+                />
+                <ImageElement
+                  className="img-right"
+                  src="/img/yourstory4.jpg"
+                  alt=""
+                />
               </div>
               <div className={styles.flex2}>
                 <TypingAnimation startTyping={startTyping} lines={lines} />
