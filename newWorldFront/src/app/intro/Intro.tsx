@@ -3,99 +3,29 @@ import React, { useEffect, useState } from "react";
 import styles from "./intro.module.scss";
 import Playbutton from "./Playbutton";
 import Link from "next/link";
-import { Link as ScrollLink, Element, scroller } from "react-scroll";
+import { Element } from "react-scroll";
+import FacebookFeed from "@/components/facebookfeed/page";
+import TypingAnimation from "@/components/useTypingAnimation/page";
+import { useTypingAnimation } from "@/components/useTypingAnimation/useTypingAnimation";
+import { useScrollToContainer } from "@/components/useScrollPosition/useScrollPosition";
+import { ImageElement } from "@/components/imageElement/page";
+
 const Intro = () => {
-  type FacebookData = {
-    data: {
-      picture: string;
-      name: string;
-      link: string;
-    }[];
-  };
-  const [key, setKey] = useState(0);
-  const [facebookData, setFacebookData] = useState<FacebookData | null>(null);
-  useEffect(() => {
-    fetch(
-      "https://graph.facebook.com/v18.0/4780344565524119/feed?fields=attachments%2Cmessage%2Cpicture%2Clink%2Cname%2Ccaption%2Cdescription%2Csource&limit=5&access_token=EAAKqjJo7xBEBO8dD3BDD68ZCezg7YxYpHULnRLqv50ZBZAf8IGGbZBvgOOfa3I8PzGZBqVwuB649MNtKNReJH00rnEZAVb7V9oLg7pMrBL53nIZBDpNXKEjtZAejCXnKboSRlJuEr7pivILjESFG6PA7iAkaFppnpTLHavUkm3NWrVabF1oS8tYsTmF99mzvYoUFzcxWy841LX8J81XhzVXCuTAzW4mMidGZCg1NbcCKi83ioUZBMP3LuGAlMSVGxXpieyfiEZD"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setFacebookData(data); // 데이터를 상태에 저장
-      });
-  }, []);
+  const [lines, setLines] = useState([
+    '"당신의 동화 같은 이야기를 기다리고 있어요."',
+    "여기, 우리는 모두 작은 작가이자 독자이기도 한 곳입니다.",
+    "당신의 상상력과 이야기를 우리와 함께 나누어보세요.",
+    "특별한 순간을 만들어내는데 참여하실 수 있습니다.",
+  ]);
+  const { key, startTyping } = useScrollToContainer();
+  const { currentLines, typingDone } = useTypingAnimation(startTyping, lines);
 
-  useEffect(() => {
-    window.addEventListener("wheel", handleScroll);
-    return () => window.removeEventListener("wheel", handleScroll);
-  }, []);
-
-  const handleScroll = (e: any) => {
-    setKey((prevKey) => prevKey + 1);
-    if (e.deltaY > 0) {
-      scroller.scrollTo("container2", {
-        duration: 150,
-        delay: 0,
-        smooth: "easeInOutQuart",
-      });
-    } else if (e.deltaY < 0) {
-      scroller.scrollTo("container1", {
-        duration: 150,
-        delay: 0,
-        smooth: "easeInOutQuart",
-      });
-    }
-  };
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowUp" || e.key === "ArrowDown") {
-        e.preventDefault();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("wheel", handleScroll);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("wheel", handleScroll);
-    };
-  }, []);
   return (
     <div>
       <Element name="container1">
         <div className={styles.container}>
           <div className={styles.flexbox}>
             <div className={styles.main_box}>
-              <header className={styles.header}>
-                <div className={styles.img_box}>
-                  <img src="/img/intrologo.svg" alt="" />
-                </div>
-                <div className={styles.ul_box}>
-                  <div className={styles.flex}>
-                    <div className={styles.flex_column}>
-                      <div className={styles.text}>홈</div>
-                      <div className={styles.text_en}>HOME</div>
-                    </div>
-                    <div className={styles.flex_column}>
-                      <div className={styles.text}>미궁</div>
-                      <div className={styles.text_en}>LABYRINTH</div>
-                    </div>
-                    <div className={styles.flex_column}>
-                      <div className={styles.text}>랭킹</div>
-                      <div className={styles.text_en}>RANKING</div>
-                    </div>
-                    <div className={styles.flex_column}>
-                      <div className={styles.text}>커뮤니티</div>
-                      <div className={styles.text_en}>COMMUNITY</div>
-                    </div>
-                    <div className={styles.flex_column}>
-                      <div className={styles.text}>신세계</div>
-                      <div className={styles.text_en}>NEWWORLD</div>
-                    </div>
-                  </div>
-                </div>
-              </header>
               <div className={styles.contents}>
                 <div key={key} className={styles.title}>
                   <div className={styles.title_text}>
@@ -104,7 +34,7 @@ const Intro = () => {
                       <p>검은 그림자</p>
                     </div>
                     <div>
-                      <span>"upon the final day of the year 1999"</span>
+                      <span>{'"upon the final day of the year 1999"'}</span>
                     </div>
                     <div className={styles.play}>
                       <Link href={`/labyrinth`}>
@@ -123,30 +53,52 @@ const Intro = () => {
           <div className={styles.main_box2}>
             <div className={styles.container}>
               <div className={styles.contents_box}>
-                <div className={styles.box1}>1</div>
+                <div className={styles.box1}></div>
                 <div className={styles.box2}>
                   <div className={styles.box2_header}>
                     <div>Notice from @minimalmocha</div>
                     <div className={styles.follow}>Follow on Facebook</div>
                   </div>
-                  <div
-                    className={styles.box2_contents}
-                    onWheel={(e) => e.stopPropagation()}
-                  >
-                    {facebookData ? (
-                      facebookData.data.map((post, index) => (
-                        <div key={index}>
-                          <a href={post.link}>
-                            <img src={post.picture} alt="Post" />
-                            {post.name}
-                          </a>
-                        </div>
-                      ))
-                    ) : (
-                      <div>Loading...</div> // facebookData가 없는 경우 로딩 표시를 합니다.
-                    )}
-                  </div>
+                  <FacebookFeed></FacebookFeed>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Element>
+      <Element name="container3">
+        <div className={styles.container3}>
+          <div className={styles.main_box3}>
+            <div className={styles.main_box3_container}>
+              <div className={styles.flex1}>
+                <ImageElement
+                  className="img-left"
+                  src="/img/yourstory.jpg"
+                  alt=""
+                />
+                <ImageElement
+                  className="img-right"
+                  src="/img/yourstory2.jpg"
+                  alt=""
+                />
+                <ImageElement
+                  className="img-left"
+                  src="/img/yourstory3.jpg"
+                  alt=""
+                />
+                <ImageElement
+                  className="img-right"
+                  src="/img/yourstory4.jpg"
+                  alt=""
+                />
+              </div>
+              <div className={styles.flex2}>
+                <TypingAnimation startTyping={startTyping} lines={lines} />
+                {typingDone && (
+                  <Link href={`/community`}>
+                    <button className={styles.button}>커뮤니티로 이동</button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
