@@ -7,63 +7,16 @@ import { Link as ScrollLink, Element, scroller } from "react-scroll";
 import FacebookFeed from "@/components/facebookfeed/page";
 import TypingAnimation from "@/components/useTypingAnimation/page";
 import { useTypingAnimation } from "@/components/useTypingAnimation/useTypingAnimation";
-
+import { useScrollToContainer } from "@/components/useScrollPosition/useScrollPosition";
 const Intro = () => {
-  const [key, setKey] = useState(0);
-  const [startTyping, setStartTyping] = useState(false);
   const lines = [
     '"당신의 동화 같은 이야기를 기다리고 있어요."',
     "여기, 우리는 모두 작은 작가이자 독자이기도 한 곳입니다.",
     "당신의 상상력과 이야기를 우리와 함께 나누어보세요.",
     "특별한 순간을 만들어내는데 참여하실 수 있습니다.",
   ];
+  const { key, startTyping } = useScrollToContainer();
   const { currentLines, typingDone } = useTypingAnimation(startTyping, lines);
-
-  useEffect(() => {
-    window.addEventListener("wheel", handleScroll);
-    return () => window.removeEventListener("wheel", handleScroll);
-  }, []);
-
-  let scrollPosition = 0;
-
-  const handleScroll = (e: any) => {
-    setKey((prevKey) => prevKey + 1);
-    if (e.deltaY > 0) {
-      scrollPosition += 1;
-    } else if (e.deltaY < 0) {
-      scrollPosition -= 1;
-    }
-
-    scrollPosition = Math.max(0, scrollPosition); // scrollPosition이 0보다 작아지지 않도록 합니다.
-
-    const container = ["container1", "container2", "container3"][
-      scrollPosition
-    ];
-    scroller.scrollTo(container, {
-      duration: 150,
-      delay: 0,
-      smooth: "easeInOutQuart",
-    });
-    if (container === "container3") {
-      setStartTyping(true);
-    }
-  };
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowUp" || e.key === "ArrowDown") {
-        e.preventDefault();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("wheel", handleScroll);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("wheel", handleScroll);
-    };
-  }, []);
 
   return (
     <div>
