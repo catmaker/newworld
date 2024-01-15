@@ -56,6 +56,7 @@
   font-size: 1.5vw;
   margin-top: 0.8rem;
   position: fixed;
+  color: white;
 }
 .img_box {
   width: 300px;
@@ -350,6 +351,7 @@
   align-items: center;
   justify-content: center;
   z-index: 0;
+  user-select: none;
 }
 .main_box3 {
   width: 100vw;
@@ -360,28 +362,157 @@
   align-items: center;
   justify-content: center;
 }
+
+.img-left,
+.img-right {
+  transition: margin 0.5s ease-in-out; // margin의 변화에 애니메이션 적용
+}
+
+@media (max-width: 850px) {
+  .img-left {
+    margin: 0 !important;
+  }
+  .img-right {
+    margin: 0 !important;
+  }
+}
+@media (max-width: 560px) {
+  .img-left {
+    margin-right: 13rem !important;
+  }
+  .img-right {
+    margin-right: 13rem !important;
+  }
+  .ul_box {
+    margin-right: 3rem !important;
+  }
+}
+@media (max-width: 400px) {
+  .main_box3_container {
+    flex-direction: column !important;
+    gap: 5rem !important;
+  }
+  .img-left {
+    margin-right: 0 !important;
+  }
+  .img-right {
+    margin-right: 0 !important;
+  }
+}
 .main_box3_container {
-  width: 100%;
-  height: 80%;
+  width: 65%;
+  height: 55%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  border: #28221d 1px solid;
   color: white;
+
+  .flex1 {
+    border-top-left-radius: 50px;
+    width: 45%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    img.img-left {
+      margin-right: 40rem;
+      width: clamp(12rem, 10vw, 20rem);
+      height: clamp(12rem, 10vw, 20rem);
+      object-fit: contain;
+      transform: rotate(-45deg);
+      &:hover {
+        scale: (1.1);
+        box-shadow: 0 0 30px rgb(255, 255, 255);
+      }
+      &:nth-child(1) {
+        transform: rotate(40deg);
+      }
+      &:nth-last-child(1) {
+        transform: rotate(-30deg);
+      }
+    }
+
+    img.img-right {
+      width: clamp(12rem, 10vw, 20rem);
+      height: clamp(12rem, 10vw, 20rem);
+      object-fit: contain;
+      transform: rotate(45deg);
+      &:hover {
+        scale: (1.1);
+        box-shadow: 0 0 30px rgb(255, 255, 255);
+      }
+      &:nth-child(1) {
+        transform: rotate(-40deg);
+      }
+      &:nth-of-type(2) {
+        transform: rotate(25deg);
+      }
+    }
+  }
+  .flex2 {
+    border-bottom-right-radius: 50px;
+    width: 55%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  p {
+    text-align: center;
+    font-size: clamp(11px, 1.5vw, 18px);
+    margin-top: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  /* 타이핑 애니메이션 */
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  /* 커서 깜빡임 애니메이션 */
+  @keyframes blink-caret {
+    50% {
+      border-color: transparent;
+    }
+  }
 }
-.flex1 {
-  width: 30%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+.no_blink {
+  animation: none;
 }
-.flex2 {
-  width: 70%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+
+.button {
+  color: black;
+  background-color: white;
+  border-radius: 50px;
+  margin-top: 3rem;
+  padding: 1rem;
+  border: none;
+  width: clamp(10rem, 20vw, 20rem);
+  animation: fadeIn 1s ease-in-out; // fade in 애니메이션 적용
+  &:hover {
+    background-color: #db6f39;
+    color: white;
+    transition: all 0.2s ease-in-out;
+  }
+  &:active {
+    scale: (0.98);
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 }
