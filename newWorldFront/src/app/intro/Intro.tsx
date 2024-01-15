@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./intro.module.scss";
 import Playbutton from "./Playbutton";
 import Link from "next/link";
-import { Link as ScrollLink, Element, scroller } from "react-scroll";
+import { Element } from "react-scroll";
 import FacebookFeed from "@/components/facebookfeed/page";
 import TypingAnimation from "@/components/useTypingAnimation/page";
 import { useTypingAnimation } from "@/components/useTypingAnimation/useTypingAnimation";
