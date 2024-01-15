@@ -11,12 +11,12 @@ import { useScrollToContainer } from "@/components/useScrollPosition/useScrollPo
 import { ImageElement } from "@/components/imageElement/page";
 
 const Intro = () => {
-  const lines = [
+  const [lines, setLines] = useState([
     '"당신의 동화 같은 이야기를 기다리고 있어요."',
     "여기, 우리는 모두 작은 작가이자 독자이기도 한 곳입니다.",
     "당신의 상상력과 이야기를 우리와 함께 나누어보세요.",
     "특별한 순간을 만들어내는데 참여하실 수 있습니다.",
-  ];
+  ]);
   const { key, startTyping } = useScrollToContainer();
   const { currentLines, typingDone } = useTypingAnimation(startTyping, lines);
 
