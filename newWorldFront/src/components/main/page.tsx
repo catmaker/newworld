@@ -7,14 +7,14 @@ const Mainpage = () => {
   const [textIndex, setTextIndex] = useState(0);
   const [showButton, setShowButton] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const fullTexts = [
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  const [fullTexts, setFullTexts] = useState([
     "newWorld에 오신걸 환영합니다.",
     "여기는 지혜와 용기가 시험을 받는 곳입니다.",
     "퀴즈의 문에 당신의 두뇌를, 미궁의 길에 당신의 용기를 펼쳐보세요.",
     "당신의 모험은 시작됐습니다!",
-  ];
-
-  const audioRef = useRef<HTMLAudioElement>(null);
+  ]);
 
   const handlePlayClick = () => {
     if (audioRef.current) {

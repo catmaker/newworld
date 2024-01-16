@@ -4,11 +4,11 @@ import styles from "./intro.module.scss";
 import Playbutton from "./Playbutton";
 import Link from "next/link";
 import { Element } from "react-scroll";
-import FacebookFeed from "@/components/facebookfeed/page";
-import TypingAnimation from "@/components/useTypingAnimation/page";
-import { useTypingAnimation } from "@/components/useTypingAnimation/useTypingAnimation";
-import { useScrollToContainer } from "@/components/useScrollPosition/useScrollPosition";
-import { ImageElement } from "@/components/imageElement/page";
+import FacebookFeed from "@/components/intropageComponents/facebookfeed/page";
+import TypingAnimation from "@/components/intropageComponents/useTypingAnimation/page";
+import { useTypingAnimation } from "@/components/intropageComponents/useTypingAnimation/useTypingAnimation";
+import { useScrollToContainer } from "@/components/intropageComponents/useScrollPosition/useScrollPosition";
+import { ImageElement } from "@/components/intropageComponents/imageElement/page";
 
 const Intro = () => {
   const [lines, setLines] = useState([

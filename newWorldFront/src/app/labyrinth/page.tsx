@@ -1,7 +1,7 @@
 import React from "react";
-
+import Labyrinth from "./Labyrinth";
 const page = () => {
-  return <div>page</div>;
+  return <Labyrinth></Labyrinth>;
 };
 
 export default page;
