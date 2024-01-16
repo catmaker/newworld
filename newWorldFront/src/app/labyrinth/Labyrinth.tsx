@@ -1,7 +1,13 @@
+// Labyrinth.tsx
 import React from "react";
-
-const labyrinth = () => {
-  return <div>labyrinth</div>;
+import styles from "./labyrinth.module.scss";
+import Rains from "@/components/labyrinthComponents/rain/Rains";
+const Labyrinth = () => {
+  return (
+    <div className={styles.container}>
+      <Rains />
+    </div>
+  );
 };
 
-export default labyrinth;
+export default Labyrinth;
