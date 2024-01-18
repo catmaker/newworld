@@ -4,15 +4,15 @@ import styles from "./labyrinth.module.scss";
 import Rains from "@/components/labyrinthComponents/rain/Rains";
 
 const Labyrinth = () => {
-  const [list, setList] = React.useState([]);
+  const [list, setList] = React.useState<string[]>([]);
 
   const fetchList = () => {
-    fetch("/api/test")
+    fetch("/test")
       .then((response) => {
-        return response.json();
+        return response.text();
       })
       .then((data) => {
-        setList(data);
+        setList(data.split(","));
       });
   };
 
@@ -24,7 +24,13 @@ const Labyrinth = () => {
           <div className={styles.contents}>
             <div className={styles.title}>이번주 인기작</div>
             <div className={styles.content_container}>
-              <div className={styles.content}>{list}</div>
+              <div className={styles.content}>
+                {list.map((item, index) => (
+                  <div key={index} className={styles.content}>
+                    {item}
+                  </div>
+                ))}
+              </div>
               <div className={styles.content}>컨텐츠</div>
               <div className={styles.content}>컨텐츠</div>
               <div className={styles.content}>컨텐츠</div>
