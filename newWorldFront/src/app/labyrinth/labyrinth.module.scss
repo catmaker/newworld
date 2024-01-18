@@ -27,10 +27,61 @@
   animation-duration: 5s;
 }
 
-.container {
+.background {
   position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   background-color: black;
+
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+    .contents_box {
+      width: 80%;
+      height: 80%;
+
+      .contents {
+        width: 100%;
+        height: 33.3%;
+        margin-bottom: 2rem;
+
+        .content_container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 80%;
+          gap: 1rem;
+
+          .content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60%;
+            background-color: blue;
+            width: 20%;
+          }
+        }
+      }
+    }
+  }
+}
+.title {
+  display: flex;
+  align-items: center;
+  font-size: 3rem;
+  height: 4rem;
+  font-weight: medium;
+  &:hover {
+    cursor: pointer;
+    color: #db6f39;
+    transition: all 0.3s ease-in-out;
+  }
 }
