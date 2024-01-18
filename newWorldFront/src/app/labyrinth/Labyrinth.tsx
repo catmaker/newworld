@@ -7,7 +7,7 @@ const Labyrinth = () => {
   const [list, setList] = React.useState([]);
 
   const fetchList = () => {
-    fetch("/test")
+    fetch("/api/test")
       .then((response) => {
         return response.json();
       })
