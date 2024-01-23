@@ -1,4 +1,4 @@
-package NewWorld.vo;
+package NewWorld.domain;
 
 import NewWorld.Maker;
 import jakarta.persistence.*;
@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class HintVo{
+public class Hint{
 
     @Id
     @GeneratedValue
-    @Column(name = "hint_vo_id")
+    @Column(name = "hint_id")
     private Long id;
 
     private String hint;
@@ -27,7 +27,7 @@ public class HintVo{
     private Maker maker;
 
     @Builder
-    public HintVo(Long id, String hint, Maker maker) {
+    public Hint(Long id, String hint, Maker maker) {
         this.id = id;
         this.hint = hint;
         this.maker = maker;

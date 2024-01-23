@@ -1,4 +1,4 @@
-package NewWorld.vo;
+package NewWorld.domain;
 
 import NewWorld.Maker;
 import jakarta.persistence.*;
@@ -11,10 +11,10 @@ import lombok.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class AnswerVo {
+public class Answer {
 
     @Id @GeneratedValue
-    @Column(name = "answer_vo_id")
+    @Column(name = "answer_id")
     private Long id;
 
     private String answer;
@@ -23,7 +23,7 @@ public class AnswerVo {
     private Maker maker;
 
     @Builder
-    public AnswerVo(Long id, String answer, Maker maker) {
+    public Answer(Long id, String answer, Maker maker) {
         this.id = id;
         this.answer = answer;
         this.maker = maker;

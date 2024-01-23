@@ -1,4 +1,4 @@
-package NewWorld.vo;
+package NewWorld.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -16,11 +16,11 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PostVo {
+public class Post {
 
     @Id
     @GeneratedValue
-    @Column(name = "post_vo_id")
+    @Column(name = "post_id")
     private Long id;
 
     private String title;
@@ -32,15 +32,15 @@ public class PostVo {
     private String userNickName;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    private List<CommentVo> commentVoList;
+    private List<Comment> commentList;
 
     @Builder
-    public PostVo(Long id, String title, String detail, Date makedDate, String userNickName, List<CommentVo> commentVoList) {
+    public Post(Long id, String title, String detail, Date makedDate, String userNickName, List<Comment> commentList) {
         this.id = id;
         this.title = title;
         this.detail = detail;
         this.makedDate = makedDate;
         this.userNickName = userNickName;
-        this.commentVoList = commentVoList;
+        this.commentList = commentList;
     }
 }

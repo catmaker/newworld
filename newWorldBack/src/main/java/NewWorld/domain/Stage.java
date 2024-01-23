@@ -1,4 +1,4 @@
-package NewWorld.vo;
+package NewWorld.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -10,19 +10,19 @@ import java.util.List;
 
 /**
  * 2024.01.12 jeonil
- * 게임 클리어타임
+ * 게임 스테이지
  */
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ClearTime {
+public class Stage {
 
     @Id
     @GeneratedValue
-    @Column(name = "cleartime_vo_id")
+    @Column(name = "stage_id")
     private Long id;
 
-    private String gameName;
+    private String title;
 
     private String stageDescription;
 
@@ -31,15 +31,15 @@ public class ClearTime {
     private String imageUrl;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    private List<QuizVo> quizVos;
+    private List<Quiz> quizs;
 
     @Builder
-    public ClearTime(Long id, String gameName, String stageDescription, int expr, String imageUrl, List<QuizVo> quizVos) {
+    public Stage(Long id, String title, String stageDescription, int expr, String imageUrl, List<Quiz> quizs) {
         this.id = id;
-        this.gameName = gameName;
+        this.title = title;
         this.stageDescription = stageDescription;
         this.expr = expr;
         this.imageUrl = imageUrl;
-        this.quizVos = quizVos;
+        this.quizs = quizs;
     }
 }

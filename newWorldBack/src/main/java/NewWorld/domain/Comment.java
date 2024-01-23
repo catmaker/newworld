@@ -1,4 +1,4 @@
-package NewWorld.vo;
+package NewWorld.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,11 +18,11 @@ import java.util.Date;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CommentVo {
+public class Comment {
 
     @Id
     @GeneratedValue
-    @Column(name = "comment_vo_id")
+    @Column(name = "comment_id")
     private Long id;
 
     private String comment;
@@ -32,7 +32,7 @@ public class CommentVo {
     private Date makedDate;
 
     @Builder
-    public CommentVo(Long id, String comment, String userNickName, Date makedDate) {
+    public Comment(Long id, String comment, String userNickName, Date makedDate) {
         this.id = id;
         this.comment = comment;
         this.userNickName = userNickName;

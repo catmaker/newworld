@@ -1,4 +1,4 @@
-package NewWorld.vo;
+package NewWorld.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -15,11 +15,11 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class GameVo {
+public class Game {
 
     @Id
     @GeneratedValue
-    @Column(name = "game_vo_id")
+    @Column(name = "game_id")
     private Long id;
 
     private String title;
@@ -29,18 +29,18 @@ public class GameVo {
     private String createNickName;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    private List<UserVo> userVoList;
+    private List<User> userList;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    private List<StageVo> stageVoList;
+    private List<Stage> stageList;
 
     @Builder
-    public GameVo(Long id, String title, String gameDescription, String createNickName, List<UserVo> userVoList, List<StageVo> stageVoList) {
+    public Game(Long id, String title, String gameDescription, String createNickName, List<User> userList, List<Stage> stageList) {
         this.id = id;
         this.title = title;
         this.gameDescription = gameDescription;
         this.createNickName = createNickName;
-        this.userVoList = userVoList;
-        this.stageVoList = stageVoList;
+        this.userList = userList;
+        this.stageList = stageList;
     }
 }
