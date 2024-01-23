@@ -1,8 +1,8 @@
 package NewWorld.service;
 
+import NewWorld.domain.User;
 import NewWorld.exception.LoginException;
 import NewWorld.repository.UserRepository;
-import NewWorld.vo.UserVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +47,7 @@ public class LoginServiceImpl implements LoginService {
      * @throws LoginException
      */
     private String userCheck(String loginId, String loginPw) throws LoginException {
-        UserVo loginUser = loginRepository.findUserVoByUserIdAndUserPassword(loginId, loginPw);
+        User loginUser = loginRepository.findByNameAndAndPhoneNumber(loginId, loginPw);
 
         try {
             String userName = loginUser.getName();
