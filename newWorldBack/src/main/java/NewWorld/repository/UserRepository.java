@@ -11,6 +11,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 로그인 처리
  */
 public interface UserRepository extends JpaRepository<User, Long> {
+
+    /**
+     * 회원가입 아이디 중복체크
+     * @param userId
+     * @return
+     */
+    User findUserByUserId(String userId);
+
     /**
      * user로그인
      * @param userId
@@ -20,20 +28,29 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findUserByUserIdAndUserPassword(String userId, String userPw);
 
     /**
-     * user조회
+     * user 기본정보조회
      * @param name
-     * @param naickname
+     * @param nickname
      * @return
      */
-    User findUserByNameAndNickname(String name, String naickname);
+    User findUserByNameAndNickname(String name, String nickname);
 
     /**
-     * 가입시 중복검사
-     * @param userId
-     * @param userPw
+     * 회원조회
+     * @param userName
+     * @param phoneNumber
      * @return
      */
-    User findByNameAndAndPhoneNumber(String userId, String userPw);
+    User findByNameAndAndPhoneNumber(String userName, String phoneNumber);
+
+    /**
+     * 회원조회(비번찾기)
+     * @param loginId
+     * @param userName
+     * @param phoneNumber
+     * @return
+     */
+    User findByNameAndAndPhoneNumber(String loginId, String userName, String phoneNumber);
 
 
 }

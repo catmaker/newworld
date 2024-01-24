@@ -67,4 +67,13 @@ public class User {
 
         return this;
     }
+
+    /**
+     * 비밀번호 변경
+     * @param newPassword
+     */
+    public User changePassword(String newPassword){
+        this.userPassword = newPassword;
+        return this;
+    }
 }

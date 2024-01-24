@@ -11,7 +11,12 @@ import NewWorld.exception.NotfindUserException;
  * 로그인 처리
  */
 public interface UserService {
-
+    /**
+     * 회원가입 아이디 중복 체크
+     * @param loginId
+     * @return
+     */
+    public Boolean checkIdValidation(String loginId);
     /**
      * 로그인 처리
      * @param joinInfo
