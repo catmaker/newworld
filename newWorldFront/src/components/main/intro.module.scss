@@ -498,6 +498,8 @@
   border: none;
   width: clamp(10rem, 20vw, 20rem);
   animation: fadeIn 1s ease-in-out; // fade in 애니메이션 적용
+  font-size: clamp(11px, 1.5vw, 18px);
+
   &:hover {
     background-color: #db6f39;
     color: white;

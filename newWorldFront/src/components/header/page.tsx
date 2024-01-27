@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "@/app/intro/intro.module.scss"; // CSS 모듈을 import합니다. 필요에 따라 경로를 수정하세요.
+import styles from "@/components/main/intro.module.scss"; // CSS 모듈을 import합니다. 필요에 따라 경로를 수정하세요.
 
 const Header = () => {
   return (
@@ -9,7 +9,7 @@ const Header = () => {
       </div>
       <div className={styles.ul_box}>
         <div className={styles.flex}>
-          <Link href={`/intro`}>
+          <Link href={`/`}>
             <div className={styles.flex_column}>
               <div className={styles.text}>홈</div>
               <div className={styles.text_en}>HOME</div>
