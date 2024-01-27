@@ -1,0 +1,45 @@
+.background {
+  width: 100vw;
+  height: 30rem;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  user-select: none;
+}
+.sns_img_box {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 20rem;
+  margin-bottom: 2rem;
+  div {
+    cursor: pointer;
+  }
+}
+.footer_Link_Section {
+  display: flex;
+  margin-top: 2rem;
+  gap: 1.5rem;
+  justify-content: center;
+  width: 20rem;
+  margin-bottom: 2rem;
+  div {
+    cursor: pointer;
+  }
+}
+.policy_Links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 20rem;
+  margin-bottom: 2rem;
+  div {
+    cursor: pointer;
+  }
+}
+.copyright_Info {
+  color: gray;
+}
