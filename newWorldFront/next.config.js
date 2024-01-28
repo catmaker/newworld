@@ -24,3 +24,8 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+module.exports = {
+  images: {
+    domains: ["mblogthumb-phinf.pstatic.net", "localhost"],
+  },
+};

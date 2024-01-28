@@ -1,0 +1,165 @@
+.background {
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+.container {
+  margin-top: 80px;
+  width: 80%;
+  border: 1px solid white;
+  height: 80%;
+  padding: 3rem;
+}
+.layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 20px;
+}
+.left_layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  height: 100%;
+  gap: 20px;
+  div {
+    width: 100%;
+    height: 100%;
+  }
+  .profile {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    .profile_icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 0.2;
+      font-size: 1.2rem;
+      font-weight: bold;
+      div:first-child {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+      }
+      div:last-child {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        font-size: 3rem;
+        cursor: pointer;
+      }
+    }
+    .profile_image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+      img {
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+    .profile_info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex: 0.8;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 20px;
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: left;
+        flex-direction: column;
+        width: 80%;
+
+        div:nth-child(1) {
+          justify-content: left;
+          flex: 0.5;
+          color: #898c92;
+          margin-bottom: 10px;
+        }
+        div:nth-child(2) {
+          justify-content: left;
+          flex: 0.5;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+  .badge {
+    font-size: 1.2rem;
+    font-weight: bold;
+    flex: 1;
+    .badge_container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      .badge_title {
+        flex: 0.15;
+      }
+      .my_badge {
+        flex: 0.8;
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: left;
+        gap: 10px;
+        margin-left: 10px;
+        .badge_image {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background-color: red;
+        }
+      }
+    }
+  }
+}
+.right_layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+  height: 100%;
+  background-color: yellow;
+  gap: 20px;
+  div:nth-child(1) {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    flex: 0.5;
+  }
+  div:nth-child(2) {
+    background-color: blue;
+    width: 100%;
+    height: 100%;
+    flex: 0.3;
+  }
+  div:nth-child(3) {
+    background-color: rgb(68, 53, 56);
+    width: 100%;
+    height: 100%;
+    flex: 2;
+  }
+}
