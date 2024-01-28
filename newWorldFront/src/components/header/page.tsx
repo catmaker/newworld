@@ -1,11 +1,35 @@
+"use client";
 import Link from "next/link";
 import styles from "@/components/main/intro.module.scss"; // CSS 모듈을 import합니다. 필요에 따라 경로를 수정하세요.
+import { useEffect, useState } from "react";
+import { throttle } from "lodash";
 
 const Header = () => {
+  const [isVisible, setIsVisible] = useState(true);
+  useEffect(() => {
+    let lastScrollTop = 0;
+
+    const handleScroll = throttle(() => {
+      let st = window.pageYOffset || document.documentElement.scrollTop;
+      if (st > lastScrollTop) {
+        setTimeout(() => setIsVisible(false), 200);
+      } else {
+        setTimeout(() => setIsVisible(true), 200);
+      }
+      lastScrollTop = st <= 0 ? 0 : st;
+    }, 200);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isVisible ? "" : styles.hidden}`}>
       <div className={styles.img_box}>
-        <img src="/img/intrologo.svg" alt="" />
+        <Link href={"/"}>
+          <img src="/img/intrologo.svg" alt="" />
+        </Link>
       </div>
       <div className={styles.ul_box}>
         <div className={styles.flex}>
@@ -33,10 +57,10 @@ const Header = () => {
               <div className={styles.text_en}>COMMUNITY</div>
             </div>
           </Link>
-          <Link href={`/newworld`}>
+          <Link href={`/mypage`}>
             <div className={styles.flex_column}>
-              <div className={styles.text}>신세계</div>
-              <div className={styles.text_en}>NEWWORLD</div>
+              <div className={styles.text}>마이페이지</div>
+              <div className={styles.text_en}>MYPAGE</div>
             </div>
           </Link>
         </div>
