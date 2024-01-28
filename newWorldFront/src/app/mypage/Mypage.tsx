@@ -69,6 +69,7 @@ const Mypage = () => {
                         alt="Badge"
                         width={30}
                         height={30}
+                        title={badge.description}
                       />
                     ))}
                 </div>
