@@ -1,0 +1,27 @@
+{
+  "users": [
+    {
+      "name": "이지은",
+      "badges": [
+        {
+          "name": "Badge 1",
+          "level": 3,
+          "description": "Badge 1에 대한 설명",
+          "image": "/img/medal/medal1.svg"
+        },
+        {
+          "name": "Badge 2",
+          "level": 2,
+          "description": "Badge 2에 대한 설명",
+          "image": "/img/medal/medal2.svg"
+        },
+        {
+          "name": "Badge 3",
+          "level": 1,
+          "description": "Badge 3에 대한 설명",
+          "image": "/img/medal/medal3.svg"
+        }
+      ]
+    }
+  ]
+}

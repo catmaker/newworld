@@ -61,6 +61,7 @@
         justify-content: right;
         align-items: center;
         font-size: 3rem;
+        cursor: pointer;
       }
     }
     .profile_image {
@@ -81,16 +82,57 @@
       flex: 0.8;
       font-size: 1.2rem;
       font-weight: bold;
+      margin-top: 20px;
       div {
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: left;
+        flex-direction: column;
+        width: 80%;
+
+        div:nth-child(1) {
+          justify-content: left;
+          flex: 0.5;
+          color: #898c92;
+          margin-bottom: 10px;
+        }
+        div:nth-child(2) {
+          justify-content: left;
+          flex: 0.5;
+          margin-bottom: 20px;
+        }
       }
     }
   }
   .badge {
-    background-color: yellow;
+    font-size: 1.2rem;
+    font-weight: bold;
     flex: 1;
+    .badge_container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      .badge_title {
+        flex: 0.15;
+      }
+      .my_badge {
+        flex: 0.8;
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: left;
+        gap: 10px;
+        margin-left: 10px;
+        .badge_image {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background-color: red;
+        }
+      }
+    }
   }
 }
 .right_layout {
