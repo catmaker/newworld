@@ -57,6 +57,11 @@
   margin-top: 0.8rem;
   position: fixed;
   color: white;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
 }
 .img_box {
   width: 300px;
@@ -68,7 +73,7 @@
   overflow: hidden;
   color: blue;
 }
-.img_box > img {
+.img_box > a > img {
   width: 300px;
   height: 30px;
   object-fit: contain;
@@ -499,6 +504,7 @@
   width: clamp(10rem, 20vw, 20rem);
   animation: fadeIn 1s ease-in-out; // fade in 애니메이션 적용
   font-size: clamp(11px, 1.5vw, 18px);
+  cursor: pointer;
 
   &:hover {
     background-color: #db6f39;
