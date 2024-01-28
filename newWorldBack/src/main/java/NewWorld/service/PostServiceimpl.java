@@ -29,7 +29,12 @@ public class PostServiceimpl implements PostService {
         return postRepository.findAll(pageRequest);
     }
 
-
+    @Override
+    public PostDto getPost(PostDto info) {
+        Post post = postRepository.findByNickname(info);
+        PostDto postDto = new PostDto().toDto(post);
+        return postDto;
+    }
 
     @Override
     public Page<Post> myPost(Pageable pageable, String userName, String userNickname) {
@@ -53,7 +58,6 @@ public class PostServiceimpl implements PostService {
         Post savedPost = postRepository.save(firstPost);
 
         user.getPostList().add(savedPost);
-        userRepository.save(user);
     }
 
     @Override
@@ -66,8 +70,8 @@ public class PostServiceimpl implements PostService {
 
     @Override
     public void deletePost(PostDto postDto) {
-
-        //find
+        Post post = postRepository.findByNickname(postDto);
+        postRepository.delete(post);
     }
 
     /**

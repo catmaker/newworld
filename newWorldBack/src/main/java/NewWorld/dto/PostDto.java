@@ -42,7 +42,7 @@ public class PostDto {
      * 게사판정보 ->dto
      * @param post
      */
-    public PostDto basicInfo(Post post){
+    public PostDto toDto(Post post){
 
         this.title = post.getTitle();
         this.detail = post.getDetail();

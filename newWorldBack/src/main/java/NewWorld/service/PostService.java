@@ -27,6 +27,7 @@ public interface PostService {
      * @return
      */
     public Page<Post> myPost(Pageable pageable, String userName, String userNickname);
+    public PostDto getPost(PostDto postDto);
     public void makePost(PostDto postDto, String userName);
     public void changePost(PostDto postDto,  String userNickname);
     public void deletePost(PostDto postDto);
