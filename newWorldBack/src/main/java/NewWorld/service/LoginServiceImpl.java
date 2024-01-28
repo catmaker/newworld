@@ -86,8 +86,6 @@ public class LoginServiceImpl implements LoginService {
     public void ChangeUserPw(String loginId, String userName, String phoneNumber, String newPassword) throws NotfindUserException {
         User user = findUserforChageInfo(loginId, userName, phoneNumber);
         user.changePassword(newPassword);
-
-        userRepository.save(user);
     }
 
     /**
@@ -118,9 +116,9 @@ public class LoginServiceImpl implements LoginService {
     private User findUserforChageInfo(String loginId, String userName, String phoneNumber) throws NotfindUserException {
         User user = null;
         if(loginId == null){
-            user = userRepository.findByNameAndAndPhoneNumber(userName, phoneNumber);
+            user = userRepository.findByUserIdAndNameAndPhoneNumber(loginId, userName, phoneNumber);
         }else{
-            user = userRepository.findByNameAndAndPhoneNumber(userName, phoneNumber);
+            user = userRepository.findByUserIdAndNameAndPhoneNumber(loginId, userName, phoneNumber);
         }
 
         if(user == null){

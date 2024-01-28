@@ -19,7 +19,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    @Column(name = "user_id")
+    @Column(name = "users_id")
     private Long id;
 
     private String name;
@@ -76,4 +76,5 @@ public class User {
         this.userPassword = newPassword;
         return this;
     }
+
 }

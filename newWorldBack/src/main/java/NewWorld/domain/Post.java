@@ -1,5 +1,6 @@
 package NewWorld.domain;
 
+import NewWorld.dto.PostDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -42,5 +43,16 @@ public class Post {
         this.makedDate = makedDate;
         this.userNickName = userNickName;
         this.commentList = commentList;
+    }
+
+    /**
+     * 2024.01.28 jeonil
+     * 글 수정
+     */
+    public Post chagePost(PostDto postDto){
+        this.title = postDto.getTitle();
+        this.detail = postDto.getDetail();
+
+        return this;
     }
 }

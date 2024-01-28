@@ -15,11 +15,11 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ClearTime {
+public class GameClearTime {
 
     @Id
     @GeneratedValue
-    @Column(name = "cleartime_id")
+    @Column(name = "gameCleartime_id")
     private Long id;
 
     private String gameName;
@@ -34,7 +34,7 @@ public class ClearTime {
     private List<Quiz> quizs;
 
     @Builder
-    public ClearTime(Long id, String gameName, String stageDescription, int expr, String imageUrl, List<Quiz> quizs) {
+    public GameClearTime(Long id, String gameName, String stageDescription, int expr, String imageUrl, List<Quiz> quizs) {
         this.id = id;
         this.gameName = gameName;
         this.stageDescription = stageDescription;
