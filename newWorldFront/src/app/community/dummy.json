@@ -1,0 +1,74 @@
+{
+  "bulletinBoard": [
+    {
+      "id": 1,
+      "title": "First Post",
+      "content": "This is the content of the first post.",
+      "author": "John Doe",
+      "timestamp": "2022-01-01T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "title": "Second Post",
+      "content": "This is the content of the second post.",
+      "author": "Jane Smith",
+      "timestamp": "2022-01-02T14:30:00Z"
+    },
+    {
+      "id": 3,
+      "title": "Third Post",
+      "content": "This is the content of the third post.",
+      "author": "Bob Johnson",
+      "timestamp": "2022-01-03T09:15:00Z"
+    },
+    {
+      "id": 4,
+      "title": "Fourth Post",
+      "content": "This is the content of the fourth post.",
+      "author": "Alice Brown",
+      "timestamp": "2022-01-04T16:45:00Z"
+    },
+    {
+      "id": 5,
+      "title": "Fifth Post",
+      "content": "This is the content of the fifth post.",
+      "author": "David Wilson",
+      "timestamp": "2022-01-05T11:30:00Z"
+    },
+    {
+      "id": 6,
+      "title": "Sixth Post",
+      "content": "This is the content of the sixth post.",
+      "author": "Emily Davis",
+      "timestamp": "2022-01-06T08:20:00Z"
+    },
+    {
+      "id": 7,
+      "title": "Seventh Post",
+      "content": "This is the content of the seventh post.",
+      "author": "Michael Miller",
+      "timestamp": "2022-01-07T13:10:00Z"
+    },
+    {
+      "id": 8,
+      "title": "Eighth Post",
+      "content": "This is the content of the eighth post.",
+      "author": "Olivia Wilson",
+      "timestamp": "2022-01-08T17:55:00Z"
+    },
+    {
+      "id": 9,
+      "title": "Ninth Post",
+      "content": "This is the content of the ninth post.",
+      "author": "Sophia Martinez",
+      "timestamp": "2022-01-09T12:40:00Z"
+    },
+    {
+      "id": 10,
+      "title": "Tenth Post",
+      "content": "This is the content of the tenth post.",
+      "author": "William Johnson",
+      "timestamp": "2022-01-10T15:25:00Z"
+    }
+  ]
+}
