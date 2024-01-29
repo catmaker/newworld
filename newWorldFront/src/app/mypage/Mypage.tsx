@@ -43,7 +43,7 @@ const Mypage = () => {
                 )}
               </div>
               <div className={styles.profile_info}>
-                <div className={styles.profile_name}>
+                <div>
                   <div>Name</div>
                   {dummy.users && dummy.users[0] ? (
                     <div>
@@ -53,7 +53,7 @@ const Mypage = () => {
                     <div>No user data</div>
                   )}
                 </div>
-                <div className={styles.profile_email}>
+                <div>
                   <div>Email</div>
                   {dummy.users && dummy.users[0] ? (
                     <div>{dummy.users[0].email}</div>
@@ -61,7 +61,7 @@ const Mypage = () => {
                     <div>No user data</div>
                   )}
                 </div>
-                <div className={styles.profile_nickname}>
+                <div>
                   <div>Nickname</div>
                   {dummy.users && dummy.users[0] ? (
                     <div>{dummy.users[0].nickname}</div>
@@ -159,7 +159,12 @@ const Mypage = () => {
                 뱃지
               </div>
             </div>
-            <div className={styles.infomation}>{selectedItem}</div>
+            <div className={styles.infomation}>
+              {selectedItem === "개인정보 관리" && <div>개인정보관리</div>}
+              {selectedItem === "프로필 관리" && <div>프로필관리</div>}
+              {selectedItem === "클리어 퀴즈" && <div>클리어퀴즈</div>}
+              {selectedItem === "뱃지" && <div>뱃지</div>}
+            </div>
           </div>
         </div>
       </div>
