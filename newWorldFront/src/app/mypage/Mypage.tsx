@@ -160,7 +160,39 @@ const Mypage = () => {
               </div>
             </div>
             <div className={styles.infomation}>
-              {selectedItem === "개인정보 관리" && <div>개인정보관리</div>}
+              {selectedItem === "개인정보 관리" && (
+                <div className={styles.infomation_box}>
+                  <div className={styles.id_box}>
+                    <div>아이디</div>
+                    <div>{dummy2.users[0].id}</div>
+                  </div>
+                  <div className={styles.password_box}>
+                    <div>비밀번호</div>
+                    <div>
+                      <input type="password" />
+                    </div>
+                  </div>
+                  <div className={styles.password_check_box}>
+                    <div>비밀번호 확인</div>
+                    <div>
+                      <input type="password" />
+                    </div>
+                  </div>
+                  <div className={styles.nickname_box}>
+                    <div>닉네임</div>
+                    <div>
+                      <input
+                        type="text"
+                        placeholder={dummy2?.users?.[0]?.nickname}
+                      />
+                    </div>
+                  </div>
+                  <div className={styles.button_box}>
+                    <button>수정하기</button>
+                    <button>탈퇴하기</button>
+                  </div>
+                </div>
+              )}
               {selectedItem === "프로필 관리" && <div>프로필관리</div>}
               {selectedItem === "클리어 퀴즈" && <div>클리어퀴즈</div>}
               {selectedItem === "뱃지" && <div>뱃지</div>}
