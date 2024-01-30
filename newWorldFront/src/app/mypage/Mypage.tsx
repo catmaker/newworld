@@ -1,9 +1,25 @@
+"use client";
 import React from "react";
 import styles from "./mypage.module.scss";
 import dummy from "./dummy.json";
 import dummy2 from "./dummy2.json";
 import Image from "next/image";
+import { useState, useEffect } from "react";
+
 const Mypage = () => {
+  const [days, setDays] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [selectedItem, setSelectedItem] = useState("");
+  useEffect(() => {
+    const signUp = new Date(dummy2.users[0].signUpDate);
+    const current = new Date("2024-01-30");
+
+    const differenceInTime = current.getTime() - signUp.getTime();
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+    setDays(Math.ceil(differenceInDays));
+    setLoading(false);
+  }, []);
   return (
     <div className={styles.background}>
       <div className={styles.container}>
@@ -27,7 +43,7 @@ const Mypage = () => {
                 )}
               </div>
               <div className={styles.profile_info}>
-                <div className={styles.profile_name}>
+                <div>
                   <div>Name</div>
                   {dummy.users && dummy.users[0] ? (
                     <div>
@@ -37,7 +53,7 @@ const Mypage = () => {
                     <div>No user data</div>
                   )}
                 </div>
-                <div className={styles.profile_email}>
+                <div>
                   <div>Email</div>
                   {dummy.users && dummy.users[0] ? (
                     <div>{dummy.users[0].email}</div>
@@ -45,7 +61,7 @@ const Mypage = () => {
                     <div>No user data</div>
                   )}
                 </div>
-                <div className={styles.profile_nickname}>
+                <div>
                   <div>Nickname</div>
                   {dummy.users && dummy.users[0] ? (
                     <div>{dummy.users[0].nickname}</div>
@@ -77,9 +93,121 @@ const Mypage = () => {
             </div>
           </div>
           <div className={styles.right_layout}>
-            <div></div>
-            <div></div>
-            <div></div>
+            <div className={styles.welcome_message}>
+              <div className={styles.message}>
+                {loading ? (
+                  <div className={styles.loading}>
+                    로딩중입니다. 잠시만 기다려주세요.
+                  </div>
+                ) : (
+                  <div>
+                    <p>
+                      환영합니다 <span>{dummy2.users[0].name}</span> 님!
+                    </p>
+                    <p>
+                      저희가 처음 만난 날은 {dummy2.users[0].signUpDate} 입니다.
+                    </p>
+                    <p>처음 만난 날부터 지금까지 {days}일이 지났습니다.</p>
+                  </div>
+                )}
+                <Image
+                  src={"/img/medal/medal1.svg"}
+                  width={20}
+                  height={20}
+                  alt="image"
+                  title="1000 days"
+                ></Image>
+              </div>
+              <div className={styles.point_section}>
+                <div>
+                  <p>해결한 문제 수 : {dummy2.users[0].clear}</p>
+                  <p>획득한 포인트 : {dummy2.users[0].point}</p>
+                </div>
+              </div>
+            </div>
+            <div className={styles.privacy_control_box}>
+              <div
+                className={`${styles.privacy_control_box_item} ${
+                  selectedItem === "개인정보 관리" ? styles.selected : ""
+                }`}
+                onClick={() => setSelectedItem("개인정보 관리")}
+              >
+                개인정보 관리
+              </div>
+              <div
+                className={`${styles.privacy_control_box_item} ${
+                  selectedItem === "프로필 관리" ? styles.selected : ""
+                }`}
+                onClick={() => setSelectedItem("프로필 관리")}
+              >
+                프로필 관리
+              </div>
+              <div
+                className={`${styles.privacy_control_box_item} ${
+                  selectedItem === "클리어 퀴즈" ? styles.selected : ""
+                }`}
+                onClick={() => setSelectedItem("클리어 퀴즈")}
+              >
+                클리어 퀴즈
+              </div>
+              <div
+                className={`${styles.privacy_control_box_item} ${
+                  selectedItem === "뱃지" ? styles.selected : ""
+                }`}
+                onClick={() => setSelectedItem("뱃지")}
+              >
+                뱃지
+              </div>
+            </div>
+            <div className={styles.infomation}>
+              {selectedItem === "개인정보 관리" && (
+                <form className={styles.infomation_box}>
+                  <div className={styles.id_box}>
+                    <div>
+                      아이디 <span>{dummy2.users[0].id}</span>
+                    </div>
+                  </div>
+                  <div className={styles.password_box}>
+                    <div>비밀번호</div>
+                    <div>
+                      <input type="password" />
+                    </div>
+                  </div>
+                  <div className={styles.password_check_box}>
+                    <div>비밀번호확인</div>
+                    <div>
+                      <input type="password" />
+                    </div>
+                  </div>
+                  <div className={styles.nickname_box}>
+                    <div>닉네임</div>
+                    <div>
+                      <input
+                        type="text"
+                        placeholder={dummy2?.users?.[0]?.nickname}
+                      />
+                    </div>
+                  </div>
+                  <div className={styles.button_box}>
+                    <button>수정하기</button>
+                    <button>탈퇴하기</button>
+                  </div>
+                </form>
+              )}
+              {selectedItem === "프로필 관리" && (
+                <div className={styles.profile_box}>
+                  <Image
+                    src={dummy.users[0].profilePicture}
+                    alt="Profile"
+                    width={200}
+                    height={200}
+                  />
+                  <div>이미지 변경하기</div>
+                </div>
+              )}
+              {selectedItem === "클리어 퀴즈" && <div>클리어퀴즈</div>}
+              {selectedItem === "뱃지" && <div>뱃지</div>}
+            </div>
           </div>
         </div>
       </div>

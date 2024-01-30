@@ -39,7 +39,7 @@ const SignUp = () => {
     setLanguage(language === "en" ? "ko" : "en");
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     // 모든 인풋 필드가 채워져 있는지 확인
@@ -79,7 +79,28 @@ const SignUp = () => {
     }
 
     // 모든 조건이 충족되면, 폼 제출 처리를 계속 진행
-    // ...
+    const formData = {
+      firstName: NameField.value,
+      lastName: NameField.value,
+      email: EmailField.value,
+      password: PasswordField.value,
+    };
+    try {
+      const response = await fetch("/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        throw new Error("Signup request failed");
+      }
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
