@@ -1,8 +1,8 @@
 // SelectedItemComponent.tsx
 import React from "react";
 import Image from "next/image";
-import Pagenation from "@/components/pagenation/Pagenation"; // Assuming Pagenation component is in the same directory
-import styles from "./mypage.module.scss";
+import Pagination from "@/components/pagination/Pagination"; // Assuming Pagenation component is in the same directory
+import styles from "@/app/mypage/mypage.module.scss";
 interface SelectedItemComponentProps {
   selectedItem: string;
   dummy: any;
@@ -64,7 +64,7 @@ const SelectedItem: React.FC<SelectedItemComponentProps> = ({
             width={200}
             height={200}
           />
-          <div className={styles.change_profile_img}>
+          <div>
             <form action="">
               <input
                 type="file"
@@ -81,24 +81,37 @@ const SelectedItem: React.FC<SelectedItemComponentProps> = ({
         </div>
       )}
       {selectedItem === "클리어 퀴즈" && (
-        <div>
+        <div className={styles.clear_quiz}>
           {currentItems.map(({ problemName, difficulty, clearDate }, index) => (
-            <div key={index}>
-              <div>{problemName}</div>
-              <div>{difficulty}</div>
-              <div>{clearDate}</div>
+            <div key={index} className={styles.clear_list}>
+              <div className={styles.problem_name}>{problemName}</div>
+              <div
+                className={styles.difficulty}
+                style={{
+                  color:
+                    difficulty === "초급"
+                      ? "green"
+                      : difficulty === "중급"
+                      ? "orange"
+                      : difficulty === "고급"
+                      ? "red"
+                      : "black",
+                }}
+              >
+                {difficulty}
+              </div>
+              <div className={styles.clear_date}>{clearDate}</div>
             </div>
           ))}
 
-          {/* Pagination 컴포넌트 사용 */}
-          <Pagenation
+          <Pagination
             totalPages={totalPages}
             currentPage={currentPage}
             onPageChange={handlePageClick}
           />
         </div>
       )}
-      {selectedItem === "뱃지" && <div>뱃지</div>}
+      {selectedItem === "뱃지" && <div>이런 획득한 뱃지가 없군요!</div>}
     </>
   );
 };

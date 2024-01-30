@@ -1,0 +1,11 @@
+.pagination_button {
+  color: white;
+  background-color: black;
+  &:not(.active):hover {
+    background-color: #db6f3981;
+    transition: all 0.3s ease-in-out;
+  }
+}
+.pagination_button.active {
+  background-color: #db6f39;
+}

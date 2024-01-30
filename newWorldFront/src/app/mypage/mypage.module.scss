@@ -12,9 +12,8 @@
 .container {
   margin-top: 80px;
   width: 80%;
-  border: 1px solid white;
+  border-radius: 20px;
   height: 80%;
-  padding: 3rem;
 }
 .layout {
   display: flex;
@@ -84,7 +83,7 @@
       justify-content: center;
       align-items: center;
       flex: 0.8;
-      font-size: 1.2rem;
+      font-size: clamp(0.8rem, 1vw, 1.2rem);
       font-weight: bold;
       margin-top: 20px;
       div {
@@ -109,17 +108,23 @@
     }
   }
   .badge {
-    font-size: 1.2rem;
+    font-size: clamp(0.8rem, 1vw, 1.2rem);
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex: 1;
     .badge_container {
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      align-items: center;
-      width: 100%;
+      align-items: left;
+      flex-direction: column;
+      width: 80%;
       .badge_title {
         flex: 0.15;
+        display: flex;
+        justify-content: left;
+        width: 80%;
       }
       .my_badge {
         flex: 0.8;
@@ -128,7 +133,6 @@
         justify-content: left;
         align-items: left;
         gap: 10px;
-        margin-left: 10px;
         .badge_image {
           width: 50px;
           height: 50px;
@@ -170,7 +174,8 @@
       display: flex;
       justify-content: center;
       flex-direction: row;
-      font-size: 1.2rem;
+      font-size: clamp(0.5rem, 1vw, 1.2rem);
+
       background-color: #1b1d24;
       color: #b6bac9;
       border-radius: 20px;
@@ -179,8 +184,8 @@
         font-weight: medium;
       }
       img {
-        width: 70px;
-        height: 70px;
+        width: clamp(50px, 5vw, 70px);
+        height: clamp(50px, 5vw, 70px);
         border-radius: 20px;
         object-fit: cover;
       }
@@ -205,7 +210,7 @@
       display: flex;
       justify-content: center;
       flex-direction: row;
-      font-size: 1.2rem;
+      font-size: clamp(0.8rem, 1vw, 1.2rem);
       background-color: #8a2be2;
       color: white;
       border-radius: 20px;
@@ -227,12 +232,11 @@
   }
   .privacy_control_box {
     width: 100%;
-    height: 100%;
     align-items: left;
     display: flex;
     justify-content: center;
     flex-direction: row;
-    font-size: 1.2rem;
+    font-size: clamp(0.8rem, 1vw, 1.2rem);
     background-color: #111216;
     color: white;
     border-radius: 20px;
@@ -269,7 +273,7 @@
       gap: 20px;
       .id_box {
         display: flex;
-        font-size: 1.2rem;
+        font-size: clamp(0.8rem, 1vw, 1.2rem);
         gap: 20px;
         width: 50%;
         align-items: center;
@@ -287,7 +291,7 @@
       }
       .password_box {
         display: flex;
-        font-size: 1.2rem;
+        font-size: clamp(0.8rem, 1vw, 1.2rem);
         gap: 20px;
         align-items: center;
         flex: 1;
@@ -314,7 +318,7 @@
       }
       .password_check_box {
         display: flex;
-        font-size: 1.2rem;
+        font-size: clamp(0.8rem, 1vw, 1.2rem);
         gap: 20px;
         align-items: center;
         flex: 1;
@@ -341,7 +345,7 @@
       }
       .nickname_box {
         display: flex;
-        font-size: 1.2rem;
+        font-size: clamp(0.8rem, 1vw, 1.2rem);
         gap: 20px;
         align-items: center;
         flex: 1;
@@ -357,7 +361,7 @@
             background-color: #1b1d24;
             color: white;
             border: none;
-            font-size: 1.2rem;
+            font-size: clamp(0.8rem, 1vw, 1.2rem);
             font-weight: bold;
             padding-left: 10px;
             &:focus {
@@ -375,16 +379,16 @@
         gap: 20px;
         margin-left: 20px;
         button {
-          width: 100px;
-          height: 40px;
+          width: clamp(80px, 5vw, 100px);
+          height: clamp(30px, 5vw, 40px);
           border-radius: 10px;
           background-color: white;
           color: black;
           border: none;
-          font-size: 1.2rem;
+          font-size: clamp(0.8rem, 1vw, 1.2rem);
           font-weight: bold;
           cursor: pointer;
-          margin-top: 60px;
+          margin-top: clamp(10px, 1vw, 70px);
           &:hover {
             background-color: #db6f39;
             transition: all 0.3s ease-in-out;
@@ -436,5 +440,211 @@
     background-color: #2f323e;
     border-radius: 10px;
     padding: 10px;
+  }
+}
+.clear_quiz {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  gap: 20px;
+  width: 100%;
+  height: 80%;
+
+  .clear_list {
+    width: 80%;
+    height: 10%;
+    background-color: #1b1d2448;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    &:hover {
+      background-color: #1b1d24;
+      transition: all 0.3s ease-in-out;
+      padding: 8px;
+    }
+  }
+  div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-size: clamp(0.8rem, 1vw, 1.2rem);
+
+    .problem_name {
+      flex: 1;
+    }
+    .difficulty {
+      flex: 1;
+    }
+    .clear_date {
+      flex: 1;
+    }
+  }
+}
+@media screen and (max-width: 650px) {
+  .infomation_box {
+    gap: 0px !important;
+  }
+  .button_box {
+    button {
+      width: 80px !important;
+      height: 30px !important;
+    }
+  }
+  .password_box {
+    div {
+      input {
+        padding: 0 !important;
+        height: 15px !important;
+      }
+    }
+  }
+  .password_check_box {
+    div {
+      input {
+        padding: 0 !important;
+        height: 15px !important;
+      }
+    }
+  }
+  .nickname_box {
+    div {
+      input {
+        padding: 0 !important;
+        height: 15px !important;
+      }
+    }
+  }
+  .privacy_control_box {
+    overflow: hidden !important;
+    height: 200px !important;
+  }
+  .clear_quiz {
+    justify-content: normal !important;
+    div {
+      gap: 0px;
+      button {
+        width: clamp(10px, 1vw, 30px) !important;
+        height: clamp(10px, 1vw, 30px) !important;
+        margin-right: 0px !important;
+        font-size: clamp(0.8rem, 1vw, 1.2rem) !important;
+        background: none !important;
+      }
+    }
+  }
+  .profile_box {
+    img {
+      width: clamp(80px, 5vw, 100px) !important;
+      height: clamp(80px, 5vw, 100px) !important;
+    }
+  }
+  .badge_container {
+    img {
+      width: clamp(10px, 5vw, 30px) !important;
+      height: clamp(10px, 5vw, 30px) !important;
+    }
+  }
+  .profile_image {
+    align-items: stretch !important;
+    img {
+      width: clamp(80px, 5vw, 100px) !important;
+      height: clamp(80px, 5vw, 100px) !important;
+    }
+  }
+  .welcome_message {
+    flex-direction: column !important;
+    justify-items: center !important;
+    align-items: center !important;
+    div {
+      height: auto !important;
+      padding: 11px !important;
+      margin-left: 5px !important;
+      width: 80% !important;
+    }
+  }
+}
+@media screen and (max-width: 450px) {
+  .message {
+    div {
+      p {
+        margin-left: 0px !important;
+      }
+    }
+  }
+}
+@media screen and (max-height: 700px) {
+  .privacy_control_box {
+    overflow: visible !important;
+    height: 200px !important;
+  }
+  .profile_box {
+    img {
+      width: clamp(80px, 5vw, 100px) !important;
+      height: clamp(80px, 5vw, 100px) !important;
+    }
+  }
+  .badge_container {
+    img {
+      width: clamp(10px, 5vw, 30px) !important;
+      height: clamp(10px, 5vw, 30px) !important;
+    }
+  }
+  .profile_image {
+    align-items: stretch !important;
+    img {
+      width: clamp(80px, 5vw, 100px) !important;
+      height: clamp(80px, 5vw, 100px) !important;
+    }
+  }
+  .left_layout {
+    gap: 0px !important;
+  }
+  .privacy_control_box {
+    overflow: hidden !important;
+  }
+  .clear_quiz {
+    gap: 0px !important;
+  }
+  .my_badge {
+    img {
+    }
+  }
+}
+@media screen and (max-height: 550px) {
+  .button_box {
+    button {
+      width: 80px !important;
+      height: 30px !important;
+    }
+  }
+  .password_box {
+    div {
+      input {
+        padding: 3px !important;
+
+        height: 15px !important;
+      }
+    }
+  }
+  .password_check_box {
+    div {
+      input {
+        padding: 3px !important;
+        height: 15px !important;
+      }
+    }
+  }
+  .nickname_box {
+    div {
+      input {
+        padding: 3px !important;
+
+        height: 15px !important;
+      }
+    }
   }
 }

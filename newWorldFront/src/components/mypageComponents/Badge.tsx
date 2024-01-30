@@ -1,7 +1,7 @@
 // Badge.tsx
 import React from "react";
 import Image from "next/image";
-import styles from "./mypage.module.scss";
+import styles from "@/app/mypage/mypage.module.scss";
 interface Badge {
   name: string;
   level: number;
@@ -24,8 +24,8 @@ const Badge: React.FC<BadgeProps> = ({ badges }) => {
                 key={index}
                 src={badge.image}
                 alt={`${badge.name} badge`}
-                width={50}
-                height={50}
+                width={35}
+                height={35}
               />
             ))}
         </div>

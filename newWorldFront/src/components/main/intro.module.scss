@@ -2,6 +2,14 @@
   font-family: "DNFForgedBlade-Bold";
   src: url("/font/DNFForgedBlade-Bold.TTF") format("TTF");
 }
+@media screen and (max-width: 650px) {
+  .header {
+    justify-content: center !important;
+  }
+  .header img {
+    display: none !important;
+  }
+}
 .container {
   width: 100vw;
   height: 100vh;

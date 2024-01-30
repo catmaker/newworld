@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import styles from "./mypage.module.scss";
+import styles from "@/app/mypage/mypage.module.scss";
 interface User {
   profilePicture: string;
   name: {
@@ -18,10 +18,7 @@ interface ProfileProps {
 const Profile: React.FC<ProfileProps> = ({ user }) => {
   return (
     <div className={styles.profile}>
-      <div className={styles.profile_icon}>
-        <div>InFo</div>
-        <div>⋯</div>
-      </div>
+      <div className={styles.profile_icon}></div>
       <div className={styles.profile_image}>
         {user ? (
           <Image

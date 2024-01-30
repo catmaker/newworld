@@ -4,14 +4,12 @@ import styles from "./mypage.module.scss";
 import dummy from "./dummy.json";
 import dummy2 from "./dummy2.json";
 import dummy3 from "./dummy3.json";
-import Image from "next/image";
 import { useState, useEffect } from "react";
-import Pagenation from "@/components/pagenation/Pagenation";
-import Profile from "./Profile";
-import Badge from "./Badge";
-import WelcomeMessage from "./WelcomeMessage";
-import PrivacyControlBox from "./PrivacyControlBox";
-import SelectedItem from "./SelectedItem";
+import Profile from "../../components/mypageComponents/Profile";
+import Badge from "../../components/mypageComponents/Badge";
+import WelcomeMessage from "../../components/mypageComponents/WelcomeMessage";
+import PrivacyControlBox from "../../components/mypageComponents/PrivacyControlBox";
+import SelectedItem from "../../components/mypageComponents/SelectedItem";
 const Mypage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentItems, setCurrentItems] = useState<
@@ -22,6 +20,7 @@ const Mypage = () => {
       clearDate: string;
     }[]
   >([]);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [days, setDays] = useState(0);
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState("");
@@ -29,7 +28,19 @@ const Mypage = () => {
   const handlePageClick = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
-  const totalPages = Math.ceil(dummy3.clearedProblems.length / ITEMS_PER_PAGE);
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      setItemsPerPage(window.innerWidth <= 700 ? 5 : 10);
+    };
+
+    window.addEventListener("resize", updateItemsPerPage);
+    updateItemsPerPage();
+
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
+
+  // ...
+  const totalPages = Math.ceil(dummy3.clearedProblems.length / itemsPerPage);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) {
@@ -40,10 +51,10 @@ const Mypage = () => {
   };
 
   useEffect(() => {
-    const start = (currentPage - 1) * ITEMS_PER_PAGE;
-    const end = start + ITEMS_PER_PAGE;
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
     setCurrentItems(dummy3.clearedProblems.slice(start, end));
-  }, [currentPage]);
+  }, [currentPage, itemsPerPage]);
 
   useEffect(() => {
     const signUp = new Date(dummy2.users[0].signUpDate);
@@ -71,8 +82,7 @@ const Mypage = () => {
             <PrivacyControlBox
               selectedItem={selectedItem}
               setSelectedItem={setSelectedItem}
-            />{" "}
-            {/* PrivacyControlBox 컴포넌트를 사용 */}
+            />
             <div className={styles.infomation}>
               <SelectedItem
                 selectedItem={selectedItem}
