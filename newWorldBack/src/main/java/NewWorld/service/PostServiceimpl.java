@@ -23,7 +23,7 @@ public class PostServiceimpl implements PostService {
     private final PostRepository postRepository;
 
     @Override
-    public Page<Post> allPost(Pageable pageable) {
+    public Page<Post> getAllPost(Pageable pageable) {
         PageRequest pageRequest = getPageRequest(pageable);
 
         return postRepository.findAll(pageRequest);
@@ -31,13 +31,13 @@ public class PostServiceimpl implements PostService {
 
     @Override
     public PostDto getPost(PostDto info) {
-        Post post = postRepository.findByNickname(info);
+        Post post = postRepository.findBypost(info);
         PostDto postDto = new PostDto().toDto(post);
         return postDto;
     }
 
     @Override
-    public Page<Post> myPost(Pageable pageable, String userName, String userNickname) {
+    public Page<Post> getMyPost(Pageable pageable, String userName, String userNickname) {
         PageRequest pageRequest = getPageRequest(pageable);
         Page<Post> myPosts = postRepository.findPostsByUserNickName(pageRequest, userNickname);
 
@@ -63,14 +63,14 @@ public class PostServiceimpl implements PostService {
     @Override
     public void changePost(PostDto postDto,String userName) {
 
-        Post post= postRepository.findByNickname(postDto);
+        Post post= postRepository.findBypost(postDto);
 
         post.chagePost(postDto);
     }
 
     @Override
     public void deletePost(PostDto postDto) {
-        Post post = postRepository.findByNickname(postDto);
+        Post post = postRepository.findBypost(postDto);
         postRepository.delete(post);
     }
 

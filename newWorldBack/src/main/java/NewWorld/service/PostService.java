@@ -17,7 +17,7 @@ public interface PostService {
      * @param pageable
      * @return
      */
-    Page<Post> allPost(Pageable pageable);
+    Page<Post> getAllPost(Pageable pageable);
 
     /**
      * 특정 회원 게시판 불러오기
@@ -26,7 +26,7 @@ public interface PostService {
      * @param userNickname
      * @return
      */
-    public Page<Post> myPost(Pageable pageable, String userName, String userNickname);
+    public Page<Post> getMyPost(Pageable pageable, String userName, String userNickname);
     public PostDto getPost(PostDto postDto);
     public void makePost(PostDto postDto, String userName);
     public void changePost(PostDto postDto,  String userNickname);

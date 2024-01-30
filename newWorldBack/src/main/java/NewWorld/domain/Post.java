@@ -46,6 +46,13 @@ public class Post {
     }
 
     /**
+     * 댓글 등록
+     */
+    public Post setComment(boolean comments){
+        this.commentList = commentList;
+        return this;
+    }
+    /**
      * 2024.01.28 jeonil
      * 글 수정
      */

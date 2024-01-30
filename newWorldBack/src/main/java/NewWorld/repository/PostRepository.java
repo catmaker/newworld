@@ -26,7 +26,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query( value = "select Post from User u left join fetch Post p " +
             "where u.nickname = :#{#postDto.userNickName} and " +
             "p.title = :#{#postDto.title} and p.makedDate = :#{#postDto.makedDate}")
-    Post findByNickname(@Param(value = "postDto") PostDto postDto);
+    Post findBypost(@Param(value = "postDto") PostDto postDto);
     public Page<Post> findPostsByUserNickName(PageRequest pageable, String userNickname);
     public Post findPostByTitleAndUserNickNameAndMakedDate(String title, String userNickname, Date makeDate);
 
