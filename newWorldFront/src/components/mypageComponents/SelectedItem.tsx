@@ -1,7 +1,7 @@
 // SelectedItemComponent.tsx
 import React from "react";
 import Image from "next/image";
-import Pagenation from "@/components/pagenation/Pagination"; // Assuming Pagenation component is in the same directory
+import Pagination from "@/components/pagination/Pagination"; // Assuming Pagenation component is in the same directory
 import styles from "@/app/mypage/mypage.module.scss";
 interface SelectedItemComponentProps {
   selectedItem: string;
@@ -81,17 +81,30 @@ const SelectedItem: React.FC<SelectedItemComponentProps> = ({
         </div>
       )}
       {selectedItem === "클리어 퀴즈" && (
-        <div>
+        <div className={styles.clear_quiz}>
           {currentItems.map(({ problemName, difficulty, clearDate }, index) => (
-            <div key={index}>
-              <div>{problemName}</div>
-              <div>{difficulty}</div>
-              <div>{clearDate}</div>
+            <div key={index} className={styles.clear_list}>
+              <div className={styles.problem_name}>{problemName}</div>
+              <div
+                className={styles.difficulty}
+                style={{
+                  color:
+                    difficulty === "초급"
+                      ? "green"
+                      : difficulty === "중급"
+                      ? "orange"
+                      : difficulty === "고급"
+                      ? "red"
+                      : "black",
+                }}
+              >
+                {difficulty}
+              </div>
+              <div className={styles.clear_date}>{clearDate}</div>
             </div>
           ))}
 
-          {/* Pagination 컴포넌트 사용 */}
-          <Pagenation
+          <Pagination
             totalPages={totalPages}
             currentPage={currentPage}
             onPageChange={handlePageClick}

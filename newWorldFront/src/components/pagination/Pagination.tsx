@@ -1,5 +1,5 @@
 import React from "react";
-
+import styles from "./pagination.module.scss";
 interface PaginationProps {
   totalPages: number;
   currentPage: number;
@@ -22,7 +22,16 @@ const Pagination: React.FC<PaginationProps> = ({
         <button
           key={number}
           onClick={() => onPageChange(number)}
-          style={{ backgroundColor: currentPage === number ? "gray" : "white" }}
+          className={styles.pagination_button}
+          style={{
+            backgroundColor: currentPage === number ? "#db6f39" : "black",
+            color: "white",
+            border: "none",
+            padding: "0.5rem 1rem",
+            cursor: "pointer",
+            borderRadius: "0.5rem",
+            marginRight: "0.5rem",
+          }}
         >
           {number}
         </button>

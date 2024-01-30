@@ -438,3 +438,43 @@
     padding: 10px;
   }
 }
+.clear_quiz {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  gap: 20px;
+  width: 100%;
+  .clear_list {
+    width: 80%;
+    height: 10%;
+    background-color: #1b1d2448;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    &:hover {
+      background-color: #1b1d24;
+      transition: all 0.3s ease-in-out;
+      padding: 8px;
+    }
+  }
+  div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    .problem_name {
+      flex: 1;
+    }
+    .difficulty {
+      flex: 1;
+    }
+    .clear_date {
+      flex: 1;
+    }
+  }
+}
