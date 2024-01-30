@@ -14,7 +14,6 @@
   width: 80%;
   border-radius: 20px;
   height: 80%;
-  padding: 3rem;
 }
 .layout {
   display: flex;
@@ -233,7 +232,6 @@
   }
   .privacy_control_box {
     width: 100%;
-    height: 100%;
     align-items: left;
     display: flex;
     justify-content: center;
@@ -381,16 +379,16 @@
         gap: 20px;
         margin-left: 20px;
         button {
-          width: 100px;
-          height: 40px;
+          width: clamp(80px, 5vw, 100px);
+          height: clamp(30px, 5vw, 40px);
           border-radius: 10px;
           background-color: white;
           color: black;
           border: none;
-          font-size: 1.2rem;
+          font-size: clamp(0.8rem, 1vw, 1.2rem);
           font-weight: bold;
           cursor: pointer;
-          margin-top: 60px;
+          margin-top: clamp(10px, 1vw, 70px);
           &:hover {
             background-color: #db6f39;
             transition: all 0.3s ease-in-out;
@@ -452,6 +450,7 @@
   flex: 1;
   gap: 20px;
   width: 100%;
+  height: 80%;
 
   .clear_list {
     width: 80%;
@@ -487,6 +486,56 @@
   }
 }
 @media screen and (max-width: 650px) {
+  .infomation_box {
+    gap: 0px !important;
+  }
+  .button_box {
+    button {
+      width: 80px !important;
+      height: 30px !important;
+    }
+  }
+  .password_box {
+    div {
+      input {
+        padding: 0 !important;
+        height: 15px !important;
+      }
+    }
+  }
+  .password_check_box {
+    div {
+      input {
+        padding: 0 !important;
+        height: 15px !important;
+      }
+    }
+  }
+  .nickname_box {
+    div {
+      input {
+        padding: 0 !important;
+        height: 15px !important;
+      }
+    }
+  }
+  .privacy_control_box {
+    overflow: hidden !important;
+    height: 200px !important;
+  }
+  .clear_quiz {
+    justify-content: normal !important;
+    div {
+      gap: 0px;
+      button {
+        width: clamp(10px, 1vw, 30px) !important;
+        height: clamp(10px, 1vw, 30px) !important;
+        margin-right: 0px !important;
+        font-size: clamp(0.8rem, 1vw, 1.2rem) !important;
+        background: none !important;
+      }
+    }
+  }
   .profile_box {
     img {
       width: clamp(80px, 5vw, 100px) !important;
@@ -519,13 +568,82 @@
   }
 }
 @media screen and (max-width: 450px) {
-  .privacy_control_box {
-  }
-
   .message {
     div {
       p {
         margin-left: 0px !important;
+      }
+    }
+  }
+}
+@media screen and (max-height: 700px) {
+  .privacy_control_box {
+    overflow: visible !important;
+    height: 200px !important;
+  }
+  .profile_box {
+    img {
+      width: clamp(80px, 5vw, 100px) !important;
+      height: clamp(80px, 5vw, 100px) !important;
+    }
+  }
+  .badge_container {
+    img {
+      width: clamp(10px, 5vw, 30px) !important;
+      height: clamp(10px, 5vw, 30px) !important;
+    }
+  }
+  .profile_image {
+    align-items: stretch !important;
+    img {
+      width: clamp(80px, 5vw, 100px) !important;
+      height: clamp(80px, 5vw, 100px) !important;
+    }
+  }
+  .left_layout {
+    gap: 0px !important;
+  }
+  .privacy_control_box {
+    overflow: hidden !important;
+  }
+  .clear_quiz {
+    gap: 0px !important;
+  }
+  .my_badge {
+    img {
+    }
+  }
+}
+@media screen and (max-height: 550px) {
+  .button_box {
+    button {
+      width: 80px !important;
+      height: 30px !important;
+    }
+  }
+  .password_box {
+    div {
+      input {
+        padding: 3px !important;
+
+        height: 15px !important;
+      }
+    }
+  }
+  .password_check_box {
+    div {
+      input {
+        padding: 3px !important;
+        height: 15px !important;
+      }
+    }
+  }
+  .nickname_box {
+    div {
+      input {
+        padding: 3px !important;
+
+        height: 15px !important;
       }
     }
   }
