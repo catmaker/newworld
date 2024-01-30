@@ -404,8 +404,37 @@
   justify-content: center;
   align-items: center;
   flex: 1;
+  gap: 20px;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    button {
+      width: 100px;
+      height: 40px;
+      border-radius: 10px;
+      background-color: white;
+      color: black;
+      border: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      &:hover {
+        background-color: #db6f39;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+  }
   img {
     border-radius: 50%;
     object-fit: cover;
+  }
+  .custom_file_upload {
+    cursor: pointer;
+    background-color: #2f323e;
+    border-radius: 10px;
+    padding: 10px;
   }
 }
