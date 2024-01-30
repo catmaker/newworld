@@ -22,10 +22,10 @@ const Pagination: React.FC<PaginationProps> = ({
         <button
           key={number}
           onClick={() => onPageChange(number)}
-          className={styles.pagination_button}
+          className={`${styles.pagination_button} ${
+            currentPage === number ? styles.active : ""
+          }`}
           style={{
-            backgroundColor: currentPage === number ? "#db6f39" : "black",
-            color: "white",
             border: "none",
             padding: "0.5rem 1rem",
             cursor: "pointer",
