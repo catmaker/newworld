@@ -111,7 +111,7 @@ const SelectedItem: React.FC<SelectedItemComponentProps> = ({
           />
         </div>
       )}
-      {selectedItem === "뱃지" && <div>뱃지</div>}
+      {selectedItem === "뱃지" && <div>이런 획득한 뱃지가 없군요!</div>}
     </>
   );
 };

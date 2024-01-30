@@ -24,8 +24,8 @@ const Badge: React.FC<BadgeProps> = ({ badges }) => {
                 key={index}
                 src={badge.image}
                 alt={`${badge.name} badge`}
-                width={50}
-                height={50}
+                width={35}
+                height={35}
               />
             ))}
         </div>
