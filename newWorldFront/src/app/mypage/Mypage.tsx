@@ -4,14 +4,12 @@ import styles from "./mypage.module.scss";
 import dummy from "./dummy.json";
 import dummy2 from "./dummy2.json";
 import dummy3 from "./dummy3.json";
-import Image from "next/image";
 import { useState, useEffect } from "react";
-import Pagenation from "@/components/pagenation/Pagenation";
-import Profile from "./Profile";
-import Badge from "./Badge";
-import WelcomeMessage from "./WelcomeMessage";
-import PrivacyControlBox from "./PrivacyControlBox";
-import SelectedItem from "./SelectedItem";
+import Profile from "../../components/mypageComponents/Profile";
+import Badge from "../../components/mypageComponents/Badge";
+import WelcomeMessage from "../../components/mypageComponents/WelcomeMessage";
+import PrivacyControlBox from "../../components/mypageComponents/PrivacyControlBox";
+import SelectedItem from "../../components/mypageComponents/SelectedItem";
 const Mypage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentItems, setCurrentItems] = useState<
@@ -71,8 +69,7 @@ const Mypage = () => {
             <PrivacyControlBox
               selectedItem={selectedItem}
               setSelectedItem={setSelectedItem}
-            />{" "}
-            {/* PrivacyControlBox 컴포넌트를 사용 */}
+            />
             <div className={styles.infomation}>
               <SelectedItem
                 selectedItem={selectedItem}

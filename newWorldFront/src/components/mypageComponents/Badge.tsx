@@ -1,7 +1,7 @@
 // Badge.tsx
 import React from "react";
 import Image from "next/image";
-import styles from "./mypage.module.scss";
+import styles from "@/app/mypage/mypage.module.scss";
 interface Badge {
   name: string;
   level: number;

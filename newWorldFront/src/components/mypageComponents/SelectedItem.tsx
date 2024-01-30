@@ -1,8 +1,8 @@
 // SelectedItemComponent.tsx
 import React from "react";
 import Image from "next/image";
-import Pagenation from "@/components/pagenation/Pagenation"; // Assuming Pagenation component is in the same directory
-import styles from "./mypage.module.scss";
+import Pagenation from "@/components/pagenation/Pagination"; // Assuming Pagenation component is in the same directory
+import styles from "@/app/mypage/mypage.module.scss";
 interface SelectedItemComponentProps {
   selectedItem: string;
   dummy: any;
@@ -64,7 +64,7 @@ const SelectedItem: React.FC<SelectedItemComponentProps> = ({
             width={200}
             height={200}
           />
-          <div className={styles.change_profile_img}>
+          <div>
             <form action="">
               <input
                 type="file"
