@@ -20,6 +20,7 @@ const Mypage = () => {
       clearDate: string;
     }[]
   >([]);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [days, setDays] = useState(0);
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState("");
@@ -27,7 +28,19 @@ const Mypage = () => {
   const handlePageClick = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
-  const totalPages = Math.ceil(dummy3.clearedProblems.length / ITEMS_PER_PAGE);
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      setItemsPerPage(window.innerWidth <= 700 ? 5 : 10);
+    };
+
+    window.addEventListener("resize", updateItemsPerPage);
+    updateItemsPerPage();
+
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
+
+  // ...
+  const totalPages = Math.ceil(dummy3.clearedProblems.length / itemsPerPage);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) {
@@ -38,10 +51,10 @@ const Mypage = () => {
   };
 
   useEffect(() => {
-    const start = (currentPage - 1) * ITEMS_PER_PAGE;
-    const end = start + ITEMS_PER_PAGE;
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
     setCurrentItems(dummy3.clearedProblems.slice(start, end));
-  }, [currentPage]);
+  }, [currentPage, itemsPerPage]);
 
   useEffect(() => {
     const signUp = new Date(dummy2.users[0].signUpDate);
