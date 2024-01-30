@@ -72,6 +72,8 @@
       align-items: center;
       flex: 1;
       img {
+        width: 200px;
+        height: 200px;
         border-radius: 50%;
         object-fit: cover;
       }
@@ -276,9 +278,11 @@
         div:nth-child(1) {
           font-weight: bold;
           flex: 1;
-        }
-        div:nth-child(2) {
-          flex: 1;
+          span {
+            margin-left: 10px;
+            color: #898c92;
+            font-weight: normal;
+          }
         }
       }
       .password_box {
@@ -291,6 +295,22 @@
         div:nth-child(1) {
           font-weight: bold;
         }
+        div:nth-child(2) {
+          input {
+            width: 100%;
+            height: 40px;
+            border-radius: 10px;
+            background-color: #1b1d24;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding-left: 10px;
+            &:focus {
+              outline: none;
+            }
+          }
+        }
       }
       .password_check_box {
         display: flex;
@@ -302,6 +322,22 @@
         div:nth-child(1) {
           font-weight: bold;
         }
+        div:nth-child(2) {
+          input {
+            width: 100%;
+            height: 40px;
+            border-radius: 10px;
+            background-color: #1b1d24;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding-left: 10px;
+            &:focus {
+              outline: none;
+            }
+          }
+        }
       }
       .nickname_box {
         display: flex;
@@ -312,6 +348,22 @@
         margin-left: 20px;
         div:nth-child(1) {
           font-weight: bold;
+        }
+        div:nth-child(2) {
+          input {
+            width: 100%;
+            height: 40px;
+            border-radius: 10px;
+            background-color: #1b1d24;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding-left: 10px;
+            &:focus {
+              outline: none;
+            }
+          }
         }
       }
       .button_box {
@@ -345,4 +397,15 @@
 .selected {
   background-color: #2f323e;
   transition: all 0.3s ease-in-out;
+}
+.profile_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  img {
+    border-radius: 50%;
+    object-fit: cover;
+  }
 }

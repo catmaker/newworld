@@ -161,10 +161,11 @@ const Mypage = () => {
             </div>
             <div className={styles.infomation}>
               {selectedItem === "개인정보 관리" && (
-                <div className={styles.infomation_box}>
+                <form className={styles.infomation_box}>
                   <div className={styles.id_box}>
-                    <div>아이디</div>
-                    <div>{dummy2.users[0].id}</div>
+                    <div>
+                      아이디 <span>{dummy2.users[0].id}</span>
+                    </div>
                   </div>
                   <div className={styles.password_box}>
                     <div>비밀번호</div>
@@ -173,7 +174,7 @@ const Mypage = () => {
                     </div>
                   </div>
                   <div className={styles.password_check_box}>
-                    <div>비밀번호 확인</div>
+                    <div>비밀번호확인</div>
                     <div>
                       <input type="password" />
                     </div>
@@ -191,9 +192,19 @@ const Mypage = () => {
                     <button>수정하기</button>
                     <button>탈퇴하기</button>
                   </div>
+                </form>
+              )}
+              {selectedItem === "프로필 관리" && (
+                <div className={styles.profile_box}>
+                  <Image
+                    src={dummy.users[0].profilePicture}
+                    alt="Profile"
+                    width={200}
+                    height={200}
+                  />
+                  <div>이미지 변경하기</div>
                 </div>
               )}
-              {selectedItem === "프로필 관리" && <div>프로필관리</div>}
               {selectedItem === "클리어 퀴즈" && <div>클리어퀴즈</div>}
               {selectedItem === "뱃지" && <div>뱃지</div>}
             </div>
