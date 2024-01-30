@@ -52,6 +52,9 @@ const Community = () => {
           <li onClick={() => handleCategoryClick("추천")}>추천</li>
           <li onClick={() => handleCategoryClick("질문")}>질문</li>
           <li onClick={() => handleCategoryClick("기타")}>기타</li>
+          <li>
+            <Link href={"/post"}>글쓰기</Link>
+          </li>
         </ul>
       </div>
       <div className={styles.container}>
