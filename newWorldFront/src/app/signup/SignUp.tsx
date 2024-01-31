@@ -91,31 +91,23 @@ const SignUp = () => {
       email: EmailField.value,
       password: PasswordField.value,
     };
-    
+
     try {
-      const response = await fetch("/signup", {
+      const response = await fetch("/signUp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-    
+
       if (!response.ok) {
         throw new Error("Signup request failed");
       }
-    
-      if (response.headers.get("content-length") !== "0") {
-        const data = await response.json();
-        console.log(data);
-      } else {
-        console.log("Empty response from server");
-      }
     } catch (error) {
-      const err = error as Error;
-      console.error(err);
-      alert("An error occurred: " + err.message);
+      console.error(error);
     }
+  };
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -244,6 +236,7 @@ const SignUp = () => {
                 className={styles.signUp_button}
                 type="submit"
                 value={translations[language].signUp}
+                onClick={handleSubmit}
               />
               <button
                 type="button"
