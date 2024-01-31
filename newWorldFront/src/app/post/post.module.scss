@@ -1,6 +1,7 @@
 .background {
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
   background-color: black;
 }
 .container {
@@ -9,6 +10,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.ql-editor {
+  min-height: 5rem !important;
+  /* max-height: 800px; */
+  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: scroll;
 }
 .contents_section {
   margin-top: 50px;
@@ -21,16 +29,5 @@
   color: white;
   div {
     width: 100%;
-    div {
-      width: 100%;
-      overflow: hidden;
-      div:nth-child(2) {
-        width: 100%;
-        height: 500px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    }
   }
 }

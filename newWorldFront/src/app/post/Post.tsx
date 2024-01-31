@@ -1,14 +1,13 @@
 "use client";
 import React from "react";
 import styles from "./post.module.scss";
-import "react-quill/dist/quill.snow.css";
-import ReactEditor from "@/components/reactQuill/ReactQuill";
+import Tiptap from "../../components/tiptap/Tiptap";
 const Post = () => {
   return (
     <div className={styles.background}>
       <div className={styles.container}>
         <div className={styles.contents_section}>
-          <ReactEditor />
+          <Tiptap content="Hello, world!" />
         </div>
       </div>
     </div>
