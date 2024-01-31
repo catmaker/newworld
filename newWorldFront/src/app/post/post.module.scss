@@ -3,3 +3,34 @@
   height: 100vh;
   background-color: black;
 }
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contents_section {
+  margin-top: 50px;
+  width: 80%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  div {
+    width: 100%;
+    div {
+      width: 100%;
+      overflow: hidden;
+      div:nth-child(2) {
+        width: 100%;
+        height: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
