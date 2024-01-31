@@ -20,8 +20,7 @@ const SignUp = () => {
   // 패스워드 보이기/숨기기
   const [showPassword, setShowPassword] = useState(false);
   // 이름 입력시 13자 제한 커스텀 훅
-  const FirstNameField = useInputField(13);
-  const LastNameField = useInputField(13);
+  const NameField = useInputField(13);
   const PasswordField = usePasswordField(8, 13);
   const ConfirmPasswordField = useInputField(13);
   // 이메일 정규식 확인 커스텀 훅
@@ -45,8 +44,7 @@ const SignUp = () => {
 
     // 모든 인풋 필드가 채워져 있는지 확인
     if (
-      !FirstNameField.value ||
-      !LastNameField.value ||
+      !NameField.value ||
       !EmailField.value ||
       !PasswordField.value ||
       !ConfirmPasswordField.value
@@ -68,11 +66,7 @@ const SignUp = () => {
     }
 
     // 이름과 패스워드가 13자 이하인지 확인
-    if (
-      FirstNameField.value.length > 13 ||
-      LastNameField.value.length > 13 ||
-      PasswordField.value.length > 13
-    ) {
+    if (NameField.value.length > 13 || PasswordField.value.length > 13) {
       alert("이름과 패스워드는 13자 이내로 작성해주세요.");
       return;
     }
@@ -86,14 +80,16 @@ const SignUp = () => {
 
     // 모든 조건이 충족되면, 폼 제출 처리를 계속 진행
     const formData = {
-      firstName: FirstNameField.value,
-      lastName: LastNameField.value,
-      email: EmailField.value,
-      password: PasswordField.value,
+      name: NameField.value,
+      userId: EmailField.value,
+      userPassword: PasswordField.value,
+      nickname: "테스트",
+      phoneNumber: "01064090592",
+      birthday:"20201212"
     };
 
     try {
-      const response = await fetch("/signUp", {
+      const response = await fetch("http://localhost:8080/signUp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -154,21 +150,18 @@ const SignUp = () => {
                   className={styles.content_input_name_box}
                   type="text"
                   placeholder={translations[language].firstName}
-                  onChange={FirstNameField.handleChange}
+                  onChange={NameField.handleChange}
                 />
 
                 <input
                   className={styles.content_input_name_box}
                   type="text"
                   placeholder={translations[language].lastName}
-                  onChange={LastNameField.handleChange}
+                  onChange={NameField.handleChange}
                 />
               </div>
-              {FirstNameField.warning && (
-                <p className={styles.warning}>{FirstNameField.warning}</p>
-              )}
-              {LastNameField.warning && (
-                <p className={styles.warning}>{LastNameField.warning}</p>
+              {NameField.warning && (
+                <p className={styles.warning}>{NameField.warning}</p>
               )}
               <div>
                 <input
