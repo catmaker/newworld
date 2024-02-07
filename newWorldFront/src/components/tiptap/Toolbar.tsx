@@ -20,6 +20,7 @@ function ToolBar({ editor }: ToolBarProps) {
         <Icon.Strikethrough editor={editor} />
         <Icon.Code editor={editor} />
         <Icon.Quote editor={editor} />
+        <Icon.ColorButton editor={editor} />
       </div>
       <div></div>
 

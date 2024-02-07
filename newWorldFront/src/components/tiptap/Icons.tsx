@@ -1,4 +1,6 @@
 import { Editor } from "@tiptap/core";
+import { Color } from "@tiptap/extension-color";
+import { TextStyle } from "@tiptap/extension-text-style";
 import { ReactComponent as H1Icon } from "./img/h1.svg";
 import { ReactComponent as H2Icon } from "./img/h2.svg";
 import { ReactComponent as H3Icon } from "./img/h3.svg";
@@ -99,7 +101,22 @@ const Quote: React.FC<IconProps> = ({ editor }) => {
     </button>
   );
 };
-
+const ColorButton: React.FC<{ editor: Editor }> = ({ editor }) => {
+  if (!editor) {
+    return null;
+  }
+  return (
+    <input
+      type="color"
+      onInput={(event) => {
+        const target = event.target as HTMLInputElement;
+        editor.chain().focus().setColor(target.value).run();
+      }}
+      value={editor.getAttributes("textStyle").color}
+      data-testid="setColor"
+    />
+  );
+};
 export const Icon = {
   H1,
   H2,
@@ -109,4 +126,5 @@ export const Icon = {
   Strikethrough,
   Code,
   Quote,
+  ColorButton,
 };
