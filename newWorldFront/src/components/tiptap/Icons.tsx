@@ -9,6 +9,7 @@ import { ReactComponent as ItalicIcon } from "./img/italic.svg";
 import { ReactComponent as StrikethroughIcon } from "./img/strikethrough.svg";
 import { ReactComponent as CodeIcon } from "./img/code.svg";
 import { ReactComponent as QuoteIcon } from "./img/quote.svg";
+import { ReactComponent as ColorIcon } from "./img/color.svg";
 import "./icons.css";
 interface IconProps {
   editor: Editor | null;
@@ -114,6 +115,10 @@ const ColorButton: React.FC<{ editor: Editor }> = ({ editor }) => {
       }}
       value={editor.getAttributes("textStyle").color}
       data-testid="setColor"
+      style={{
+        backgroundColor: "transparent",
+        border: "none",
+      }}
     />
   );
 };
