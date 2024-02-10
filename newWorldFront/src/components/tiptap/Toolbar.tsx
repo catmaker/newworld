@@ -11,17 +11,19 @@ function ToolBar({ editor }: ToolBarProps) {
 
   return (
     <div className={styles.flex}>
-      <div>
-        <Icon.H1 editor={editor} />
-        <Icon.H2 editor={editor} />
-        <Icon.H3 editor={editor} />
-        <Icon.Bold editor={editor} />
-        <Icon.Italic editor={editor} />
-        <Icon.Strikethrough editor={editor} />
-        <Icon.Code editor={editor} />
-        <Icon.Quote editor={editor} />
-        <Icon.ColorButton editor={editor} />
-      </div>
+      <form>
+        <div>
+          <Icon.H1 editor={editor} />
+          <Icon.H2 editor={editor} />
+          <Icon.H3 editor={editor} />
+          <Icon.Bold editor={editor} />
+          <Icon.Italic editor={editor} />
+          <Icon.Strikethrough editor={editor} />
+          <Icon.Code editor={editor} />
+          <Icon.Quote editor={editor} />
+          <Icon.ColorButton editor={editor} />
+        </div>
+      </form>
       <div></div>
 
       <div></div>

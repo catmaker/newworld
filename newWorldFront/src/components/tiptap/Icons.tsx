@@ -1,6 +1,4 @@
 import { Editor } from "@tiptap/core";
-import { Color } from "@tiptap/extension-color";
-import { TextStyle } from "@tiptap/extension-text-style";
 import { ReactComponent as H1Icon } from "./img/h1.svg";
 import { ReactComponent as H2Icon } from "./img/h2.svg";
 import { ReactComponent as H3Icon } from "./img/h3.svg";
@@ -9,7 +7,6 @@ import { ReactComponent as ItalicIcon } from "./img/italic.svg";
 import { ReactComponent as StrikethroughIcon } from "./img/strikethrough.svg";
 import { ReactComponent as CodeIcon } from "./img/code.svg";
 import { ReactComponent as QuoteIcon } from "./img/quote.svg";
-import { ReactComponent as ColorIcon } from "./img/color.svg";
 import "./icons.css";
 interface IconProps {
   editor: Editor | null;
@@ -118,6 +115,7 @@ const ColorButton: React.FC<{ editor: Editor }> = ({ editor }) => {
       style={{
         backgroundColor: "transparent",
         border: "none",
+        padding: "3px",
       }}
     />
   );

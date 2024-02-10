@@ -11,13 +11,7 @@
   justify-content: center;
   align-items: center;
 }
-.ql-editor {
-  min-height: 5rem !important;
-  /* max-height: 800px; */
-  overflow: hidden;
-  overflow-y: scroll;
-  overflow-x: scroll;
-}
+
 .contents_section {
   margin-top: 50px;
   width: 80%;
@@ -27,7 +21,40 @@
   justify-content: center;
   align-items: center;
   color: white;
+  padding: 1rem;
   div {
     width: 100%;
+    input {
+      padding: 0;
+      padding: 1rem;
+    }
+  }
+}
+.button_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px;
+
+  button {
+    width: 80px !important;
+    height: 30px !important;
+  }
+}
+.button {
+  width: clamp(80px, 5vw, 100px);
+  height: clamp(30px, 5vw, 40px);
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  border: none;
+  font-size: clamp(0.8rem, 1vw, 1.2rem);
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: clamp(10px, 1vw, 70px);
+  &:hover {
+    background-color: #db6f39;
+    transition: all 0.3s ease-in-out;
   }
 }
