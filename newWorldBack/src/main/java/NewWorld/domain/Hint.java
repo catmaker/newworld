@@ -1,6 +1,6 @@
 package NewWorld.domain;
 
-import NewWorld.Maker;
+import NewWorld.MemberType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -24,12 +24,12 @@ public class Hint{
     private String hint;
 
     @Enumerated(value = EnumType.STRING)
-    private Maker maker;
+    private MemberType memberType;
 
     @Builder
-    public Hint(Long id, String hint, Maker maker) {
+    public Hint(Long id, String hint, MemberType memberType) {
         this.id = id;
         this.hint = hint;
-        this.maker = maker;
+        this.memberType = memberType;
     }
 }

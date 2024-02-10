@@ -1,6 +1,6 @@
 package NewWorld.domain;
 
-import NewWorld.Maker;
+import NewWorld.MemberType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -25,21 +25,24 @@ public class Quiz {
 
     private String quiz;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Answer> answerList;
+    private String difficultly;
+
+    private String answer;
+
+    private String maker;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<Hint> hintList;
 
-    @Enumerated(value = EnumType.STRING)
-    private Maker maker;
+    //문제 푼사람
 
     @Builder
-    public Quiz(Long id, String quiz, List<Answer> answerList, List<Hint> hintList, Maker maker) {
+    public Quiz(Long id, String quiz, String difficultly, String answer, String maker, List<Hint> hintList) {
         this.id = id;
         this.quiz = quiz;
-        this.answerList = answerList;
-        this.hintList = hintList;
+        this.difficultly = difficultly;
+        this.answer = answer;
         this.maker = maker;
+        this.hintList = hintList;
     }
 }

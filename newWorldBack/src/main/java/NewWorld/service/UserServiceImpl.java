@@ -65,7 +65,6 @@ public class UserServiceImpl implements UserService {
                 nickname(joinInfo.getNickname()).
                 phoneNumber(phoneNumber).
                 birthday(joinInfo.getBirthday()).
-                postList(new ArrayList<Post>()).
                 build();
 
         userRepository.save(newUser);

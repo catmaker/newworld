@@ -36,7 +36,7 @@ public class PostServiceimpl implements PostService {
         return postDto;
     }
 
-    @Override
+    @Override// pagable 없이 LIst,  만나서
     public Page<Post> getMyPost(Pageable pageable, String userName, String userNickname) {
         PageRequest pageRequest = getPageRequest(pageable);
         Page<Post> myPosts = postRepository.findPostsByUserNickName(pageRequest, userNickname);
