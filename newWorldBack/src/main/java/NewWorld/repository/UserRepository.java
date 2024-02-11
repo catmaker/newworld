@@ -1,10 +1,14 @@
 package NewWorld.repository;
 
+import NewWorld.domain.Post;
 import NewWorld.domain.User;
+import NewWorld.dto.PostDto;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.JoinException;
 import NewWorld.exception.LoginException;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  * 2024.01.14 jeonil
@@ -35,13 +39,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
      */
     User findUserByNameAndNickname(String name, String nickname);
 
-    /**
-     * 회원조회
-     * @param userName
-     * @param phoneNumber
-     * @return
-     */
-    User findByNameAndAndPhoneNumber(String userName, String phoneNumber);
 
     /**
      * 회원조회(비번찾기)
@@ -50,7 +47,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @param phoneNumber
      * @return
      */
-    User findByNameAndAndPhoneNumber(String loginId, String userName, String phoneNumber);
+    User findByUserIdAndNameAndPhoneNumber(String loginId, String userName, String phoneNumber);
 
 
 }

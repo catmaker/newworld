@@ -8,7 +8,9 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -29,13 +31,22 @@ public class Comment {
 
     private String userNickName;
 
-    private Date makedDate;
+    private LocalDateTime makedDate;
 
     @Builder
-    public Comment(Long id, String comment, String userNickName, Date makedDate) {
+    public Comment(Long id, String comment, String userNickName, LocalDateTime makedDate) {
         this.id = id;
         this.comment = comment;
         this.userNickName = userNickName;
         this.makedDate = makedDate;
+    }
+
+    /**
+     * 2024.01.30 jeonil
+     * 댓글 수정
+     */
+    public Comment modifyComment(String newComment){
+        this.comment = newComment;
+        return this;
     }
 }

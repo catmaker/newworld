@@ -1,5 +1,6 @@
 package NewWorld.service;
 
+import NewWorld.domain.Post;
 import NewWorld.domain.User;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.JoinException;
@@ -10,6 +11,7 @@ import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**

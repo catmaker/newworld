@@ -1,5 +1,6 @@
 package NewWorld.domain;
 
+import NewWorld.MemberType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -19,7 +20,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    @Column(name = "user_id")
+    @Column(name = "users_id")
     private Long id;
 
     private String name;
@@ -34,14 +35,20 @@ public class User {
 
     private String birthday;
 
+    private int point;
+
+    private int attendance;
+
+    private MemberType memberType;
+
     @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Game> gameList;
+    private List<Quiz> quizList;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<Post> postList;
 
     @Builder
-    public User(Long id, String name, String userId, String nickname, String phoneNumber, String userPassword, String birthday, List<Game> gameList, List<Post> postList) {
+    public User(Long id, String name, String userId, String nickname, String phoneNumber, String userPassword, String birthday, int point, int attendance, MemberType memberType, List<Quiz> quizList, List<Post> postList) {
         this.id = id;
         this.name = name;
         this.userId = userId;
@@ -49,7 +56,10 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.userPassword = userPassword;
         this.birthday = birthday;
-        this.gameList = gameList;
+        this.point = point;
+        this.attendance = attendance;
+        this.memberType = memberType;
+        this.quizList = quizList;
         this.postList = postList;
     }
 
@@ -76,4 +86,5 @@ public class User {
         this.userPassword = newPassword;
         return this;
     }
+
 }
