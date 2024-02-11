@@ -111,6 +111,7 @@ const SignUp = () => {
                   className={styles.content_input_box}
                   type="text"
                   onChange={FirstNameField.handleChange}
+                  name="name"
                 />
               </div>
               {FirstNameField.warning && (
@@ -124,6 +125,7 @@ const SignUp = () => {
                   className={styles.content_input_box}
                   type="email"
                   onChange={EmailField.handleChange}
+                  name="userId"
                 />
                 {EmailField.warning && (
                   <p className={styles.warning}>{EmailField.warning}</p>
@@ -137,6 +139,7 @@ const SignUp = () => {
                       className={styles.content_input_box}
                       type={showPassword ? "text" : "password"}
                       onChange={PasswordField.handleChange}
+                      name="password"
                     />
                     <Image
                       width={20}
@@ -173,6 +176,7 @@ const SignUp = () => {
                       type="text"
                       className={styles.content_input_box}
                       placeholder="닉네임"
+                      name="nickname"
                     />
                   </div>
                   <div>
@@ -180,6 +184,7 @@ const SignUp = () => {
                       type="text"
                       className={styles.content_input_box}
                       placeholder="휴대폰 번호"
+                      name="phoneNumber"
                     />
                   </div>
                   <div>
@@ -187,6 +192,7 @@ const SignUp = () => {
                       type="date"
                       className={styles.content_input_box}
                       placeholder="생년월일"
+                      name="birthday"
                     />
                   </div>
                 </div>
