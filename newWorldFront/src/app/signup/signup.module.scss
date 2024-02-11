@@ -171,7 +171,7 @@
 .signUp_button {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  padding: 1.5rem;
+  padding: clamp(0.3rem, 1vw, 1.5rem);
   border: none;
   border-radius: 1.5rem;
   margin-right: 1rem;
@@ -198,8 +198,24 @@
     justify-content: center;
     align-items: center;
     margin-left: 0 !important;
-    div:nth-child(1) {
-      align-items: left;
+    transition: all 0.3s ease;
+    form {
+      div {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+      }
     }
+  }
+  .message_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .input_wrapper {
+    margin-bottom: 1rem;
   }
 }

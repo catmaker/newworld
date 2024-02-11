@@ -78,7 +78,7 @@ const SignUp = () => {
       userPassword: PasswordField.value,
       nickname: NicknameField.value,
       phoneNumber: PhoneNumberField.value,
-      birthday: BirthdayField.value,
+      birthday: BirthdayField.value.replaceAll("-", ""),
     };
     console.log(formData);
     try {
@@ -112,12 +112,14 @@ const SignUp = () => {
         <div className={styles.login_box}>
           <div className={styles.background}></div>
           <div className={styles.content}>
-            <div>
+            <div className={styles.message_box}>
               <span>반갑습니다</span>
               <h1>회원가입</h1>
-              <p>이름</p>
             </div>
             <form onSubmit={handleSubmit}>
+              <div>
+                <p>이름</p>
+              </div>
               <div>
                 <input
                   className={styles.content_input_box}
