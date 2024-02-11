@@ -18,6 +18,9 @@ const SignUp = () => {
   const FirstNameField = useInputField(13);
   const PasswordField = usePasswordField(8, 13);
   const ConfirmPasswordField = useInputField(13);
+  const PhoneNumberField = useInputField(11);
+  const BirthdayField = useInputField(8);
+  const NicknameField = useInputField(13);
   // 이메일 정규식 확인 커스텀 훅
   const EmailField = useEmailField();
   // 패스워드 일치 여부 확인
@@ -70,11 +73,14 @@ const SignUp = () => {
 
     // 모든 조건이 충족되면, 폼 제출 처리를 계속 진행
     const formData = {
-      firstName: FirstNameField.value,
-      email: EmailField.value,
-      password: PasswordField.value,
+      name: FirstNameField.value,
+      userId: EmailField.value,
+      userPassword: PasswordField.value,
+      nickname: NicknameField.value,
+      phoneNumber: PhoneNumberField.value,
+      birthday: BirthdayField.value,
     };
-
+    console.log(formData);
     try {
       const response = await fetch("http://localhost:8080/signUp", {
         method: "POST",
@@ -87,6 +93,12 @@ const SignUp = () => {
       if (!response.ok) {
         throw new Error("Signup request failed");
       }
+
+      // 서버에서 받은 응답을 JSON 형태로 파싱
+      const data = await response.json();
+
+      // 콘솔에 출력
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -111,7 +123,6 @@ const SignUp = () => {
                   className={styles.content_input_box}
                   type="text"
                   onChange={FirstNameField.handleChange}
-                  name="name"
                 />
               </div>
               {FirstNameField.warning && (
@@ -125,7 +136,6 @@ const SignUp = () => {
                   className={styles.content_input_box}
                   type="email"
                   onChange={EmailField.handleChange}
-                  name="userId"
                 />
                 {EmailField.warning && (
                   <p className={styles.warning}>{EmailField.warning}</p>
@@ -139,7 +149,6 @@ const SignUp = () => {
                       className={styles.content_input_box}
                       type={showPassword ? "text" : "password"}
                       onChange={PasswordField.handleChange}
-                      name="password"
                     />
                     <Image
                       width={20}
@@ -176,7 +185,7 @@ const SignUp = () => {
                       type="text"
                       className={styles.content_input_box}
                       placeholder="닉네임"
-                      name="nickname"
+                      onChange={NicknameField.handleChange}
                     />
                   </div>
                   <div>
@@ -184,7 +193,7 @@ const SignUp = () => {
                       type="text"
                       className={styles.content_input_box}
                       placeholder="휴대폰 번호"
-                      name="phoneNumber"
+                      onChange={PhoneNumberField.handleChange}
                     />
                   </div>
                   <div>
@@ -192,7 +201,7 @@ const SignUp = () => {
                       type="date"
                       className={styles.content_input_box}
                       placeholder="생년월일"
-                      name="birthday"
+                      onChange={BirthdayField.handleChange}
                     />
                   </div>
                 </div>
