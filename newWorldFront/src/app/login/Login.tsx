@@ -31,7 +31,28 @@ const Login = () => {
     }
 
     // 아이디와 비밀번호가 모두 채워져 있는 경우, 로그인 처리를 수행합니다.
-    // ...
+    if (id !== "" && password !== "") {
+      const data = {
+        userId: id,
+        userPassword: password,
+      };
+      console.log(data);
+      fetch("http://localhost:8080/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.error(error);
+        });
+    }
   };
 
   return (
