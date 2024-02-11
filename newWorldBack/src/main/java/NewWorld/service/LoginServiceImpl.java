@@ -1,5 +1,6 @@
 package NewWorld.service;
 
+import NewWorld.config.EncoderConfig;
 import NewWorld.domain.User;
 import NewWorld.exception.LoginException;
 import NewWorld.exception.NotfindUserException;
@@ -17,6 +18,7 @@ public class LoginServiceImpl implements LoginService {
 
     private final UserRepository userRepository;
     private final UserService userService;
+
 
     /**
      * 로그인

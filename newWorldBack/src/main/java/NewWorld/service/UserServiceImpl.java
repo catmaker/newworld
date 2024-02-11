@@ -1,5 +1,6 @@
 package NewWorld.service;
 
+import NewWorld.config.EncoderConfig;
 import NewWorld.domain.Post;
 import NewWorld.domain.User;
 import NewWorld.dto.UserDto;
@@ -23,7 +24,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
+    private final EncoderConfig encoder;
     /**
      * 회원가입 아이디 중복체크
      *
@@ -87,7 +88,7 @@ public class UserServiceImpl implements UserService {
 
         User newUser = User.builder().
                 userId(joinInfo.getUserId()).
-                userPassword(joinInfo.getUserPassword()).
+                userPassword(encoder.passwordEncoder().encode(joinInfo.getUserPassword())).
                 name(name).
                 nickname(joinInfo.getNickname()).
                 phoneNumber(phoneNumber).
