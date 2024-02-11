@@ -33,8 +33,8 @@ const Login = () => {
     // 아이디와 비밀번호가 모두 채워져 있는 경우, 로그인 처리를 수행합니다.
     if (id !== "" && password !== "") {
       const data = {
-        id: id,
-        password: password,
+        userId: id,
+        userPassword: password,
       };
       console.log(data);
       fetch("http://localhost:8080/login", {
