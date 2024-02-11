@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./signup.module.scss";
 import "@/app/globals.scss";
-import Link from "next/link";
-import { translations } from "./translations";
 import {
   useEmailField,
   useInputField,
@@ -12,15 +10,12 @@ import {
 import Image from "next/image";
 import hide from "/public/img/hide-password.png";
 import show from "/public/img/show-password.png";
-type LanguageKeys = "en" | "ko";
 
 const SignUp = () => {
-  // 언어 선택
-  const [language, setLanguage] = useState<LanguageKeys>("en");
   // 패스워드 보이기/숨기기
   const [showPassword, setShowPassword] = useState(false);
   // 이름 입력시 13자 제한 커스텀 훅
-  const NameField = useInputField(13);
+  const FirstNameField = useInputField(13);
   const PasswordField = usePasswordField(8, 13);
   const ConfirmPasswordField = useInputField(13);
   // 이메일 정규식 확인 커스텀 훅
@@ -34,17 +29,12 @@ const SignUp = () => {
     }
   }, [PasswordField.value, ConfirmPasswordField.value]);
 
-  // 사용자 ko, en 선택
-  const changeLanguage = () => {
-    setLanguage(language === "en" ? "ko" : "en");
-  };
-
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     // 모든 인풋 필드가 채워져 있는지 확인
     if (
-      !NameField.value ||
+      !FirstNameField.value ||
       !EmailField.value ||
       !PasswordField.value ||
       !ConfirmPasswordField.value
@@ -66,7 +56,7 @@ const SignUp = () => {
     }
 
     // 이름과 패스워드가 13자 이하인지 확인
-    if (NameField.value.length > 13 || PasswordField.value.length > 13) {
+    if (FirstNameField.value.length > 13 || PasswordField.value.length > 13) {
       alert("이름과 패스워드는 13자 이내로 작성해주세요.");
       return;
     }
@@ -80,12 +70,9 @@ const SignUp = () => {
 
     // 모든 조건이 충족되면, 폼 제출 처리를 계속 진행
     const formData = {
-      name: NameField.value,
-      userId: EmailField.value,
-      userPassword: PasswordField.value,
-      nickname: "테스트",
-      phoneNumber: "01064090592",
-      birthday:"20201212"
+      firstName: FirstNameField.value,
+      email: EmailField.value,
+      password: PasswordField.value,
     };
 
     try {
@@ -111,74 +98,44 @@ const SignUp = () => {
     <div className={styles.container}>
       <div className={styles.flexbox}>
         <div className={styles.login_box}>
-          <header className={styles.header}>
-            <div className={styles.img_box}>
-              <img src="/img/logo2.png" alt="" />
-            </div>
-            <div className={styles.flex}>
-              <h1>
-                {Array.from("New World").map((char, i) => (
-                  <span key={i} style={{ animationDelay: `${i * 0.5}s` }}>
-                    {char}
-                  </span>
-                ))}
-              </h1>
-              <ul className={styles.flex}>
-                <Link href={`/intro`}>
-                  <li>🏠 Home</li>
-                </Link>
-                <Link href={`/intro`}>
-                  <li>⚔︎ Guide</li>
-                </Link>
-              </ul>
-            </div>
-          </header>
+          <div className={styles.background}></div>
           <div className={styles.content}>
             <div>
-              <p className={styles.content_p}>
-                {translations[language].startForFree}
-              </p>
-              <h1>{translations[language].createNewAccount}</h1>
-              <p className={styles.content_p}>
-                {translations[language].alreadyAMember}
-                <Link href={`/login`}>{translations[language].logIn}</Link>
-              </p>
+              <span>반갑습니다</span>
+              <h1>회원가입</h1>
+              <p>이름</p>
             </div>
             <form onSubmit={handleSubmit}>
-              <div className={styles.box_size}>
+              <div>
                 <input
-                  className={styles.content_input_name_box}
+                  className={styles.content_input_box}
                   type="text"
-                  placeholder={translations[language].firstName}
-                  onChange={NameField.handleChange}
-                />
-
-                <input
-                  className={styles.content_input_name_box}
-                  type="text"
-                  placeholder={translations[language].lastName}
-                  onChange={NameField.handleChange}
+                  onChange={FirstNameField.handleChange}
                 />
               </div>
-              {NameField.warning && (
-                <p className={styles.warning}>{NameField.warning}</p>
+              {FirstNameField.warning && (
+                <p className={styles.warning}>{FirstNameField.warning}</p>
               )}
+              <div>
+                <p>이메일</p>
+              </div>
               <div>
                 <input
                   className={styles.content_input_box}
                   type="email"
-                  placeholder={translations[language].email}
                   onChange={EmailField.handleChange}
                 />
                 {EmailField.warning && (
                   <p className={styles.warning}>{EmailField.warning}</p>
                 )}
+                <div>
+                  <p>비밀번호</p>
+                </div>
                 <div className={styles.password_wrapper}>
                   <div className={styles.input_wrapper}>
                     <input
                       className={styles.content_input_box}
                       type={showPassword ? "text" : "password"}
-                      placeholder={translations[language].password}
                       onChange={PasswordField.handleChange}
                     />
                     <Image
@@ -193,11 +150,13 @@ const SignUp = () => {
                   {PasswordField.warning && (
                     <p className={styles.warning}>{PasswordField.warning}</p>
                   )}
+                  <div>
+                    <p>비밀번호 확인</p>
+                  </div>
                   <div className={styles.input_wrapper}>
                     <input
                       className={styles.content_input_box}
                       type={showPassword ? "text" : "password"}
-                      placeholder={translations[language].confirmPassword}
                       onChange={ConfirmPasswordField.handleChange}
                     />
                     <Image
@@ -207,6 +166,27 @@ const SignUp = () => {
                       className={styles.password_toggle}
                       onClick={toggleShowPassword}
                       alt="hide-password"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      className={styles.content_input_box}
+                      placeholder="닉네임"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      className={styles.content_input_box}
+                      placeholder="휴대폰 번호"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="date"
+                      className={styles.content_input_box}
+                      placeholder="생년월일"
                     />
                   </div>
                 </div>
@@ -228,17 +208,10 @@ const SignUp = () => {
               <input
                 className={styles.signUp_button}
                 type="submit"
-                value={translations[language].signUp}
                 onClick={handleSubmit}
               />
-              <button
-                type="button"
-                className={styles.signUp_button}
-                onClick={changeLanguage}
-              >
-                {language === "en"
-                  ? translations["ko"].changeToKorean
-                  : translations["en"].changeToEnglish}
+              <button type="button" className={styles.signUp_button}>
+                123
               </button>
             </form>
           </div>
