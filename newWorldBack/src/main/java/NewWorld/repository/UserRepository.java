@@ -24,6 +24,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findUserByUserId(String userId);
 
     /**
+     * 회원가입 중복체크
+     * @param name
+     * @param phoneNumber
+     * @return
+     */
+    User findUserByNameAndPhoneNumber(String name, String phoneNumber);
+
+    /**
      * user로그인
      * @param userId
      * @param userPw
@@ -47,7 +55,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @param phoneNumber
      * @return
      */
-    User findByUserIdAndNameAndPhoneNumber(String loginId, String userName, String phoneNumber);
+    User
+    findByUserIdAndNameAndPhoneNumber(String loginId, String userName, String phoneNumber);
 
 
 }

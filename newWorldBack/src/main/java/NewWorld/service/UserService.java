@@ -17,6 +17,15 @@ public interface UserService {
      * @return
      */
     public Boolean checkIdValidation(String loginId);
+
+    /**
+     * 회원가입 중복체크
+     *
+     * @param phoneNumber
+     * @param name
+     * @return
+     */
+    public Boolean checkUserValidation(String phoneNumber, String name);
     /**
      * 로그인 처리
      * @param joinInfo

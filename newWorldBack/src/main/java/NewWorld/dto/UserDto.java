@@ -56,7 +56,7 @@ public class UserDto {
         this.userPassword = user.getUserPassword();
         this.nickname = user.getNickname();
         this.phoneNumber = user.getPhoneNumber();
-        this.birthday = user.getPhoneNumber();
+        this.birthday = user.getBirthday();
 
         return this;
     }
