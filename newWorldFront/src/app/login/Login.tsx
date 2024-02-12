@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import styles from "./login.module.scss";
 import Link from "next/link";
+import SignInButton from "@/components/signInButton/SignInButton";
 const Login = () => {
   const [typing, setTyping] = useState(false);
   const [id, setId] = useState("");
@@ -37,7 +38,7 @@ const Login = () => {
         userPassword: password,
       };
       console.log(data);
-      fetch("http://localhost:8080/login", {
+      fetch("api/auth/[...nextauth]", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -68,27 +69,29 @@ const Login = () => {
             </div>
             <form action="" onSubmit={handleSubmit}>
               <div>
-                <input
-                  className={`${styles.content_input_box} ${
-                    typing ? styles.typing : ""
-                  }`}
-                  type="text"
-                  placeholder="아이디"
-                  onChange={handleIdChange}
-                />
-                <input
-                  className={`${styles.content_input_box} ${
-                    typing ? styles.typing : ""
-                  }`}
-                  type="password"
-                  placeholder="비밀번호"
-                  onChange={handlePasswordChange}
-                />
+                <label htmlFor="Username">
+                  <input
+                    className={`${styles.content_input_box} ${
+                      typing ? styles.typing : ""
+                    }`}
+                    type="text"
+                    placeholder="아이디"
+                    onChange={handleIdChange}
+                  />
+                </label>
+                <label htmlFor="Password">
+                  <input
+                    className={`${styles.content_input_box} ${
+                      typing ? styles.typing : ""
+                    }`}
+                    type="password"
+                    placeholder="비밀번호"
+                    onChange={handlePasswordChange}
+                  />
+                </label>
               </div>
               <div>
-                <button className={styles.button} type="submit">
-                  입장하기
-                </button>
+                <SignInButton></SignInButton>
                 <Link href={`/signup`}>
                   <button className={styles.button}>처음입니다.</button>
                 </Link>

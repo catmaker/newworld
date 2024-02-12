@@ -7,7 +7,7 @@ const Labyrinth = () => {
   const [list, setList] = React.useState<string[]>([]);
 
   const fetchList = () => {
-    fetch("http://localhost:8080/test")
+    fetch("/test")
       .then((response) => {
         return response.text();
       })
