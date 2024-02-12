@@ -37,14 +37,14 @@ const Login = () => {
         userPassword: password,
       };
       console.log(data);
-      fetch("http://localhost:8080/login", {
+       fetch("http://localhost:3000/loginMember", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       })
-        .then((response) => response.json())
+        .then((response) => response.text())
         .then((result) => {
           console.log(result);
         })

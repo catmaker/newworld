@@ -28,7 +28,7 @@ public class LoginServiceImpl implements LoginService {
      * @return
      */
     @Override
-    public String login(String loginId, String loginPw) throws LoginException {
+    public User login(String loginId, String loginPw) throws LoginException {
         return userCheck(loginId, loginPw);
     }
 
@@ -40,7 +40,7 @@ public class LoginServiceImpl implements LoginService {
      */
     @Override
     public String logout(String loginId, String loginPw) throws LoginException {
-        return userCheck(loginId, loginPw);
+        return userCheck(loginId, loginPw).getName();
     }
 
     /**
@@ -97,12 +97,10 @@ public class LoginServiceImpl implements LoginService {
      * @return
      * @throws LoginException
      */
-    private String userCheck(String loginId, String loginPw) throws LoginException {
-        User loginUser = userRepository.findUserByUserIdAndUserPassword(loginId, loginPw);
-
+    private User userCheck(String loginId, String loginPw) throws LoginException {
         try {
-            String userName = loginUser.getName();
-            return userName;
+            User loginUser = userRepository.findUserByUserIdAndUserPassword(loginId, loginPw);
+            return loginUser;
         } catch (Exception e) {
             throw new LoginException("로그인 정보를 찾을 수 없습니다.");
         }

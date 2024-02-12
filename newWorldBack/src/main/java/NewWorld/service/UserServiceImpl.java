@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
 
         User newUser = User.builder().
                 userId(joinInfo.getUserId()).
-                userPassword(encoder.passwordEncoder().encode(joinInfo.getUserPassword())).
+                userPassword(joinInfo.getUserPassword()).
                 name(name).
                 nickname(joinInfo.getNickname()).
                 phoneNumber(phoneNumber).
