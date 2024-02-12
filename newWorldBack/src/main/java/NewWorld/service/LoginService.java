@@ -1,5 +1,6 @@
 package NewWorld.service;
 
+import NewWorld.domain.User;
 import NewWorld.exception.LoginException;
 import NewWorld.exception.NotfindUserException;
 
@@ -9,13 +10,14 @@ import NewWorld.exception.NotfindUserException;
  */
 public interface LoginService {
 
+
     /**
      * 로그인 처리
      * @param loginId
      * @param loginPw
      * @return
      */
-    public String login(String loginId, String loginPw) throws LoginException;
+    public User login(String loginId, String loginPw) throws LoginException;
 
     /**
      * 로그아웃 처리

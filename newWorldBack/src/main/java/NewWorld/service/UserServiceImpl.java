@@ -1,15 +1,16 @@
 package NewWorld.service;
 
+import NewWorld.config.EncoderConfig;
 import NewWorld.domain.Post;
 import NewWorld.domain.User;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.JoinException;
-import NewWorld.exception.LoginException;
 import NewWorld.exception.NotChangeException;
 import NewWorld.exception.NotfindUserException;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
+    private final EncoderConfig encoder;
     /**
      * 회원가입 아이디 중복체크
      *
@@ -42,20 +43,47 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 회원가입 중복체크
+     *
+     * @param phoneNumber
+     * @param name
+     * @return
+     */
+    @Override
+    public Boolean checkUserValidation(String phoneNumber, String name) {
+        Boolean validationCheck = false;
+        User userCheck = userRepository.findUserByNameAndPhoneNumber(name, phoneNumber);
+
+        if (userCheck != null) {
+            validationCheck = true;
+        }
+
+        return validationCheck;
+    }
+
+    /**
      * 회원가입
      *
      * @param joinInfo
      * @throws JoinException
      */
+    @Transactional(readOnly = false)
     @Override
     public String join(UserDto joinInfo) throws JoinException {
 
+        String checkJoinStatus = "s";
+
         String phoneNumber = joinInfo.getPhoneNumber();
         String name = joinInfo.getName();
-        Boolean check = checkIdValidation(joinInfo.getUserId());
-        //회원 중복검사
-        if (check) {
-            throw new JoinException("이미 존재하는 회원입니다.");
+        Boolean checkId = checkIdValidation(joinInfo.getUserId());
+        Boolean checkUser = checkUserValidation(joinInfo.getName(), joinInfo.getPhoneNumber());
+        //회원 아이디 중복검사
+        if (checkId) {
+            return "f1";
+        }
+        //중복회원 검사
+        if(checkUser){
+            return "f2";
         }
 
         User newUser = User.builder().
@@ -64,12 +92,18 @@ public class UserServiceImpl implements UserService {
                 name(name).
                 nickname(joinInfo.getNickname()).
                 phoneNumber(phoneNumber).
+                point(0).
+                attendance(0).
                 birthday(joinInfo.getBirthday()).
                 build();
 
-        userRepository.save(newUser);
+        User savedUser = userRepository.save(newUser);
 
-        return newUser.getName();
+        if(savedUser == null){
+            return "f";
+        }
+
+        return checkJoinStatus;
     }
 
 
@@ -91,7 +125,7 @@ public class UserServiceImpl implements UserService {
         if (checkChangeInfo) {
             if (changeInfo.getNickname().isEmpty()) newNn = user.getNickname();
             if (changeInfo.getPhoneNumber().isEmpty()) newPn = user.getNickname();
-            if (changeInfo.getBirthday().isEmpty()) newBd = user.getBirthday();
+            if (changeInfo.getBirthday() == null) newBd = user.getBirthday();
 
             user.basicInfoUpdate(newNn, newPn, newBd);
         } else {
