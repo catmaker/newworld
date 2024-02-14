@@ -21,6 +21,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -111,6 +112,7 @@ public class UserServiceImpl implements UserService {
      * user기본정보 수정
      */
     @Override
+    @Transactional(readOnly = false)
     public String updateUserInfo(UserDto changeInfo) throws Exception {
         String phoneNumber = changeInfo.getPhoneNumber();
         String name = changeInfo.getName();
