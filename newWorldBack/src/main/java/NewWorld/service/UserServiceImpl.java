@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Boolean checkIdValidation(String loginId) {
-        Boolean validationCheck = false;
+        boolean validationCheck = false;
         User idCheck = userRepository.findUserByUserId(loginId);
 
         if (idCheck != null) {
@@ -111,16 +111,21 @@ public class UserServiceImpl implements UserService {
      * user기본정보 수정
      */
     @Override
-    public void updateUserInfo(UserDto changeInfo) throws Exception {
+    public String updateUserInfo(UserDto changeInfo) throws Exception {
         String phoneNumber = changeInfo.getPhoneNumber();
         String name = changeInfo.getName();
         String newNn = changeInfo.getNickname();
         String newPn = changeInfo.getPhoneNumber();
         String newBd = changeInfo.getBirthday();
 
-        User user = getUser(phoneNumber, name);
+        User user = getUser(name, newNn);
+
+        if(user == null){
+            throw new NotfindUserException("찾을 수 없는 회원입니다.");
+        }
 
         Boolean checkChangeInfo = checkChangeInfo(changeInfo, user);
+
         //변경된 정보가 있는지 체크
         if (checkChangeInfo) {
             if (changeInfo.getNickname().isEmpty()) newNn = user.getNickname();
@@ -129,9 +134,11 @@ public class UserServiceImpl implements UserService {
 
             user.basicInfoUpdate(newNn, newPn, newBd);
         } else {
-            throw new NotChangeException("수정사항이 없습니다");
+            return "notChange";
         }
         userRepository.save(user);
+
+        return "s";
     }
 
     /**
@@ -139,9 +146,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserDto getUserInfo(String userName, String userNickname) throws NotfindUserException {
-
         User user = getUser(userName, userNickname);
-
+        if(user == null){
+            return null;
+        }
         UserDto userDto = new UserDto();
         UserDto result = userDto.usertoDto(user);
 
@@ -164,9 +172,6 @@ public class UserServiceImpl implements UserService {
      */
     private User getUser(String userName, String userNickname) throws NotfindUserException {
         User userInfo = userRepository.findUserByNameAndNickname(userName, userNickname);
-        if (userInfo == null) {
-            throw new NotfindUserException("찾을수 없는 회원입니다");
-        }
         return userInfo;
     }
 

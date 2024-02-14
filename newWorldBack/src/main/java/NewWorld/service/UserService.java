@@ -38,7 +38,7 @@ public interface UserService {
      * @param joinInfo
      * @return
      */
-    public void updateUserInfo(UserDto joinInfo) throws LoginException, JoinException, NotfindUserException, NotChangeException, Exception;
+    public String updateUserInfo(UserDto joinInfo) throws LoginException, JoinException, NotfindUserException, NotChangeException, Exception;
 
     /**
      * user기본정보 조회
