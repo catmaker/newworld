@@ -95,7 +95,7 @@ const SignUp = () => {
       }
 
       // 서버에서 받은 응답을 JSON 형태로 파싱
-      const data = await response.json();
+      const data = await response.text();
 
       // 콘솔에 출력
       console.log(data);
