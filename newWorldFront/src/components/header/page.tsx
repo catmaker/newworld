@@ -3,8 +3,10 @@ import Link from "next/link";
 import styles from "@/components/main/intro.module.scss"; // CSS 모듈을 import합니다. 필요에 따라 경로를 수정하세요.
 import { useEffect, useState } from "react";
 import { throttle } from "lodash";
+import { useSession } from "next-auth/react";
 
 const Header = () => {
+  const { data: session } = useSession();
   const [isVisible, setIsVisible] = useState(true);
   useEffect(() => {
     let lastScrollTop = 0;
@@ -57,12 +59,21 @@ const Header = () => {
               <div className={styles.text_en}>MYPAGE</div>
             </div>
           </Link>
-          <Link href={`/login`}>
-            <div className={styles.flex_column}>
-              <div className={styles.text}>로그인</div>
-              <div className={styles.text_en}>LOGIN</div>
-            </div>
-          </Link>
+          {!session ? (
+            <Link href={`/login`}>
+              <div className={styles.flex_column}>
+                <div className={styles.text}>로그인</div>
+                <div className={styles.text_en}>LOGIN</div>
+              </div>
+            </Link>
+          ) : (
+            <Link href={`/api/auth/signout`}>
+              <div className={styles.flex_column}>
+                <div className={styles.text}>로그아웃</div>
+                <div className={styles.text_en}>LOGOUT</div>
+              </div>
+            </Link>
+          )}
         </div>
       </div>
     </header>

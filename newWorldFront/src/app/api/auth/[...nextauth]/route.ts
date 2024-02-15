@@ -1,14 +1,9 @@
 //app/api/auth/[...nextauth]/route.ts
 
-import { debug } from "console";
-import NextAuth from "next-auth/next";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-interface Credentials {
-  userId: string;
-  userPassword: string;
-}
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
@@ -44,6 +39,10 @@ const handler = NextAuth({
       },
     }),
   ],
-});
-
+  session: {
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+    updateAge: 24 * 60 * 60, // 24 hours
+  },
+};
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
