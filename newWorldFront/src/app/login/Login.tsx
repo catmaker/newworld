@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styles from "./login.module.scss";
 import Link from "next/link";
 import SignInButton from "@/components/signInButton/SignInButton";
+import { signIn as nextAuthSignIn } from "next-auth/react";
 const Login = () => {
   const [typing, setTyping] = useState(false);
   const [id, setId] = useState("");
@@ -17,7 +18,7 @@ const Login = () => {
     setPassword(event.target.value);
     setTyping(event.target.value !== "");
   };
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     if (id === "" && password === "") {
@@ -38,21 +39,24 @@ const Login = () => {
         userPassword: password,
       };
       console.log(data);
-      fetch("api/auth/[...nextauth]", {
+      const res = await fetch("http://localhost:8080/loginMember", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      })
-        .then((response) => response.text())
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((error) => {
-          // Handle any errors
-          console.error(error);
+      });
+      const result = await res.text();
+      console.log(result);
+      if (result) {
+        nextAuthSignIn("credentials", {
+          userId: id,
+          userPassword: password,
+          callbackUrl: `${window.location.origin}/`,
         });
+      } else {
+        alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+      }
     }
   };
 
@@ -91,9 +95,10 @@ const Login = () => {
                 </label>
               </div>
               <div>
-                <SignInButton></SignInButton>
                 <Link href={`/signup`}>
-                  <button className={styles.button}>처음입니다.</button>
+                  <button onClick={handleSubmit} className={styles.button}>
+                    로그인
+                  </button>
                 </Link>
               </div>
             </form>

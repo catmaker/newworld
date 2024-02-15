@@ -11,6 +11,7 @@ import { useScrollToContainer } from "@/components/intropageComponents/useScroll
 import { ImageElement } from "@/components/intropageComponents/imageElement/page";
 import Footer from "@/components/footer/page";
 import Header from "@/components/header/page";
+import { useSession } from "next-auth/react";
 const Intro = () => {
   const [lines, setLines] = useState([
     '"당신의 동화 같은 이야기를 기다리고 있어요."',

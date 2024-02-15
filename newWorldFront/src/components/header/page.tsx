@@ -33,12 +33,6 @@ const Header = () => {
       </div>
       <div className={styles.ul_box}>
         <div className={styles.flex}>
-          <Link href={`/`}>
-            <div className={styles.flex_column}>
-              <div className={styles.text}>홈</div>
-              <div className={styles.text_en}>HOME</div>
-            </div>
-          </Link>
           <Link href={`/labyrinth`}>
             <div className={styles.flex_column}>
               <div className={styles.text}>미궁</div>
@@ -61,6 +55,12 @@ const Header = () => {
             <div className={styles.flex_column}>
               <div className={styles.text}>마이페이지</div>
               <div className={styles.text_en}>MYPAGE</div>
+            </div>
+          </Link>
+          <Link href={`/mypage`}>
+            <div className={styles.flex_column}>
+              <div className={styles.text}>로그인</div>
+              <div className={styles.text_en}>LOGIN</div>
             </div>
           </Link>
         </div>

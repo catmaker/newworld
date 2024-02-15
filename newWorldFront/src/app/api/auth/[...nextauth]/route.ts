@@ -1,38 +1,49 @@
 //app/api/auth/[...nextauth]/route.ts
 
 import { debug } from "console";
-import NextAuth from 'next-auth/next';
-import CredentialsProvider from 'next-auth/providers/credentials';
+import NextAuth from "next-auth/next";
+import CredentialsProvider from "next-auth/providers/credentials";
+interface Credentials {
+  userId: string;
+  userPassword: string;
+}
 
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
-      name: 'Credentials',
+      name: "Credentials",
       // `credentials` is used to generate a form on the sign in page.
       // You can specify which fields should be submitted, by adding keys to the `credentials` object.
       // e.g. domain, username, password, 2FA token, etc.
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
-        password: { label: 'Password', type: 'password' },
+        userId: { label: "Username", type: "text", placeholder: "jsmith" },
+        userPassword: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
-        const user = { id: '1', name: 'J Smith', email: 'jsmith@example.com' }
+      async authorize(credentials: Record<string, string> | undefined, req) {
+        // credentials 객체가 undefined가 아닌지 확인합니다.
+        if (credentials) {
+          // credentials 객체에는 사용자가 입력한 아이디와 비밀번호가 포함되어 있습니다.
+          const { userId, userPassword } = credentials;
 
-        if (user) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user
+          // 이미 /loginMember에서 비교는 다 끝난 상황이므로, text인지 null인지만 확인하면 됩니다.
+          if (userId && userPassword) {
+            // 검증이 성공하면 사용자 객체를 반환합니다.
+            // 이 객체는 JWT의 `user` 속성에 저장됩니다.
+            return { id: userId };
+          } else {
+            // 검증이 실패하면 null을 반환합니다.
+            // 이 경우, NextAuth.js는 로그인 실패 메시지를 표시합니다.
+            return null;
+          }
         } else {
-          // If you return null then an error will be displayed advising the user to check their details.
-          return null
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+          // credentials 객체가 undefined인 경우, null을 반환합니다.
+          return null;
         }
       },
     }),
   ],
-})
+});
 
 export { handler as GET, handler as POST };
