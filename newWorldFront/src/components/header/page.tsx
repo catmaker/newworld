@@ -57,7 +57,7 @@ const Header = () => {
               <div className={styles.text_en}>MYPAGE</div>
             </div>
           </Link>
-          <Link href={`/mypage`}>
+          <Link href={`/login`}>
             <div className={styles.flex_column}>
               <div className={styles.text}>로그인</div>
               <div className={styles.text_en}>LOGIN</div>
