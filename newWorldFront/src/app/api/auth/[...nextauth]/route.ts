@@ -43,6 +43,9 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
     updateAge: 24 * 60 * 60, // 24 hours
   },
+  pages: {
+    signIn: "/login",
+  },
 };
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
