@@ -53,7 +53,7 @@ const Community = () => {
           <li onClick={() => handleCategoryClick("질문")}>질문</li>
           <li onClick={() => handleCategoryClick("기타")}>기타</li>
           <li>
-            <Link href={"/post"}>글쓰기</Link>
+            <Link href={"/community/post"}>글쓰기</Link>
           </li>
         </ul>
       </div>
