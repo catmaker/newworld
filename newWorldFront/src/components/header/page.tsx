@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "@/components/main/intro.module.scss"; // CSS 모듈을 import합니다. 필요에 따라 경로를 수정하세요.
 import { useEffect, useState } from "react";
 import { throttle } from "lodash";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -69,7 +69,9 @@ const Header = () => {
           ) : (
             <Link href={`/api/auth/signout`}>
               <div className={styles.flex_column}>
-                <div className={styles.text}>로그아웃</div>
+                <div onClick={() => signOut()} className={styles.text}>
+                  로그아웃
+                </div>
                 <div className={styles.text_en}>LOGOUT</div>
               </div>
             </Link>
