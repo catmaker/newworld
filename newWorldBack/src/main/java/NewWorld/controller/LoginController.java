@@ -29,26 +29,31 @@ public class LoginController {
     public UserDto login(@RequestBody LoginDto loginDto, HttpServletRequest request) throws LoginException {
         HttpSession session = request.getSession();
 
-        if(loginDto.getUserId() == null || loginDto.getUserPassword() == null){
+        if (loginDto.getUserId() == null || loginDto.getUserPassword() == null) {
             return null;
         }
+        UserDto result = null;
+        try {
+            User user = loginService.login(loginDto.getUserId(), loginDto.getUserPassword());
 
-        User user = loginService.login(loginDto.getUserId(), loginDto.getUserPassword());
+            UserDto userDto = new UserDto();
+            result = userDto.basicInfo(user);
 
-        UserDto userDto = new UserDto();
-        UserDto result = userDto.basicInfo(user);
+            if (user == null) {
+                return null;
+            }
 
-        if(user == null){
+            LoginSessionDto loginSession = LoginSessionDto.builder()
+                    .userNickname(user.getNickname())
+                    .userName(user.getName())
+                    .build();
+
+            session.setAttribute(MemberSession.LOGIN_MEMBER, loginSession);
+
+
+        } catch (Exception e) {
             return null;
         }
-
-        LoginSessionDto loginSession = LoginSessionDto.builder()
-                .userNickname(user.getNickname())
-                .userName(user.getName())
-                .build();
-
-        session.setAttribute(MemberSession.LOGIN_MEMBER,loginSession);
-
         return result;
     }
 }
