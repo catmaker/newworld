@@ -25,17 +25,17 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping("/loginMember")
-    public String login(@RequestBody LoginDto loginDto, HttpServletRequest request) throws LoginException {
+    public User login(@RequestBody LoginDto loginDto, HttpServletRequest request) throws LoginException {
         HttpSession session = request.getSession();
 
         if(loginDto.getUserId() == null || loginDto.getUserPassword() == null){
-            return "f";
+            return null;
         }
 
         User user = loginService.login(loginDto.getUserId(), loginDto.getUserPassword());
 
         if(user == null){
-            return "f";
+            return null;
         }
 
         LoginSessionDto loginSession = LoginSessionDto.builder()
@@ -44,6 +44,6 @@ public class LoginController {
                 .build();
 
         session.setAttribute(MemberSession.LOGIN_MEMBER,loginSession);
-        return user.getName();
+        return user;
     }
 }
