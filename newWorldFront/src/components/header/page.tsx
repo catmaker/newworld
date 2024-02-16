@@ -69,7 +69,10 @@ const Header = () => {
           ) : (
             <Link href={`/api/auth/signout`}>
               <div className={styles.flex_column}>
-                <div onClick={() => signOut()} className={styles.text}>
+                <div
+                  onClick={() => signOut({ callbackUrl: "/login" })}
+                  className={styles.text}
+                >
                   로그아웃
                 </div>
                 <div className={styles.text_en}>LOGOUT</div>
