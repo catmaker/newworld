@@ -38,7 +38,13 @@ export const authOptions: NextAuthOptions = {
           if (result) {
             // 검증이 성공하면 사용자 객체를 반환합니다.
             // 이 객체는 JWT의 `user` 속성에 저장됩니다.
-            return { id: userId };
+            return {
+              id: userId,
+              name: result.name,
+              nickname: result.nickname,
+              birthday: result.birthday,
+              phone: result.phoneNumber,
+            };
           } else {
             // 검증이 실패하면 null을 반환합니다.
             // 이 경우, NextAuth.js는 로그인 실패 메시지를 표시합니다.
@@ -59,6 +65,16 @@ export const authOptions: NextAuthOptions = {
     signIn: "/login",
     signOut: "/",
     error: "/login",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user };
+    },
+
+    async session({ session, token }) {
+      session.user = token as any;
+      return session;
+    },
   },
 };
 const handler = NextAuth(authOptions);
