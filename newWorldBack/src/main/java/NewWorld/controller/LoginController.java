@@ -4,6 +4,7 @@ import NewWorld.MemberSession;
 import NewWorld.domain.User;
 import NewWorld.dto.LoginDto;
 import NewWorld.dto.LoginSessionDto;
+import NewWorld.dto.UserDto;
 import NewWorld.exception.LoginException;
 import NewWorld.service.LoginService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,7 +26,7 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping("/loginMember")
-    public User login(@RequestBody LoginDto loginDto, HttpServletRequest request) throws LoginException {
+    public UserDto login(@RequestBody LoginDto loginDto, HttpServletRequest request) throws LoginException {
         HttpSession session = request.getSession();
 
         if(loginDto.getUserId() == null || loginDto.getUserPassword() == null){
@@ -33,6 +34,9 @@ public class LoginController {
         }
 
         User user = loginService.login(loginDto.getUserId(), loginDto.getUserPassword());
+
+        UserDto userDto = new UserDto();
+        UserDto result = userDto.basicInfo(user);
 
         if(user == null){
             return null;
@@ -44,6 +48,7 @@ public class LoginController {
                 .build();
 
         session.setAttribute(MemberSession.LOGIN_MEMBER,loginSession);
-        return user;
+
+        return result;
     }
 }

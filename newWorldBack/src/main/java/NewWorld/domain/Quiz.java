@@ -1,12 +1,15 @@
 package NewWorld.domain;
 
 import NewWorld.MemberType;
+import NewWorld.QuizDifficulty;
+import NewWorld.dto.QuizDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,26 +26,53 @@ public class Quiz {
     @Column(name = "quiz_id")
     private Long id;
 
-    private String quiz;
+    private String title;
 
-    private String difficultly;
+    private String detail;
+    @Enumerated
+    private QuizDifficulty quizDifficulty;
 
     private String answer;
 
     private String maker;
 
+    private String makedDate;
+
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<Hint> hintList;
 
     //문제 푼사람
-
     @Builder
-    public Quiz(Long id, String quiz, String difficultly, String answer, String maker, List<Hint> hintList) {
+    public Quiz(Long id, String title, String detail, QuizDifficulty quizDifficulty, String answer, String maker, String makedDate, List<Hint> hintList) {
         this.id = id;
-        this.quiz = quiz;
-        this.difficultly = difficultly;
+        this.title = title;
+        this.detail = detail;
+        this.quizDifficulty = quizDifficulty;
         this.answer = answer;
         this.maker = maker;
+        this.makedDate = makedDate;
         this.hintList = hintList;
+    }
+
+    public QuizDto of(Quiz quiz) {
+        List<Hint> hints = quiz.getHintList();
+        List<String> hintsforDto = new ArrayList<>();
+
+        for (Hint hint : hints) {
+            String h = hint.getHint();
+            hintsforDto.add(h);
+        }
+
+        QuizDto quizDto = QuizDto.builder()
+                .quizTitle(quiz.getTitle())
+                .quizDetail(quiz.getDetail())
+                .hints(hintsforDto)
+                .makeDate(quiz.getMakedDate())
+                .quizDifficulty(quiz.getQuizDifficulty())
+                .maker(quiz.getMaker())
+                .answer(quiz.getAnswer())
+                .build();
+
+        return quizDto;
     }
 }

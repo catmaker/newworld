@@ -7,6 +7,10 @@ import NewWorld.dto.QuizDto;
 import NewWorld.repository.HintRepository;
 import NewWorld.repository.QuizRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +23,14 @@ public class QuizServiceImpl implements QuizService{
     private final HintRepository hintRepository;
     private final QuizRepository quizRepository;
 
+    @Override
+    public Page<Quiz> getQuizzes(Pageable pageable) {
+        PageRequest pageRequest = getPageRequest(pageable);
+        Page<Quiz> all = quizRepository.findAll(pageable);
+
+
+        return all;
+    }
     @Override
     public QuizDto getQuiz(String quizTitle, String maker) {
         Quiz quiz = quizRepository.findByTitleAndAndMaker(quizTitle, maker);
@@ -73,5 +85,17 @@ public class QuizServiceImpl implements QuizService{
     @Override
     public String checkAnswer(QuizDto quizDto, String answer) {
         return null;
+    }
+
+
+    /**
+     * 게사판 pageable
+     * @param pageable
+     * @return
+     */
+    private static PageRequest getPageRequest(Pageable pageable) {
+        int page = pageable.getPageNumber() == 0 ? 0 : pageable.getPageNumber() - 1;
+        PageRequest pageRequest = PageRequest.of(page, 10);
+        return pageRequest;
     }
 }

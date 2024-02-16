@@ -3,10 +3,16 @@ package NewWorld.controller;
 import NewWorld.domain.Quiz;
 import NewWorld.dto.QuizDto;
 import NewWorld.service.QuizService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,4 +36,12 @@ public class GameController {
         QuizDto result = quizService.getQuiz(quizDto.getQuizTitle(), quizDto.getMaker());
         return result;
     }
+
+    @PostMapping("/getQuizzes")
+    public Page<Quiz> findQuiz(HttpServletRequest request){
+        PageRequest pageRequest = PageRequest.of(5, 5);
+        Page<Quiz> quizzes = quizService.getQuizzes(pageRequest);
+        return quizzes;
+    }
+
 }
