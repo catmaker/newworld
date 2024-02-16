@@ -1,6 +1,7 @@
 package NewWorld.service;
 
 import NewWorld.MemberType;
+import NewWorld.QuizDifficulty;
 import NewWorld.domain.Hint;
 import NewWorld.domain.Quiz;
 import NewWorld.dto.QuizDto;
@@ -12,12 +13,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class QuizServiceImpl implements QuizService{
 
     private final HintRepository hintRepository;
@@ -25,9 +28,9 @@ public class QuizServiceImpl implements QuizService{
 
     @Override
     public Page<Quiz> getQuizzes(Pageable pageable) {
-        PageRequest pageRequest = getPageRequest(pageable);
-        Page<Quiz> all = quizRepository.findAll(pageable);
 
+        Page<Quiz> all = quizRepository.findAll(pageable);
+        List<Quiz> all1 = quizRepository.findAll();
 
         return all;
     }
@@ -40,7 +43,7 @@ public class QuizServiceImpl implements QuizService{
     }
 
     @Override
-    public QuizDto quizMake(QuizDto quizDto, String quiz) {
+    public QuizDto quizMake(QuizDto quizDto, String nickname) {
         List<String> hints = quizDto.getHints();
         List<Hint> savedHints = new ArrayList<>();
 
@@ -61,7 +64,7 @@ public class QuizServiceImpl implements QuizService{
                 .detail(quizDto.getQuizDetail())
                 .hintList(savedHints)
                 .answer(quizDto.getAnswer())
-                .maker(quizDto.getMaker())
+                .maker(nickname)
                 .quizDifficulty(quizDto.getQuizDifficulty())
                 .build();
 
@@ -93,7 +96,8 @@ public class QuizServiceImpl implements QuizService{
      * @param pageable
      * @return
      */
-    private static PageRequest getPageRequest(Pageable pageable) {
+    private PageRequest getPageRequest(Pageable pageable) {
+
         int page = pageable.getPageNumber() == 0 ? 0 : pageable.getPageNumber() - 1;
         PageRequest pageRequest = PageRequest.of(page, 10);
         return pageRequest;

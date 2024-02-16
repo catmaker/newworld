@@ -11,8 +11,8 @@ public interface QuizService {
 
     QuizDto getQuiz(String quizTitle, String maker);
     Page<Quiz> getQuizzes(Pageable pageable);
-    QuizDto quizMake(QuizDto quizDto, String quiz);
-    void deleteQuiz(QuizDto quizDto, String quiz);
-    void updateQuiz(QuizDto quizDto, String quiz);
+    QuizDto quizMake(QuizDto quizDto, String nickname);
+    void deleteQuiz(QuizDto quizDto, String nickname);
+    void updateQuiz(QuizDto quizDto, String nickname);
     String checkAnswer(QuizDto quizDto, String answer);
 }
