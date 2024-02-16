@@ -21,12 +21,30 @@ export const authOptions: NextAuthOptions = {
         if (credentials) {
           // credentials 객체에는 사용자가 입력한 아이디와 비밀번호가 포함되어 있습니다.
           const { userId, userPassword } = credentials;
-
+          // 여기서 사용자가 입력한 아이디와 비밀번호를 검증합니다.
+          const res = await fetch("http://localhost:8080/loginMember", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(credentials),
+          });
+          const result = await res.json();
+          console.log(result);
           // 이미 /loginMember에서 비교는 다 끝난 상황이므로, text인지 null인지만 확인하면 됩니다.
-          if (userId && userPassword) {
+          if (!result) {
+            throw new Error("로그인 실패");
+          }
+          if (result) {
             // 검증이 성공하면 사용자 객체를 반환합니다.
             // 이 객체는 JWT의 `user` 속성에 저장됩니다.
-            return { id: userId };
+            return {
+              id: userId,
+              name: result.name,
+              nickname: result.nickname,
+              birthday: result.birthday,
+              phone: result.phoneNumber,
+            };
           } else {
             // 검증이 실패하면 null을 반환합니다.
             // 이 경우, NextAuth.js는 로그인 실패 메시지를 표시합니다.
@@ -46,6 +64,17 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
     signOut: "/",
+    error: "/login",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user };
+    },
+
+    async session({ session, token }) {
+      session.user = token as any;
+      return session;
+    },
   },
 };
 const handler = NextAuth(authOptions);

@@ -21,7 +21,8 @@ const Intro = () => {
   ]);
   const { key, startTyping } = useScrollToContainer();
   const { currentLines, typingDone } = useTypingAnimation(startTyping, lines);
-
+  const { data: session } = useSession();
+  console.log(session);
   return (
     <div>
       <Header />
