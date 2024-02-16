@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -38,9 +39,9 @@ public class GameController {
     }
 
     @PostMapping("/getQuizzes")
-    public Page<Quiz> findQuiz(HttpServletRequest request){
-        PageRequest pageRequest = PageRequest.of(5, 5);
-        Page<Quiz> quizzes = quizService.getQuizzes(pageRequest);
+    public Page<Quiz> findQuiz(@RequestParam(required = false, defaultValue = "0", value = "page") int pageNo){
+        Pageable pageable = PageRequest.of(pageNo, 5);
+        Page<Quiz> quizzes = quizService.getQuizzes(pageable);
         return quizzes;
     }
 
