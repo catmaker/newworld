@@ -5,7 +5,6 @@ export const config = {
     "/mypage/:path*",
     "/api/:path*",
     "/community/:path*",
-    "/labyrinth/:path*",
     "/ranking/:path*",
   ],
 };
