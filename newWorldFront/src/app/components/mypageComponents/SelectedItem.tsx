@@ -1,7 +1,7 @@
 // SelectedItemComponent.tsx
 import React from "react";
 import Image from "next/image";
-import Pagination from "@/components/pagination/Pagination"; // Assuming Pagenation component is in the same directory
+import Pagination from "@/app/components/pagination/Pagination"; // Assuming Pagenation component is in the same directory
 import styles from "@/app/(root)/mypage/mypage.module.scss";
 
 interface SelectedItemComponentProps {

@@ -4,13 +4,13 @@ import styles from "./intro.module.scss";
 import Playbutton from "./Playbutton";
 import Link from "next/link";
 import { Element } from "react-scroll";
-import FacebookFeed from "@/components/intropageComponents/facebookfeed/page";
-import TypingAnimation from "@/components/intropageComponents/useTypingAnimation/page";
-import { useTypingAnimation } from "@/components/intropageComponents/useTypingAnimation/useTypingAnimation";
-import { useScrollToContainer } from "@/components/intropageComponents/useScrollPosition/useScrollPosition";
-import { ImageElement } from "@/components/intropageComponents/imageElement/page";
-import Footer from "@/components/footer/page";
-import Header from "@/components/header/page";
+import FacebookFeed from "@/app/components/intropageComponents/facebookfeed/page";
+import TypingAnimation from "@/app/components/intropageComponents/useTypingAnimation/page";
+import { useTypingAnimation } from "@/app/components/intropageComponents/useTypingAnimation/useTypingAnimation";
+import { useScrollToContainer } from "@/app/components/intropageComponents/useScrollPosition/useScrollPosition";
+import { ImageElement } from "@/app/components/intropageComponents/imageElement/page";
+import Footer from "@/app/components/footer/page";
+import Header from "@/app/components/header/page";
 import { useSession } from "next-auth/react";
 const Intro = () => {
   const [lines, setLines] = useState([

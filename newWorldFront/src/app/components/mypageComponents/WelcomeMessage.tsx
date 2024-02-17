@@ -1,6 +1,6 @@
 // WelcomeMessage.tsx
 import React from "react";
-import dummy2 from "../../app/(root)/mypage/dummy2.json";
+import dummy2 from "../../(root)/mypage/dummy2.json";
 import styles from "@/app/(root)/mypage/mypage.module.scss";
 import Image from "next/image";
 interface WelcomeMessageProps {

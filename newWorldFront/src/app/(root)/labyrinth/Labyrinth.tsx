@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import styles from "./labyrinth.module.scss";
-import Rains from "@/components/labyrinthComponents/rain/Rains";
+import Rains from "@/app/components/labyrinthComponents/rain/Rains";
 
 const Labyrinth = () => {
   const [list, setList] = React.useState<string[]>([]);

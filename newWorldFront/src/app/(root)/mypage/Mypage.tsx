@@ -5,11 +5,11 @@ import dummy from "./dummy.json";
 import dummy2 from "./dummy2.json";
 import dummy3 from "./dummy3.json";
 import { useState, useEffect } from "react";
-import Profile from "@/components/mypageComponents/Profile";
-import Badge from "@/components/mypageComponents/Badge";
-import WelcomeMessage from "@/components/mypageComponents/WelcomeMessage";
-import PrivacyControlBox from "@/components/mypageComponents/PrivacyControlBox";
-import SelectedItem from "@/components/mypageComponents/SelectedItem";
+import Profile from "@/app/components/mypageComponents/Profile";
+import Badge from "@/app/components/mypageComponents/Badge";
+import WelcomeMessage from "@/app/components/mypageComponents/WelcomeMessage";
+import PrivacyControlBox from "@/app/components/mypageComponents/PrivacyControlBox";
+import SelectedItem from "@/app/components/mypageComponents/SelectedItem";
 const Mypage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentItems, setCurrentItems] = useState<
@@ -66,13 +66,26 @@ const Mypage = () => {
     setDays(Math.ceil(differenceInDays));
     setLoading(false);
   }, []);
+  const fetchData = async () => {
+    const res = await fetch("/api/getUserProfile", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    console.log(data);
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className={styles.background}>
       <div className={styles.container}>
         <div className={styles.layout}>
           <div className={styles.left_layout}>
-            <Profile user={dummy.users && dummy.users[0]} />
+            <Profile />
             <Badge
               badges={dummy2.users && dummy2.users[0] && dummy2.users[0].badges}
             />
