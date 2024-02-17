@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import styles from "./post.module.scss";
-import Tiptap from "../../../components/tiptap/Tiptap";
+import Tiptap from "@/components/tiptap/Tiptap";
 const Post = () => {
   return (
     <div className={styles.background}>

@@ -1,6 +1,7 @@
 // PrivacyControlBox.tsx
 import React from "react";
-import styles from "@/app/mypage/mypage.module.scss";
+import styles from "@/app/(root)/mypage/mypage.module.scss";
+
 interface PrivacyControlBoxProps {
   selectedItem: string;
   setSelectedItem: (item: string) => void;

@@ -5,11 +5,11 @@ import dummy from "./dummy.json";
 import dummy2 from "./dummy2.json";
 import dummy3 from "./dummy3.json";
 import { useState, useEffect } from "react";
-import Profile from "../../components/mypageComponents/Profile";
-import Badge from "../../components/mypageComponents/Badge";
-import WelcomeMessage from "../../components/mypageComponents/WelcomeMessage";
-import PrivacyControlBox from "../../components/mypageComponents/PrivacyControlBox";
-import SelectedItem from "../../components/mypageComponents/SelectedItem";
+import Profile from "@/components/mypageComponents/Profile";
+import Badge from "@/components/mypageComponents/Badge";
+import WelcomeMessage from "@/components/mypageComponents/WelcomeMessage";
+import PrivacyControlBox from "@/components/mypageComponents/PrivacyControlBox";
+import SelectedItem from "@/components/mypageComponents/SelectedItem";
 const Mypage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentItems, setCurrentItems] = useState<

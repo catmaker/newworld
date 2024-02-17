@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import styles from "@/app/mypage/mypage.module.scss";
+import styles from "@/app/(root)/mypage/mypage.module.scss";
+
 interface User {
   profilePicture: string;
   name: {
