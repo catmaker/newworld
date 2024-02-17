@@ -22,20 +22,16 @@ public class GameController {
     private final QuizService quizService;
 
     @PostMapping("/makeQuiz")
-    public QuizDto makeQuiz(QuizDto quizDto, String nickName){
-        QuizDto result = quizService.quizMake(quizDto, nickName);
+    public String makeQuiz(QuizDto quizDto, String nickName){
+        String result = quizService.quizMake(quizDto, nickName);
 
-        if(result != null){
-            return result;
-        }
-
-        return null;
+        return result;
     }
 
     @PostMapping("/getQuiz")
     public QuizDto findQuiz(QuizDto quizDto){
-        QuizDto result = quizService.getQuiz(quizDto.getQuizTitle(), quizDto.getMaker());
-        return result;
+        QuizDto quiz = quizService.getQuiz(quizDto.getQuizTitle(), quizDto.getMaker());
+        return quiz;
     }
 
     @PostMapping("/getQuizzes")

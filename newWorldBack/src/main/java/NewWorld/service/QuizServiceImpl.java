@@ -43,9 +43,20 @@ public class QuizServiceImpl implements QuizService{
     }
 
     @Override
-    public QuizDto quizMake(QuizDto quizDto, String nickname) {
+    public String quizMake(QuizDto quizDto, String nickname) {
         List<String> hints = quizDto.getHints();
         List<Hint> savedHints = new ArrayList<>();
+        Quiz checkValidation = quizRepository.findByTitleAndAndMaker(quizDto.getQuizTitle(), quizDto.getMaker());
+
+        if(quizDto.getQuizTitle() == null){
+            return "nonTitle";
+        }
+        if(quizDto.getQuizDetail() == null){
+            return "nonDetail";
+        }
+        if(checkValidation != null){
+            return "duplication";
+        }
 
         if(hints != null){
             for(String hint : hints){
@@ -72,7 +83,10 @@ public class QuizServiceImpl implements QuizService{
 
         QuizDto result = savedQuiz.of(savedQuiz);
 
-        return result;
+        if(result != null){
+            return "s";
+        }
+        return "f";
     }
 
     @Override
