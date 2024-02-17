@@ -4,6 +4,7 @@ import NewWorld.domain.User;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -45,33 +46,29 @@ public class UserDto {
     @NotNull
     private String birthday;
 
-    /**
-     * user기본정보 ->dto
-     * @param user
-     */
-    public UserDto usertoDto(User user){
-
-        this.name = user.getName();
-        this.userId = user.getUserId();
-        this.userPassword = user.getUserPassword();
-        this.nickname = user.getNickname();
-        this.phoneNumber = user.getPhoneNumber();
-        this.birthday = user.getBirthday();
-
-        return this;
+    @Builder
+    public UserDto(String name, String userId, String nickname, String phoneNumber, String userPassword, String birthday) {
+        this.name = name;
+        this.userId = userId;
+        this.nickname = nickname;
+        this.phoneNumber = phoneNumber;
+        this.userPassword = userPassword;
+        this.birthday = birthday;
     }
 
     /**
      * user기본정보 ->dto
      * @param user
      */
-    public UserDto basicInfo(User user){
-
-        this.name = user.getName();
-        this.nickname = user.getNickname();
-        this.phoneNumber = user.getPhoneNumber();
-        this.birthday = user.getPhoneNumber();
-
-        return this;
+    public static UserDto of(User user){
+        UserDto userDto = UserDto.builder()
+                .userId(user.getUserId())
+                .userPassword(user.getUserPassword())
+                .name(user.getName())
+                .phoneNumber(user.getPhoneNumber())
+                .birthday(user.getBirthday())
+                .nickname(user.getNickname())
+                .build();
+        return userDto;
     }
 }

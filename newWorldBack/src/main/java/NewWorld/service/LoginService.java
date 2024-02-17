@@ -1,6 +1,7 @@
 package NewWorld.service;
 
 import NewWorld.domain.User;
+import NewWorld.dto.UserDto;
 import NewWorld.exception.LoginException;
 import NewWorld.exception.NotfindUserException;
 
@@ -17,7 +18,7 @@ public interface LoginService {
      * @param loginPw
      * @return
      */
-    public User login(String loginId, String loginPw) throws LoginException;
+    public UserDto login(String loginId, String loginPw) throws LoginException;
 
     /**
      * 로그아웃 처리

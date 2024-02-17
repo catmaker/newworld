@@ -34,14 +34,13 @@ public class LoginController {
         }
         UserDto result = null;
         try {
-            User user = loginService.login(loginDto.getUserId(), loginDto.getUserPassword());
-
-            UserDto userDto = new UserDto();
-            result = userDto.basicInfo(user);
+            UserDto user = loginService.login(loginDto.getUserId(), loginDto.getUserPassword());
 
             if (user == null) {
                 return null;
             }
+
+            result = user;
 
             LoginSessionDto loginSession = LoginSessionDto.builder()
                     .userNickname(user.getNickname())

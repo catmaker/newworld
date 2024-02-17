@@ -152,8 +152,7 @@ public class UserServiceImpl implements UserService {
         if(user == null){
             return null;
         }
-        UserDto userDto = new UserDto();
-        UserDto result = userDto.usertoDto(user);
+        UserDto result = UserDto.of(user);
 
         return result;
     }

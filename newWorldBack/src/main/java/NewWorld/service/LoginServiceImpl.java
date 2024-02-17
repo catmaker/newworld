@@ -2,6 +2,7 @@ package NewWorld.service;
 
 import NewWorld.config.EncoderConfig;
 import NewWorld.domain.User;
+import NewWorld.dto.UserDto;
 import NewWorld.exception.LoginException;
 import NewWorld.exception.NotfindUserException;
 import NewWorld.repository.UserRepository;
@@ -28,8 +29,14 @@ public class LoginServiceImpl implements LoginService {
      * @return
      */
     @Override
-    public User login(String loginId, String loginPw) throws LoginException {
-        return userCheck(loginId, loginPw);
+    public UserDto login(String loginId, String loginPw) throws LoginException {
+        User user = userCheck(loginId, loginPw);
+        UserDto userDto = UserDto.of(user);
+
+        userDto.setUserPassword(null);
+        userDto.setPhoneNumber(null);
+
+        return userDto;
     }
 
     /**
