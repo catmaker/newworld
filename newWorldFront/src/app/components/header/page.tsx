@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import styles from "@/components/main/intro.module.scss"; // CSS 모듈을 import합니다. 필요에 따라 경로를 수정하세요.
+import styles from "@/app/components/main/intro.module.scss"; // CSS 모듈을 import합니다. 필요에 따라 경로를 수정하세요.
 import { useEffect, useState } from "react";
 import { throttle } from "lodash";
 import { signOut, useSession } from "next-auth/react";
