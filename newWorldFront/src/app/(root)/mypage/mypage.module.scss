@@ -8,12 +8,14 @@
   align-items: center;
   justify-content: center;
   user-select: none;
+  overflow: auto;
+  min-height: 600px;
 }
 .container {
   margin-top: 80px;
   width: 80%;
   border-radius: 20px;
-  height: 80%;
+  height: 800px;
 }
 .layout {
   display: flex;
@@ -21,7 +23,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 800px;
   gap: 20px;
 }
 .left_layout {
@@ -156,7 +158,7 @@
   justify-content: center;
   align-items: center;
   width: 75%;
-  height: 100%;
+  height: 500px;
   gap: 20px;
   .welcome_message {
     background-color: black;
@@ -485,6 +487,20 @@
     }
   }
 }
+.nickname_input {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #1b1d24;
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-left: 10px;
+  &:focus {
+    outline: none;
+  }
+}
 @media screen and (max-width: 650px) {
   .infomation_box {
     gap: 0px !important;
@@ -498,7 +514,7 @@
   .password_box {
     div {
       input {
-        padding: 0 !important;
+        padding: 5px !important;
         height: 15px !important;
       }
     }
@@ -506,7 +522,7 @@
   .password_check_box {
     div {
       input {
-        padding: 0 !important;
+        padding: 5px !important;
         height: 15px !important;
       }
     }
@@ -577,10 +593,6 @@
   }
 }
 @media screen and (max-height: 700px) {
-  .privacy_control_box {
-    overflow: visible !important;
-    height: 200px !important;
-  }
   .profile_box {
     img {
       width: clamp(80px, 5vw, 100px) !important;
@@ -611,40 +623,6 @@
   }
   .my_badge {
     img {
-    }
-  }
-}
-@media screen and (max-height: 550px) {
-  .button_box {
-    button {
-      width: 80px !important;
-      height: 30px !important;
-    }
-  }
-  .password_box {
-    div {
-      input {
-        padding: 3px !important;
-
-        height: 15px !important;
-      }
-    }
-  }
-  .password_check_box {
-    div {
-      input {
-        padding: 3px !important;
-        height: 15px !important;
-      }
-    }
-  }
-  .nickname_box {
-    div {
-      input {
-        padding: 3px !important;
-
-        height: 15px !important;
-      }
     }
   }
 }
