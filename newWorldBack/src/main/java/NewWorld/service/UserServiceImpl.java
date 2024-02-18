@@ -1,18 +1,24 @@
 package NewWorld.service;
 
 import NewWorld.config.EncoderConfig;
+import NewWorld.domain.ImageFile;
 import NewWorld.domain.Post;
+import NewWorld.domain.Quiz;
 import NewWorld.domain.User;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.JoinException;
 import NewWorld.exception.NotChangeException;
 import NewWorld.exception.NotfindUserException;
+import NewWorld.repository.ImageFileRepository;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,7 +31,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final EncoderConfig encoder;
+    private final ImageFileRepository imageFileRepository;
     /**
      * 회원가입 아이디 중복체크
      *
@@ -63,6 +69,24 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 회원가입 중복체크
+     *
+     * @param phoneNumber
+     * @param name
+     * @return
+     */
+    public Boolean checkNicknameValidation(String nicknamee) {
+        Boolean validationCheck = false;
+        User userCheck = userRepository.findByNickname(nicknamee);
+
+        if (userCheck != null) {
+            validationCheck = true;
+        }
+
+        return validationCheck;
+    }
+
+    /**
      * 회원가입
      *
      * @param joinInfo
@@ -78,6 +102,7 @@ public class UserServiceImpl implements UserService {
         String name = joinInfo.getName();
         Boolean checkId = checkIdValidation(joinInfo.getUserId());
         Boolean checkUser = checkUserValidation(joinInfo.getName(), joinInfo.getPhoneNumber());
+        Boolean checkNickname = checkNicknameValidation(joinInfo.getNickname());
         //회원 아이디 중복검사
         if (checkId) {
             return "f1";
@@ -86,7 +111,12 @@ public class UserServiceImpl implements UserService {
         if(checkUser){
             return "f2";
         }
+        if(checkNickname){
+            return "f3";
+        }
 
+        LocalDateTime now = LocalDateTime.now();
+        String string = now.toLocalDate().toString();
         User newUser = User.builder().
                 userId(joinInfo.getUserId()).
                 userPassword(joinInfo.getUserPassword()).
@@ -96,6 +126,7 @@ public class UserServiceImpl implements UserService {
                 point(0).
                 attendance(0).
                 birthday(joinInfo.getBirthday()).
+                joinDate(string).
                 build();
 
         User savedUser = userRepository.save(newUser);
@@ -123,7 +154,7 @@ public class UserServiceImpl implements UserService {
         User user = getUser(name, newNn);
 
         if(user == null){
-            throw new NotfindUserException("찾을 수 없는 회원입니다.");
+            return null;
         }
 
         Boolean checkChangeInfo = checkChangeInfo(changeInfo, user);
@@ -136,7 +167,7 @@ public class UserServiceImpl implements UserService {
 
             user.basicInfoUpdate(newNn, newPn, newBd);
         } else {
-            return "notChange";
+            return null;
         }
         userRepository.save(user);
 
@@ -154,8 +185,24 @@ public class UserServiceImpl implements UserService {
         }
         UserDto result = UserDto.of(user);
 
+        ImageFile imageFile = user.getImageFile();
+        String fileName = imageFile.getFileName();
+        //추후업로드경로필요
+        String path = imageFile.getPath();
+        File file = new File(path, fileName);
+
+        if(!file.isFile()) return null;
+        result.setImageFile(file);
+
+        List<Quiz> quizList = user.getQuizList();
+        if(quizList == null){
+            result.setPuzzleCount(0);
+        }
+
         return result;
     }
+
+
 
     /**
      * 회원탈퇴

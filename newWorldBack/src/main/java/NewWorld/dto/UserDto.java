@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.File;
+
 /**
  * 2024-01-23 jeonil
  * User 정보
@@ -46,14 +48,26 @@ public class UserDto {
     @NotNull
     private String birthday;
 
+    private String signupDate;
+
+    private int puzzleCount;
+
+    private int point;
+
+    private File imageFile;
+
     @Builder
-    public UserDto(String name, String userId, String nickname, String phoneNumber, String userPassword, String birthday) {
+    public UserDto(String name, String userId, String nickname, String phoneNumber, String userPassword, String birthday, String signupDate, int puzzleCount, int point, File imageFile) {
         this.name = name;
         this.userId = userId;
         this.nickname = nickname;
         this.phoneNumber = phoneNumber;
         this.userPassword = userPassword;
         this.birthday = birthday;
+        this.signupDate = signupDate;
+        this.puzzleCount = puzzleCount;
+        this.point = point;
+        this.imageFile = imageFile;
     }
 
     /**
@@ -68,6 +82,8 @@ public class UserDto {
                 .phoneNumber(user.getPhoneNumber())
                 .birthday(user.getBirthday())
                 .nickname(user.getNickname())
+                .point(user.getPoint())
+                .signupDate(user.getJoinDate())
                 .build();
         return userDto;
     }

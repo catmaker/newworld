@@ -18,7 +18,7 @@ public class JoinController {
 
     private final UserService userService;
 
-    @PostMapping(value = "/signUp")
+    @PostMapping(value = "/join")
     @ResponseBody
     public String join(@RequestBody UserDto userDto) throws JoinException, LoginException {
         String name = userDto.getName();

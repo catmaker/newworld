@@ -1,5 +1,6 @@
 package NewWorld.domain;
 
+import NewWorld.dto.ImageFileDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,5 +32,14 @@ public class ImageFile {
         this.path = path;
         this.originalPath = originalPath;
         this.fileName = fileName;
+    }
+
+    public static ImageFile of(ImageFileDto imageFileDto){
+        ImageFile newImageFile = ImageFile.builder()
+                .fileName(imageFileDto.getFileName())
+                .originalPath(imageFileDto.getOriginalPath())
+                .path(imageFileDto.getPath())
+                .build();
+        return newImageFile;
     }
 }
