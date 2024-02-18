@@ -1,9 +1,9 @@
 // ProfileManagement.tsx
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import styles from "@/app/(root)/mypage/mypage.module.scss";
-import { postUserProfileImageAPI } from "@/app/lib/api/mypage";
-import { ProfileImageManagement } from "@/app/types/mypage";
+import { postUserProfileImageAPI } from "@/app/lib/api/mypageapi";
+import { ProfileImageManagement } from "@/app/types/Mypage";
 
 const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
   profilePicture,
@@ -48,6 +48,11 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
           <label htmlFor="file" className={styles.custom_file_upload}>
             파일 선택
           </label>
+          <input
+            type="text"
+            className={styles.nickname_input}
+            placeholder="변경할 닉네임을 입력해주세요."
+          />
           <button type="submit">변경하기</button>
         </form>
       </div>
