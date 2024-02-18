@@ -1,6 +1,6 @@
 import React from "react";
 import Login from "./Login";
-import Header from "@/components/header/page";
+import Header from "@/app/components/header/page";
 const page = () => {
   return (
     <>

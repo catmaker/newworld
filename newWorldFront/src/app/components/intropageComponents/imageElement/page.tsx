@@ -1,6 +1,6 @@
 // ImageElement.tsx
 import React from "react";
-import styles from "@/components/main/intro.module.scss";
+import styles from "@/app/components/main/intro.module.scss";
 
 interface ImageElementProps {
   src: string;

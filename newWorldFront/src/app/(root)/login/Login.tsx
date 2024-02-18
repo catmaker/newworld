@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import styles from "./login.module.scss";
 import Link from "next/link";
-import SignInButton from "@/components/signInButton/SignInButton";
+import SignInButton from "@/app/components/signInButton/SignInButton";
 import { getSession, signIn as nextAuthSignIn, signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { Session } from "inspector";

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import styles from "./community.module.scss";
 import dummy from "./dummy.json";
-import Header from "@/components/header/page";
+import Header from "@/app/components/header/page";
 import UseCategory from "./UseCategory";
 import { useState } from "react";
 const Community = () => {
