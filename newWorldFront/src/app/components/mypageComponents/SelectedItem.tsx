@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Pagination from "@/app/components/pagination/Pagination"; // Assuming Pagenation component is in the same directory
 import styles from "@/app/(root)/mypage/mypage.module.scss";
-
+import { useSession } from "next-auth/react";
 interface SelectedItemComponentProps {
   selectedItem: string;
   dummy: any;

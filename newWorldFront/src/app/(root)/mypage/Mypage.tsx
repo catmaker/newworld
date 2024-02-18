@@ -10,7 +10,9 @@ import Badge from "@/app/components/mypageComponents/Badge";
 import WelcomeMessage from "@/app/components/mypageComponents/WelcomeMessage";
 import PrivacyControlBox from "@/app/components/mypageComponents/PrivacyControlBox";
 import SelectedItem from "@/app/components/mypageComponents/SelectedItem";
-const Mypage = () => {
+import { MypageProps } from "@/app/interface/MypageProps";
+
+const Mypage: React.FC<MypageProps> = ({ session }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentItems, setCurrentItems] = useState<
     {
@@ -67,7 +69,7 @@ const Mypage = () => {
     setLoading(false);
   }, []);
   const fetchData = async () => {
-    const res = await fetch("/api/getUserProfile", {
+    const res = await fetch("/getUserProfile", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +87,7 @@ const Mypage = () => {
       <div className={styles.container}>
         <div className={styles.layout}>
           <div className={styles.left_layout}>
-            <Profile />
+            <Profile session={session} />
             <Badge
               badges={dummy2.users && dummy2.users[0] && dummy2.users[0].badges}
             />

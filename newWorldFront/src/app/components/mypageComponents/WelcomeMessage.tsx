@@ -3,12 +3,14 @@ import React from "react";
 import dummy2 from "../../(root)/mypage/dummy2.json";
 import styles from "@/app/(root)/mypage/mypage.module.scss";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 interface WelcomeMessageProps {
   loading: boolean;
   days: number;
 }
 
 const WelcomeMessage: React.FC<WelcomeMessageProps> = ({ loading, days }) => {
+  const { data: session } = useSession();
   return (
     <div className={styles.welcome_message}>
       <div className={styles.message}>
@@ -18,7 +20,7 @@ const WelcomeMessage: React.FC<WelcomeMessageProps> = ({ loading, days }) => {
           </div>
         ) : (
           <div>
-            <p>환영합니다 {dummy2.users[0].name}님!</p>
+            <p>환영합니다 {session?.user?.name}님!</p>
             <p>저희가 처음 만난 날은 {dummy2.users[0].signUpDate} 입니다.</p>
             <p>처음 만난 날부터 지금까지 {days}일이 지났습니다.</p>
           </div>
