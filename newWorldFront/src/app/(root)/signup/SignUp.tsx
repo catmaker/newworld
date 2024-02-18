@@ -82,7 +82,7 @@ const SignUp = () => {
     };
     console.log(formData);
     try {
-      const response = await fetch("http://localhost:8080/signUp", {
+      const response = await fetch("http://localhost:8080/join", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
