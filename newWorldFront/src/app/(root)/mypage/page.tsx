@@ -11,7 +11,6 @@ const page = async () => {
 
   if (session && session.user) {
     const { name, id, nickname } = session.user;
-    console.log(name, id, nickname);
     return (
       <div>
         <Header></Header>

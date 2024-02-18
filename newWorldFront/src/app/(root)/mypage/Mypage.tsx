@@ -10,7 +10,7 @@ import Badge from "@/app/components/mypageComponents/Badge";
 import WelcomeMessage from "@/app/components/mypageComponents/WelcomeMessage";
 import PrivacyControlBox from "@/app/components/mypageComponents/PrivacyControlBox";
 import SelectedItem from "@/app/components/mypageComponents/SelectedItem";
-import { MypageProps } from "@/app/interface/MypageProps";
+import { MypageProps } from "@/app/types/mypage";
 
 const Mypage: React.FC<MypageProps> = ({ session }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -93,7 +93,7 @@ const Mypage: React.FC<MypageProps> = ({ session }) => {
             />
           </div>
           <div className={styles.right_layout}>
-            <WelcomeMessage loading={loading} days={days} />
+            <WelcomeMessage session={session} />
             <PrivacyControlBox
               selectedItem={selectedItem}
               setSelectedItem={setSelectedItem}

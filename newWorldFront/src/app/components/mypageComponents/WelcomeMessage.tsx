@@ -3,26 +3,29 @@ import React from "react";
 import dummy2 from "../../(root)/mypage/dummy2.json";
 import styles from "@/app/(root)/mypage/mypage.module.scss";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
-interface WelcomeMessageProps {
-  loading: boolean;
-  days: number;
-}
+import { MypageProps } from "@/app/types/mypage";
+import { redirect } from "next/navigation";
 
-const WelcomeMessage: React.FC<WelcomeMessageProps> = ({ loading, days }) => {
-  const { data: session } = useSession();
+const WelcomeMessage: React.FC<MypageProps> = ({ session }) => {
+  let name, id, nickname;
+  if (session) {
+    ({ name, id, nickname } = session);
+    console.log(name, id, nickname);
+  } else {
+    return redirect("/login");
+  }
   return (
     <div className={styles.welcome_message}>
       <div className={styles.message}>
-        {loading ? (
+        {!session ? (
           <div className={styles.loading}>
             로딩중입니다. 잠시만 기다려주세요.
           </div>
         ) : (
           <div>
-            <p>환영합니다 {session?.user?.name}님!</p>
-            <p>저희가 처음 만난 날은 {dummy2.users[0].signUpDate} 입니다.</p>
-            <p>처음 만난 날부터 지금까지 {days}일이 지났습니다.</p>
+            <p>환영합니다 {name}님!</p>
+            <p>저희가 처음 만난 날은 {name} 입니다.</p>
+            <p>처음 만난 날부터 지금까지 {name}일이 지났습니다.</p>
           </div>
         )}
         <Image

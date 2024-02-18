@@ -1,8 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "@/app/(root)/mypage/mypage.module.scss";
-import { useSession } from "next-auth/react";
-import { MypageProps } from "@/app/interface/MypageProps";
+import { MypageProps } from "@/app/types/mypage";
 const Profile: React.FC<MypageProps> = ({ session }) => {
   const { name, id, nickname } = session;
   return (
