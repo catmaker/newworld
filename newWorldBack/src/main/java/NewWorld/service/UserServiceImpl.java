@@ -1,15 +1,14 @@
 package NewWorld.service;
 
 import NewWorld.config.EncoderConfig;
-import NewWorld.domain.ImageFile;
-import NewWorld.domain.Post;
-import NewWorld.domain.Quiz;
-import NewWorld.domain.User;
+import NewWorld.domain.*;
+import NewWorld.dto.SolvedQuizDto;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.JoinException;
 import NewWorld.exception.NotChangeException;
 import NewWorld.exception.NotfindUserException;
 import NewWorld.repository.ImageFileRepository;
+import NewWorld.repository.UserQuizSolvedDateRepository;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,6 +30,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final UserQuizSolvedDateRepository userQuizSolvedDateRepository;
     private final ImageFileRepository imageFileRepository;
     /**
      * 회원가입 아이디 중복체크
@@ -202,8 +202,20 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+    public List<SolvedQuizDto> getSolveQuizList(UserDto userDto){
+        List<SolvedQuizDto> result = new ArrayList<>();
+        String nickname = userDto.getNickname();
+        User user = userRepository.findByNickname(nickname);
 
+        List<UserQuizSolvedDate> byUser = userQuizSolvedDateRepository.findByUser(user);
 
+        for(UserQuizSolvedDate userQuizSolvedDate : byUser){
+            SolvedQuizDto solvedQuizDto = SolvedQuizDto.of(userQuizSolvedDate, userQuizSolvedDate.getQuiz());
+            result.add(solvedQuizDto);
+        }
+
+        return result;
+    }
     /**
      * 회원탈퇴
      *

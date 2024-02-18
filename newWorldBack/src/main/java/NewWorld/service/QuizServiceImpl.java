@@ -4,9 +4,13 @@ import NewWorld.MemberType;
 import NewWorld.QuizDifficulty;
 import NewWorld.domain.Hint;
 import NewWorld.domain.Quiz;
+import NewWorld.domain.User;
+import NewWorld.domain.UserQuizSolvedDate;
 import NewWorld.dto.QuizDto;
 import NewWorld.repository.HintRepository;
 import NewWorld.repository.QuizRepository;
+import NewWorld.repository.UserQuizSolvedDateRepository;
+import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,8 +19,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +31,8 @@ public class QuizServiceImpl implements QuizService{
 
     private final HintRepository hintRepository;
     private final QuizRepository quizRepository;
-
+    private final UserRepository userRepository;
+    private final UserQuizSolvedDateRepository userQuizSolvedDateRepository;
     @Override
     public Page<Quiz> getQuizzes(Pageable pageable) {
 
@@ -91,29 +98,64 @@ public class QuizServiceImpl implements QuizService{
 
     @Override
     public void deleteQuiz(QuizDto quizDto, String quiz) {
+        String quizTitle = quizDto.getQuizTitle();
+        String maker = quizDto.getMaker();
 
+        Quiz q = quizRepository.findByTitleAndAndMaker(quizTitle, maker);
+
+        quizRepository.delete(q);
     }
 
     @Override
-    public void updateQuiz(QuizDto quizDto, String quiz) {
+    public void updateQuiz(QuizDto quizDto){
+        Optional<Quiz> optionalQuiz = quizRepository.findById(quizDto.getQuizId());
+
+        if(optionalQuiz.isPresent()){
+            Quiz quiz = optionalQuiz.get();
+            quiz.updateQuiz(quizDto);
+
+            List<Hint> hintList = quiz.getHintList();
+            List<String> updateHints = quizDto.getHints();
+
+            for(Hint hint: hintList){
+                String hintDetail = hint.getHint();
+                for(String updateHint: updateHints){
+                    if(updateHint == null){
+                        hintRepository.delete(hint);
+                    }else if(hintDetail == hint.getHint()){
+                        continue;
+                    }
+                    else{
+                        hint.changeHint(updateHint);
+                    }
+                }
+            }
+        }
 
     }
 
     @Override
     public String checkAnswer(QuizDto quizDto, String answer) {
-        return null;
-    }
+        Optional<Quiz> optionalQuiz = quizRepository.findById(quizDto.getQuizId());
 
+        if(optionalQuiz.isPresent()){
+            Quiz quiz = optionalQuiz.get();
+            String collectAnswer = quiz.getAnswer();
 
-    /**
-     * 게사판 pageable
-     * @param pageable
-     * @return
-     */
-    private PageRequest getPageRequest(Pageable pageable) {
+            if(collectAnswer.equals(answer)){
+                User user = userRepository.findByNickname(quizDto.getMaker());
+                UserQuizSolvedDate solvedDate = UserQuizSolvedDate.builder()
+                        .user(user)
+                        .solvedTime(LocalDateTime.now().toLocalDate().toString())
+                        .build();
 
-        int page = pageable.getPageNumber() == 0 ? 0 : pageable.getPageNumber() - 1;
-        PageRequest pageRequest = PageRequest.of(page, 10);
-        return pageRequest;
+                userQuizSolvedDateRepository.save(solvedDate);
+                user.addQuizList(quiz);
+                return "s";
+            }else if(!collectAnswer.equals(answer)){
+                return "wrong answer";
+            }
+        }
+        return "f";
     }
 }

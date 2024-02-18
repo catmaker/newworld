@@ -1,10 +1,13 @@
 package NewWorld.service;
 
+import NewWorld.dto.SolvedQuizDto;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.JoinException;
 import NewWorld.exception.LoginException;
 import NewWorld.exception.NotChangeException;
 import NewWorld.exception.NotfindUserException;
+
+import java.util.List;
 
 /**
  * 2024.01.17 jeonil
@@ -48,4 +51,5 @@ public interface UserService {
      */
     UserDto getUserInfo(String userName, String userNickname) throws IllegalAccessException, NotfindUserException;
 
+    List<SolvedQuizDto> getSolveQuizList(UserDto userDto);
 }

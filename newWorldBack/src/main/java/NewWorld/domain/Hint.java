@@ -32,4 +32,9 @@ public class Hint{
         this.hint = hint;
         this.memberType = memberType;
     }
+
+    public Hint changeHint(String hint){
+        this.hint = hint;
+        return this;
+    }
 }

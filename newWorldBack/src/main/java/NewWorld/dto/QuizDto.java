@@ -13,6 +13,8 @@ import java.util.List;
 @Setter
 public class QuizDto {
 
+    private Long quizId;
+
     private String quizTitle;
 
     private String quizDetail;
@@ -28,7 +30,8 @@ public class QuizDto {
     private QuizDifficulty quizDifficulty;
 
     @Builder
-    public QuizDto(String quizTitle, String quizDetail, List<String> hints, String maker, String makeDate, String answer, QuizDifficulty quizDifficulty) {
+    public QuizDto(Long quizId, String quizTitle, String quizDetail, List<String> hints, String maker, String makeDate, String answer, QuizDifficulty quizDifficulty) {
+        this.quizId = quizId;
         this.quizTitle = quizTitle;
         this.quizDetail = quizDetail;
         this.hints = hints;

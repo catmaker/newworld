@@ -40,10 +40,10 @@ public class Post {
     //종류 (기타,질문)
     private PostType postType;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private ImageFile imageFile;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Comment> commentList;
 
     @Builder

@@ -1,5 +1,6 @@
 package NewWorld.controller;
 
+import NewWorld.dto.SolvedQuizDto;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.NotfindUserException;
 import NewWorld.service.ImageFileService;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -59,5 +61,13 @@ public class UserPageController {
         String result = imageFileService.saveImageFile(uploadFile, realPath, userDto.getName(), userDto.getNickname());
 
         return result;
+    }
+
+    @PostMapping("/api/getUserClearQuizzes")
+    public List<SolvedQuizDto> findUserClearQuizzes(@RequestBody UserDto userDto){
+
+        List<SolvedQuizDto> solveQuizList = userService.getSolveQuizList(userDto);
+
+        return solveQuizList;
     }
 }

@@ -44,13 +44,13 @@ public class User {
 
     private String joinDate;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private ImageFile imageFile;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<Quiz> quizList;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Post> postList;
 
     @Builder
@@ -93,6 +93,18 @@ public class User {
      */
     public User changePassword(String newPassword){
         this.userPassword = newPassword;
+        return this;
+    }
+
+    public User addQuizList(Quiz quiz){
+
+        if (this.quizList == null){
+            this.quizList = List.of(quiz);
+        }else{
+            this.quizList.add(quiz);
+        }
+
+
         return this;
     }
 

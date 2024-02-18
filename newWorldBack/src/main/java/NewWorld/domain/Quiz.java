@@ -38,10 +38,9 @@ public class Quiz {
 
     private String makedDate;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Hint> hintList;
 
-    //문제 푼사람
     @Builder
     public Quiz(Long id, String title, String detail, QuizDifficulty quizDifficulty, String answer, String maker, String makedDate, List<Hint> hintList) {
         this.id = id;
@@ -74,5 +73,13 @@ public class Quiz {
                 .build();
 
         return quizDto;
+    }
+
+    public Quiz updateQuiz(QuizDto quizDto){
+        this.title = quizDto.getQuizTitle();
+        this.detail = quizDto.getQuizDetail();
+        this.quizDifficulty = quizDto.getQuizDifficulty();
+        this.answer = quizDto.getAnswer();
+        return this;
     }
 }
