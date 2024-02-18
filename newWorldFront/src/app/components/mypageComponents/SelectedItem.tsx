@@ -3,8 +3,9 @@
 import InfoManagement from "./SelectedItemInfoManagement";
 import ProfileImageManagement from "./SelectedItemProfileImageManagement";
 import ClearQuiz from "./SelectedItemClearQuiz";
-import { SelectedItemComponentProps } from "@/app/types/mypage";
-const SelectedItem: React.FC<SelectedItemComponentProps> = ({
+import { SelectedItemComponentProps, MypageProps } from "@/app/types/Mypage";
+type SelectedItemProps = SelectedItemComponentProps & MypageProps;
+const SelectedItem: React.FC<SelectedItemProps> = ({
   selectedItem,
   dummy,
   dummy2,
@@ -13,15 +14,11 @@ const SelectedItem: React.FC<SelectedItemComponentProps> = ({
   totalPages,
   currentPage,
   handlePageClick,
+  session,
 }) => {
   return (
     <>
-      {selectedItem === "개인정보 관리" && (
-        <InfoManagement
-          userId={dummy2.users[0].id}
-          userNickname={dummy2?.users?.[0]?.nickname}
-        />
-      )}
+      {selectedItem === "개인정보 관리" && <InfoManagement session={session} />}
       {selectedItem === "프로필 관리" && (
         <ProfileImageManagement
           profilePicture={dummy.users[0].profilePicture}

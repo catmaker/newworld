@@ -3,7 +3,7 @@ import React from "react";
 import dummy2 from "../../(root)/mypage/dummy2.json";
 import styles from "@/app/(root)/mypage/mypage.module.scss";
 import Image from "next/image";
-import { MypageProps } from "@/app/types/mypage";
+import { MypageProps } from "@/app/types/Mypage";
 import { redirect } from "next/navigation";
 
 const WelcomeMessage: React.FC<MypageProps> = ({ session }) => {

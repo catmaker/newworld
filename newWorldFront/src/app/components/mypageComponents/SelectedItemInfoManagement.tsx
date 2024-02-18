@@ -1,28 +1,28 @@
 // SelectedItemInfoManagement.tsx
 import React, { useEffect, useState } from "react";
 import styles from "@/app/(root)/mypage/mypage.module.scss";
-import { postUserProfileAPI } from "@/app/lib/api/mypage";
+import { deleteUserProfile, postUserProfileAPI } from "@/app/lib/api/mypageapi";
+import { MypageProps } from "@/app/types/Mypage";
+import Modal from "@/app/components/modal/Modal";
+import { redirect } from "next/navigation";
+const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
+  let name, id, nickname;
+  if (session) {
+    ({ name, id, nickname } = session);
+  } else {
+    return redirect("/login");
+  }
 
-interface PersonalInfoManagementProps {
-  userId: string;
-  userNickname: string;
-}
-
-const SelectedItemInfoManagement: React.FC<PersonalInfoManagementProps> = ({
-  userId,
-  userNickname,
-}) => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [nickname, setNickname] = useState("");
   const [shouldUpdateProfile, setShouldUpdateProfile] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const updateProfile = async () => {
       const data = {
         currentPassword,
         newPassword,
-        nickname,
       };
 
       try {
@@ -36,56 +36,70 @@ const SelectedItemInfoManagement: React.FC<PersonalInfoManagementProps> = ({
       updateProfile();
       setShouldUpdateProfile(false);
     }
-  }, [shouldUpdateProfile, currentPassword, newPassword, nickname]);
+  }, [shouldUpdateProfile, currentPassword, newPassword]);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    if (!currentPassword || !newPassword) {
+      alert("모든 항목을 입력해주세요.");
+      return;
+    }
     setShouldUpdateProfile(true);
   };
-
+  const handleDelete = async () => {
+    try {
+      await deleteUserProfile();
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
-    <form className={styles.infomation_box} onSubmit={handleSubmit}>
-      <div className={styles.id_box}>
-        <div>
-          아이디 <span>{userId}</span>
+    <>
+      <form className={styles.infomation_box} onSubmit={handleSubmit}>
+        <div className={styles.id_box}>
+          <div>
+            아이디 <span>{id}</span>
+          </div>
         </div>
-      </div>
-      <div className={styles.password_box}>
-        <div>현재 비밀번호</div>
-        <div>
-          <input
-            type="password"
-            value={currentPassword}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-          />
+        <div className={styles.password_box}>
+          <div>현재 비밀번호</div>
+          <div>
+            <input
+              type="password"
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+            />
+          </div>
         </div>
-      </div>
-      <div className={styles.password_check_box}>
-        <div>비밀번호 확인</div>
-        <div>
-          <input
-            type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
+        <div className={styles.password_check_box}>
+          <div>변경할 비밀번호</div>
+          <div>
+            <input
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+          </div>
         </div>
-      </div>
-      <div className={styles.nickname_box}>
-        <div>닉네임</div>
-        <div>
-          <input
-            type="text"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            placeholder={userNickname}
-          />
+
+        <div className={styles.button_box}>
+          <button type="submit">수정하기</button>
+          <button type="button" onClick={() => setIsModalOpen(true)}>
+            탈퇴하기
+          </button>
         </div>
-      </div>
-      <div className={styles.button_box}>
-        <button type="submit">수정하기</button>
-        <button>탈퇴하기</button>
-      </div>
-    </form>
+      </form>
+      {isModalOpen && (
+        <Modal
+          title="정말 탈퇴하시겠습니까?"
+          content="탈퇴하면 모든 정보가 삭제됩니다."
+          confirmText="예"
+          cancelText="아니오"
+          onConfirm={handleDelete}
+          onCancel={() => setIsModalOpen(false)}
+        />
+      )}
+    </>
   );
 };
 

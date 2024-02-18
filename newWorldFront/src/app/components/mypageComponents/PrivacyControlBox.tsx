@@ -1,7 +1,7 @@
 // PrivacyControlBox.tsx
 import React from "react";
 import styles from "@/app/(root)/mypage/mypage.module.scss";
-import { PrivacyControlBoxProps } from "@/app/types/mypage";
+import { PrivacyControlBoxProps } from "@/app/types/Mypage";
 
 const PrivacyControlBox: React.FC<PrivacyControlBoxProps> = ({
   selectedItem,
