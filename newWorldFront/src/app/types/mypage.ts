@@ -1,7 +1,6 @@
 export interface postUserProfileInterface {
   currentPassword: string;
   newPassword: string;
-  nickname: string;
 }
 export interface ProfileImageManagement {
   profilePicture: string;
@@ -30,4 +29,9 @@ export interface MypageProps {
 export interface PrivacyControlBoxProps {
   selectedItem: string;
   setSelectedItem: (item: string) => void;
+}
+
+export interface PersonalInfoManagementProps {
+  userId: string;
+  userNickname: string;
 }

@@ -1,5 +1,5 @@
 import axios from ".";
-import { postUserProfileInterface } from "@/app/types/mypage";
+import { postUserProfileInterface } from "@/app/types/Mypage";
 // myPageAPI
 export const getUserProfileAPI = async () => {
   try {
@@ -46,9 +46,11 @@ export const deleteUserProfile = async () => {
   try {
     const response = await axios.delete("/api/deleteUserProfile");
     console.log(response);
+    alert("회원 탈퇴에 성공했습니다.");
     return response;
   } catch (error) {
     console.error(error);
+    alert("회원 탈퇴에 실패했습니다.");
   }
 };
 
