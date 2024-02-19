@@ -27,9 +27,9 @@ public class UserPageController {
     private final UserService userService;
     private final ImageFileService imageFileService;
 
-    @PostMapping("/api/getUserProfile")
+    @PostMapping("/getUserProfile")
     public UserDto findUserProfile(@RequestBody UserDto userDto) throws NotfindUserException, IllegalAccessException {
-        UserDto userInfo = userService.getUserInfo(userDto.getNickname(), userDto.getName());
+        UserDto userInfo = userService.getUserInfo(userDto.getName(), userDto.getNickname());
 
         return userInfo;
     }

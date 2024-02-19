@@ -75,9 +75,9 @@ public class UserServiceImpl implements UserService {
      * @param name
      * @return
      */
-    public Boolean checkNicknameValidation(String nicknamee) {
+    public Boolean checkNicknameValidation(String nickname) {
         Boolean validationCheck = false;
-        User userCheck = userRepository.findByNickname(nicknamee);
+        User userCheck = userRepository.findByNickname(nickname);
 
         if (userCheck != null) {
             validationCheck = true;
@@ -185,18 +185,20 @@ public class UserServiceImpl implements UserService {
         }
         UserDto result = UserDto.of(user);
 
-        ImageFile imageFile = user.getImageFile();
-        String fileName = imageFile.getFileName();
-        //추후업로드경로필요
-        String path = imageFile.getPath();
-        File file = new File(path, fileName);
-
-        if(!file.isFile()) return null;
-        result.setImageFile(file);
+//        ImageFile imageFile = user.getImageFile();
+//        String fileName = imageFile.getFileName();
+//        //추후업로드경로필요
+//        String path = imageFile.getPath();
+//        File file = new File(path, fileName);
+//
+//        if(!file.isFile()) return null;
+//        result.setImageFile(file);
 
         List<Quiz> quizList = user.getQuizList();
         if(quizList == null){
             result.setPuzzleCount(0);
+        }else{
+            result.setPuzzleCount(quizList.size());
         }
 
         return result;

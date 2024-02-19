@@ -9,6 +9,8 @@ import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 /**
  * 2024.01.14 jeonill
  * 로그인 처리
@@ -31,8 +33,16 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public UserDto login(String loginId, String loginPw) throws LoginException {
         User user = userCheck(loginId, loginPw);
-        UserDto userDto = UserDto.of(user);
+        LocalDateTime loginDate = user.getLoginDate();
+        int loginDay = Integer.parseInt(loginDate.toLocalDate().toString());
+        int attendance = user.getAttendance();
+        int now = Integer.parseInt(LocalDateTime.now().toLocalDate().toString());
+        if (now>loginDay){
+            attendance = user.checkAttendance();
+        }
 
+        UserDto userDto = UserDto.of(user);
+        userDto.setAttendance(attendance);
         userDto.setUserPassword(null);
         userDto.setPhoneNumber(null);
 

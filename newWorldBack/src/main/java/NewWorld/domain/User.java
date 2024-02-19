@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -38,6 +39,8 @@ public class User {
 
     private int point;
 
+    private LocalDateTime loginDate;
+
     private int attendance;
 
     private MemberType memberType;
@@ -53,8 +56,9 @@ public class User {
     @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Post> postList;
 
+
     @Builder
-    public User(Long id, String name, String userId, String nickname, String phoneNumber, String userPassword, String birthday, int point, int attendance, MemberType memberType, String joinDate, ImageFile imageFile, List<Quiz> quizList, List<Post> postList) {
+    public User(Long id, String name, String userId, String nickname, String phoneNumber, String userPassword, String birthday, int point, LocalDateTime loginDate, int attendance, MemberType memberType, String joinDate, ImageFile imageFile, List<Quiz> quizList, List<Post> postList) {
         this.id = id;
         this.name = name;
         this.userId = userId;
@@ -63,6 +67,7 @@ public class User {
         this.userPassword = userPassword;
         this.birthday = birthday;
         this.point = point;
+        this.loginDate = loginDate;
         this.attendance = attendance;
         this.memberType = memberType;
         this.joinDate = joinDate;
@@ -70,7 +75,6 @@ public class User {
         this.quizList = quizList;
         this.postList = postList;
     }
-
 
     /**
      * user기본정보 업데이트
@@ -108,6 +112,11 @@ public class User {
         return this;
     }
 
+    public int checkAttendance(){
+        this.attendance = this.attendance + 1;
+
+        return this.attendance;
+    }
     public void saveImage(ImageFile imageFile){
         this.imageFile = imageFile;
     }
