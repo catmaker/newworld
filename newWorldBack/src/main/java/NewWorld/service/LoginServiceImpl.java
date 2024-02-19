@@ -8,6 +8,7 @@ import NewWorld.exception.NotfindUserException;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
  * 로그인 처리
  */
 @Service
+@Transactional(readOnly = false)
 @RequiredArgsConstructor
 public class LoginServiceImpl implements LoginService {
 
@@ -34,10 +36,10 @@ public class LoginServiceImpl implements LoginService {
     public UserDto login(String loginId, String loginPw) throws LoginException {
         User user = userCheck(loginId, loginPw);
         LocalDateTime loginDate = user.getLoginDate();
-        int loginDay = Integer.parseInt(loginDate.toLocalDate().toString());
+        int loginDay = Integer.parseInt(loginDate.toLocalDate().toString().replaceAll("-",""));
         int attendance = user.getAttendance();
-        int now = Integer.parseInt(LocalDateTime.now().toLocalDate().toString());
-        if (now>loginDay){
+        int now = Integer.parseInt(LocalDateTime.now().toLocalDate().toString().replaceAll("-",""));
+        if (now>loginDay || user.getAttendance() == 0){
             attendance = user.checkAttendance();
         }
 

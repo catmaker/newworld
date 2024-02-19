@@ -127,6 +127,7 @@ public class UserServiceImpl implements UserService {
                 attendance(0).
                 birthday(joinInfo.getBirthday()).
                 joinDate(string).
+                loginDate(LocalDateTime.now()).
                 build();
 
         User savedUser = userRepository.save(newUser);
