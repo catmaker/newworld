@@ -13,6 +13,10 @@ import java.util.List;
 @Setter
 public class QuizDto {
 
+    private String nickname;
+
+    private String name;
+
     private Long quizId;
 
     private String quizTitle;

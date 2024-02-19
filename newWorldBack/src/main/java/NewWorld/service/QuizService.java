@@ -14,5 +14,5 @@ public interface QuizService {
     String quizMake(QuizDto quizDto, String nickname);
     void deleteQuiz(QuizDto quizDto, String nickname);
     void updateQuiz(QuizDto quizDto);
-    String checkAnswer(QuizDto quizDto, String answer);
+    String checkAnswer(QuizDto quizDto);
 }

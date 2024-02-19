@@ -135,24 +135,25 @@ public class QuizServiceImpl implements QuizService{
     }
 
     @Override
-    public String checkAnswer(QuizDto quizDto, String answer) {
+    public String checkAnswer(QuizDto quizDto) {
         Optional<Quiz> optionalQuiz = quizRepository.findById(quizDto.getQuizId());
 
         if(optionalQuiz.isPresent()){
             Quiz quiz = optionalQuiz.get();
             String collectAnswer = quiz.getAnswer();
 
-            if(collectAnswer.equals(answer)){
-                User user = userRepository.findByNickname(quizDto.getMaker());
+            if(collectAnswer.equals(quizDto.getAnswer())){
+                User user = userRepository.findByNickname(quizDto.getNickname());
                 UserQuizSolvedDate solvedDate = UserQuizSolvedDate.builder()
                         .user(user)
+                        .quiz(quiz)
                         .solvedTime(LocalDateTime.now().toLocalDate().toString())
                         .build();
 
                 userQuizSolvedDateRepository.save(solvedDate);
                 user.addQuizList(quiz);
                 return "s";
-            }else if(!collectAnswer.equals(answer)){
+            }else if(!collectAnswer.equals(quizDto.getAnswer())){
                 return "wrong answer";
             }
         }

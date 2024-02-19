@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,14 +23,14 @@ public class GameController {
     private final QuizService quizService;
 
     @PostMapping("/makeQuiz")
-    public String makeQuiz(QuizDto quizDto, String nickName){
+    public String makeQuiz(@RequestBody QuizDto quizDto, String nickName){
         String result = quizService.quizMake(quizDto, nickName);
 
         return result;
     }
 
     @PostMapping("/getQuiz")
-    public QuizDto findQuiz(QuizDto quizDto){
+    public QuizDto findQuiz(@RequestBody QuizDto quizDto){
         QuizDto quiz = quizService.getQuiz(quizDto.getQuizTitle(), quizDto.getMaker());
         return quiz;
     }
@@ -39,6 +40,12 @@ public class GameController {
         Pageable pageable = PageRequest.of(pageNo, 5);
         Page<Quiz> quizzes = quizService.getQuizzes(pageable);
         return quizzes;
+    }
+
+    @PostMapping("/checkQuizAnswer")
+    public String checkQuizAnswer(@RequestBody QuizDto quizDto){
+        String result = quizService.checkAnswer(quizDto);
+        return result;
     }
 
 }
