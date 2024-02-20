@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "./community.module.scss";
 import dummy from "./dummy.json";
 import Header from "@/app/components/header/page";
-import UseCategory from "./UseCategory";
+import UseCategory from "../../hooks/UseCategory";
 import { useState } from "react";
 const Community = () => {
   const [currentPage, setCurrentPage] = useState(1);
