@@ -3,17 +3,18 @@ import React from "react";
 import dummy2 from "../../(root)/mypage/dummy2.json";
 import styles from "@/app/(root)/mypage/mypage.module.scss";
 import Image from "next/image";
-import { MypageProps } from "@/app/types/Mypage";
+import { WelcomeMessageProps } from "@/app/types/Mypage";
 import { redirect } from "next/navigation";
-
-const WelcomeMessage: React.FC<MypageProps> = ({ session }) => {
-  let name, id, nickname;
+import DaysSince from "../util/daysSince/DaysSince";
+const WelcomeMessage: React.FC<WelcomeMessageProps> = ({ session }) => {
+  let name, id, nickname, signupDate, puzzleCount, point;
   if (session) {
-    ({ name, id, nickname } = session);
-    console.log(name, id, nickname);
+    ({ name, id, nickname, signupDate, puzzleCount, point } = session);
+    console.log(name, id, nickname, signupDate, puzzleCount, point);
   } else {
     return redirect("/login");
   }
+
   return (
     <div className={styles.welcome_message}>
       <div className={styles.message}>
@@ -24,8 +25,11 @@ const WelcomeMessage: React.FC<MypageProps> = ({ session }) => {
         ) : (
           <div>
             <p>환영합니다 {name}님!</p>
-            <p>저희가 처음 만난 날은 {name} 입니다.</p>
-            <p>처음 만난 날부터 지금까지 {name}일이 지났습니다.</p>
+            <p>저희가 처음 만난 날은 {signupDate} 입니다.</p>
+            <p>
+              처음 만난 날부터 지금까지 <DaysSince date={signupDate} />
+              일이 지났습니다.
+            </p>
           </div>
         )}
         <Image
@@ -38,8 +42,8 @@ const WelcomeMessage: React.FC<MypageProps> = ({ session }) => {
       </div>
       <div className={styles.point_section}>
         <div>
-          <p>해결한 문제 수 : {dummy2.users[0].clear}</p>
-          <p>획득한 포인트 : {dummy2.users[0].point}</p>
+          <p>해결한 문제 수 : {puzzleCount}</p>
+          <p>획득한 포인트 : {point}</p>
         </div>
       </div>
     </div>

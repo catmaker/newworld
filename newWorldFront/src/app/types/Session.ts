@@ -7,5 +7,8 @@ export interface MySession extends Session {
     image: string;
     nickname: string;
     id: string;
+    signupDate: string;
+    puzzleCount: number;
+    point: number;
   };
 }

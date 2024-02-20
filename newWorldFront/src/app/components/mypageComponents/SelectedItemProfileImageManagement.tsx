@@ -10,6 +10,7 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
 }) => {
   const [preview, setPreview] = useState(profilePicture);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [nickname, setNickname] = useState(""); // 닉네임 상태를 추가합니다.
 
   const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -25,6 +26,10 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (!selectedFile || !nickname) {
+      alert("변경할 사항을 입력해주세요.");
+      return;
+    }
     if (selectedFile) {
       try {
         await postUserProfileImageAPI(selectedFile);

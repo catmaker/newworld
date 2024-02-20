@@ -10,9 +10,10 @@ import Badge from "@/app/components/mypageComponents/Badge";
 import WelcomeMessage from "@/app/components/mypageComponents/WelcomeMessage";
 import PrivacyControlBox from "@/app/components/mypageComponents/PrivacyControlBox";
 import SelectedItem from "@/app/components/mypageComponents/SelectedItem";
-import { MypageProps } from "@/app/types/Mypage";
+import { MypageProps, WelcomeMessageProps } from "@/app/types/Mypage";
 
-const Mypage: React.FC<MypageProps> = ({ session }) => {
+type CombinedProps = MypageProps & WelcomeMessageProps;
+const Mypage: React.FC<CombinedProps> = ({ session }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentItems, setCurrentItems] = useState<
     {

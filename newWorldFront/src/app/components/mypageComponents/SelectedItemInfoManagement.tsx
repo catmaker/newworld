@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import styles from "@/app/(root)/mypage/mypage.module.scss";
 import { deleteUserProfile, postUserProfileAPI } from "@/app/lib/api/mypageapi";
 import { MypageProps } from "@/app/types/Mypage";
-import Modal from "@/app/components/modal/Modal";
+import Modal from "@/app/components/util/modal/Modal";
 import { redirect } from "next/navigation";
 const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
   let name, id, nickname;
