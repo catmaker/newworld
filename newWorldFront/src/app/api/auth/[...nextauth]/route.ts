@@ -42,8 +42,10 @@ export const authOptions: NextAuthOptions = {
               id: userId,
               name: result.name,
               nickname: result.nickname,
-              birthday: result.birthday,
-              phone: result.phoneNumber,
+              signupDate: result.signupDate,
+              puzzleCount: result.puzzleCount,
+              point: result.point,
+              imageFile: result.imageFile,
             };
           } else {
             // 검증이 실패하면 null을 반환합니다.
