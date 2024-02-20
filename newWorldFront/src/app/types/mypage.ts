@@ -25,7 +25,16 @@ export interface MypageProps {
     nickname: string;
   };
 }
-
+export interface WelcomeMessageProps {
+  session: {
+    name: string;
+    id: string;
+    nickname: string;
+    signupDate: string;
+    puzzleCount: number;
+    point: number;
+  };
+}
 export interface PrivacyControlBoxProps {
   selectedItem: string;
   setSelectedItem: (item: string) => void;

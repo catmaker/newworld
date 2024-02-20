@@ -91,12 +91,18 @@ const SignUp = () => {
       });
 
       if (!response.ok) {
+        console.log(response.ok);
         throw new Error("Signup request failed");
       }
 
       // 서버에서 받은 응답을 JSON 형태로 파싱
       const data = await response.text();
-
+      if (data === "f3") {
+        alert("닉네임이 중복되었습니다.");
+      }
+      if (data === "f1") {
+        alert("이미 가입된 이메일입니다.");
+      }
       // 콘솔에 출력
       console.log(data);
     } catch (error) {
