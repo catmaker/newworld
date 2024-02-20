@@ -2,11 +2,9 @@ import axios from "axios";
 export const getRankingAPI = async () => {
   try {
     // 클리어 포인트 / 출석 포인트 / 총 포인트
-    const response = await axios.get("/api/getRanking");
-    console.log(response.data.clearPoints);
-    console.log(response.data.attendancePoints);
-    console.log(response.data.totalPoints);
-    return response.data;
+    const { data } = await axios.get("http://localhost:3000/api/getRanking");
+    console.log(data);
+    return data;
   } catch (error) {
     console.error(error);
   }
