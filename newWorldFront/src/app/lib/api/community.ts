@@ -16,14 +16,14 @@ export const getCommunityAPI = async () => {
   }
 };
 
-export const postsCreateAPI = async (data: string) => {
+export const postsCreateAPI = async (data: any) => {
   try {
     // 보낼 데이터는 카테고리, 제목, 내용
-    const response = await axios.post("/api/postsCreate", data);
-    console.log(response);
-    console.log(response.data.category);
-    console.log(response.data.title);
-    console.log(response.data.content);
+    const response = await axios.post(
+      "http://localhost:3000/api/postsCreate",
+      data
+    );
+
     return response;
   } catch (error) {
     console.error(error);

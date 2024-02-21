@@ -17,7 +17,12 @@ const H1: React.FC<IconProps> = ({ editor }) => {
     return null;
   }
   return (
-    <button onClick={() => editor.chain().toggleHeading({ level: 1 }).run()}>
+    <button
+      onClick={(event) => {
+        event.preventDefault();
+        editor.chain().toggleHeading({ level: 1 }).run();
+      }}
+    >
       <H1Icon />
     </button>
   );
@@ -28,7 +33,12 @@ const H2: React.FC<IconProps> = ({ editor }) => {
     return null;
   }
   return (
-    <button onClick={() => editor.chain().toggleHeading({ level: 2 }).run()}>
+    <button
+      onClick={(event) => {
+        event.preventDefault();
+        editor.chain().toggleHeading({ level: 2 }).run();
+      }}
+    >
       <H2Icon />
     </button>
   );
@@ -39,7 +49,12 @@ const H3: React.FC<IconProps> = ({ editor }) => {
     return null;
   }
   return (
-    <button onClick={() => editor.chain().toggleHeading({ level: 3 }).run()}>
+    <button
+      onClick={(event) => {
+        event.preventDefault();
+        editor.chain().toggleHeading({ level: 3 }).run();
+      }}
+    >
       <H3Icon />
     </button>
   );
@@ -50,7 +65,12 @@ const Bold: React.FC<IconProps> = ({ editor }) => {
     return null;
   }
   return (
-    <button onClick={() => editor.chain().toggleBold().run()}>
+    <button
+      onClick={(event) => {
+        event.preventDefault();
+        editor.chain().toggleBold().run();
+      }}
+    >
       <BoldIcon />
     </button>
   );
@@ -61,7 +81,12 @@ const Italic: React.FC<IconProps> = ({ editor }) => {
     return null;
   }
   return (
-    <button onClick={() => editor.chain().toggleItalic().run()}>
+    <button
+      onClick={(event) => {
+        event.preventDefault();
+        editor.chain().toggleItalic().run();
+      }}
+    >
       <ItalicIcon />
     </button>
   );
@@ -72,7 +97,12 @@ const Strikethrough: React.FC<IconProps> = ({ editor }) => {
     return null;
   }
   return (
-    <button onClick={() => editor.chain().toggleStrike().run()}>
+    <button
+      onClick={(event) => {
+        event.preventDefault();
+        editor.chain().toggleStrike().run();
+      }}
+    >
       <StrikethroughIcon />
     </button>
   );
@@ -83,7 +113,13 @@ const Code: React.FC<IconProps> = ({ editor }) => {
     return null;
   }
   return (
-    <button className="code" onClick={() => editor.chain().toggleCode().run()}>
+    <button
+      className="code"
+      onClick={(event) => {
+        event.preventDefault();
+        editor.chain().toggleCode().run();
+      }}
+    >
       <CodeIcon />
     </button>
   );
@@ -94,7 +130,12 @@ const Quote: React.FC<IconProps> = ({ editor }) => {
     return null;
   }
   return (
-    <button onClick={() => editor.chain().toggleBlockquote().run()}>
+    <button
+      onClick={(event) => {
+        event.preventDefault();
+        editor.chain().toggleBlockquote().run();
+      }}
+    >
       <QuoteIcon />
     </button>
   );
@@ -107,6 +148,7 @@ const ColorButton: React.FC<{ editor: Editor }> = ({ editor }) => {
     <input
       type="color"
       onInput={(event) => {
+        event.preventDefault();
         const target = event.target as HTMLInputElement;
         editor.chain().focus().setColor(target.value).run();
       }}
