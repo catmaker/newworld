@@ -27,9 +27,9 @@ public class SolvedQuizDto {
 
     public static SolvedQuizDto of (UserQuizSolvedDate userQuizSolvedDate){
         SolvedQuizDto solvedQuizDto = SolvedQuizDto.builder()
-                .puzzleTitle(userQuizSolvedDate.getSolvedTime())
+                .puzzleTitle(userQuizSolvedDate.getQuiz().getTitle())
                 .puzzleDifficulty(userQuizSolvedDate.getQuiz().getQuizDifficulty())
-                .puzzleClearDate(userQuizSolvedDate.getQuiz().getMaker())
+                .puzzleClearDate(userQuizSolvedDate.getSolvedTime())
                 .build();
 
         return solvedQuizDto;

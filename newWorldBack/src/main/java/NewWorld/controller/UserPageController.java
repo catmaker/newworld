@@ -34,7 +34,7 @@ public class UserPageController {
         return userInfo;
     }
 
-    @PostMapping("/api/getUserProfileImage")
+    @PostMapping("/getUserProfileImage")
     public ResponseEntity<byte[]> updateUserProfileImage(@RequestBody UserDto userDto) throws NotfindUserException, IllegalAccessException {
 
         ResponseEntity<byte[]> result;
@@ -54,7 +54,7 @@ public class UserPageController {
         return result;
     }
 
-    @PostMapping("/api/postUserProfileImage")
+    @PostMapping("/postUserProfileImage")
     public String updateUserProfileImage(MultipartFile uploadFile, HttpServletRequest request,@RequestBody UserDto userDto){
 
         String realPath = request.getServletContext().getRealPath("/upload");
@@ -63,7 +63,7 @@ public class UserPageController {
         return result;
     }
 
-    @PostMapping("/api/getUserClearQuizzes")
+    @PostMapping("/getUserClearQuizzes")
     public List<SolvedQuizDto> findUserClearQuizzes(@RequestBody UserDto userDto){
 
         List<SolvedQuizDto> solveQuizList = userService.getSolveQuizList(userDto);

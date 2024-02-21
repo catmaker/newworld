@@ -54,7 +54,7 @@ public class QuizServiceImpl implements QuizService{
         List<String> hints = quizDto.getHints();
         List<Hint> savedHints = new ArrayList<>();
         Quiz checkValidation = quizRepository.findByTitleAndAndMaker(quizDto.getQuizTitle(), quizDto.getMaker());
-
+        QuizDifficulty difficulty = QuizDifficulty.NORMAL;
         if(quizDto.getQuizTitle() == null){
             return "nonTitle";
         }
@@ -77,13 +77,16 @@ public class QuizServiceImpl implements QuizService{
             }
         }
 
+        if(quizDto.getQuizDifficulty() != null){
+            difficulty = quizDto.getQuizDifficulty();
+        }
         Quiz newQuiz = Quiz.builder()
                 .title(quizDto.getQuizTitle())
                 .detail(quizDto.getQuizDetail())
                 .hintList(savedHints)
                 .answer(quizDto.getAnswer())
                 .maker(nickname)
-                .quizDifficulty(quizDto.getQuizDifficulty())
+                .quizDifficulty(difficulty)
                 .build();
 
         Quiz savedQuiz = quizRepository.save(newQuiz);
