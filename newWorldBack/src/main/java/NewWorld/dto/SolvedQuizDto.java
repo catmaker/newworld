@@ -25,11 +25,11 @@ public class SolvedQuizDto {
         this.puzzleClearDate = puzzleClearDate;
     }
 
-    public static SolvedQuizDto of (UserQuizSolvedDate userQuizSolvedDate, Quiz quiz){
+    public static SolvedQuizDto of (UserQuizSolvedDate userQuizSolvedDate){
         SolvedQuizDto solvedQuizDto = SolvedQuizDto.builder()
                 .puzzleTitle(userQuizSolvedDate.getSolvedTime())
-                .puzzleDifficulty(quiz.getQuizDifficulty())
-                .puzzleClearDate(quiz.getMakedDate())
+                .puzzleDifficulty(userQuizSolvedDate.getQuiz().getQuizDifficulty())
+                .puzzleClearDate(userQuizSolvedDate.getQuiz().getMaker())
                 .build();
 
         return solvedQuizDto;

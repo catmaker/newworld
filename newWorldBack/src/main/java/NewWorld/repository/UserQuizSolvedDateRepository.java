@@ -9,5 +9,4 @@ import java.util.List;
 
 
 public interface UserQuizSolvedDateRepository extends JpaRepository<UserQuizSolvedDate, Long> {
-    List<UserQuizSolvedDate> findByUser(User user);
 }

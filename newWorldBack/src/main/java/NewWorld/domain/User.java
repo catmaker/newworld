@@ -51,14 +51,14 @@ public class User {
     private ImageFile imageFile;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Quiz> quizList;
+    private List<UserQuizSolvedDate> quizList;
 
     @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Post> postList;
 
 
     @Builder
-    public User(Long id, String name, String userId, String nickname, String phoneNumber, String userPassword, String birthday, int point, LocalDateTime loginDate, int attendance, MemberType memberType, String joinDate, ImageFile imageFile, List<Quiz> quizList, List<Post> postList) {
+    public User(Long id, String name, String userId, String nickname, String phoneNumber, String userPassword, String birthday, int point, LocalDateTime loginDate, int attendance, MemberType memberType, String joinDate, ImageFile imageFile, List<UserQuizSolvedDate> quizList, List<Post> postList) {
         this.id = id;
         this.name = name;
         this.userId = userId;
@@ -100,16 +100,13 @@ public class User {
         return this;
     }
 
-    public User addQuizList(Quiz quiz){
+    public void addSovlvedUser(UserQuizSolvedDate solvedDate){
 
         if (this.quizList == null){
-            this.quizList = List.of(quiz);
+            this.quizList = List.of(solvedDate);
         }else{
-            this.quizList.add(quiz);
+            this.quizList.add(solvedDate);
         }
-
-
-        return this;
     }
 
     public int checkAttendance(){

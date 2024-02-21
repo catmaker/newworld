@@ -145,13 +145,13 @@ public class QuizServiceImpl implements QuizService{
             if(collectAnswer.equals(quizDto.getAnswer())){
                 User user = userRepository.findByNickname(quizDto.getNickname());
                 UserQuizSolvedDate solvedDate = UserQuizSolvedDate.builder()
-                        .user(user)
                         .quiz(quiz)
                         .solvedTime(LocalDateTime.now().toLocalDate().toString())
                         .build();
 
-                userQuizSolvedDateRepository.save(solvedDate);
-                user.addQuizList(quiz);
+                UserQuizSolvedDate savedSolvedUser = userQuizSolvedDateRepository.save(solvedDate);
+                user.addSovlvedUser(savedSolvedUser);
+
                 return "s";
             }else if(!collectAnswer.equals(quizDto.getAnswer())){
                 return "wrong answer";

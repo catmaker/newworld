@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -29,7 +30,8 @@ public class Quiz {
     private String title;
 
     private String detail;
-    @Enumerated
+
+    @Enumerated(EnumType.STRING)
     private QuizDifficulty quizDifficulty;
 
     private String answer;
@@ -41,6 +43,8 @@ public class Quiz {
     @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Hint> hintList;
 
+
+
     @Builder
     public Quiz(Long id, String title, String detail, QuizDifficulty quizDifficulty, String answer, String maker, String makedDate, List<Hint> hintList) {
         this.id = id;
@@ -51,8 +55,8 @@ public class Quiz {
         this.maker = maker;
         this.makedDate = makedDate;
         this.hintList = hintList;
-    }
 
+    }
     public QuizDto of(Quiz quiz) {
         List<Hint> hints = quiz.getHintList();
         List<String> hintsforDto = new ArrayList<>();
@@ -79,7 +83,7 @@ public class Quiz {
         this.title = quizDto.getQuizTitle();
         this.detail = quizDto.getQuizDetail();
         this.quizDifficulty = quizDto.getQuizDifficulty();
-        this.answer = quizDto.getAnswer();
         return this;
     }
+
 }

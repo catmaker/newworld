@@ -17,14 +17,10 @@ public class UserQuizSolvedDate {
     @OneToOne(cascade = CascadeType.PERSIST)
     private Quiz quiz;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private User user;
-
     @Builder
-    public UserQuizSolvedDate(Long id, String solvedTime, Quiz quiz, User user) {
+    public UserQuizSolvedDate(Long id, String solvedTime, Quiz quiz) {
         this.id = id;
         this.solvedTime = solvedTime;
         this.quiz = quiz;
-        this.user = user;
     }
 }

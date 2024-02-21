@@ -195,7 +195,7 @@ public class UserServiceImpl implements UserService {
 //        if(!file.isFile()) return null;
 //        result.setImageFile(file);
 
-        List<Quiz> quizList = user.getQuizList();
+        List<UserQuizSolvedDate> quizList = user.getQuizList();
         if(quizList == null){
             result.setPuzzleCount(0);
         }else{
@@ -210,10 +210,11 @@ public class UserServiceImpl implements UserService {
         String nickname = userDto.getNickname();
         User user = userRepository.findByNickname(nickname);
 
-        List<UserQuizSolvedDate> byUser = userQuizSolvedDateRepository.findByUser(user);
+        List<UserQuizSolvedDate> solvedQuizList = user.getQuizList();
 
-        for(UserQuizSolvedDate userQuizSolvedDate : byUser){
-            SolvedQuizDto solvedQuizDto = SolvedQuizDto.of(userQuizSolvedDate, userQuizSolvedDate.getQuiz());
+
+        for(UserQuizSolvedDate solvedQuiz : solvedQuizList){
+            SolvedQuizDto solvedQuizDto = SolvedQuizDto.of(solvedQuiz);
             result.add(solvedQuizDto);
         }
 
