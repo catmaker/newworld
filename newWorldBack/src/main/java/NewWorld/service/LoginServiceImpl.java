@@ -36,9 +36,16 @@ public class LoginServiceImpl implements LoginService {
     public UserDto login(String loginId, String loginPw) throws LoginException {
         User user = userCheck(loginId, loginPw);
         LocalDateTime loginDate = user.getLoginDate();
-        int loginDay = Integer.parseInt(loginDate.toLocalDate().toString().replaceAll("-",""));
-        int attendance = user.getAttendance();
         int now = Integer.parseInt(LocalDateTime.now().toLocalDate().toString().replaceAll("-",""));
+        int loginDay ;
+        if(loginDate == null){
+            loginDay = now;
+        }else{
+            loginDay = Integer.parseInt(loginDate.toLocalDate().toString().replaceAll("-",""));
+        }
+
+        int attendance = user.getAttendance();
+
         if (now>loginDay || user.getAttendance() == 0){
             attendance = user.checkAttendance();
         }
