@@ -1,11 +1,11 @@
 import React from "react";
-import Labyrinth from "./Labyrinth";
+import Quizzes from "./Quizzes";
 import Header from "@/app/components/header/page";
 const page = () => {
   return (
     <>
       <Header />
-      <Labyrinth></Labyrinth>
+      <Quizzes></Quizzes>
     </>
   );
 };

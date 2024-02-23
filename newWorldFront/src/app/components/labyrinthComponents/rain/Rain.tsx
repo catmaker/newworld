@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "@/app/(root)/labyrinth/labyrinth.module.scss";
+import styles from "@/app/(root)/quizzes/quizzes.module.scss";
 
 interface RainProps {
   length: number;

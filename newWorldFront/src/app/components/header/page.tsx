@@ -35,10 +35,10 @@ const Header = () => {
       </div>
       <div className={styles.ul_box}>
         <div className={styles.flex}>
-          <Link href={`/labyrinth`}>
+          <Link href={`/quizzes`}>
             <div className={styles.flex_column}>
-              <div className={styles.text}>미궁</div>
-              <div className={styles.text_en}>LABYRINTH</div>
+              <div className={styles.text}>퀴즈</div>
+              <div className={styles.text_en}>Quizzes</div>
             </div>
           </Link>
           <Link href={`/ranking`}>
