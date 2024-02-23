@@ -15,6 +15,7 @@ const SelectedItem: React.FC<SelectedItemProps> = ({
   currentPage,
   handlePageClick,
   session,
+  quizzes,
 }) => {
   return (
     <>
@@ -32,6 +33,7 @@ const SelectedItem: React.FC<SelectedItemProps> = ({
           totalPages={totalPages}
           currentPage={currentPage}
           handlePageClick={handlePageClick}
+          quizzes={quizzes}
         />
       )}
       {selectedItem === "뱃지" && <div>이런 획득한 뱃지가 없군요!</div>}

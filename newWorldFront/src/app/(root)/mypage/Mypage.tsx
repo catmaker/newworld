@@ -11,26 +11,32 @@ import WelcomeMessage from "@/app/components/mypageComponents/WelcomeMessage";
 import PrivacyControlBox from "@/app/components/mypageComponents/PrivacyControlBox";
 import SelectedItem from "@/app/components/mypageComponents/SelectedItem";
 import { MypageProps, WelcomeMessageProps } from "@/app/types/Mypage";
+import usePagination from "@/app/hooks/UsePagination";
+import { getUserClearQuizzes } from "@/app/lib/api/mypageapi";
 
 type CombinedProps = MypageProps & WelcomeMessageProps;
 const Mypage: React.FC<CombinedProps> = ({ session }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [currentItems, setCurrentItems] = useState<
-    {
-      problemId: number;
-      problemName: string;
-      difficulty: string;
-      clearDate: string;
-    }[]
-  >([]);
+  const [quizzes, setQuizzes] = useState([]);
+  const [quizzesLength, setQuizzesLength] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [days, setDays] = useState(0);
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState("");
   const ITEMS_PER_PAGE = 10;
-  const handlePageClick = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
+  const { currentPage, currentItems, handlePageClick } = usePagination(
+    quizzesLength,
+    itemsPerPage
+  );
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = { nickname: session?.nickname };
+      const result = await getUserClearQuizzes(data);
+      setQuizzes(result);
+      setQuizzesLength(result.puzzleTitle || []); // puzzleTitle이 undefined인 경우 빈 배열을 설정
+    };
+
+    fetchData();
+  }, []);
   useEffect(() => {
     const updateItemsPerPage = () => {
       setItemsPerPage(window.innerWidth <= 700 ? 5 : 10);
@@ -43,7 +49,7 @@ const Mypage: React.FC<CombinedProps> = ({ session }) => {
   }, []);
 
   // ...
-  const totalPages = Math.ceil(dummy3.clearedProblems.length / itemsPerPage);
+  const totalPages = Math.ceil(quizzesLength.length / itemsPerPage);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) {
@@ -52,12 +58,6 @@ const Mypage: React.FC<CombinedProps> = ({ session }) => {
     }
     console.log(file.name);
   };
-
-  useEffect(() => {
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    setCurrentItems(dummy3.clearedProblems.slice(start, end));
-  }, [currentPage, itemsPerPage]);
 
   useEffect(() => {
     const signUp = new Date(dummy2.users[0].signUpDate);
@@ -110,6 +110,7 @@ const Mypage: React.FC<CombinedProps> = ({ session }) => {
                 totalPages={totalPages}
                 currentPage={currentPage}
                 handlePageClick={handlePageClick}
+                quizzes={quizzes}
               />
             </div>
           </div>

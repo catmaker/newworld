@@ -16,6 +16,7 @@ export interface SelectedItemComponentProps {
   totalPages: number;
   currentPage: number;
   handlePageClick: (page: number) => void;
+  quizzes: any[];
 }
 
 export interface MypageProps {
@@ -45,6 +46,7 @@ export interface PersonalInfoManagementProps {
   userNickname: string;
 }
 export interface ClearQuizProps {
+  quizzes: any[];
   currentItems: any[];
   totalPages: number;
   currentPage: number;

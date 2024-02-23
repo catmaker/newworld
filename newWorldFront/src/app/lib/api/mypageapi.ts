@@ -57,8 +57,9 @@ export const deleteUserProfile = async () => {
 export const getUserClearQuizzes = async (data: any) => {
   try {
     // 게임 제목 / 클리어 날짜 / 난이도
-    const response = await axios.get("/getUserClearQuizzes", data);
     console.log(data);
+    const response = await axios.post("/getUserClearQuizzes", data);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);

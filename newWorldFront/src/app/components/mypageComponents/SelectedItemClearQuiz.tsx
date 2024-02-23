@@ -1,7 +1,7 @@
 // ClearQuiz.tsx
 
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Pagination from "@/app/components/pagination/Pagination";
 import styles from "@/app/(root)/mypage/mypage.module.scss";
 import { ClearQuizProps } from "@/app/types/Mypage";
@@ -12,35 +12,34 @@ const SelectedItemClearQuiz: React.FC<ClearQuizProps> = ({
   currentPage,
   handlePageClick,
   session,
+  quizzes,
 }) => {
-  console.log(session?.nickname);
-  useEffect(() => {
-    const data = session?.nickname;
-    getUserClearQuizzes(data);
-  });
+  console.log(quizzes);
   return (
     <div className={styles.clear_quiz}>
-      {currentItems.map(({ problemName, difficulty, clearDate }, index) => (
-        <div key={index} className={styles.clear_list}>
-          <div className={styles.problem_name}>{problemName}</div>
-          <div
-            className={styles.difficulty}
-            style={{
-              color:
-                difficulty === "초급"
-                  ? "green"
-                  : difficulty === "중급"
-                  ? "orange"
-                  : difficulty === "고급"
-                  ? "red"
-                  : "black",
-            }}
-          >
-            {difficulty}
+      {quizzes.map(
+        ({ puzzleTitle, puzzleDifficulty, puzzleClearDate }, index) => (
+          <div key={index} className={styles.clear_list}>
+            <div className={styles.problem_name}>{puzzleTitle}</div>
+            <div
+              className={styles.difficulty}
+              style={{
+                color:
+                  puzzleDifficulty === "초급"
+                    ? "green"
+                    : puzzleDifficulty === "중급"
+                    ? "orange"
+                    : puzzleDifficulty === "고급"
+                    ? "red"
+                    : "black",
+              }}
+            >
+              {puzzleDifficulty}
+            </div>
+            <div className={styles.clear_date}>{puzzleClearDate}</div>
           </div>
-          <div className={styles.clear_date}>{clearDate}</div>
-        </div>
-      ))}
+        )
+      )}
 
       <Pagination
         totalPages={totalPages}
