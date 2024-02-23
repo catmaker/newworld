@@ -1,7 +1,7 @@
 @keyframes falling {
   0% {
     transform: translateY(0vh);
-    opacity: 1;
+    opacity: 0.8;
   }
   75% {
     transform: translateY(90vh);
@@ -10,13 +10,13 @@
   100% {
     transform: translateY(100vh);
     opacity: 0.3;
-    transform: scale(2); // 땅에 닿았을 때 비가 퍼지는 효과를 만듭니다.
+    transform: scale(1); // 땅에 닿았을 때 비가 퍼지는 효과를 만듭니다.
   }
 }
 
 .star {
   position: absolute;
-  width: 1px;
+  width: 1.2px;
   height: 10px;
   background: linear-gradient(
     to bottom,
@@ -24,7 +24,7 @@
     rgba(255, 255, 255, 0.25)
   );
   animation: falling 0.5s linear infinite;
-  animation-duration: 5s;
+  animation-duration: 10s;
 }
 
 .background {

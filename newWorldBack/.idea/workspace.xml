@@ -11,11 +11,15 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/NewWorld/service/LoginServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/NewWorld/service/LoginServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/(root)/labyrinth/Labyrinth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/(root)/labyrinth/Labyrinth.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/(root)/labyrinth/labyrinth.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/(root)/labyrinth/labyrinth.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/components/mypageComponents/SelectedItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/mypageComponents/SelectedItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/components/mypageComponents/SelectedItemClearQuiz.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/mypageComponents/SelectedItemClearQuiz.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/lib/api/mypageapi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/lib/api/mypageapi.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/types/mypage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/types/mypage.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,17 +51,17 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="main" />
+        <entry key="$PROJECT_DIR$/.." value="feat/post" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "catmaker"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;catmaker&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -88,8 +92,8 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.NewWorldApplication.executor": "Debug",
-    "git-widget-placeholder": "main",
+    "Spring Boot.NewWorldApplication.executor": "Run",
+    "git-widget-placeholder": "fix/mypage",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/rzt03/Desktop/last/newworld/newWorldBack",
     "node.js.detected.package.eslint": "true",
@@ -133,7 +137,8 @@
       <option name="presentableId" value="Default" />
       <updated>1704521624257</updated>
       <workItem from="1704521625287" duration="13000" />
-      <workItem from="1708473491629" duration="2210000" />
+      <workItem from="1708473491629" duration="2821000" />
+      <workItem from="1708644766156" duration="2489000" />
     </task>
     <servers />
   </component>

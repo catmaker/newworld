@@ -54,14 +54,11 @@ export const deleteUserProfile = async () => {
   }
 };
 
-export const getUserClearPuzzle = async () => {
+export const getUserClearQuizzes = async (data: any) => {
   try {
     // 게임 제목 / 클리어 날짜 / 난이도
-    const response = await axios.get("/api/getUserClearPuzzle");
-    console.log(response.data);
-    console.log(response.data.puzzleTitle);
-    console.log(response.data.puzzleClearDate);
-    console.log(response.data.puzzleDifficulty);
+    const response = await axios.get("/getUserClearQuizzes", data);
+    console.log(data);
     return response.data;
   } catch (error) {
     console.error(error);

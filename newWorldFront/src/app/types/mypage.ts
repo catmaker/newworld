@@ -44,3 +44,10 @@ export interface PersonalInfoManagementProps {
   userId: string;
   userNickname: string;
 }
+export interface ClearQuizProps {
+  currentItems: any[];
+  totalPages: number;
+  currentPage: number;
+  handlePageClick: (page: number) => void;
+  session: any;
+}

@@ -27,6 +27,7 @@ const SelectedItem: React.FC<SelectedItemProps> = ({
       )}
       {selectedItem === "클리어 퀴즈" && (
         <ClearQuiz
+          session={session}
           currentItems={currentItems}
           totalPages={totalPages}
           currentPage={currentPage}
