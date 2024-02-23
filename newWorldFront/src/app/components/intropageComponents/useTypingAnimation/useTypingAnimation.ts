@@ -1,4 +1,5 @@
 // useTypingAnimation.ts
+"use client";
 import { useState, useEffect } from "react";
 
 export const useTypingAnimation = (startTyping: boolean, lines: string[]) => {

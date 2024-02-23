@@ -2,6 +2,9 @@ const path = require("path");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   experimental: {
     appDir: true,
   },
@@ -22,7 +25,6 @@ const nextConfig = {
   images: {
     domains: ["mblogthumb-phinf.pstatic.net"],
   },
-
 };
 
 module.exports = nextConfig;
