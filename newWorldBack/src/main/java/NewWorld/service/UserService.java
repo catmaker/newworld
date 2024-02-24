@@ -1,5 +1,6 @@
 package NewWorld.service;
 
+import NewWorld.dto.ChangeInfoDto;
 import NewWorld.dto.SolvedQuizDto;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.JoinException;
@@ -41,7 +42,7 @@ public interface UserService {
      * @param joinInfo
      * @return
      */
-    public String updateUserInfo(UserDto joinInfo) throws LoginException, JoinException, NotfindUserException, NotChangeException, Exception;
+    public String updateUserInfo(ChangeInfoDto changeInfoDto) throws LoginException, JoinException, NotfindUserException, NotChangeException, Exception;
 
     /**
      * user기본정보 조회

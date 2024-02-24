@@ -2,6 +2,7 @@ package NewWorld.service;
 
 import NewWorld.config.EncoderConfig;
 import NewWorld.domain.*;
+import NewWorld.dto.ChangeInfoDto;
 import NewWorld.dto.SolvedQuizDto;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.JoinException;
@@ -145,31 +146,24 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional(readOnly = false)
-    public String updateUserInfo(UserDto changeInfo) throws Exception {
-        String phoneNumber = changeInfo.getPhoneNumber();
-        String name = changeInfo.getName();
-        String newNn = changeInfo.getNickname();
-        String newPn = changeInfo.getPhoneNumber();
-        String newBd = changeInfo.getBirthday();
+    public String updateUserInfo(ChangeInfoDto changeInfoDto) throws Exception {
 
-        User user = getUser(name, newNn);
+        User user = userRepository.findByNickname(changeInfoDto.getNickname());
 
         if(user == null){
-            return null;
+            return "f";
         }
 
-        Boolean checkChangeInfo = checkChangeInfo(changeInfo, user);
-
-        //변경된 정보가 있는지 체크
-        if (checkChangeInfo) {
-            if (changeInfo.getNickname().isEmpty()) newNn = user.getNickname();
-            if (changeInfo.getPhoneNumber().isEmpty()) newPn = user.getNickname();
-            if (changeInfo.getBirthday() == null) newBd = user.getBirthday();
-
-            user.basicInfoUpdate(newNn, newPn, newBd);
-        } else {
-            return null;
+        if (changeInfoDto.getCurrentPassword() != user.getUserPassword()){
+            return "different password";
         }
+
+        if (changeInfoDto.getNewPassword() == user.getUserPassword()){
+            return "same password";
+        }
+
+        user.changePassword(changeInfoDto.getNewPassword());
+
         userRepository.save(user);
 
         return "s";

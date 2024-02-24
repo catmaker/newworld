@@ -1,5 +1,6 @@
 package NewWorld.controller;
 
+import NewWorld.dto.ChangeInfoDto;
 import NewWorld.dto.SolvedQuizDto;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.NotfindUserException;
@@ -32,6 +33,13 @@ public class UserPageController {
         UserDto userInfo = userService.getUserInfo(userDto.getName(), userDto.getNickname());
 
         return userInfo;
+    }
+
+    @PostMapping("/postUserProfile")
+    public String updateUserProfile(@RequestBody ChangeInfoDto changeInfoDto) throws Exception {
+        String result = userService.updateUserInfo(changeInfoDto);
+
+        return result;
     }
 
     @PostMapping("/getUserProfileImage")
@@ -70,4 +78,6 @@ public class UserPageController {
 
         return solveQuizList;
     }
+
+
 }
