@@ -3,7 +3,7 @@ import axios from "axios";
 export const getCommunityAPI = async () => {
   try {
     // 카테고리 / 제목 / 작성자 / 작성일 / 조회수 / 좋아요
-    const response = await axios.get("/api/getCommunity");
+    const response = await axios.get("http://localhost:8080/getCommunity");
     console.log(response.data.category);
     console.log(response.data.title);
     console.log(response.data.author);
@@ -33,7 +33,10 @@ export const postsCreateAPI = async (data: any) => {
 export const postsDeleteAPI = async (data: string) => {
   try {
     // 보낼 데이터는 게시글 id
-    const response = await axios.post("/api/postsDelete", data);
+    const response = await axios.post(
+      "http://localhost:8080//postsDelete",
+      data
+    );
     console.log(response);
     return response;
   } catch (error) {
@@ -44,7 +47,10 @@ export const postsDeleteAPI = async (data: string) => {
 export const postsUpdateAPI = async (data: string) => {
   try {
     // 보낼 데이터는 게시글 id, 카테고리, 제목, 내용
-    const response = await axios.post("/api/postsUpdate", data);
+    const response = await axios.post(
+      "http://localhost:8080//postsUpdate",
+      data
+    );
     console.log(response);
     return response;
   } catch (error) {
@@ -55,7 +61,7 @@ export const postsUpdateAPI = async (data: string) => {
 export const postsViewAPI = async (data: string) => {
   try {
     // 보낼 데이터는 게시글 id
-    const response = await axios.post("/api/postsView", data);
+    const response = await axios.post("http://localhost:8080//postsView", data);
     console.log(response);
     return response;
   } catch (error) {
@@ -66,7 +72,7 @@ export const postsViewAPI = async (data: string) => {
 export const postsLikeAPI = async (data: string) => {
   try {
     // 보낼 데이터는 게시글 id
-    const response = await axios.post("/api/postsLike", data);
+    const response = await axios.post("http://localhost:8080//postsLike", data);
     console.log(response);
     return response;
   } catch (error) {

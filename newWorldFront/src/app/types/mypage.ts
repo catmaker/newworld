@@ -16,6 +16,7 @@ export interface SelectedItemComponentProps {
   totalPages: number;
   currentPage: number;
   handlePageClick: (page: number) => void;
+  quizzes: any[];
 }
 
 export interface MypageProps {
@@ -43,4 +44,12 @@ export interface PrivacyControlBoxProps {
 export interface PersonalInfoManagementProps {
   userId: string;
   userNickname: string;
+}
+export interface ClearQuizProps {
+  quizzes: any[];
+  currentItems: any[];
+  totalPages: number;
+  currentPage: number;
+  handlePageClick: (page: number) => void;
+  session: any;
 }
