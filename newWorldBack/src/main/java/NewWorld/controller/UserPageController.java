@@ -73,10 +73,13 @@ public class UserPageController {
 
     @PostMapping("/getUserClearQuizzes")
     public List<SolvedQuizDto> findUserClearQuizzes(@RequestBody UserDto userDto){
+        try{
+            List<SolvedQuizDto> solveQuizList = userService.getSolveQuizList(userDto);
 
-        List<SolvedQuizDto> solveQuizList = userService.getSolveQuizList(userDto);
-
-        return solveQuizList;
+            return solveQuizList;
+        }catch (Exception e){
+            return null;
+        }
     }
 
 
