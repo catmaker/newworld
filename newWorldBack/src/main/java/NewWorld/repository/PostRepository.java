@@ -18,15 +18,6 @@ import java.util.Date;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    /**
-     * 회원찾기
-     * @param userNickname
-     * @return
-     */
-    @Query( value = "select Post from User u left join fetch Post p " +
-            "where u.nickname = :#{#postDto.userNickName} and " +
-            "p.title = :#{#postDto.title} and p.makedDate = :#{#postDto.makedDate}")
-    Post findBypost(@Param(value = "postDto") PostDto postDto);
     public Page<Post> findPostsByUserNickName(PageRequest pageable, String userNickname);
     public Post findPostByTitleAndUserNickNameAndMakedDate(String title, String userNickname, Date makeDate);
 

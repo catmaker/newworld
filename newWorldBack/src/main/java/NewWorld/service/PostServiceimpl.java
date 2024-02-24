@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -24,64 +25,79 @@ public class PostServiceimpl implements PostService {
 
     @Override
     public Page<Post> getAllPost(Pageable pageable) {
-        PageRequest pageRequest = getPageRequest(pageable);
 
-        return postRepository.findAll(pageRequest);
+        return postRepository.findAll(pageable);
     }
 
     @Override
     public PostDto getPost(PostDto info) {
-        Post post = postRepository.findBypost(info);
-        PostDto postDto = new PostDto().toDto(post);
-        return postDto;
-    }
+        Optional<Post> byId = postRepository.findById(info.getPostId());
 
-    @Override// pagable 없이 LIst,  만나서
-    public Page<Post> getMyPost(Pageable pageable, String userName, String userNickname) {
-        PageRequest pageRequest = getPageRequest(pageable);
-        Page<Post> myPosts = postRepository.findPostsByUserNickName(pageRequest, userNickname);
+        if(byId.isPresent()){
+            Post post = byId.get();
+            post.addview();
 
-        return myPosts;
+            PostDto postDto = new PostDto().toDto(post);
+
+            return postDto;
+        }
+        return null;
     }
 
     @Override
-    public void makePost(PostDto postDto, String username) {
-        String userNickName = postDto.getUserNickName();
-        User user = userRepository.findUserByNameAndNickname(username, userNickName);
+    public String makePost(PostDto postDto) {
+        String userNickName = postDto.getNickname();
+        User user = userRepository.findByNickname(userNickName);
 
         Post firstPost = Post.builder().
                 title(postDto.getTitle()).
                 detail(postDto.getDetail()).
                 makedDate(postDto.getMakedDate()).
-                userNickName(postDto.getUserNickName()).build();
+                postType(postDto.getPostType()).
+                likes(0).
+                views(0).
+                userNickName(postDto.getNickname()).build();
 
         Post savedPost = postRepository.save(firstPost);
 
         user.getPostList().add(savedPost);
+
+        return "s";
     }
 
     @Override
-    public void changePost(PostDto postDto,String userName) {
+    public String changePost(PostDto postDto) {
 
-        Post post= postRepository.findBypost(postDto);
-
+        Post post = getPost(postDto.getPostId());
+        if(post == null){return "f";}
         post.chagePost(postDto);
+        return "s";
     }
 
     @Override
-    public void deletePost(PostDto postDto) {
-        Post post = postRepository.findBypost(postDto);
-        postRepository.delete(post);
+    public String deletePost(PostDto postDto) {
+        Post post = getPost(postDto.getPostId());
+        if(post == null){return "f";}
+        return "s";
     }
 
-    /**
-     * 게사판 pageable
-     * @param pageable
-     * @return
-     */
-    private static PageRequest getPageRequest(Pageable pageable) {
-        int page = pageable.getPageNumber() == 0 ? 0 : pageable.getPageNumber() - 1;
-        PageRequest pageRequest = PageRequest.of(page, 10, Sort.by("makeDate").descending());
-        return pageRequest;
+    @Override
+    public String addLike(PostDto postDto) {
+        Post post = getPost(postDto.getPostId());
+
+        if (post == null){return "f";}
+
+        post.addLike();
+        return "s";
+    }
+
+
+    public Post getPost(Long postId) {
+        Optional<Post> byId = postRepository.findById(postId);
+
+        if (byId.isPresent()){
+            return byId.get();
+        }
+       return null;
     }
 }

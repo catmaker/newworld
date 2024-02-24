@@ -74,7 +74,16 @@ public class Post {
     public Post chagePost(PostDto postDto){
         this.title = postDto.getTitle();
         this.detail = postDto.getDetail();
+        this.postType = postDto.getPostType();
 
         return this;
+    }
+
+    public void addLike(){
+        this.likes = this.likes + 1;
+    }
+
+    public void addview(){
+        this.views = this.views + 1;
     }
 }

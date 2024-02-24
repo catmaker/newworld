@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 
 /**
  * 2024.01.30 jeonil
@@ -44,19 +45,21 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void setComment(PostDto postDto, String comment, String userNickname) {
-        Post post = postRepository.findBypost(postDto);
+        Optional<Post> byId = postRepository.findById(postDto.getPostId());
+        if(byId.isPresent()){
+            Post post = byId.get();
+            Comment newComment = Comment.builder().
+                    comment(comment).
+                    makedDate(LocalDateTime.now()).
+                    userNickName(userNickname).build();
 
-        Comment newComment = Comment.builder().
-                comment(comment).
-                makedDate(LocalDateTime.now()).
-                userNickName(userNickname).build();
+            commentRepository.save(newComment);
 
-        commentRepository.save(newComment);
-
-        if(post.getCommentList() == null){
-            post.setComment(new ArrayList<>().add(newComment));
-        }else{
-            post.setComment(post.getCommentList().add(newComment));
+            if(post.getCommentList() == null){
+                post.setComment(new ArrayList<>().add(newComment));
+            }else{
+                post.setComment(post.getCommentList().add(newComment));
+            }
         }
     }
 

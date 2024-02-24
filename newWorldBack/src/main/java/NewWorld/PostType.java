@@ -5,5 +5,5 @@ package NewWorld;
  * 게시물 구분
  */
 public enum PostType {
-   BASIC,FORQUIZ;
+   QUESTION,RECOMMEND,ANNOUNCEMENT,NORMAL;
 }

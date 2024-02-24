@@ -1,5 +1,6 @@
 package NewWorld.dto;
 
+import NewWorld.PostType;
 import NewWorld.domain.Post;
 import NewWorld.domain.User;
 import jakarta.validation.constraints.NotBlank;
@@ -18,6 +19,12 @@ import java.util.Date;
 @Setter
 public class PostDto {
 
+    private String nickname;
+
+    private String name;
+
+    private Long postId;
+
     @NotBlank
     @NotEmpty
     @NotNull
@@ -33,11 +40,11 @@ public class PostDto {
     @NotNull
     private Date makedDate;
 
-    @NotBlank
-    @NotEmpty
-    @NotNull
-    private String userNickName;
+    private PostType postType;
 
+    private int like;
+
+    private int views;
     /**
      * 게사판정보 ->dto
      * @param post
@@ -47,7 +54,10 @@ public class PostDto {
         this.title = post.getTitle();
         this.detail = post.getDetail();
         this.makedDate = post.getMakedDate();
-        this.userNickName = post.getUserNickName();
+        this.nickname = post.getUserNickName();
+        this.postType = post.getPostType();
+        this.like = post.getLikes();
+        this.views = post.getViews();
 
         return this;
     }

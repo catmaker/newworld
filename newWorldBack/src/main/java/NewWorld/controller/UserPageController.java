@@ -1,19 +1,25 @@
 package NewWorld.controller;
 
+import NewWorld.domain.Quiz;
 import NewWorld.dto.ChangeInfoDto;
 import NewWorld.dto.SolvedQuizDto;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.NotfindUserException;
 import NewWorld.service.ImageFileService;
+import NewWorld.service.QuizService;
 import NewWorld.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,6 +32,7 @@ import java.util.List;
 public class UserPageController {
 
     private final UserService userService;
+    private  final QuizService quizService;
     private final ImageFileService imageFileService;
 
     @PostMapping("/getUserProfile")
@@ -82,5 +89,11 @@ public class UserPageController {
         }
     }
 
+    @PostMapping("/getQuizzes")
+    public Page<Quiz> findQuizzes(@RequestParam(required = false, defaultValue = "0", value = "page") int pageNo){
+        Pageable pageable = PageRequest.of(pageNo, 5);
+        Page<Quiz> quizzes = quizService.getQuizzes(pageable);
+        return quizzes;
+    }
 
 }

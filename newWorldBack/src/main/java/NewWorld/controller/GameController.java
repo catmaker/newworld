@@ -38,12 +38,7 @@ public class GameController {
         return quiz;
     }
 
-    @PostMapping("/getQuizzes")
-    public Page<Quiz> findQuizzes(@RequestParam(required = false, defaultValue = "0", value = "page") int pageNo){
-        Pageable pageable = PageRequest.of(pageNo, 5);
-        Page<Quiz> quizzes = quizService.getQuizzes(pageable);
-        return quizzes;
-    }
+
 
     @PostMapping("/checkQuizAnswer")
     public String checkQuizAnswer(@RequestBody QuizDto quizDto){
