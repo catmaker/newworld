@@ -100,13 +100,19 @@ public class QuizServiceImpl implements QuizService{
     }
 
     @Override
-    public void deleteQuiz(QuizDto quizDto, String quiz) {
+    public String deleteQuiz(QuizDto quizDto) {
         String quizTitle = quizDto.getQuizTitle();
         String maker = quizDto.getMaker();
-
+        if(quizDto.getNickname() != quizDto.getMaker()){
+            return "f";
+        }
         Quiz q = quizRepository.findByTitleAndAndMaker(quizTitle, maker);
 
+        UserQuizSolvedDate byDate = userQuizSolvedDateRepository.findByQuiz(q);
+
+        userQuizSolvedDateRepository.delete(byDate);
         quizRepository.delete(q);
+        return "s";
     }
 
     @Override

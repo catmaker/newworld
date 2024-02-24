@@ -1,5 +1,6 @@
 package NewWorld.repository;
 
+import NewWorld.domain.Quiz;
 import NewWorld.domain.User;
 import NewWorld.domain.UserQuizSolvedDate;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,4 +10,5 @@ import java.util.List;
 
 
 public interface UserQuizSolvedDateRepository extends JpaRepository<UserQuizSolvedDate, Long> {
+    UserQuizSolvedDate findByQuiz(Quiz quiz);
 }

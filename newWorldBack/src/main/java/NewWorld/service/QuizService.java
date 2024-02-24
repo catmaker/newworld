@@ -12,7 +12,7 @@ public interface QuizService {
     QuizDto getQuiz(String quizTitle, String maker);
     Page<Quiz> getQuizzes(Pageable pageable);
     String quizMake(QuizDto quizDto, String nickname);
-    void deleteQuiz(QuizDto quizDto, String nickname);
+    String deleteQuiz(QuizDto quizDto);
     void updateQuiz(QuizDto quizDto);
     String checkAnswer(QuizDto quizDto);
 }

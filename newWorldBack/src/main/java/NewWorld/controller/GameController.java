@@ -24,9 +24,12 @@ public class GameController {
 
     @PostMapping("/makeQuiz")
     public String makeQuiz(@RequestBody QuizDto quizDto, String nickName){
-        String result = quizService.quizMake(quizDto, nickName);
-
-        return result;
+        try {
+            String result = quizService.quizMake(quizDto, nickName);
+            return result;
+        }catch (Exception e){
+            return "f";
+        }
     }
 
     @PostMapping("/getQuiz")
@@ -36,7 +39,7 @@ public class GameController {
     }
 
     @PostMapping("/getQuizzes")
-    public Page<Quiz> findQuiz(@RequestParam(required = false, defaultValue = "0", value = "page") int pageNo){
+    public Page<Quiz> findQuizzes(@RequestParam(required = false, defaultValue = "0", value = "page") int pageNo){
         Pageable pageable = PageRequest.of(pageNo, 5);
         Page<Quiz> quizzes = quizService.getQuizzes(pageable);
         return quizzes;
@@ -44,8 +47,30 @@ public class GameController {
 
     @PostMapping("/checkQuizAnswer")
     public String checkQuizAnswer(@RequestBody QuizDto quizDto){
-        String result = quizService.checkAnswer(quizDto);
-        return result;
+        try {
+            String result = quizService.checkAnswer(quizDto);
+            return result;
+        }catch (Exception e){
+            return "f";
+        }
     }
 
+    @PostMapping("/updateQuiz")
+    public String updateQuiz(@RequestBody QuizDto quizDto){
+        try {
+            quizService.updateQuiz(quizDto);
+            return "s";
+        }catch (Exception e) {
+            return "f";
+        }
+    }
+    @PostMapping("/deleteQuiz")
+    public String deleteQuiz(@RequestBody QuizDto quizDto){
+        try {
+            String s = quizService.deleteQuiz(quizDto);
+            return s;
+        }catch (Exception e) {
+            return "f";
+        }
+    }
 }
