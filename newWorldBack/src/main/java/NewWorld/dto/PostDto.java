@@ -1,6 +1,7 @@
 package NewWorld.dto;
 
 import NewWorld.PostType;
+import NewWorld.domain.Comment;
 import NewWorld.domain.Post;
 import NewWorld.domain.User;
 import jakarta.validation.constraints.NotBlank;
@@ -9,7 +10,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 2024.01.28 jeonil
@@ -35,10 +38,9 @@ public class PostDto {
     @NotNull
     private String detail;
 
-    @NotBlank
-    @NotEmpty
-    @NotNull
-    private Date makedDate;
+    private List<Comment> comments;
+
+    private LocalDateTime makedDate;
 
     private PostType postType;
 
@@ -53,6 +55,7 @@ public class PostDto {
 
         this.title = post.getTitle();
         this.detail = post.getDetail();
+        this.comments = post.getCommentList();
         this.makedDate = post.getMakedDate();
         this.nickname = post.getUserNickName();
         this.postType = post.getPostType();

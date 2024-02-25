@@ -12,7 +12,6 @@ import org.springframework.data.domain.Pageable;
  * 댓글기능
  */
 public interface CommentService {
-    public Page<Comment> getComments(Pageable pageable, String userNickname);
     public void setComment(PostDto post, String comment, String userNickname);
     public CommentDto modifyComment(CommentDto commentDto) throws NotfindException;
     public void deleteComment(CommentDto commentDto) throws NotfindException;

@@ -30,18 +30,6 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
 
-    /**
-     * 게사판 댓글 불러오기
-     * @param pageable
-     * @param userNickname
-     * @return
-     */
-    @Override
-    public Page<Comment> getComments(Pageable pageable, String userNickname) {
-        PageRequest pageRequest = getPageRequest(pageable);
-        Page<Comment> comments = commentRepository.findAll(pageRequest);
-        return comments;
-    }
 
     @Override
     public void setComment(PostDto postDto, String comment, String userNickname) {
@@ -83,14 +71,4 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.delete(comment);
     }
 
-    /**
-     * 댓글 pageable
-     * @param pageable
-     * @return
-     */
-    private static PageRequest getPageRequest(Pageable pageable) {
-        int page = pageable.getPageNumber() == 0 ? 0 : pageable.getPageNumber() - 1;
-        PageRequest pageRequest = PageRequest.of(page, 10, Sort.by("makeDate").descending());
-        return pageRequest;
-    }
 }

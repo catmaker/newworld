@@ -11,13 +11,17 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class PostServiceimpl implements PostService {
 
     private final UserRepository userRepository;
@@ -52,7 +56,7 @@ public class PostServiceimpl implements PostService {
         Post firstPost = Post.builder().
                 title(postDto.getTitle()).
                 detail(postDto.getDetail()).
-                makedDate(postDto.getMakedDate()).
+                makedDate(LocalDateTime.now()).
                 postType(postDto.getPostType()).
                 likes(0).
                 views(0).
@@ -78,6 +82,7 @@ public class PostServiceimpl implements PostService {
     public String deletePost(PostDto postDto) {
         Post post = getPost(postDto.getPostId());
         if(post == null){return "f";}
+        postRepository.delete(post);
         return "s";
     }
 

@@ -7,10 +7,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDateTime;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +23,7 @@ public class PostController {
 
     @PostMapping("/getCommunity")
     public Page<Post> findPostList(@RequestParam(required = false, defaultValue = "0", value = "page") int pageNo){
-        Pageable pageable = PageRequest.of(pageNo, 5);
+        Pageable pageable = PageRequest.of(pageNo, 5, Sort.by("makedDate"));
         Page<Post> allPost = postService.getAllPost(pageable);
 
         return allPost;

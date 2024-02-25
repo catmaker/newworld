@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class Post {
 
     private String detail;
 
-    private Date makedDate;
+    private LocalDateTime makedDate;
 
     private String userNickName;
 
@@ -38,6 +39,7 @@ public class Post {
     //좋아요
     private  int likes;
     //종류 (기타,질문)
+    @Enumerated(EnumType.STRING)
     private PostType postType;
 
     @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
@@ -47,7 +49,7 @@ public class Post {
     private List<Comment> commentList;
 
     @Builder
-    public Post(Long id, String title, String detail, Date makedDate, String userNickName, int views, int likes, PostType postType, ImageFile imageFile, List<Comment> commentList) {
+    public Post(Long id, String title, String detail, LocalDateTime makedDate, String userNickName, int views, int likes, PostType postType, ImageFile imageFile, List<Comment> commentList) {
         this.id = id;
         this.title = title;
         this.detail = detail;

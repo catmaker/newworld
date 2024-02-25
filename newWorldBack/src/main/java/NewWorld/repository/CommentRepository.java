@@ -8,5 +8,6 @@ import java.time.LocalDateTime;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
+
     Comment findByUserNickNameAndMakedDate(String nickname, LocalDateTime makingDate);
 }
