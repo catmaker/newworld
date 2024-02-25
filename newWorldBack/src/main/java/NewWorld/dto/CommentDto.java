@@ -13,16 +13,22 @@ import java.util.Date;
 @Getter
 @Setter
 public class CommentDto {
+
+    private Long postId;
+
+    private Long commentId;
+
     private String comment;
 
-    private String userNickName;
+    private String nickName;
 
     private LocalDateTime makedDate;
 
     public CommentDto toDto(Comment comment){
+        this.commentId = comment.getId();
         this.comment = comment.getComment();
         this.makedDate = comment.getMakedDate();
-        this.userNickName = comment.getUserNickName();
+        this.nickName = comment.getUserNickName();
         return this;
     }
 }

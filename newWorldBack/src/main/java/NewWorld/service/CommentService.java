@@ -12,7 +12,7 @@ import org.springframework.data.domain.Pageable;
  * 댓글기능
  */
 public interface CommentService {
-    public void setComment(PostDto post, String comment, String userNickname);
-    public CommentDto modifyComment(CommentDto commentDto) throws NotfindException;
-    public void deleteComment(CommentDto commentDto) throws NotfindException;
+    public String setComment(CommentDto commentDto);
+    public String modifyComment(CommentDto commentDto) throws NotfindException;
+    public String deleteComment(CommentDto commentDto) throws NotfindException;
 }

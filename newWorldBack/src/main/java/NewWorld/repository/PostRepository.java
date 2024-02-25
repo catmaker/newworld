@@ -18,8 +18,4 @@ import java.util.Date;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    public Page<Post> findPostsByUserNickName(PageRequest pageable, String userNickname);
-    public Post findPostByTitleAndUserNickNameAndMakedDate(String title, String userNickname, Date makeDate);
-
-
 }

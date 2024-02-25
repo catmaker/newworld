@@ -65,8 +65,8 @@ public class Post {
     /**
      * 댓글 등록
      */
-    public Post setComment(boolean comments){
-        this.commentList = commentList;
+    public Post setComment(List<Comment> comments){
+        this.commentList = comments;
         return this;
     }
     /**

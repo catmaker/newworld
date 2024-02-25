@@ -13,10 +13,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -25,6 +27,7 @@ import java.util.Optional;
  */
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
@@ -32,43 +35,75 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    public void setComment(PostDto postDto, String comment, String userNickname) {
-        Optional<Post> byId = postRepository.findById(postDto.getPostId());
-        if(byId.isPresent()){
+    public String setComment(CommentDto commentDto) {
+        Optional<Post> byId = postRepository.findById(commentDto.getPostId());
+        if (byId.isPresent()) {
             Post post = byId.get();
+
+            if (commentDto.getComment() == null) {
+                return "comment null";
+            }
+
             Comment newComment = Comment.builder().
-                    comment(comment).
+                    comment(commentDto.getComment()).
                     makedDate(LocalDateTime.now()).
-                    userNickName(userNickname).build();
+                    userNickName(commentDto.getNickName()).build();
 
             commentRepository.save(newComment);
 
-            if(post.getCommentList() == null){
-                post.setComment(new ArrayList<>().add(newComment));
-            }else{
-                post.setComment(post.getCommentList().add(newComment));
+            if (post.getCommentList() == null) {
+                post.setComment(List.of(newComment));
+            } else {
+                post.getCommentList().add(newComment);
             }
+            return "s";
         }
+        return "f";
     }
 
     @Override
-    public CommentDto modifyComment(CommentDto commentDto) throws NotfindException {
-        Comment comment = commentRepository.findByUserNickNameAndMakedDate(commentDto.getUserNickName(), commentDto.getMakedDate());
-        if(comment == null){
-            throw new NotfindException("찾을 수 없는 정보입니다.");
+    public String modifyComment(CommentDto commentDto) throws NotfindException {
+        Comment comment = getComment(commentDto.getCommentId());
+
+        if (comment == null) {
+            return "f";
         }
         Comment newComment = comment.modifyComment(commentDto.getComment());
-        CommentDto dto = new CommentDto().toDto(newComment);
-        return dto;
+
+        return "s";
     }
 
     @Override
-    public void deleteComment(CommentDto commentDto) throws NotfindException {
-        Comment comment = commentRepository.findByUserNickNameAndMakedDate(commentDto.getUserNickName(), commentDto.getMakedDate());
-        if(comment == null){
-            throw new NotfindException("이미 삭제된 댓글입니다");
+    public String deleteComment(CommentDto commentDto) throws NotfindException {
+        Optional<Post> byId = postRepository.findById(commentDto.getPostId());
+
+        if (byId.isPresent()) {
+            Post post = byId.get();
+
+            List<Comment> commentList = post.getCommentList();
+
+            for (int i= 0; i< commentList.size(); i++) {
+                Comment comment = commentList.get(i);
+
+                if (comment.getId() == commentDto.getCommentId()) {
+                    commentList.remove(i);
+                    return "s";
+                }
+            }
         }
-        commentRepository.delete(comment);
+        return "f";
+    }
+
+    public Comment getComment(Long commentId) {
+        Optional<Comment> byId = commentRepository.findById(commentId);
+
+        if (byId.isPresent()) {
+            Comment comment = byId.get();
+
+            return comment;
+        }
+
+        return null;
     }
 
 }
