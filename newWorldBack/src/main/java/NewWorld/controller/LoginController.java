@@ -25,7 +25,7 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @PostMapping("/loginMember")
+    @GetMapping("/loginMember")
     public UserDto login(@RequestBody LoginDto loginDto, HttpServletRequest request) throws LoginException {
         HttpSession session = request.getSession();
 

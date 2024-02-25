@@ -17,10 +17,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -35,7 +32,7 @@ public class UserPageController {
     private  final QuizService quizService;
     private final ImageFileService imageFileService;
 
-    @PostMapping("/getUserProfile")
+    @GetMapping("/getUserProfile")
     public UserDto findUserProfile(@RequestBody UserDto userDto) throws NotfindUserException, IllegalAccessException {
         UserDto userInfo = userService.getUserInfo(userDto.getName(), userDto.getNickname());
 
@@ -78,7 +75,7 @@ public class UserPageController {
         return result;
     }
 
-    @PostMapping("/getUserClearQuizzes")
+    @GetMapping("/getUserClearQuizzes")
     public List<SolvedQuizDto> findUserClearQuizzes(@RequestBody UserDto userDto){
         try{
             List<SolvedQuizDto> solveQuizList = userService.getSolveQuizList(userDto);
@@ -89,7 +86,7 @@ public class UserPageController {
         }
     }
 
-    @PostMapping("/getQuizzes")
+    @GetMapping("/getQuizzes")
     public Page<Quiz> findQuizzes(@RequestParam(required = false, defaultValue = "0", value = "page") int pageNo){
         Pageable pageable = PageRequest.of(pageNo, 5);
         Page<Quiz> quizzes = quizService.getQuizzes(pageable);
