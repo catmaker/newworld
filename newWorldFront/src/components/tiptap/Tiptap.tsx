@@ -19,11 +19,12 @@ import { getRankingAPI } from "@/app/lib/api/ranking";
 import { postsCreateAPI } from "@/app/lib/api/community";
 interface TiptapProps {
   content: string;
+  nickname: string;
 }
 
-const Tiptap = ({ content }: TiptapProps) => {
+const Tiptap = ({ content, nickname }: TiptapProps) => {
   const [title, setTitle] = useState("");
-
+  const [selectedOption, setSelectedOption] = useState("QUESTION");
   const lowlight = createLowlight(common);
   const editor = useEditor({
     extensions: [
@@ -49,6 +50,10 @@ const Tiptap = ({ content }: TiptapProps) => {
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
+  const handleChange = (event: any) => {
+    setSelectedOption(event.target.value);
+  };
+
   useEffect(() => {
     if (content) {
       editor?.commands.setContent(content);
@@ -61,7 +66,9 @@ const Tiptap = ({ content }: TiptapProps) => {
     try {
       const response = await postsCreateAPI({
         title,
-        content: editorContent,
+        detail: editorContent,
+        postType: selectedOption,
+        nickname: nickname,
       });
 
       console.log(response);
@@ -73,6 +80,10 @@ const Tiptap = ({ content }: TiptapProps) => {
     <>
       <div className="border-2">
         <ToolBar editor={editor} />
+        <select value={selectedOption} onChange={handleChange}>
+          <option value="QUESTION">질문</option>
+          <option value="NORMAL">기타</option>
+        </select>
         <input
           type="text"
           className={styles.h1}

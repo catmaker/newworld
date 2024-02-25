@@ -1,238 +1,238 @@
 {
   "bulletinBoard": [
     {
-      "category": "기타",
+      "postType": "기타",
       "title": "8개월 가량 재밌게 즐기다갑니다.",
       "image": true,
       "author": "신지수",
-      "timestamp": "2022-03-01",
-      "view": 399,
-      "like": 0
+      "makedDate": "2022-03-01",
+      "views": 399,
+      "likes": 0
     },
     {
-      "category": "공지사항",
+      "postType": "공지사항",
       "title": "2021년 12월 31일 금요일 휴무 안내",
       "image": false,
       "author": "관리자",
-      "timestamp": "2022-02-01",
-      "view": 100,
-      "like": 10
+      "makedDate": "2022-02-01",
+      "views": 100,
+      "likes": 10
     },
     {
-      "category": "질문",
+      "postType": "질문",
       "title": "질문드립니다.",
       "image": false,
       "author": "작성자 1",
-      "timestamp": "2024-03-08",
-      "view": 200,
-      "like": 20
+      "makedDate": "2024-03-08",
+      "views": 200,
+      "likes": 20
     },
     {
-      "category": "토론",
+      "postType": "토론",
       "title": "토론 주제 들고왔습니다.",
       "image": false,
       "author": "작성자 3",
-      "timestamp": "2024-01-08",
-      "view": 300,
-      "like": 30
+      "makedDate": "2024-01-08",
+      "views": 300,
+      "likes": 30
     },
     {
-      "category": "추천",
+      "postType": "추천",
       "title": "김대종은 역시",
       "image": false,
       "author": "작성자 4",
-      "timestamp": "2024-02-08",
-      "view": 400,
-      "like": 40
+      "makedDate": "2024-02-08",
+      "views": 400,
+      "likes": 40
     },
     {
-      "category": "질문",
+      "postType": "질문",
       "title": "더미 데이터 5",
       "image": false,
       "author": "작성자 5",
-      "timestamp": "2024-06-08",
-      "view": 500,
-      "like": 50
+      "makedDate": "2024-06-08",
+      "views": 500,
+      "likes": 50
     },
     {
-      "category": "기타",
+      "postType": "기타",
       "title": "더미 데이터 6",
       "image": false,
       "author": "작성자 6",
-      "timestamp": "2024-05-08",
-      "view": 600,
-      "like": 60
+      "makedDate": "2024-05-08",
+      "views": 600,
+      "likes": 60
     },
     {
-      "category": "공지사항",
+      "postType": "공지사항",
       "title": "더미 데이터 7",
       "image": false,
       "author": "관리자",
-      "timestamp": "2023-01-08",
-      "view": 700,
-      "like": 70
+      "makedDate": "2023-01-08",
+      "views": 700,
+      "likes": 70
     },
     {
-      "category": "기타",
+      "postType": "기타",
       "title": "더미 데이터 8",
       "image": false,
       "author": "작성자 8",
-      "timestamp": "2026-03-08",
-      "view": 800,
-      "like": 80
+      "makedDate": "2026-03-08",
+      "views": 800,
+      "likes": 80
     },
     {
-      "category": "추천",
+      "postType": "추천",
       "title": "더미 데이터 9",
       "image": false,
       "author": "작성자 9",
-      "timestamp": "2028-03-08",
-      "view": 900,
-      "like": 90
+      "makedDate": "2028-03-08",
+      "views": 900,
+      "likes": 90
     },
     {
-      "category": "공지사항",
+      "postType": "공지사항",
       "title": "더미 데이터 10",
       "image": false,
       "author": "관리자",
-      "timestamp": "2024-03-08",
-      "view": 1000,
-      "like": 100
+      "makedDate": "2024-03-08",
+      "views": 1000,
+      "likes": 100
     },
     {
-      "category": "공지사항",
+      "postType": "공지사항",
       "title": "더미 데이터 11",
       "image": false,
       "author": "관리자",
-      "timestamp": "2024-03-08",
-      "view": 1000,
-      "like": 100
+      "makedDate": "2024-03-08",
+      "views": 1000,
+      "likes": 100
     },
     {
-      "category": "공지사항",
+      "postType": "공지사항",
       "title": "더미 데이터 12",
       "image": false,
       "author": "관리자",
-      "timestamp": "2024-03-08",
-      "view": 1000,
-      "like": 100
+      "makedDate": "2024-03-08",
+      "views": 1000,
+      "likes": 100
     },
     {
-      "category": "기타",
+      "postType": "기타",
       "title": "8개월 가량 재밌게 즐기다갑니다.",
       "image": true,
       "author": "신지수",
-      "timestamp": "2022-03-01",
-      "view": 399,
-      "like": 0
+      "makedDate": "2022-03-01",
+      "views": 399,
+      "likes": 0
     },
     {
-      "category": "공지사항",
+      "postType": "공지사항",
       "title": "2021년 12월 31일 금요일 휴무 안내",
       "image": false,
       "author": "관리자",
-      "timestamp": "2022-02-01",
-      "view": 100,
-      "like": 10
+      "makedDate": "2022-02-01",
+      "views": 100,
+      "likes": 10
     },
     {
-      "category": "질문",
+      "postType": "질문",
       "title": "질문드립니다.",
       "image": false,
       "author": "작성자 1",
-      "timestamp": "2024-03-08",
-      "view": 200,
-      "like": 20
+      "makedDate": "2024-03-08",
+      "views": 200,
+      "likes": 20
     },
     {
-      "category": "토론",
+      "postType": "토론",
       "title": "토론 주제 들고왔습니다.",
       "image": false,
       "author": "작성자 3",
-      "timestamp": "2024-01-08",
-      "view": 300,
-      "like": 30
+      "makedDate": "2024-01-08",
+      "views": 300,
+      "likes": 30
     },
     {
-      "category": "추천",
+      "postType": "추천",
       "title": "김대종은 역시",
       "image": false,
       "author": "작성자 4",
-      "timestamp": "2024-02-08",
-      "view": 400,
-      "like": 40
+      "makedDate": "2024-02-08",
+      "views": 400,
+      "likes": 40
     },
     {
-      "category": "질문",
+      "postType": "질문",
       "title": "더미 데이터 5",
       "image": false,
       "author": "작성자 5",
-      "timestamp": "2024-06-08",
-      "view": 500,
-      "like": 50
+      "makedDate": "2024-06-08",
+      "views": 500,
+      "likes": 50
     },
     {
-      "category": "기타",
+      "postType": "기타",
       "title": "더미 데이터 6",
       "image": false,
       "author": "작성자 6",
-      "timestamp": "2024-05-08",
-      "view": 600,
-      "like": 60
+      "makedDate": "2024-05-08",
+      "views": 600,
+      "likes": 60
     },
     {
-      "category": "공지사항",
+      "postType": "공지사항",
       "title": "더미 데이터 7",
       "image": false,
       "author": "관리자",
-      "timestamp": "2023-01-08",
-      "view": 700,
-      "like": 70
+      "makedDate": "2023-01-08",
+      "views": 700,
+      "likes": 70
     },
     {
-      "category": "기타",
+      "postType": "기타",
       "title": "더미 데이터 8",
       "image": false,
       "author": "작성자 8",
-      "timestamp": "2026-03-08",
-      "view": 800,
-      "like": 80
+      "makedDate": "2026-03-08",
+      "views": 800,
+      "likes": 80
     },
     {
-      "category": "추천",
+      "postType": "추천",
       "title": "더미 데이터 9",
       "image": false,
       "author": "작성자 9",
-      "timestamp": "2028-03-08",
-      "view": 900,
-      "like": 90
+      "makedDate": "2028-03-08",
+      "views": 900,
+      "likes": 90
     },
     {
-      "category": "공지사항",
+      "postType": "공지사항",
       "title": "더미 데이터 10",
       "image": false,
       "author": "관리자",
-      "timestamp": "2024-03-08",
-      "view": 1000,
-      "like": 100
+      "makedDate": "2024-03-08",
+      "views": 1000,
+      "likes": 100
     },
     {
-      "category": "공지사항",
+      "postType": "공지사항",
       "title": "더미 데이터 11",
       "image": false,
       "author": "관리자",
-      "timestamp": "2024-03-08",
-      "view": 1000,
-      "like": 100
+      "makedDate": "2024-03-08",
+      "views": 1000,
+      "likes": 100
     },
     {
-      "category": "공지사항",
+      "postType": "공지사항",
       "title": "더미 데이터 12",
       "image": false,
       "author": "관리자",
-      "timestamp": "2024-03-08",
-      "view": 1000,
-      "like": 100
+      "makedDate": "2024-03-08",
+      "views": 1000,
+      "likes": 100
     }
   ]
 }

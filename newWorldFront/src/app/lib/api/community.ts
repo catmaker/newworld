@@ -20,7 +20,7 @@ export const postsCreateAPI = async (data: any) => {
   try {
     // 보낼 데이터는 카테고리, 제목, 내용
     const response = await axios.post(
-      "http://localhost:3000/api/postsCreate",
+      "http://localhost:8080/postsCreate",
       data
     );
 
