@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 2024.01.14 jeonil
  * 로그인 처리
  */
 @Service
@@ -111,7 +110,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserDto getUserInfo(UserDto userDto) throws NotfindUserException {
-        User user = getUser(userDto.getName(), userDto.getNickname());
+        User user = getUser(userDto.getNickname());
         if(user == null){
             return null;
         }
@@ -160,12 +159,11 @@ public class UserServiceImpl implements UserService {
 
     /**
      * user기본정보 조회
-     *  @param userName
      *  @param userNickname
      *  @throws NotfindUserException
      */
-    private User getUser(String userName, String userNickname) throws NotfindUserException {
-        User userInfo = userRepository.findUserByNameAndNickname(userName, userNickname);
+    private User getUser(String userNickname) {
+        User userInfo = userRepository.findByNickname(userNickname);
         return userInfo;
     }
 
