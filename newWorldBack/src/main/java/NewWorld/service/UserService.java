@@ -11,46 +11,35 @@ import NewWorld.exception.NotfindUserException;
 import java.util.List;
 
 /**
- * 2024.01.17 jeonil
  * 로그인 처리
  */
 public interface UserService {
-    /**
-     * 회원가입 아이디 중복 체크
-     * @param loginId
-     * @return
-     */
-    public Boolean checkIdValidation(String loginId);
 
-    /**
-     * 회원가입 중복체크
-     *
-     * @param phoneNumber
-     * @param name
-     * @return
-     */
-    public Boolean checkUserValidation(String phoneNumber, String name);
     /**
      * 로그인 처리
      * @param joinInfo
      * @return
      */
-    public String join(UserDto joinInfo) throws LoginException, JoinException;
+    public String join(UserDto joinInfo);
 
     /**
      * 회원정보 수정
-     * @param joinInfo
+     * @param changeInfoDto
      * @return
      */
-    public String updateUserInfo(ChangeInfoDto changeInfoDto) throws LoginException, JoinException, NotfindUserException, NotChangeException, Exception;
+    public String updateUserInfo(ChangeInfoDto changeInfoDto);
 
     /**
      * user기본정보 조회
-     * @param userName
-     * @param userNickname
+     * @param userDto
      * @return
      */
-    UserDto getUserInfo(String userName, String userNickname) throws IllegalAccessException, NotfindUserException;
+    UserDto getUserInfo(UserDto userDto) throws NotfindUserException;
 
+    /**
+     * user내가푼문제 조히
+     * @param userDto
+     * @return
+     */
     List<SolvedQuizDto> getSolveQuizList(UserDto userDto);
 }

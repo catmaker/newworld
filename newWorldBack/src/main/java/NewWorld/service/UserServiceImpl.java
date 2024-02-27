@@ -1,24 +1,17 @@
 package NewWorld.service;
 
-import NewWorld.config.EncoderConfig;
 import NewWorld.domain.*;
 import NewWorld.dto.ChangeInfoDto;
 import NewWorld.dto.SolvedQuizDto;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.JoinException;
-import NewWorld.exception.NotChangeException;
 import NewWorld.exception.NotfindUserException;
-import NewWorld.repository.ImageFileRepository;
-import NewWorld.repository.UserQuizSolvedDateRepository;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,27 +20,20 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final UserQuizSolvedDateRepository userQuizSolvedDateRepository;
-    private final ImageFileRepository imageFileRepository;
+
     /**
      * 회원가입 아이디 중복체크
      *
      * @param loginId
      * @return
      */
-    @Override
-    public Boolean checkIdValidation(String loginId) {
-        boolean validationCheck = false;
+    public Boolean isLoginIdPresent(String loginId) {
         User idCheck = userRepository.findUserByUserId(loginId);
-
-        if (idCheck != null) {
-            validationCheck = true;
-        }
-        return validationCheck;
+        return idCheck != null;
     }
 
     /**
@@ -57,34 +43,20 @@ public class UserServiceImpl implements UserService {
      * @param name
      * @return
      */
-    @Override
-    public Boolean checkUserValidation(String phoneNumber, String name) {
-        Boolean validationCheck = false;
+    public Boolean isUserPresent(String phoneNumber, String name) {
         User userCheck = userRepository.findUserByNameAndPhoneNumber(name, phoneNumber);
-
-        if (userCheck != null) {
-            validationCheck = true;
-        }
-
-        return validationCheck;
+        return userCheck != null;
     }
 
     /**
      * 회원가입 중복체크
      *
-     * @param phoneNumber
-     * @param name
+     * @param nickname
      * @return
      */
-    public Boolean checkNicknameValidation(String nickname) {
-        Boolean validationCheck = false;
+    public Boolean isNicknamePresent(String nickname) {
         User userCheck = userRepository.findByNickname(nickname);
-
-        if (userCheck != null) {
-            validationCheck = true;
-        }
-
-        return validationCheck;
+        return userCheck != null;
     }
 
     /**
@@ -93,51 +65,18 @@ public class UserServiceImpl implements UserService {
      * @param joinInfo
      * @throws JoinException
      */
-    @Transactional(readOnly = false)
     @Override
-    public String join(UserDto joinInfo) throws JoinException {
+    public String join(UserDto joinInfo) {
 
-        String checkJoinStatus = "s";
+        //유저 정보 중복체크
+        String validationFailureCode = validateJoinUser(joinInfo);
+        if (validationFailureCode != null) return validationFailureCode;;
 
-        String phoneNumber = joinInfo.getPhoneNumber();
-        String name = joinInfo.getName();
-        Boolean checkId = checkIdValidation(joinInfo.getUserId());
-        Boolean checkUser = checkUserValidation(joinInfo.getName(), joinInfo.getPhoneNumber());
-        Boolean checkNickname = checkNicknameValidation(joinInfo.getNickname());
-        //회원 아이디 중복검사
-        if (checkId) {
-            return "f1";
-        }
-        //중복회원 검사
-        if(checkUser){
-            return "f2";
-        }
-        if(checkNickname){
-            return "f3";
-        }
+        User user = User.of(joinInfo);
 
-        LocalDateTime now = LocalDateTime.now();
-        String string = now.toLocalDate().toString();
-        User newUser = User.builder().
-                userId(joinInfo.getUserId()).
-                userPassword(joinInfo.getUserPassword()).
-                name(name).
-                nickname(joinInfo.getNickname()).
-                phoneNumber(phoneNumber).
-                point(0).
-                attendance(0).
-                birthday(joinInfo.getBirthday()).
-                joinDate(string).
-                loginDate(LocalDateTime.now()).
-                build();
+        userRepository.save(user);
 
-        User savedUser = userRepository.save(newUser);
-
-        if(savedUser == null){
-            return "f";
-        }
-
-        return checkJoinStatus;
+        return "s";
     }
 
 
@@ -145,26 +84,24 @@ public class UserServiceImpl implements UserService {
      * user기본정보 수정
      */
     @Override
-    @Transactional(readOnly = false)
-    public String updateUserInfo(ChangeInfoDto changeInfoDto) throws Exception {
+    public String updateUserInfo(ChangeInfoDto changeInfoDto){
 
         User user = userRepository.findByNickname(changeInfoDto.getNickname());
-
         if(user == null){
             return "f";
         }
 
-        if (changeInfoDto.getCurrentPassword() != user.getUserPassword()){
+        String currentPassword = user.getUserPassword();
+        String newPassword = changeInfoDto.getNewPassword();
+
+        if (changeInfoDto.getCurrentPassword() != currentPassword){
             return "different password";
         }
-
-        if (changeInfoDto.getNewPassword() == user.getUserPassword()){
+        if (newPassword == currentPassword){
             return "same password";
         }
 
         user.changePassword(changeInfoDto.getNewPassword());
-
-        userRepository.save(user);
 
         return "s";
     }
@@ -173,8 +110,8 @@ public class UserServiceImpl implements UserService {
      * user기본정보 조회
      */
     @Override
-    public UserDto getUserInfo(String userName, String userNickname) throws NotfindUserException {
-        User user = getUser(userName, userNickname);
+    public UserDto getUserInfo(UserDto userDto) throws NotfindUserException {
+        User user = getUser(userDto.getName(), userDto.getNickname());
         if(user == null){
             return null;
         }
@@ -201,11 +138,9 @@ public class UserServiceImpl implements UserService {
 
     public List<SolvedQuizDto> getSolveQuizList(UserDto userDto){
         List<SolvedQuizDto> result = new ArrayList<>();
-        String nickname = userDto.getNickname();
-        User user = userRepository.findByNickname(nickname);
+        User user = userRepository.findByNickname(userDto.getNickname());
 
         List<UserQuizSolvedDate> solvedQuizList = user.getQuizList();
-
 
         for(UserQuizSolvedDate solvedQuiz : solvedQuizList){
             SolvedQuizDto solvedQuizDto = SolvedQuizDto.of(solvedQuiz);
@@ -216,7 +151,6 @@ public class UserServiceImpl implements UserService {
     }
     /**
      * 회원탈퇴
-     *
      * @param userInfo
      * @throws JoinException
      */
@@ -225,12 +159,30 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 2024-01-23 jeonill
      * user기본정보 조회
+     *  @param userName
+     *  @param userNickname
+     *  @throws NotfindUserException
      */
     private User getUser(String userName, String userNickname) throws NotfindUserException {
         User userInfo = userRepository.findUserByNameAndNickname(userName, userNickname);
         return userInfo;
+    }
+
+    private String validateJoinUser(UserDto joinInfo) {
+        if (isLoginIdPresent(joinInfo.getUserId())) {
+            return "f1";
+        }
+
+        if(isUserPresent(joinInfo.getName(), joinInfo.getPhoneNumber())){
+            return "f2";
+        }
+
+        if(isNicknamePresent(joinInfo.getNickname())){
+            return "f3";
+        }
+
+        return null;
     }
 
     /**

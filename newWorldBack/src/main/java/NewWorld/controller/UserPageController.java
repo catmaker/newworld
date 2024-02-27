@@ -34,9 +34,14 @@ public class UserPageController {
 
     @GetMapping("/getUserProfile")
     public UserDto findUserProfile(@RequestBody UserDto userDto) throws NotfindUserException, IllegalAccessException {
-        UserDto userInfo = userService.getUserInfo(userDto.getName(), userDto.getNickname());
+        try {
+            UserDto userInfo = userService.getUserInfo(userDto);
 
-        return userInfo;
+            return userInfo;
+        }catch (Exception e){
+
+            return null;
+        }
     }
 
     @PostMapping("/postUserProfile")
@@ -50,7 +55,7 @@ public class UserPageController {
     public ResponseEntity<byte[]> updateUserProfileImage(@RequestBody UserDto userDto) throws NotfindUserException, IllegalAccessException {
 
         ResponseEntity<byte[]> result;
-        UserDto userInfo = userService.getUserInfo(userDto.getNickname(), userDto.getName());
+        UserDto userInfo = userService.getUserInfo(userDto);
         File imageFile = userInfo.getImageFile();
         String path = imageFile.getPath();
 
