@@ -88,8 +88,14 @@ public class UserDto {
                 .nickname(user.getNickname())
                 .point(user.getPoint())
                 .attendance(user.getAttendance())
-                .signupDate(user.getJoinDate())
+                .signupDate(user.getJoinDate().toLocalDate().toString())
                 .build();
         return userDto;
+    }
+
+    public UserDto getSessionInfo(){
+        this.userPassword = "";
+        this.phoneNumber = "";
+        return this;
     }
 }

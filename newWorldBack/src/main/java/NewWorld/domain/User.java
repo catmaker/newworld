@@ -10,13 +10,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
-/**
- * 2024.01.12 jeonil
- * 회원
- */
 @Entity
 @DynamicUpdate
 @Getter
@@ -118,11 +113,18 @@ public class User {
         return this;
     }
 
+    /**
+     * 출석체크 변경
+     */
     public int checkAttendance(){
         this.attendance = this.attendance + 1;
 
         return this.attendance;
     }
+
+    /**
+     * 프로필 이미지 변경
+     */
     public void saveImage(ImageFile imageFile){
         this.imageFile = imageFile;
     }

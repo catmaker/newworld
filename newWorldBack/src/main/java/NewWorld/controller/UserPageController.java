@@ -29,7 +29,7 @@ import java.util.List;
 public class UserPageController {
 
     private final UserService userService;
-    private  final QuizService quizService;
+    private final QuizService quizService;
     private final ImageFileService imageFileService;
 
     @GetMapping("/getUserProfile")

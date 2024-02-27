@@ -52,5 +52,5 @@ public interface LoginService {
      * @param newPassword
      * @return
      */
-    public void ChangeUserPw(String loginId, String userName, String phoneNumber, String newPassword) throws LoginException, NotfindUserException;
+    public void updateUserPw(String loginId, String userName, String phoneNumber, String newPassword) throws LoginException, NotfindUserException;
 }

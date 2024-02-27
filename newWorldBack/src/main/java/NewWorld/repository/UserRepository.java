@@ -40,15 +40,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findUserByUserIdAndUserPassword(String userId, String userPw);
 
     /**
-     * user 기본정보조회
-     * @param name
-     * @param nickname
-     * @return
-     */
-    User findUserByNameAndNickname(String name, String nickname);
-
-
-    /**
      * 회원조회(비번찾기)
      * @param loginId
      * @param userName
@@ -60,9 +51,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     /**
      * 닉네임조회
-     * @param loginId
-     * @param userName
-     * @param phoneNumber
+     * @param nickname
      * @return
      */
     User findByNickname(String nickname);

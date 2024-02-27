@@ -17,13 +17,11 @@ import java.time.LocalDateTime;
  * 로그인 처리
  */
 @Service
-@Transactional(readOnly = false)
+@Transactional
 @RequiredArgsConstructor
 public class LoginServiceImpl implements LoginService {
 
     private final UserRepository userRepository;
-    private final UserService userService;
-
 
     /**
      * 로그인
@@ -38,24 +36,21 @@ public class LoginServiceImpl implements LoginService {
         LocalDateTime loginDate = user.getLoginDate();
         int now = Integer.parseInt(LocalDateTime.now().toLocalDate().toString().replaceAll("-",""));
         int loginDay ;
+        //출석체크를 위한 날짜 체크
         if(loginDate == null){
             loginDay = now;
         }else{
             loginDay = Integer.parseInt(loginDate.toLocalDate().toString().replaceAll("-",""));
         }
 
-        int attendance = user.getAttendance();
-
         if (now>loginDay || user.getAttendance() == 0){
-            attendance = user.checkAttendance();
+            user.checkAttendance();
         }
 
         UserDto userDto = UserDto.of(user);
-        userDto.setAttendance(attendance);
-        userDto.setUserPassword(null);
-        userDto.setPhoneNumber(null);
+        UserDto sessionInfo = userDto.getSessionInfo();
 
-        return userDto;
+        return sessionInfo;
     }
 
     /**
@@ -77,7 +72,7 @@ public class LoginServiceImpl implements LoginService {
      * @throws LoginException
      */
     @Override
-    public String findUserId(String userName, String phoneNumber) throws LoginException, NotfindUserException {
+    public String findUserId(String userName, String phoneNumber) throws NotfindUserException {
         User user = findUserforChageInfo(null, userName, phoneNumber);
         String userId = user.getUserId();
 
@@ -94,12 +89,8 @@ public class LoginServiceImpl implements LoginService {
      */
     @Override
     public Boolean findUserPw(String loginId, String userName, String phoneNumber) throws  NotfindUserException {
-        Boolean check = false;
         User user = findUserforChageInfo(loginId, userName, phoneNumber);
-       if(user != null){
-           check = true;
-       }
-        return check;
+        return user != null;
     }
 
     /**
@@ -111,7 +102,7 @@ public class LoginServiceImpl implements LoginService {
      * @throws LoginException
      */
     @Override
-    public void ChangeUserPw(String loginId, String userName, String phoneNumber, String newPassword) throws NotfindUserException {
+    public void updateUserPw(String loginId, String userName, String phoneNumber, String newPassword) throws NotfindUserException {
         User user = findUserforChageInfo(loginId, userName, phoneNumber);
         user.changePassword(newPassword);
     }
@@ -148,7 +139,7 @@ public class LoginServiceImpl implements LoginService {
         }
 
         if(user == null){
-            throw new NotfindUserException("찾을수 없는 회원입니다");
+            return null;
         }
         return user;
     }
