@@ -48,7 +48,7 @@ public class User {
     @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private ImageFile imageFile;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<UserQuizSolvedDate> quizList;
 
     @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
@@ -127,5 +127,13 @@ public class User {
      */
     public void saveImage(ImageFile imageFile){
         this.imageFile = imageFile;
+    }
+
+    public void addSolvedQuiz(UserQuizSolvedDate solvedQuiz){
+        if(this.quizList == null){
+            this.quizList = List.of(solvedQuiz);
+        }else {
+            this.quizList.add(solvedQuiz);
+        }
     }
 }

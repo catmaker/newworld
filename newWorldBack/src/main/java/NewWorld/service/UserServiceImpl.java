@@ -135,6 +135,11 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+    /**
+     * 내가 푼 문제 불러오기
+     * @param userDto
+     * @return
+     */
     public List<SolvedQuizDto> getSolveQuizList(UserDto userDto){
         List<SolvedQuizDto> result = new ArrayList<>();
         User user = userRepository.findByNickname(userDto.getNickname());

@@ -1,6 +1,8 @@
 package NewWorld.domain;
 
 import NewWorld.MemberType;
+import NewWorld.dto.HintDto;
+import NewWorld.dto.QuizDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -33,8 +35,18 @@ public class Hint{
         this.memberType = memberType;
     }
 
+    public static Hint of(HintDto hintDto){
+        Hint newHint = Hint.builder().
+                hint(hintDto.getHint()).
+                memberType(hintDto.getMemberType())
+                .build();
+
+        return newHint;
+    }
     public Hint changeHint(String hint){
         this.hint = hint;
         return this;
     }
+
+
 }

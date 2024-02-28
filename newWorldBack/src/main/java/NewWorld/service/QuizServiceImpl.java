@@ -1,97 +1,90 @@
 package NewWorld.service;
 
-import NewWorld.MemberType;
-import NewWorld.QuizDifficulty;
 import NewWorld.domain.Hint;
 import NewWorld.domain.Quiz;
 import NewWorld.domain.User;
 import NewWorld.domain.UserQuizSolvedDate;
+import NewWorld.dto.HintDto;
 import NewWorld.dto.QuizDto;
-import NewWorld.repository.HintRepository;
 import NewWorld.repository.QuizRepository;
 import NewWorld.repository.UserQuizSolvedDateRepository;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class QuizServiceImpl implements QuizService{
 
-    private final HintRepository hintRepository;
     private final QuizRepository quizRepository;
     private final UserRepository userRepository;
     private final UserQuizSolvedDateRepository userQuizSolvedDateRepository;
+
+    /**
+     * 전체 퀴즈 불러오기
+     * @param pageable
+     * @return
+     */
     @Override
     public Page<Quiz> getQuizzes(Pageable pageable) {
-
         Page<Quiz> all = quizRepository.findAll(pageable);
-        List<Quiz> all1 = quizRepository.findAll();
-
         return all;
     }
+
+    /**
+     * 퀴즈불러오기 (단일)
+     * @param quizTitle
+     * @param maker
+     * @return
+     */
     @Override
     public QuizDto getQuiz(String quizTitle, String maker) {
         Quiz quiz = quizRepository.findByTitleAndAndMaker(quizTitle, maker);
-        QuizDto quizDto = quiz.of(quiz);
+        QuizDto quizDto = QuizDto.of(quiz);
 
         return quizDto;
     }
 
+    /**
+     * 퀴즈생성
+     * @param quizDto
+     * @param nickname
+     * @return
+     */
     @Override
     public String quizMake(QuizDto quizDto, String nickname) {
-        List<String> hints = quizDto.getHints();
+        List<HintDto> hints = quizDto.getHints();
         List<Hint> savedHints = new ArrayList<>();
-        Quiz checkValidation = quizRepository.findByTitleAndAndMaker(quizDto.getQuizTitle(), quizDto.getMaker());
-        QuizDifficulty difficulty = QuizDifficulty.NORMAL;
+
+        Quiz sameQuiz = quizRepository.findByTitleAndAndMaker(quizDto.getQuizTitle(), quizDto.getMaker());
+
+        if(hints != null){
+            hints.stream().forEach(s->{savedHints.add(Hint.of(s));});
+        }
+
         if(quizDto.getQuizTitle() == null){
             return "nonTitle";
         }
         if(quizDto.getQuizDetail() == null){
             return "nonDetail";
         }
-        if(checkValidation != null){
+        if(sameQuiz != null){
             return "duplication";
         }
 
-        if(hints != null){
-            for(String hint : hints){
-                Hint quizHint = Hint.builder()
-                        .hint(hint)
-                        .memberType(MemberType.USER)
-                        .build();
+        Quiz quiz = Quiz.of(quizDto,savedHints);
+        Quiz savedQuiz = quizRepository.save(quiz);
 
-                Hint save = hintRepository.save(quizHint);
-                savedHints.add(save);
-            }
-        }
-
-        if(quizDto.getQuizDifficulty() != null){
-            difficulty = quizDto.getQuizDifficulty();
-        }
-        Quiz newQuiz = Quiz.builder()
-                .title(quizDto.getQuizTitle())
-                .detail(quizDto.getQuizDetail())
-                .hintList(savedHints)
-                .answer(quizDto.getAnswer())
-                .maker(nickname)
-                .quizDifficulty(difficulty)
-                .build();
-
-        Quiz savedQuiz = quizRepository.save(newQuiz);
-
-        QuizDto result = savedQuiz.of(savedQuiz);
+        QuizDto result = QuizDto.of(savedQuiz);
 
         if(result != null){
             return "s";
@@ -99,10 +92,16 @@ public class QuizServiceImpl implements QuizService{
          return "f";
     }
 
+    /**
+     * 퀴즈삭제
+     * @param quizDto
+     * @return
+     */
     @Override
     public String deleteQuiz(QuizDto quizDto) {
         String quizTitle = quizDto.getQuizTitle();
         String maker = quizDto.getMaker();
+
         if(quizDto.getNickname() != quizDto.getMaker()){
             return "f";
         }
@@ -115,6 +114,10 @@ public class QuizServiceImpl implements QuizService{
         return "s";
     }
 
+    /**
+     * 퀴즈업데이트
+     * @param quizDto
+     */
     @Override
     public void updateQuiz(QuizDto quizDto){
         Optional<Quiz> optionalQuiz = quizRepository.findById(quizDto.getQuizId());
@@ -124,25 +127,24 @@ public class QuizServiceImpl implements QuizService{
             quiz.updateQuiz(quizDto);
 
             List<Hint> hintList = quiz.getHintList();
-            List<String> updateHints = quizDto.getHints();
+            List<HintDto> hints = quizDto.getHints();
 
-            for(Hint hint: hintList){
-                String hintDetail = hint.getHint();
-                for(String updateHint: updateHints){
-                    if(updateHint == null){
-                        hintRepository.delete(hint);
-                    }else if(hintDetail == hint.getHint()){
-                        continue;
-                    }
-                    else{
-                        hint.changeHint(updateHint);
-                    }
-                }
+            if(hintList == null){
+                quiz.deleteAllHint(quiz.getHintList());
+            }else{
+                hintList.stream().forEach(s -> quiz.addHint(s));
+                quiz.deleteHint(hints.stream().map(s->Hint.of(s)).collect(Collectors.toList()));
             }
+
         }
 
     }
 
+    /**
+     *  정답확인
+     * @param quizDto
+     * @return
+     */
     @Override
     public String checkAnswer(QuizDto quizDto) {
         Optional<Quiz> optionalQuiz = quizRepository.findById(quizDto.getQuizId());
@@ -153,14 +155,9 @@ public class QuizServiceImpl implements QuizService{
 
             if(collectAnswer.equals(quizDto.getAnswer())){
                 User user = userRepository.findByNickname(quizDto.getNickname());
-                UserQuizSolvedDate solvedDate = UserQuizSolvedDate.builder()
-                        .quiz(quiz)
-                        .solvedTime(LocalDateTime.now().toLocalDate().toString())
-                        .build();
+                UserQuizSolvedDate solvedDate = UserQuizSolvedDate.of(quiz);
 
-                UserQuizSolvedDate savedSolvedUser = userQuizSolvedDateRepository.save(solvedDate);
-                user.addSovlvedUser(savedSolvedUser);
-
+                user.addSolvedQuiz(solvedDate);
                 return "s";
             }else if(!collectAnswer.equals(quizDto.getAnswer())){
                 return "wrong answer";
