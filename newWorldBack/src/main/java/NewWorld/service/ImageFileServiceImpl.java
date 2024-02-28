@@ -67,7 +67,7 @@ public class ImageFileServiceImpl implements ImageFileService {
             return "f";
         }
 
-        User user = userRepository.findUserByNameAndNickname(userName, userNickname);
+        User user = userRepository.findByNickname(userNickname);
 
         if(user != null){
             user.saveImage(save);
