@@ -1,5 +1,6 @@
 package NewWorld.domain;
 
+import NewWorld.dto.CommentDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,8 +42,15 @@ public class Comment {
         this.makedDate = makedDate;
     }
 
+    public static Comment of(CommentDto commentDto){
+        return Comment.builder()
+                .comment(commentDto.getComment())
+                .makedDate(LocalDateTime.now())
+                .userNickName(commentDto.getNickName())
+                .build();
+    }
+
     /**
-     * 2024.01.30 jeonil
      * 댓글 수정
      */
     public Comment modifyComment(String newComment){

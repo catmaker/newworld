@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * 2024.01.30 jeonil
  * 댓글기능
  */
 @Service
@@ -44,52 +43,36 @@ public class CommentServiceImpl implements CommentService {
                 return "comment null";
             }
 
-            Comment newComment = Comment.builder().
-                    comment(commentDto.getComment()).
-                    makedDate(LocalDateTime.now()).
-                    userNickName(commentDto.getNickName()).build();
-
-            commentRepository.save(newComment);
-
-            if (post.getCommentList() == null) {
-                post.setComment(List.of(newComment));
-            } else {
-                post.getCommentList().add(newComment);
-            }
+            Comment comment = Comment.of(commentDto);
+            //commentRepository.save(comment);
+            post.setComment(comment);
             return "s";
         }
         return "f";
     }
 
     @Override
-    public String modifyComment(CommentDto commentDto) throws NotfindException {
+    public String modifyComment(CommentDto commentDto) {
         Comment comment = getComment(commentDto.getCommentId());
 
         if (comment == null) {
             return "f";
         }
-        Comment newComment = comment.modifyComment(commentDto.getComment());
+        comment.modifyComment(commentDto.getComment());
 
         return "s";
     }
 
     @Override
-    public String deleteComment(CommentDto commentDto) throws NotfindException {
+    public String deleteComment(CommentDto commentDto) {
         Optional<Post> byId = postRepository.findById(commentDto.getPostId());
 
         if (byId.isPresent()) {
             Post post = byId.get();
 
-            List<Comment> commentList = post.getCommentList();
-
-            for (int i= 0; i< commentList.size(); i++) {
-                Comment comment = commentList.get(i);
-
-                if (comment.getId() == commentDto.getCommentId()) {
-                    commentList.remove(i);
-                    return "s";
-                }
-            }
+            Comment comment = Comment.of(commentDto);
+            post.deleteComment(comment);
+            return "s";
         }
         return "f";
     }
@@ -99,10 +82,8 @@ public class CommentServiceImpl implements CommentService {
 
         if (byId.isPresent()) {
             Comment comment = byId.get();
-
             return comment;
         }
-
         return null;
     }
 

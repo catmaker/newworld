@@ -65,9 +65,20 @@ public class Post {
     /**
      * 댓글 등록
      */
-    public Post setComment(List<Comment> comments){
-        this.commentList = comments;
+    public Post setComment(Comment comment){
+        if (commentList == null) {
+            commentList = List.of(comment);
+        } else {
+            commentList.add(comment);
+        }
+
         return this;
+    }
+
+    public void deleteComment(Comment comment){
+        commentList.removeIf(h->commentList.stream().
+                filter(s->s.equals(comment)).
+                findFirst().isPresent());
     }
     /**
      * 2024.01.28 jeonil

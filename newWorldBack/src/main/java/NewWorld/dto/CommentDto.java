@@ -1,6 +1,7 @@
 package NewWorld.dto;
 
 import NewWorld.domain.Comment;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,11 +25,21 @@ public class CommentDto {
 
     private LocalDateTime makedDate;
 
-    public CommentDto toDto(Comment comment){
-        this.commentId = comment.getId();
-        this.comment = comment.getComment();
-        this.makedDate = comment.getMakedDate();
-        this.nickName = comment.getUserNickName();
-        return this;
+    @Builder
+    public CommentDto(Long postId, Long commentId, String comment, String nickName, LocalDateTime makedDate) {
+        this.postId = postId;
+        this.commentId = commentId;
+        this.comment = comment;
+        this.nickName = nickName;
+        this.makedDate = makedDate;
+    }
+
+    public static CommentDto of(Comment comment){
+       return CommentDto.builder()
+                .commentId(comment.getId())
+                .comment(comment.getComment())
+                .nickName(comment.getUserNickName())
+                .makedDate(comment.getMakedDate())
+                .build();
     }
 }
