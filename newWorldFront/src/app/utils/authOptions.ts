@@ -30,7 +30,7 @@ export const authOptions: NextAuthOptions = {
           const result = await res.json();
           console.log(result);
           // 이미 /loginMember에서 비교는 다 끝난 상황이므로, text인지 null인지만 확인하면 됩니다.
-          if (!result) {
+          if (res.status !== 200) {
             throw new Error("로그인 실패");
           }
           if (result) {
