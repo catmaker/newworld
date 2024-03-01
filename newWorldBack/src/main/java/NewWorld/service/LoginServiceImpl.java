@@ -48,9 +48,9 @@ public class LoginServiceImpl implements LoginService {
         }
 
         UserDto userDto = UserDto.of(user);
-        UserDto sessionInfo = userDto.getSessionInfo();
+        UserDto info = userDto.hideInfo();
 
-        return sessionInfo;
+        return info;
     }
 
     /**
