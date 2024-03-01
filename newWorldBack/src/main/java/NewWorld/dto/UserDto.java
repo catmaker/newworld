@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 
@@ -18,34 +19,16 @@ import java.io.File;
 @Setter
 public class UserDto {
 
-    @NotBlank
-    @NotEmpty
-    @NotNull
     private String name;
 
-    @NotBlank
-    @NotEmpty
-    @NotNull
     private String userId;
 
-    @NotBlank
-    @NotEmpty
-    @NotNull
     private String nickname;
 
-    @NotBlank
-    @NotEmpty
-    @NotNull
     private String phoneNumber;
 
-    @NotBlank
-    @NotEmpty
-    @NotNull
     private String userPassword;
 
-    @NotBlank
-    @NotEmpty
-    @NotNull
     private String birthday;
 
     private String signupDate;
@@ -93,7 +76,7 @@ public class UserDto {
         return userDto;
     }
 
-    public UserDto getSessionInfo(){
+    public UserDto hideInfo(){
         this.userPassword = "";
         this.phoneNumber = "";
         return this;
