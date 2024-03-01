@@ -30,7 +30,7 @@ public class GameController {
     }
 
     @GetMapping("/getQuiz")
-    public QuizDto findQuiz(@RequestBody QuizDto quizDto){
+    public QuizDto findQuiz(QuizDto quizDto){
         QuizDto quiz = quizService.getQuiz(quizDto);
         return quiz;
     }

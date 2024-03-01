@@ -50,7 +50,6 @@ public class QuizServiceImpl implements QuizService{
         Quiz quiz = quizRepository.findById(quizDto.getQuizId()).
                 orElseGet(null);
         QuizDto result = QuizDto.of(quiz);
-
         return result;
     }
 

@@ -27,7 +27,7 @@ public class PostController {
     }
 
     @GetMapping("/getPost")
-    public PostDto findPostList(@RequestBody PostDto postDto){
+    public PostDto findPostList(PostDto postDto){
 
         PostDto post = postService.getPost(postDto);
 
