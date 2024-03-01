@@ -1,15 +1,11 @@
 import axios from "axios";
 
-export const getCommunityAPI = async () => {
+export const getCommunityAPI = async (page: number) => {
   try {
-    // 카테고리 / 제목 / 작성자 / 작성일 / 조회수 / 좋아요
-    const response = await axios.get("http://localhost:8080/getCommunity");
-    console.log(response.data.category);
-    console.log(response.data.title);
-    console.log(response.data.author);
-    console.log(response.data.createdAt);
-    console.log(response.data.views);
-    console.log(response.data.likes);
+    const response = await axios.get(
+      `http://localhost:8080/getCommunity?page=${page}`
+    );
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);

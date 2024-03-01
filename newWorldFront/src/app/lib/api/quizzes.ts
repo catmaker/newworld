@@ -1,8 +1,10 @@
 import axios from "axios";
-export const getQuizzesAPI = async () => {
+export const getQuizzesAPI = async (page: number) => {
   try {
     // 퍼즐 제목 / 작성일 / 난이도
-    const response = await axios.get("http://localhost:8080/getQuizzes");
+    const response = await axios.get(
+      `http://localhost:8080/getQuizzes?page=${page}`
+    );
     return response.data;
   } catch (error) {
     console.error(error);
