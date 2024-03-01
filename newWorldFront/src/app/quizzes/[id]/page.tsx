@@ -1,7 +1,9 @@
 import React from "react";
-
-const page = () => {
-  return <div>page</div>;
+import Quiz from "./Quiz";
+const page = (props: any) => {
+  console.log(props.params);
+  const { id } = props.params;
+  return <Quiz></Quiz>;
 };
 
 export default page;
