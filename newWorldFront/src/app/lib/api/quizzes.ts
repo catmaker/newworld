@@ -24,3 +24,14 @@ export const postCheckQuiz = async (data: any) => {
     console.error(error);
   }
 };
+export const getQuizAPI = async (page: number) => {
+  try {
+    // 퍼즐 제목 / 작성일 / 난이도
+    const response = await axios.get(
+      `http://localhost:8080/getQuiz?quizId=${page}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
