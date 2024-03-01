@@ -33,6 +33,7 @@
   height: 100vh;
   overflow: hidden;
   background-color: black;
+  color: white;
 
   .container {
     width: 100%;
@@ -83,5 +84,30 @@
     cursor: pointer;
     color: #db6f39;
     transition: all 0.3s ease-in-out;
+  }
+}
+.contents_box {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  height: 100%;
+}
+
+.contents {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: #db6f39 1px solid;
+  a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
   }
 }
