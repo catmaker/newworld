@@ -6,11 +6,7 @@ import { MySession } from "@/app/types/Session";
 const page = async () => {
   const session = (await getServerSession(authOptions)) as MySession;
   console.log(session);
-  return (
-    <div>
-      <Post session={session} />
-    </div>
-  );
+  return <Post session={session} />;
 };
 
 export default page;
