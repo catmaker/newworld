@@ -31,7 +31,7 @@ public class GameController {
 
     @GetMapping("/getQuiz")
     public QuizDto findQuiz(@RequestBody QuizDto quizDto){
-        QuizDto quiz = quizService.getQuiz(quizDto.getQuizTitle(), quizDto.getMaker());
+        QuizDto quiz = quizService.getQuiz(quizDto);
         return quiz;
     }
 

@@ -42,16 +42,16 @@ public class QuizServiceImpl implements QuizService{
 
     /**
      * 퀴즈불러오기 (단일)
-     * @param quizTitle
-     * @param maker
+     * @param quizDto
      * @return
      */
     @Override
-    public QuizDto getQuiz(String quizTitle, String maker) {
-        Quiz quiz = quizRepository.findByTitleAndAndMaker(quizTitle, maker);
-        QuizDto quizDto = QuizDto.of(quiz);
+    public QuizDto getQuiz(QuizDto quizDto) {
+        Quiz quiz = quizRepository.findById(quizDto.getQuizId()).
+                orElseGet(null);
+        QuizDto result = QuizDto.of(quiz);
 
-        return quizDto;
+        return result;
     }
 
     /**

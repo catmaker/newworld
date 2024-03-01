@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface QuizService {
 
-    QuizDto getQuiz(String quizTitle, String maker);
+    QuizDto getQuiz(QuizDto quizDto);
     Page<Quiz> getQuizzes(Pageable pageable);
     String quizMake(QuizDto quizDto, String nickname);
     String deleteQuiz(QuizDto quizDto);
