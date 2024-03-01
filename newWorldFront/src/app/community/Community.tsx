@@ -12,12 +12,11 @@ interface Post {
   views: number;
   likes: number;
   id: number;
-
-  // 필요한 경우 여기에 다른 속성을 추가하세요.
 }
 
 const Community = (data: any) => {
-  const [posts, setPosts] = useState(data.data.content);
+  console.log(data);
+  const [posts, setPosts] = useState(data.data || []);
   console.log(posts);
   const [currentPage, setCurrentPage] = useState(1);
   const { selectedCategory, handleCategoryClick } = UseCategory(
