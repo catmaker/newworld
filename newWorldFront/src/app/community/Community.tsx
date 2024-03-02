@@ -80,7 +80,7 @@ const Community = (data: any) => {
               let formattedDate = date.toLocaleDateString("ko-KR");
               formattedDate = formattedDate.slice(0, -1);
               return (
-                <Link href="/">
+                <Link href={`/community/${item.id}`}>
                   <div className={styles.contents_Layout_item} key={item.id}>
                     <div className={styles.contents_Layout_item_category}>
                       {item.postType}
