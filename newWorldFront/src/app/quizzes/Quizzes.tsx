@@ -29,8 +29,6 @@ const Quizzes = (data: Quiz) => {
             <div key={quiz.id} className={styles.contents}>
               <Link href={`/quizzes/${quiz.id}`}>
                 <h1>{quiz.title}</h1>
-                <p>{quiz.detail}</p>
-                <p>{quiz.answer}</p>
                 <p>{quiz.quizDifficulty}</p>
                 <p>{quiz.maker}</p>
                 <p>{quiz.makedDate}</p>

@@ -33,7 +33,7 @@ const Post = ({ session }: { session: Session }) => {
   const handleRegisterClick = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await postCheckQuiz({
+      const response = await postMakeQuiz({
         nickname: session.user.nickname,
         name: session.user.name,
         quizTitle,
@@ -54,7 +54,7 @@ const Post = ({ session }: { session: Session }) => {
     <>
       <Header></Header>
       <div className={styles.container}>
-        <div className={styles.form_wrapper}>
+        <div>
           <form action="">
             <input
               type="text"

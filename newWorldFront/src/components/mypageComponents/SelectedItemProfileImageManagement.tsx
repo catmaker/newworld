@@ -2,7 +2,10 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import styles from "@/app/mypage/mypage.module.scss";
-import { postUserProfileImageAPI } from "@/app/lib/api/mypageapi";
+import {
+  postUserProfileImageAPI,
+  updateUserProfileAPI,
+} from "@/app/lib/api/mypageapi";
 import { ProfileImageManagement } from "@/app/types/mypage";
 
 const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
@@ -26,17 +29,23 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!selectedFile || !nickname) {
+    if (!nickname) {
       alert("변경할 사항을 입력해주세요.");
       return;
-    }
-    if (selectedFile) {
+    } else {
       try {
-        await postUserProfileImageAPI(selectedFile);
+        await updateUserProfileAPI(nickname);
       } catch (error) {
         console.error(error);
       }
     }
+    // if (selectedFile) {
+    //   try {
+    //     await postUserProfileImageAPI(selectedFile);
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // }
   };
 
   return (
@@ -57,6 +66,7 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
             type="text"
             className={styles.nickname_input}
             placeholder="변경할 닉네임을 입력해주세요."
+            onChange={(e) => setNickname(e.target.value)}
           />
           <button type="submit">변경하기</button>
         </form>

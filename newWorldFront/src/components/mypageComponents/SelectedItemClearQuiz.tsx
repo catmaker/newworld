@@ -17,7 +17,7 @@ const SelectedItemClearQuiz: React.FC<ClearQuizProps> = ({
   console.log(quizzes);
   return (
     <div className={styles.clear_quiz}>
-      {quizzes.map(
+      {quizzes?.map(
         ({ puzzleTitle, puzzleDifficulty, puzzleClearDate }, index) => (
           <div key={index} className={styles.clear_list}>
             <div className={styles.problem_name}>{puzzleTitle}</div>

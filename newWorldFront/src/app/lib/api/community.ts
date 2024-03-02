@@ -75,3 +75,15 @@ export const postsLikeAPI = async (data: string) => {
     console.error(error);
   }
 };
+
+export const getPostAPI = async (id: string) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:8080/getPost?postId=${id}`
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};

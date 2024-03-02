@@ -76,3 +76,16 @@ export const getUserClearQuizzes = async (data: any) => {
     console.error(error);
   }
 };
+
+export const updateUserProfileAPI = async (nickname: string) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8080/updateUserProfile",
+      nickname
+    );
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};

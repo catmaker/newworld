@@ -14,10 +14,7 @@ export const getQuizzesAPI = async (page: number) => {
 export const postCheckQuiz = async (data: any) => {
   try {
     // 보낼 데이터는 퍼즐 id, 퍼즐 정답
-    const response = await axios.post(
-      "http://localhost:8080/postCheckQuiz",
-      data
-    );
+    const response = await axios.post("http://localhost:8080/makeQuiz", data);
 
     return response;
   } catch (error) {
