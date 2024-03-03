@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class QuizServiceImpl implements QuizService{
+public class QuizServiceImpl implements QuizService {
 
     private final QuizRepository quizRepository;
     private final UserRepository userRepository;
@@ -33,6 +33,7 @@ public class QuizServiceImpl implements QuizService{
 
     /**
      * 전체 퀴즈 불러오기
+     *
      * @param pageable
      * @return
      */
@@ -44,6 +45,7 @@ public class QuizServiceImpl implements QuizService{
 
     /**
      * 퀴즈불러오기 (단일)
+     *
      * @param quizDto
      * @return
      */
@@ -57,115 +59,104 @@ public class QuizServiceImpl implements QuizService{
 
     /**
      * 퀴즈생성
+     *
      * @param quizDto
-     * @param nickname
      * @return
      */
     @Override
-    public String quizMake(QuizDto quizDto, String nickname) {
+    public QuizDto quizMake(QuizDto quizDto) throws CustomError {
         List<HintDto> hints = quizDto.getHints();
         List<Hint> savedHints = new ArrayList<>();
 
-        Quiz sameQuiz = quizRepository.findByTitleAndAndMaker(quizDto.getQuizTitle(), quizDto.getMaker());
+        Quiz sameQuiz = quizRepository.findByTitleAndAndMaker(quizDto.getQuizTitle(), quizDto.getMaker())
+                .orElse(null);
 
-        if(hints != null){
-            hints.stream().forEach(s->{savedHints.add(Hint.of(s));});
-        }
-
-        if(quizDto.getQuizTitle() == null){
-            return "nonTitle";
-        }
-        if(quizDto.getQuizDetail() == null){
-            return "nonDetail";
-        }
-        if(sameQuiz != null){
-            return "duplication";
+        if (quizDto.getQuizTitle() == null || quizDto.getQuizDetail() == null) {
+            throw new CustomError(ErrorCode.EMPTY_INFO);
+        } else if (sameQuiz != null) {
+            throw new CustomError(ErrorCode.DUPICATION);
         }
 
-        Quiz quiz = Quiz.of(quizDto,savedHints);
+        if (hints != null) {
+            hints.stream().forEach(s -> {
+                savedHints.add(Hint.of(s));
+            });
+        }
+
+        Quiz quiz = Quiz.of(quizDto, savedHints);
         Quiz savedQuiz = quizRepository.save(quiz);
 
-        QuizDto result = QuizDto.of(savedQuiz);
-
-        if(result != null){
-            return "s";
-        }
-         return "f";
+        return QuizDto.of(savedQuiz);
     }
 
     /**
      * 퀴즈삭제
+     *
      * @param quizDto
      * @return
      */
     @Override
-    public String deleteQuiz(QuizDto quizDto) {
+    public void deleteQuiz(QuizDto quizDto) throws CustomError {
         String quizTitle = quizDto.getQuizTitle();
         String maker = quizDto.getMaker();
 
-        if(quizDto.getNickname() != quizDto.getMaker()){
-            return "f";
-        }
-        Quiz q = quizRepository.findByTitleAndAndMaker(quizTitle, maker);
+        Quiz q = quizRepository.findByTitleAndAndMaker(quizTitle, maker)
+                .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
 
         UserQuizSolvedDate byDate = userQuizSolvedDateRepository.findByQuiz(q);
 
         userQuizSolvedDateRepository.delete(byDate);
         quizRepository.delete(q);
-        return "s";
     }
 
     /**
      * 퀴즈업데이트
+     *
      * @param quizDto
      */
     @Override
-    public void updateQuiz(QuizDto quizDto){
-        Optional<Quiz> optionalQuiz = quizRepository.findById(quizDto.getQuizId());
+    public QuizDto updateQuiz(QuizDto quizDto) throws CustomError {
+        Quiz quiz = quizRepository.findById(quizDto.getQuizId())
+                .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
 
-        if(optionalQuiz.isPresent()){
-            Quiz quiz = optionalQuiz.get();
-            quiz.updateQuiz(quizDto);
+        Quiz updatedQuiz = quiz.updateQuiz(quizDto);
 
-            List<Hint> hintList = quiz.getHintList();
-            List<HintDto> hints = quizDto.getHints();
+        List<Hint> hintList = quiz.getHintList();
+        List<HintDto> hints = quizDto.getHints();
 
-            if(hintList == null){
-                quiz.deleteAllHint(quiz.getHintList());
-            }else{
-                hintList.stream().forEach(s -> quiz.addHint(s));
-                quiz.deleteHint(hints.stream().map(s->Hint.of(s)).collect(Collectors.toList()));
-            }
-
+        if (hintList == null) {
+            quiz.deleteAllHint(quiz.getHintList());
+        } else {
+            hintList.stream().forEach(s -> quiz.addHint(s));
+            quiz.deleteHint(hints.stream().map(s -> Hint.of(s)).collect(Collectors.toList()));
         }
 
+        return QuizDto.of(updatedQuiz);
     }
 
     /**
-     *  정답확인
+     * 정답확인
+     *
      * @param quizDto
      * @return
      */
     @Override
     public String checkAnswer(QuizDto quizDto) throws CustomError {
-        Optional<Quiz> optionalQuiz = quizRepository.findById(quizDto.getQuizId());
+        Quiz quiz = quizRepository.findById(quizDto.getQuizId())
+                .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
 
-        if(optionalQuiz.isPresent()){
-            Quiz quiz = optionalQuiz.get();
-            String collectAnswer = quiz.getAnswer();
+        String collectAnswer = quiz.getAnswer();
 
-            if(collectAnswer.equals(quizDto.getAnswer())){
-                User user = userRepository.findByNickname(quizDto.getNickname())
-                        .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
-                UserQuizSolvedDate solvedDate = UserQuizSolvedDate.of(quiz);
-                user.addPoint();
+        if (collectAnswer.equals(quizDto.getAnswer())) {
+            User user = userRepository.findByNickname(quizDto.getNickname())
+                    .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
+            UserQuizSolvedDate solvedDate = UserQuizSolvedDate.of(quiz);
+            user.addPoint();
 
-                user.addSolvedQuiz(solvedDate);
-                return "s";
-            }else if(!collectAnswer.equals(quizDto.getAnswer())){
-                return "wrong answer";
-            }
+            user.addSolvedQuiz(solvedDate);
+            return "success";
         }
-        return "f";
+
+        return "wrong answer";
     }
 }

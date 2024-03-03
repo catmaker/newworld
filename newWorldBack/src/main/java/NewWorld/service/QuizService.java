@@ -12,8 +12,8 @@ public interface QuizService {
 
     QuizDto getQuiz(QuizDto quizDto);
     Page<Quiz> getQuizzes(Pageable pageable);
-    String quizMake(QuizDto quizDto, String nickname);
-    String deleteQuiz(QuizDto quizDto);
-    void updateQuiz(QuizDto quizDto);
+    QuizDto quizMake(QuizDto quizDto) throws CustomError;
+    void deleteQuiz(QuizDto quizDto) throws CustomError;
+    QuizDto updateQuiz(QuizDto quizDto) throws CustomError;
     String checkAnswer(QuizDto quizDto) throws CustomError;
 }

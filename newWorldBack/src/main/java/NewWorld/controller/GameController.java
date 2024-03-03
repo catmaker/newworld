@@ -2,16 +2,17 @@ package NewWorld.controller;
 
 import NewWorld.domain.Quiz;
 import NewWorld.dto.QuizDto;
+import NewWorld.exception.CustomError;
 import NewWorld.service.QuizService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import static NewWorld.common.ResponseEntityConstants.RESPONSE_ENTITY_NO_CONTENT;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,54 +21,40 @@ public class GameController {
     private final QuizService quizService;
 
     @PostMapping("/makeQuiz")
-    public String makeQuiz(@RequestBody QuizDto quizDto, String nickName){
-        try {
-            String result = quizService.quizMake(quizDto, nickName);
-            return result;
-        }catch (Exception e){
-            return "f";
-        }
+    public ResponseEntity<QuizDto> makeQuiz(@RequestBody QuizDto quizDto) throws CustomError {
+        QuizDto result = quizService.quizMake(quizDto);
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping("/getQuiz")
-    public QuizDto findQuiz(QuizDto quizDto){
-        QuizDto quiz = quizService.getQuiz(quizDto);
-        return quiz;
+    public ResponseEntity<QuizDto> findQuiz(QuizDto quizDto) {
+        QuizDto result = quizService.getQuiz(quizDto);
+        return ResponseEntity.ok().body(result);
     }
 
     @GetMapping("/getPuzzleList")
-    public Page<Quiz> findQuizzes(@RequestParam(required = false, defaultValue = "0", value = "page") int pageNo){
+    public ResponseEntity<Page<Quiz>> findQuizzes(@RequestParam(required = false, defaultValue = "0", value = "page") int pageNo) {
         Pageable pageable = PageRequest.of(pageNo, 5);
-        Page<Quiz> quizzes = quizService.getQuizzes(pageable);
-        return quizzes;
+        Page<Quiz> result = quizService.getQuizzes(pageable);
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping("/postCheckPuzzle")
-    public String checkQuizAnswer(@RequestBody QuizDto quizDto){
-        try {
-            String result = quizService.checkAnswer(quizDto);
-            return result;
-        }catch (Exception e){
-            return "f";
-        }
+    public ResponseEntity<String> checkQuizAnswer(@RequestBody QuizDto quizDto) throws CustomError {
+        String result = quizService.checkAnswer(quizDto);
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping("/updateQuiz")
-    public String updateQuiz(@RequestBody QuizDto quizDto){
-        try {
-            quizService.updateQuiz(quizDto);
-            return "s";
-        }catch (Exception e) {
-            return "f";
-        }
+    public ResponseEntity<QuizDto> updateQuiz(@RequestBody QuizDto quizDto) throws CustomError {
+        QuizDto result = quizService.updateQuiz(quizDto);
+        return ResponseEntity.ok().body(result);
     }
+
     @PostMapping("/deletePuzzle")
-    public String deleteQuiz(@RequestBody QuizDto quizDto){
-        try {
-            String s = quizService.deleteQuiz(quizDto);
-            return s;
-        }catch (Exception e) {
-            return "f";
-        }
+    public ResponseEntity<HttpStatus> deleteQuiz(@RequestBody QuizDto quizDto) throws CustomError {
+        quizService.deleteQuiz(quizDto);
+        return RESPONSE_ENTITY_NO_CONTENT;
+
     }
 }
