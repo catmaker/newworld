@@ -74,7 +74,7 @@ public class QuizServiceImpl implements QuizService {
         if (quizDto.getQuizTitle() == null || quizDto.getQuizDetail() == null) {
             throw new CustomError(ErrorCode.EMPTY_INFO);
         } else if (sameQuiz != null) {
-            throw new CustomError(ErrorCode.DUPICATION);
+            throw new CustomError(ErrorCode.DUPICATION_INFO);
         }
 
         if (hints != null) {
