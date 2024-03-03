@@ -68,16 +68,13 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public String join(UserDto joinInfo) throws CustomError {
-
         //유저 정보 중복체크
-        String validationFailureCode = validateJoinUser(joinInfo);
-        if (validationFailureCode != null) return validationFailureCode;;
+        String result = validateJoinUser(joinInfo);
 
         User user = User.of(joinInfo);
 
         userRepository.save(user);
-
-        return "s";
+        return result;
     }
 
 
