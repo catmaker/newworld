@@ -3,6 +3,8 @@ package NewWorld.service;
 import NewWorld.domain.Comment;
 import NewWorld.domain.Post;
 import NewWorld.dto.CommentDto;
+import NewWorld.exception.CustomError;
+import NewWorld.exception.ErrorCode;
 import NewWorld.repository.CommentRepository;
 import NewWorld.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,57 +26,35 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    public String setComment(CommentDto commentDto) {
-        Optional<Post> byId = postRepository.findById(commentDto.getPostId());
-        if (byId.isPresent()) {
-            Post post = byId.get();
+    public void setComment(CommentDto commentDto) throws CustomError {
+        Post post = postRepository.findById(commentDto.getPostId())
+                .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
 
-            if (commentDto.getComment() == null) {
-                return "comment null";
-            }
-
-            Comment comment = Comment.of(commentDto);
-            //commentRepository.save(comment);
-            post.setComment(comment);
-            return "s";
-        }
-        return "f";
+        Comment comment = Comment.of(commentDto);
+        //commentRepository.save(comment);
+        post.setComment(comment);
     }
 
     @Override
-    public String modifyComment(CommentDto commentDto) {
+    public Comment modifyComment(CommentDto commentDto) throws CustomError {
         Comment comment = getComment(commentDto.getCommentId());
 
-        if (comment == null) {
-            return "f";
-        }
-        comment.modifyComment(commentDto.getComment());
-
-        return "s";
+        return comment.modifyComment(commentDto.getComment());
     }
 
     @Override
-    public String deleteComment(CommentDto commentDto) {
-        Optional<Post> byId = postRepository.findById(commentDto.getPostId());
+    public void deleteComment(CommentDto commentDto) throws CustomError {
+        Post post = postRepository.findById(commentDto.getPostId())
+                .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
 
-        if (byId.isPresent()) {
-            Post post = byId.get();
-
-            Comment comment = Comment.of(commentDto);
-            post.deleteComment(comment);
-            return "s";
-        }
-        return "f";
+        post.deleteComment(commentDto.getCommentId());
     }
 
-    public Comment getComment(Long commentId) {
-        Optional<Comment> byId = commentRepository.findById(commentId);
+    public Comment getComment(Long commentId) throws CustomError {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
 
-        if (byId.isPresent()) {
-            Comment comment = byId.get();
-            return comment;
-        }
-        return null;
+        return comment;
     }
 
 }

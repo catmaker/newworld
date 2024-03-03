@@ -75,9 +75,9 @@ public class Post {
         return this;
     }
 
-    public void deleteComment(Comment comment){
+    public void deleteComment(Long commentId){
         commentList.removeIf(h->commentList.stream().
-                filter(s->s.equals(comment)).
+                filter(s->s.getId().equals(commentId)).
                 findFirst().isPresent());
     }
     /**
