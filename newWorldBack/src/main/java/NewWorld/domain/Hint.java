@@ -25,14 +25,11 @@ public class Hint{
 
     private String hint;
 
-    @Enumerated(value = EnumType.STRING)
-    private MemberType memberType;
 
     @Builder
     public Hint(Long id, String hint, MemberType memberType) {
         this.id = id;
         this.hint = hint;
-        this.memberType = memberType;
     }
 
     public static Hint of(HintDto hintDto){

@@ -4,10 +4,12 @@ import NewWorld.MemberType;
 import NewWorld.domain.Hint;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class HintDto {
 
     private Long hintId;
@@ -27,6 +29,6 @@ public class HintDto {
         return HintDto.builder()
                 .hintId(hint.getId())
                 .hint(hint.getHint())
-                .memberType(hint.getMemberType()).build();
+                .build();
     }
 }
