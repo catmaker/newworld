@@ -4,6 +4,7 @@ import NewWorld.domain.Quiz;
 import NewWorld.dto.QuizDto;
 import NewWorld.exception.CustomError;
 import NewWorld.service.QuizService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,7 +22,7 @@ public class GameController {
     private final QuizService quizService;
 
     @PostMapping("/makeQuiz")
-    public ResponseEntity<QuizDto> makeQuiz(@RequestBody QuizDto quizDto) throws CustomError {
+    public ResponseEntity<QuizDto> makeQuiz(@Valid @RequestBody QuizDto quizDto) throws CustomError {
         QuizDto result = quizService.quizMake(quizDto);
         return ResponseEntity.ok().body(result);
     }

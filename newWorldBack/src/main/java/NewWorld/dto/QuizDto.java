@@ -3,6 +3,7 @@ package NewWorld.dto;
 import NewWorld.QuizDifficulty;
 import NewWorld.domain.Hint;
 import NewWorld.domain.Quiz;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,22 +18,29 @@ public class QuizDto {
 
     private Long quizId;
 
+    @NotEmpty(message = "닉네임을 받아오지 못하였습니다.")
     private String nickname;
 
+    @NotEmpty(message = "이름을 받아오지 못하였습니다.")
     private String name;
 
+    @NotEmpty(message = "제목을 받아오지 못하였습니다.")
     private String quizTitle;
 
+    @NotEmpty(message = "퀴즈내용을 받아오지 못하였습니다.")
     private String quizDetail;
 
     private List<HintDto> hints;
 
+    @NotEmpty(message = "닉네임(maker)을 받아오지 못하였습니다.")
     private String maker;
 
     private String makeDate;
 
+    @NotEmpty(message = "정답을 입력하지 않았습니다.")
     private String answer;
 
+    @NotEmpty(message = "난이도를 설정하지 않습니다.")
     private QuizDifficulty quizDifficulty;
 
     @Builder

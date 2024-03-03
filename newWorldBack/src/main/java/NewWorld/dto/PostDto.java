@@ -29,20 +29,17 @@ public class PostDto {
 
     private Long postId;
 
-    @NotBlank
-    @NotEmpty
-    @NotNull
+    @NotBlank(message = "제목을 입력하지 않았습니다.")
     private String title;
 
-    @NotBlank
-    @NotEmpty
-    @NotNull
+    @NotBlank(message = "내용을 입력하지 않았습니다.")
     private String detail;
 
     private List<Comment> comments;
 
     private LocalDateTime makedDate;
 
+    @NotBlank(message = "게시물종류를 입력하지 않았습니다.")
     private PostType postType;
 
     private int like;

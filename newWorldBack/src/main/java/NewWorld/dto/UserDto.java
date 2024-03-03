@@ -19,16 +19,21 @@ import java.io.File;
 @Setter
 public class UserDto {
 
+    @NotEmpty(message = "이름을 입력하지 않았습니다")
     private String name;
 
     private String userId;
 
+    @NotEmpty(message = "닉네임을 입력하지 않았습니다")
     private String nickname;
 
+    @NotEmpty(message = "핸드폰번호을 입력하지 않았습니다")
     private String phoneNumber;
 
+    @NotEmpty(message = "비밀번호를 입력하지 않았습니다")
     private String userPassword;
 
+    @NotEmpty(message = "생일을 입력하지 않았습니다")
     private String birthday;
 
     private String signupDate;

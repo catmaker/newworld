@@ -4,6 +4,7 @@ import NewWorld.domain.Post;
 import NewWorld.dto.PostDto;
 import NewWorld.exception.CustomError;
 import NewWorld.service.PostService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -39,7 +40,7 @@ public class PostController {
     }
 
     @PostMapping("/postsCreate")
-    public ResponseEntity<PostDto> makePost(@RequestBody PostDto postDto) throws CustomError {
+    public ResponseEntity<PostDto> makePost(@Valid @RequestBody PostDto postDto) throws CustomError {
 
         PostDto result = postService.makePost(postDto);
 
