@@ -76,14 +76,13 @@ export const postsLikeAPI = async (data: string) => {
   }
 };
 
-export const getPostAPI = async (id: string) => {
+export const getPostAPI = async (postId: any) => {
   try {
-    const response = await axios.get(
-      `http://localhost:8080/getPost?postId=${id}`
-    );
+    console.log(postId);
+    const response = await axios.post("http://localhost:8080/getPost", postId);
     console.log(response.data);
     return response.data;
   } catch (error) {
-    console.error(error);
+    // console.error(error);
   }
 };
