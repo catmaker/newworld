@@ -20,4 +20,12 @@ public class ImageFileDto {
         this.originalPath = originalPath;
         this.fileName = fileName;
     }
+
+    public static ImageFileDto of(String path, String originalFilename) {
+        return ImageFileDto.builder()
+                .path(path)
+                .originalPath(originalFilename)
+                .fileName(originalFilename)
+                .build();
+    }
 }

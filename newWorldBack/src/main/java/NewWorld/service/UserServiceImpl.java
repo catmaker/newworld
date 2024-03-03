@@ -33,7 +33,8 @@ public class UserServiceImpl implements UserService {
      */
     public Boolean isLoginIdPresent(String loginId) throws CustomError {
         User idCheck = userRepository.findUserByUserId(loginId)
-                .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));;
+                .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
+        ;
         return idCheck != null;
     }
 
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
      */
     public Boolean isUserPresent(String phoneNumber, String name) throws CustomError {
         User userCheck = userRepository.findUserByNameAndPhoneNumber(name, phoneNumber)
-                .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
+                .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
         return userCheck != null;
     }
 
@@ -82,25 +83,13 @@ public class UserServiceImpl implements UserService {
      * user기본정보 수정
      */
     @Override
-    public String updateUserInfo(ChangeInfoDto changeInfoDto) throws CustomError {
+    public UserDto updateUserInfo(ChangeInfoDto changeInfoDto) throws CustomError {
 
         User user = userRepository.findUserByUserId(changeInfoDto.getUserId())
-                .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
+                .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
+        User changeNickname = user.changeNickname(changeInfoDto.getNickname());
 
-
-        String currentPassword = user.getUserPassword();
-        String newPassword = changeInfoDto.getNewPassword();
-
-        if (changeInfoDto.getCurrentPassword() != currentPassword){
-            throw new CustomError(ErrorCode.SAME_PASSWORD) ;
-        }
-        if (newPassword == currentPassword){
-            throw new CustomError(ErrorCode.NOT_CHANGE) ;
-        }
-
-        user.changePassword(changeInfoDto.getNewPassword());
-
-        return "s";
+        return UserDto.of(changeNickname);
     }
 
     /**
@@ -109,7 +98,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserInfo(UserDto userDto) throws CustomError {
         User user = getUser(userDto.getNickname());
-        if(user == null){
+        if (user == null) {
             return null;
         }
         UserDto result = UserDto.of(user);
@@ -124,9 +113,9 @@ public class UserServiceImpl implements UserService {
 //        result.setImageFile(file);
 
         List<UserQuizSolvedDate> quizList = user.getQuizList();
-        if(quizList == null){
+        if (quizList == null) {
             result.setPuzzleCount(0);
-        }else{
+        } else {
             result.setPuzzleCount(quizList.size());
         }
 
@@ -135,25 +124,24 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 내가 푼 문제 불러오기
+     *
      * @param userDto
      * @return
      */
     public List<SolvedQuizDto> getSolveQuizList(UserDto userDto) throws CustomError {
         List<SolvedQuizDto> result = new ArrayList<>();
         User user = userRepository.findByNickname(userDto.getNickname())
-                .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
+                .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
 
         List<UserQuizSolvedDate> solvedQuizList = user.getQuizList();
-
-        for(UserQuizSolvedDate solvedQuiz : solvedQuizList){
-            SolvedQuizDto solvedQuizDto = SolvedQuizDto.of(solvedQuiz);
-            result.add(solvedQuizDto);
-        }
+        solvedQuizList.stream().forEach(s->result.add(SolvedQuizDto.of(s)));
 
         return result;
     }
+
     /**
      * 회원탈퇴
+     *
      * @param userInfo
      */
     public void withdraw(String userInfo) {
@@ -162,11 +150,12 @@ public class UserServiceImpl implements UserService {
 
     /**
      * user기본정보 조회
-     *  @param userNickname
+     *
+     * @param userNickname
      */
     private User getUser(String userNickname) throws CustomError {
         User user = userRepository.findByNickname(userNickname)
-                .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
+                .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
         return user;
     }
 
@@ -175,11 +164,11 @@ public class UserServiceImpl implements UserService {
             return "f1";
         }
 
-        if(isUserPresent(joinInfo.getName(), joinInfo.getPhoneNumber())){
+        if (isUserPresent(joinInfo.getName(), joinInfo.getPhoneNumber())) {
             return "f2";
         }
 
-        if(isNicknamePresent(joinInfo.getNickname())){
+        if (isNicknamePresent(joinInfo.getNickname())) {
             return "f3";
         }
 

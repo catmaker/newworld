@@ -24,7 +24,7 @@ public interface UserService {
      * @param changeInfoDto
      * @return
      */
-    public String updateUserInfo(ChangeInfoDto changeInfoDto) throws CustomError;
+    public UserDto updateUserInfo(ChangeInfoDto changeInfoDto) throws CustomError;
 
     /**
      * user기본정보 조회

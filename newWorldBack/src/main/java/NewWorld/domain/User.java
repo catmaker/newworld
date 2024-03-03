@@ -106,10 +106,10 @@ public class User {
 
     /**
      * 비밀번호 변경
-     * @param newPassword
+     * @param nickname
      */
-    public User changePassword(String newPassword){
-        this.userPassword = newPassword;
+    public User changeNickname(String nickname){
+        this.nickname = nickname;
         return this;
     }
 
@@ -138,5 +138,9 @@ public class User {
         }else {
             this.quizList.add(solvedQuiz);
         }
+    }
+
+    public void changePassword(String newPassword) {
+        this.userPassword = newPassword;
     }
 }

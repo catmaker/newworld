@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Objects;
 
 @Service
@@ -38,22 +39,17 @@ public class ImageFileServiceImpl implements ImageFileService {
      * @return The status of the save operation. Possible values are "s" for success and "f" for failure.
      */
     @Override
-    public String saveImageFile(MultipartFile uploadFile, String realpath, String userName, String userNickname) throws CustomError {
+    public File saveImageFile(MultipartFile uploadFile, String realpath, String userName, String userNickname) throws CustomError, IOException {
 
         // 이미지 파일만 업로드
         if (!Objects.requireNonNull(uploadFile.getContentType()).startsWith("image")) {
             log.warn("this file is not image type");
-            return "f";
         }
 
         String originalFilename = uploadFile.getOriginalFilename();
         String path = realpath + "/" + originalFilename;
 
-        ImageFileDto imageFileDto = ImageFileDto.builder()
-                .path(path)
-                .originalPath(originalFilename)
-                .fileName(originalFilename)
-                .build();
+        ImageFileDto imageFileDto = ImageFileDto.of(path, originalFilename);
 
         ImageFile imageFile = ImageFile.of(imageFileDto);
         ImageFile save = imageFileRepository.save(imageFile);
@@ -66,7 +62,7 @@ public class ImageFileServiceImpl implements ImageFileService {
             bos.close();
 
         } catch (Exception e) {
-            return "f";
+           throw e;
         }
 
         User user = userRepository.findByNickname(userNickname)
@@ -75,9 +71,7 @@ public class ImageFileServiceImpl implements ImageFileService {
         if(user != null){
             user.saveImage(save);
         }
-
-        if(save == null) return "f";
-        else return  "s";
+        return file;
     }
 
 }

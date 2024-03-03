@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
@@ -33,26 +34,20 @@ public class UserPageController {
     private final ImageFileService imageFileService;
 
     @PostMapping("/getUserProfile")
-    public UserDto findUserProfile(@RequestBody UserDto userDto) {
-        try {
+    public ResponseEntity<UserDto> findUserProfile(@RequestBody UserDto userDto) throws CustomError {
             UserDto userInfo = userService.getUserInfo(userDto);
-
-            return userInfo;
-        }catch (Exception e){
-
-            return null;
-        }
+            return ResponseEntity.ok().body(userInfo);
     }
 
     @PostMapping("/postUserProfile")
-    public String updateUserProfile(@RequestBody ChangeInfoDto changeInfoDto) throws Exception {
-        String result = userService.updateUserInfo(changeInfoDto);
+    public ResponseEntity<UserDto> updateUserProfile(@RequestBody ChangeInfoDto changeInfoDto) throws Exception {
+        UserDto result = userService.updateUserInfo(changeInfoDto);
 
-        return result;
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping("/getUserProfileImage")
-    public ResponseEntity<byte[]> updateUserProfileImage(@RequestBody UserDto userDto) throws CustomError {
+    public ResponseEntity<byte[]> getUserProfileImage(@RequestBody UserDto userDto) throws CustomError {
 
         ResponseEntity<byte[]> result;
         UserDto userInfo = userService.getUserInfo(userDto);
@@ -72,30 +67,34 @@ public class UserPageController {
     }
 
     @PostMapping("/postUserProfileImage")
-    public String updateUserProfileImage(MultipartFile uploadFile, HttpServletRequest request,@RequestBody UserDto userDto) throws CustomError {
-
+    public ResponseEntity<byte[]>  updateUserProfileImage(MultipartFile uploadFile, HttpServletRequest request,@RequestBody UserDto userDto) throws CustomError, IOException {
+        ResponseEntity<byte[]> result;
         String realPath = request.getServletContext().getRealPath("/upload");
-        String result = imageFileService.saveImageFile(uploadFile, realPath, userDto.getName(), userDto.getNickname());
+        File imageFile = imageFileService.saveImageFile(uploadFile, realPath, userDto.getName(), userDto.getNickname());
 
+        try{
+            HttpHeaders header = new HttpHeaders();
+
+            header.add("Content-Type", Files.probeContentType(imageFile.toPath()));
+
+            result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(imageFile), header, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return result;
     }
 
     @PostMapping("/getUserClearQuizzes")
-    public List<SolvedQuizDto> findUserClearQuizzes(@RequestBody UserDto userDto){
-        try{
+    public ResponseEntity<List<SolvedQuizDto>> findUserClearQuizzes(@RequestBody UserDto userDto) throws CustomError {
             List<SolvedQuizDto> solveQuizList = userService.getSolveQuizList(userDto);
-
-            return solveQuizList;
-        }catch (Exception e){
-            return null;
-        }
+            return ResponseEntity.ok().body(solveQuizList);
     }
 
     @GetMapping("/getQuizzes")
-    public Page<Quiz> findQuizzes(@RequestParam(required = false, defaultValue = "0", value = "page") int pageNo){
+    public ResponseEntity<Page<Quiz>> findQuizzes(@RequestParam(required = false, defaultValue = "0", value = "page") int pageNo){
         Pageable pageable = PageRequest.of(pageNo, 5);
         Page<Quiz> quizzes = quizService.getQuizzes(pageable);
-        return quizzes;
+        return ResponseEntity.ok().body(quizzes);
     }
 
 }
