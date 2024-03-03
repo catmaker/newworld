@@ -30,8 +30,8 @@ public class PostController {
         return ResponseEntity.ok().body(allPost);
     }
 
-    @GetMapping("/getPost")
-    public ResponseEntity<PostDto> findPostList(PostDto postDto) throws CustomError {
+    @PostMapping("/getPost")
+    public ResponseEntity<PostDto> findPost(@RequestBody PostDto postDto) throws CustomError {
 
         PostDto result = postService.getPost(postDto);
 

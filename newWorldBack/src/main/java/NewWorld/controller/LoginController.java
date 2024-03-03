@@ -5,6 +5,7 @@ import NewWorld.dto.UserDto;
 import NewWorld.service.LoginService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,7 +15,7 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping("/loginMember")
-    public UserDto login(@RequestBody LoginDto loginDto){
+    public ResponseEntity<UserDto> login(@RequestBody LoginDto loginDto){
         UserDto result = null;
 
         if (loginDto.getUserId() == null || loginDto.getUserPassword() == null) {
@@ -33,6 +34,6 @@ public class LoginController {
         } catch (Exception e) {
             return null;
         }
-        return result;
+        return ResponseEntity.ok().body(result);
     }
 }
