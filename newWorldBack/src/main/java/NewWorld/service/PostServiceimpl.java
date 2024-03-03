@@ -31,81 +31,62 @@ public class PostServiceimpl implements PostService {
 
     @Override
     public Page<Post> getAllPost(Pageable pageable) {
-
         return postRepository.findAll(pageable);
     }
 
     @Override
-    public PostDto getPost(PostDto info) {
-        Optional<Post> byId = postRepository.findById(info.getPostId());
+    public PostDto getPost(PostDto info) throws CustomError {
+        Post post = postRepository.findById(info.getPostId())
+                .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
 
-        if(byId.isPresent()){
-            Post post = byId.get();
-            post.addview();
+        post.addview();
+        PostDto postDto = PostDto.of(post);
 
-            PostDto postDto = new PostDto().toDto(post);
-
-            return postDto;
-        }
-        return null;
+        return postDto;
     }
 
     @Override
-    public String makePost(PostDto postDto) throws CustomError {
+    public PostDto makePost(PostDto postDto) throws CustomError {
         String userNickName = postDto.getNickname();
         User user = userRepository.findByNickname(userNickName)
-                .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
+                .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
 
-        Post firstPost = Post.builder().
-                title(postDto.getTitle()).
-                detail(postDto.getDetail()).
-                makedDate(LocalDateTime.now()).
-                postType(postDto.getPostType()).
-                likes(0).
-                views(0).
-                userNickName(postDto.getNickname()).build();
-
-        Post savedPost = postRepository.save(firstPost);
+        Post post = Post.of(postDto);
+        Post savedPost = postRepository.save(post);
 
         user.getPostList().add(savedPost);
 
-        return "s";
+        return PostDto.of(savedPost);
     }
 
     @Override
-    public String changePost(PostDto postDto) {
+    public PostDto changePost(PostDto postDto) {
 
         Post post = getPost(postDto.getPostId());
-        if(post == null){return "f";}
-        post.chagePost(postDto);
-        return "s";
+
+        Post changedPost = post.chagePost(postDto);
+        return PostDto.of(changedPost);
     }
 
     @Override
-    public String deletePost(PostDto postDto) {
+    public void deletePost(PostDto postDto) {
         Post post = getPost(postDto.getPostId());
-        if(post == null){return "f";}
         postRepository.delete(post);
-        return "s";
     }
 
     @Override
-    public String addLike(PostDto postDto) {
+    public int addLike(PostDto postDto) {
         Post post = getPost(postDto.getPostId());
-
-        if (post == null){return "f";}
-
-        post.addLike();
-        return "s";
+        return post.addLike();
     }
 
 
     public Post getPost(Long postId) {
         Optional<Post> byId = postRepository.findById(postId);
 
-        if (byId.isPresent()){
+        if (byId.isPresent()) {
             return byId.get();
         }
-       return null;
+        return null;
     }
 }

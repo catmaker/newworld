@@ -2,15 +2,19 @@ package NewWorld.controller;
 
 import NewWorld.domain.Post;
 import NewWorld.dto.PostDto;
+import NewWorld.exception.CustomError;
 import NewWorld.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+
+import static NewWorld.common.ResponseEntityConstants.RESPONSE_ENTITY_NO_CONTENT;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,58 +23,45 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/getCommunity")
-    public Page<Post> findPostList(@RequestParam(required = false, defaultValue = "0", value = "page") int pageNo){
+    public ResponseEntity<Page<Post>> findPostList(@RequestParam(required = false, defaultValue = "0", value = "page") int pageNo) {
         Pageable pageable = PageRequest.of(pageNo, 5, Sort.by("makedDate"));
         Page<Post> allPost = postService.getAllPost(pageable);
 
-        return allPost;
+        return ResponseEntity.ok().body(allPost);
     }
 
     @GetMapping("/getPost")
-    public PostDto findPostList(PostDto postDto){
+    public ResponseEntity<PostDto> findPostList(PostDto postDto) throws CustomError {
 
-        PostDto post = postService.getPost(postDto);
+        PostDto result = postService.getPost(postDto);
 
-        return post;
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping("/postsCreate")
-    public String makePost(@RequestBody PostDto postDto){
-        try {
-            postService.makePost(postDto);
-        }catch (Exception e){
-            return "f";
-        }
-        return "s";
+    public ResponseEntity<PostDto> makePost(@RequestBody PostDto postDto) throws CustomError {
+
+        PostDto result = postService.makePost(postDto);
+
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping("/postsUpdate")
-    public String updatePost(@RequestBody PostDto postDto){
-        try {
-            postService.changePost(postDto);
-        }catch (Exception e){
-            return "f";
-        }
-        return "s";
+    public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto) {
+
+        PostDto result = postService.changePost(postDto);
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping("/postsDelete")
-    public String deletePost(@RequestBody PostDto postDto){
-        try {
-            postService.deletePost(postDto);
-        }catch (Exception e){
-            return "f";
-        }
-        return "s";
+    public ResponseEntity<HttpStatus> deletePost(@RequestBody PostDto postDto) {
+        postService.deletePost(postDto);
+        return RESPONSE_ENTITY_NO_CONTENT;
     }
 
     @PostMapping("/postsLike")
-    public String addLike(@RequestBody PostDto postDto){
-        try {
-            postService.addLike(postDto);
-        }catch (Exception e){
-            return "f";
-        }
-        return "s";
+    public int addLike(@RequestBody PostDto postDto) {
+        int likes = postService.addLike(postDto);
+        return likes;
     }
 }

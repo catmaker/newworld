@@ -62,6 +62,17 @@ public class Post {
         this.commentList = commentList;
     }
 
+    public static Post of(PostDto postDto){
+        return  Post.builder().
+                title(postDto.getTitle()).
+                detail(postDto.getDetail()).
+                makedDate(LocalDateTime.now()).
+                postType(postDto.getPostType()).
+                likes(0).
+                views(0).
+                userNickName(postDto.getNickname()).build();
+    }
+
     /**
      * 댓글 등록
      */
@@ -92,8 +103,10 @@ public class Post {
         return this;
     }
 
-    public void addLike(){
+    public int addLike(){
         this.likes = this.likes + 1;
+
+        return this.likes;
     }
 
     public void addview(){

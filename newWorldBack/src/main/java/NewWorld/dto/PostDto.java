@@ -7,6 +7,7 @@ import NewWorld.domain.User;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -47,22 +48,36 @@ public class PostDto {
     private int like;
 
     private int views;
+
+    @Builder
+    public PostDto(String nickname, String name, Long postId, String title, String detail, List<Comment> comments, LocalDateTime makedDate, PostType postType, int like, int views) {
+        this.nickname = nickname;
+        this.name = name;
+        this.postId = postId;
+        this.title = title;
+        this.detail = detail;
+        this.comments = comments;
+        this.makedDate = makedDate;
+        this.postType = postType;
+        this.like = like;
+        this.views = views;
+    }
+
     /**
      * 게사판정보 ->dto
      * @param post
      */
-    public PostDto toDto(Post post){
-
-        this.title = post.getTitle();
-        this.detail = post.getDetail();
-        this.comments = post.getCommentList();
-        this.makedDate = post.getMakedDate();
-        this.nickname = post.getUserNickName();
-        this.postType = post.getPostType();
-        this.like = post.getLikes();
-        this.views = post.getViews();
-
-        return this;
+    public static PostDto of(Post post){
+       return PostDto.builder()
+                .title(post.getTitle())
+                .detail(post.getDetail())
+                .comments(post.getCommentList() != null? post.getCommentList() : null)
+                .postId(post.getId())
+                .makedDate(post.getMakedDate())
+                .like(post.getLikes())
+                .postType(post.getPostType())
+                .nickname(post.getUserNickName())
+                .build();
     }
 
 }

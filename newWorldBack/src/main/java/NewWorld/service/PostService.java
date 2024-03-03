@@ -19,9 +19,9 @@ public interface PostService {
      * @return
      */
     Page<Post> getAllPost(Pageable pageable);
-    public PostDto getPost(PostDto postDto);
-    public String makePost(PostDto postDto) throws CustomError;
-    public String changePost(PostDto postDto);
-    public String deletePost(PostDto postDto);
-    public String addLike(PostDto postDto);
+    public PostDto getPost(PostDto postDto) throws CustomError;
+    public PostDto makePost(PostDto postDto) throws CustomError;
+    public PostDto changePost(PostDto postDto);
+    public void deletePost(PostDto postDto);
+    public int addLike(PostDto postDto);
 }

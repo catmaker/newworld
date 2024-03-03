@@ -5,10 +5,13 @@ import NewWorld.dto.CommentDto;
 import NewWorld.exception.CustomError;
 import NewWorld.service.CommentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import static NewWorld.common.ResponseEntityConstants.RESPONSE_ENTITY_NO_CONTENT;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,10 +34,8 @@ public class CommentController {
     }
 
     @PostMapping("/deleteCommunityComments")
-    public ResponseEntity<String> deleteComment(@RequestBody CommentDto commentDto) throws CustomError {
-
+    public ResponseEntity<HttpStatus> deleteComment(@RequestBody CommentDto commentDto) throws CustomError {
         commentService.deleteComment(commentDto);
-
-        return ResponseEntity.ok().body("ok");
+        return RESPONSE_ENTITY_NO_CONTENT;
     }
 }
