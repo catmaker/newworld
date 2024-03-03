@@ -3,6 +3,8 @@ package NewWorld.service;
 import NewWorld.domain.ImageFile;
 import NewWorld.domain.User;
 import NewWorld.dto.ImageFileDto;
+import NewWorld.exception.CustomError;
+import NewWorld.exception.ErrorCode;
 import NewWorld.repository.ImageFileRepository;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +38,7 @@ public class ImageFileServiceImpl implements ImageFileService {
      * @return The status of the save operation. Possible values are "s" for success and "f" for failure.
      */
     @Override
-    public String saveImageFile(MultipartFile uploadFile, String realpath, String userName, String userNickname){
+    public String saveImageFile(MultipartFile uploadFile, String realpath, String userName, String userNickname) throws CustomError {
 
         // 이미지 파일만 업로드
         if (!Objects.requireNonNull(uploadFile.getContentType()).startsWith("image")) {
@@ -67,7 +69,8 @@ public class ImageFileServiceImpl implements ImageFileService {
             return "f";
         }
 
-        User user = userRepository.findByNickname(userNickname);
+        User user = userRepository.findByNickname(userNickname)
+                .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
 
         if(user != null){
             user.saveImage(save);

@@ -4,8 +4,8 @@ import NewWorld.domain.*;
 import NewWorld.dto.ChangeInfoDto;
 import NewWorld.dto.SolvedQuizDto;
 import NewWorld.dto.UserDto;
-import NewWorld.exception.JoinException;
-import NewWorld.exception.NotfindUserException;
+import NewWorld.exception.CustomError;
+import NewWorld.exception.ErrorCode;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 로그인 처리
@@ -30,8 +31,9 @@ public class UserServiceImpl implements UserService {
      * @param loginId
      * @return
      */
-    public Boolean isLoginIdPresent(String loginId) {
-        User idCheck = userRepository.findUserByUserId(loginId);
+    public Boolean isLoginIdPresent(String loginId) throws CustomError {
+        User idCheck = userRepository.findUserByUserId(loginId)
+                .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));;
         return idCheck != null;
     }
 
@@ -42,8 +44,9 @@ public class UserServiceImpl implements UserService {
      * @param name
      * @return
      */
-    public Boolean isUserPresent(String phoneNumber, String name) {
-        User userCheck = userRepository.findUserByNameAndPhoneNumber(name, phoneNumber);
+    public Boolean isUserPresent(String phoneNumber, String name) throws CustomError {
+        User userCheck = userRepository.findUserByNameAndPhoneNumber(name, phoneNumber)
+                .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
         return userCheck != null;
     }
 
@@ -53,8 +56,8 @@ public class UserServiceImpl implements UserService {
      * @param nickname
      * @return
      */
-    public Boolean isNicknamePresent(String nickname) {
-        User userCheck = userRepository.findByNickname(nickname);
+    public Boolean isNicknamePresent(String nickname) throws CustomError {
+        User userCheck = getUser(nickname);
         return userCheck != null;
     }
 
@@ -62,10 +65,9 @@ public class UserServiceImpl implements UserService {
      * 회원가입
      *
      * @param joinInfo
-     * @throws JoinException
      */
     @Override
-    public String join(UserDto joinInfo) {
+    public String join(UserDto joinInfo) throws CustomError {
 
         //유저 정보 중복체크
         String validationFailureCode = validateJoinUser(joinInfo);
@@ -83,22 +85,20 @@ public class UserServiceImpl implements UserService {
      * user기본정보 수정
      */
     @Override
-    public String updateUserInfo(ChangeInfoDto changeInfoDto){
+    public String updateUserInfo(ChangeInfoDto changeInfoDto) throws CustomError {
 
-        User user = userRepository.findUserByUserId(changeInfoDto.getUserId());
+        User user = userRepository.findUserByUserId(changeInfoDto.getUserId())
+                .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
 
-        if(user == null){
-            return "f";
-        }
 
         String currentPassword = user.getUserPassword();
         String newPassword = changeInfoDto.getNewPassword();
 
         if (changeInfoDto.getCurrentPassword() != currentPassword){
-            return "different password";
+            throw new CustomError(ErrorCode.SAME_PASSWORD) ;
         }
         if (newPassword == currentPassword){
-            return "same password";
+            throw new CustomError(ErrorCode.NOT_CHANGE) ;
         }
 
         user.changePassword(changeInfoDto.getNewPassword());
@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
      * user기본정보 조회
      */
     @Override
-    public UserDto getUserInfo(UserDto userDto) throws NotfindUserException {
+    public UserDto getUserInfo(UserDto userDto) throws CustomError {
         User user = getUser(userDto.getNickname());
         if(user == null){
             return null;
@@ -141,9 +141,10 @@ public class UserServiceImpl implements UserService {
      * @param userDto
      * @return
      */
-    public List<SolvedQuizDto> getSolveQuizList(UserDto userDto){
+    public List<SolvedQuizDto> getSolveQuizList(UserDto userDto) throws CustomError {
         List<SolvedQuizDto> result = new ArrayList<>();
-        User user = userRepository.findByNickname(userDto.getNickname());
+        User user = userRepository.findByNickname(userDto.getNickname())
+                .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
 
         List<UserQuizSolvedDate> solvedQuizList = user.getQuizList();
 
@@ -157,7 +158,6 @@ public class UserServiceImpl implements UserService {
     /**
      * 회원탈퇴
      * @param userInfo
-     * @throws JoinException
      */
     public void withdraw(String userInfo) {
         // 플레이기록 , 게시물 제거
@@ -166,14 +166,14 @@ public class UserServiceImpl implements UserService {
     /**
      * user기본정보 조회
      *  @param userNickname
-     *  @throws NotfindUserException
      */
-    private User getUser(String userNickname) {
-        User userInfo = userRepository.findByNickname(userNickname);
-        return userInfo;
+    private User getUser(String userNickname) throws CustomError {
+        User user = userRepository.findByNickname(userNickname)
+                .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
+        return user;
     }
 
-    private String validateJoinUser(UserDto joinInfo) {
+    private String validateJoinUser(UserDto joinInfo) throws CustomError {
         if (isLoginIdPresent(joinInfo.getUserId())) {
             return "f1";
         }
@@ -187,31 +187,5 @@ public class UserServiceImpl implements UserService {
         }
 
         return null;
-    }
-
-    /**
-     * 변경된 정보 확인
-     *
-     * @param changeInfo
-     * @param userInfo
-     * @return
-     */
-    private Boolean checkChangeInfo(UserDto changeInfo, User userInfo) {
-        Boolean check = true;
-
-        if (changeInfo.getBirthday() == userInfo.getBirthday()) {
-            check = false;
-        }
-        if (changeInfo.getNickname() == userInfo.getNickname()) {
-            check = false;
-        }
-        if (changeInfo.getBirthday() == userInfo.getBirthday()) {
-            check = false;
-        }
-        if (changeInfo.getPhoneNumber() == userInfo.getPhoneNumber()) {
-            check = false;
-        }
-
-        return check;
     }
 }

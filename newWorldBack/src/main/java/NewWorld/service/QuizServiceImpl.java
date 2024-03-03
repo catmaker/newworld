@@ -6,6 +6,8 @@ import NewWorld.domain.User;
 import NewWorld.domain.UserQuizSolvedDate;
 import NewWorld.dto.HintDto;
 import NewWorld.dto.QuizDto;
+import NewWorld.exception.CustomError;
+import NewWorld.exception.ErrorCode;
 import NewWorld.repository.QuizRepository;
 import NewWorld.repository.UserQuizSolvedDateRepository;
 import NewWorld.repository.UserRepository;
@@ -145,7 +147,7 @@ public class QuizServiceImpl implements QuizService{
      * @return
      */
     @Override
-    public String checkAnswer(QuizDto quizDto) {
+    public String checkAnswer(QuizDto quizDto) throws CustomError {
         Optional<Quiz> optionalQuiz = quizRepository.findById(quizDto.getQuizId());
 
         if(optionalQuiz.isPresent()){
@@ -153,7 +155,8 @@ public class QuizServiceImpl implements QuizService{
             String collectAnswer = quiz.getAnswer();
 
             if(collectAnswer.equals(quizDto.getAnswer())){
-                User user = userRepository.findByNickname(quizDto.getNickname());
+                User user = userRepository.findByNickname(quizDto.getNickname())
+                        .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
                 UserQuizSolvedDate solvedDate = UserQuizSolvedDate.of(quiz);
                 user.addPoint();
 

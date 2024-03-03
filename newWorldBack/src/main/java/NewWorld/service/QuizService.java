@@ -2,6 +2,7 @@ package NewWorld.service;
 
 import NewWorld.domain.Quiz;
 import NewWorld.dto.QuizDto;
+import NewWorld.exception.CustomError;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,5 +15,5 @@ public interface QuizService {
     String quizMake(QuizDto quizDto, String nickname);
     String deleteQuiz(QuizDto quizDto);
     void updateQuiz(QuizDto quizDto);
-    String checkAnswer(QuizDto quizDto);
+    String checkAnswer(QuizDto quizDto) throws CustomError;
 }

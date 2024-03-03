@@ -2,6 +2,7 @@ package NewWorld.service;
 
 import NewWorld.domain.Post;
 import NewWorld.dto.PostDto;
+import NewWorld.exception.CustomError;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -19,7 +20,7 @@ public interface PostService {
      */
     Page<Post> getAllPost(Pageable pageable);
     public PostDto getPost(PostDto postDto);
-    public String makePost(PostDto postDto);
+    public String makePost(PostDto postDto) throws CustomError;
     public String changePost(PostDto postDto);
     public String deletePost(PostDto postDto);
     public String addLike(PostDto postDto);

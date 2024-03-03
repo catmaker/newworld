@@ -1,16 +1,16 @@
 package NewWorld.service;
 
-import NewWorld.config.EncoderConfig;
 import NewWorld.domain.User;
 import NewWorld.dto.UserDto;
-import NewWorld.exception.LoginException;
-import NewWorld.exception.NotfindUserException;
+import NewWorld.exception.CustomError;
+import NewWorld.exception.ErrorCode;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * 2024.01.14 jeonill
@@ -31,7 +31,7 @@ public class LoginServiceImpl implements LoginService {
      * @return
      */
     @Override
-    public UserDto login(String loginId, String loginPw) throws LoginException {
+    public UserDto login(String loginId, String loginPw) throws CustomError {
         User user = userCheck(loginId, loginPw);
         LocalDateTime loginDate = user.getLoginDate();
         int now = Integer.parseInt(LocalDateTime.now().toLocalDate().toString().replaceAll("-",""));
@@ -60,7 +60,7 @@ public class LoginServiceImpl implements LoginService {
      * @return
      */
     @Override
-    public String logout(String loginId, String loginPw) throws LoginException {
+    public String logout(String loginId, String loginPw) throws CustomError {
         return userCheck(loginId, loginPw).getName();
     }
 
@@ -69,10 +69,9 @@ public class LoginServiceImpl implements LoginService {
      * @param userName
      * @param phoneNumber
      * @return
-     * @throws LoginException
      */
     @Override
-    public String findUserId(String userName, String phoneNumber) throws NotfindUserException {
+    public String findUserId(String userName, String phoneNumber) throws CustomError {
         User user = findUserforChageInfo(null, userName, phoneNumber);
         String userId = user.getUserId();
 
@@ -85,10 +84,9 @@ public class LoginServiceImpl implements LoginService {
      * @param userName
      * @param phoneNumber
      * @return
-     * @throws LoginException
      */
     @Override
-    public Boolean findUserPw(String loginId, String userName, String phoneNumber) throws  NotfindUserException {
+    public Boolean findUserPw(String loginId, String userName, String phoneNumber) throws CustomError {
         User user = findUserforChageInfo(loginId, userName, phoneNumber);
         return user != null;
     }
@@ -99,10 +97,9 @@ public class LoginServiceImpl implements LoginService {
      * @param userName
      * @param newPassword
      * @return
-     * @throws LoginException
      */
     @Override
-    public void updateUserPw(String loginId, String userName, String phoneNumber, String newPassword) throws NotfindUserException {
+    public void updateUserPw(String loginId, String userName, String phoneNumber, String newPassword) throws CustomError {
         User user = findUserforChageInfo(loginId, userName, phoneNumber);
         user.changePassword(newPassword);
     }
@@ -112,15 +109,11 @@ public class LoginServiceImpl implements LoginService {
      * @param loginId
      * @param loginPw
      * @return
-     * @throws LoginException
      */
-    private User userCheck(String loginId, String loginPw) throws LoginException {
-        try {
-            User loginUser = userRepository.findUserByUserIdAndUserPassword(loginId, loginPw);
-            return loginUser;
-        } catch (Exception e) {
-            throw new LoginException("로그인 정보를 찾을 수 없습니다.");
-        }
+    private User userCheck(String loginId, String loginPw) throws CustomError {
+            User user = userRepository.findUserByUserIdAndUserPassword(loginId, loginPw)
+                    .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
+            return user;
     }
 
     /**
@@ -130,12 +123,14 @@ public class LoginServiceImpl implements LoginService {
      * @param phoneNumber
      * @return
      */
-    private User findUserforChageInfo(String loginId, String userName, String phoneNumber) throws NotfindUserException {
+    private User findUserforChageInfo(String loginId, String userName, String phoneNumber) throws CustomError {
         User user = null;
         if(loginId == null){
-            user = userRepository.findByUserIdAndNameAndPhoneNumber(loginId, userName, phoneNumber);
+            user = userRepository.findByNameAndPhoneNumber( userName, phoneNumber)
+                    .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
         }else{
-            user = userRepository.findByUserIdAndNameAndPhoneNumber(loginId, userName, phoneNumber);
+            user = userRepository.findByUserIdAndNameAndPhoneNumber(loginId, userName, phoneNumber)
+                    .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));;
         }
 
         if(user == null){

@@ -3,6 +3,8 @@ package NewWorld.service;
 import NewWorld.domain.Post;
 import NewWorld.domain.User;
 import NewWorld.dto.PostDto;
+import NewWorld.exception.CustomError;
+import NewWorld.exception.ErrorCode;
 import NewWorld.repository.PostRepository;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -49,9 +51,10 @@ public class PostServiceimpl implements PostService {
     }
 
     @Override
-    public String makePost(PostDto postDto) {
+    public String makePost(PostDto postDto) throws CustomError {
         String userNickName = postDto.getNickname();
-        User user = userRepository.findByNickname(userNickName);
+        User user = userRepository.findByNickname(userNickName)
+                .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
 
         Post firstPost = Post.builder().
                 title(postDto.getTitle()).

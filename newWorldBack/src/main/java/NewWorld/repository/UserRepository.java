@@ -1,14 +1,9 @@
 package NewWorld.repository;
 
-import NewWorld.domain.Post;
 import NewWorld.domain.User;
-import NewWorld.dto.PostDto;
-import NewWorld.dto.UserDto;
-import NewWorld.exception.JoinException;
-import NewWorld.exception.LoginException;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+
+import java.util.Optional;
 
 /**
  * 2024.01.14 jeonil
@@ -21,7 +16,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @param userId
      * @return
      */
-    User findUserByUserId(String userId);
+    Optional<User> findUserByUserId(String userId);
 
     /**
      * 회원가입 중복체크
@@ -29,7 +24,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @param phoneNumber
      * @return
      */
-    User findUserByNameAndPhoneNumber(String name, String phoneNumber);
+    Optional<User> findUserByNameAndPhoneNumber(String name, String phoneNumber);
 
     /**
      * user로그인
@@ -37,7 +32,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @param userPw
      * @return
      */
-    User findUserByUserIdAndUserPassword(String userId, String userPw);
+    Optional<User> findUserByUserIdAndUserPassword(String userId, String userPw);
 
     /**
      * 회원조회(비번찾기)
@@ -46,15 +41,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @param phoneNumber
      * @return
      */
-    User
-    findByUserIdAndNameAndPhoneNumber(String loginId, String userName, String phoneNumber);
+    Optional<User> findByUserIdAndNameAndPhoneNumber(String loginId, String userName, String phoneNumber);
 
     /**
      * 닉네임조회
      * @param nickname
      * @return
      */
-    User findByNickname(String nickname);
+    Optional<User> findByNickname(String nickname);
 
 
+    Optional<User> findByNameAndPhoneNumber(String userName, String phoneNumber);
 }

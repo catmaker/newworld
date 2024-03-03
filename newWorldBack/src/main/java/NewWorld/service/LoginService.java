@@ -1,9 +1,7 @@
 package NewWorld.service;
 
-import NewWorld.domain.User;
 import NewWorld.dto.UserDto;
-import NewWorld.exception.LoginException;
-import NewWorld.exception.NotfindUserException;
+import NewWorld.exception.CustomError;
 
 /**
  * 2024.01.14 jeonil
@@ -18,7 +16,7 @@ public interface LoginService {
      * @param loginPw
      * @return
      */
-    public UserDto login(String loginId, String loginPw) throws LoginException;
+    public UserDto login(String loginId, String loginPw) throws CustomError;
 
     /**
      * 로그아웃 처리
@@ -26,7 +24,7 @@ public interface LoginService {
      * @param loginPw
      * @return
      */
-    public String logout(String loginId, String loginPw) throws LoginException;
+    public String logout(String loginId, String loginPw) throws CustomError;
 
     /**
      * 아이디 찾기
@@ -34,7 +32,7 @@ public interface LoginService {
      * @param phoneNumber
      * @return
      */
-    public String findUserId(String userName, String phoneNumber) throws LoginException, NotfindUserException;
+    public String findUserId(String userName, String phoneNumber) throws CustomError;
 
     /**
      * 비밀번호 찾기
@@ -43,7 +41,7 @@ public interface LoginService {
      * @param phoneNumber
      * @return
      */
-    public Boolean findUserPw(String loginId, String userName, String phoneNumber) throws LoginException, NotfindUserException;
+    public Boolean findUserPw(String loginId, String userName, String phoneNumber) throws CustomError;
 
     /**
      * 비밀번호 변경
@@ -52,5 +50,5 @@ public interface LoginService {
      * @param newPassword
      * @return
      */
-    public void updateUserPw(String loginId, String userName, String phoneNumber, String newPassword) throws LoginException, NotfindUserException;
+    public void updateUserPw(String loginId, String userName, String phoneNumber, String newPassword) throws CustomError;
 }

@@ -4,7 +4,7 @@ import NewWorld.domain.Quiz;
 import NewWorld.dto.ChangeInfoDto;
 import NewWorld.dto.SolvedQuizDto;
 import NewWorld.dto.UserDto;
-import NewWorld.exception.NotfindUserException;
+import NewWorld.exception.CustomError;
 import NewWorld.service.ImageFileService;
 import NewWorld.service.QuizService;
 import NewWorld.service.UserService;
@@ -33,7 +33,7 @@ public class UserPageController {
     private final ImageFileService imageFileService;
 
     @PostMapping("/getUserProfile")
-    public UserDto findUserProfile(@RequestBody UserDto userDto) throws NotfindUserException, IllegalAccessException {
+    public UserDto findUserProfile(@RequestBody UserDto userDto) {
         try {
             UserDto userInfo = userService.getUserInfo(userDto);
 
@@ -52,7 +52,7 @@ public class UserPageController {
     }
 
     @PostMapping("/getUserProfileImage")
-    public ResponseEntity<byte[]> updateUserProfileImage(@RequestBody UserDto userDto) throws NotfindUserException, IllegalAccessException {
+    public ResponseEntity<byte[]> updateUserProfileImage(@RequestBody UserDto userDto) throws CustomError {
 
         ResponseEntity<byte[]> result;
         UserDto userInfo = userService.getUserInfo(userDto);
@@ -72,7 +72,7 @@ public class UserPageController {
     }
 
     @PostMapping("/postUserProfileImage")
-    public String updateUserProfileImage(MultipartFile uploadFile, HttpServletRequest request,@RequestBody UserDto userDto){
+    public String updateUserProfileImage(MultipartFile uploadFile, HttpServletRequest request,@RequestBody UserDto userDto) throws CustomError {
 
         String realPath = request.getServletContext().getRealPath("/upload");
         String result = imageFileService.saveImageFile(uploadFile, realPath, userDto.getName(), userDto.getNickname());

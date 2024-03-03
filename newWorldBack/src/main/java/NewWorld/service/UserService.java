@@ -3,10 +3,7 @@ package NewWorld.service;
 import NewWorld.dto.ChangeInfoDto;
 import NewWorld.dto.SolvedQuizDto;
 import NewWorld.dto.UserDto;
-import NewWorld.exception.JoinException;
-import NewWorld.exception.LoginException;
-import NewWorld.exception.NotChangeException;
-import NewWorld.exception.NotfindUserException;
+import NewWorld.exception.CustomError;
 
 import java.util.List;
 
@@ -20,26 +17,26 @@ public interface UserService {
      * @param joinInfo
      * @return
      */
-    public String join(UserDto joinInfo);
+    public String join(UserDto joinInfo) throws CustomError;
 
     /**
      * 회원정보 수정
      * @param changeInfoDto
      * @return
      */
-    public String updateUserInfo(ChangeInfoDto changeInfoDto);
+    public String updateUserInfo(ChangeInfoDto changeInfoDto) throws CustomError;
 
     /**
      * user기본정보 조회
      * @param userDto
      * @return
      */
-    UserDto getUserInfo(UserDto userDto) throws NotfindUserException;
+    UserDto getUserInfo(UserDto userDto) throws CustomError;
 
     /**
      * user내가푼문제 조히
      * @param userDto
      * @return
      */
-    List<SolvedQuizDto> getSolveQuizList(UserDto userDto);
+    List<SolvedQuizDto> getSolveQuizList(UserDto userDto) throws CustomError;
 }
