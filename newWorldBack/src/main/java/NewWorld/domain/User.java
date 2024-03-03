@@ -129,6 +129,9 @@ public class User {
         this.imageFile = imageFile;
     }
 
+    public void addPoint(){
+        this.point = this.point + 20;
+    }
     public void addSolvedQuiz(UserQuizSolvedDate solvedQuiz){
         if(this.quizList == null){
             this.quizList = List.of(solvedQuiz);

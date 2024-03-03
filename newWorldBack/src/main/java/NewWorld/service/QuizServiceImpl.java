@@ -155,6 +155,7 @@ public class QuizServiceImpl implements QuizService{
             if(collectAnswer.equals(quizDto.getAnswer())){
                 User user = userRepository.findByNickname(quizDto.getNickname());
                 UserQuizSolvedDate solvedDate = UserQuizSolvedDate.of(quiz);
+                user.addPoint();
 
                 user.addSolvedQuiz(solvedDate);
                 return "s";
