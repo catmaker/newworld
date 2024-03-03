@@ -85,7 +85,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public String updateUserInfo(ChangeInfoDto changeInfoDto){
 
-        User user = userRepository.findByNickname(changeInfoDto.getNickname());
+        User user = userRepository.findUserByUserId(changeInfoDto.getUserId());
+
         if(user == null){
             return "f";
         }

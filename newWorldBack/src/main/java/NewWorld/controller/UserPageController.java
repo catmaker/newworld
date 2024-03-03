@@ -32,7 +32,7 @@ public class UserPageController {
     private final QuizService quizService;
     private final ImageFileService imageFileService;
 
-    @GetMapping("/getUserProfile")
+    @PostMapping("/getUserProfile")
     public UserDto findUserProfile(@RequestBody UserDto userDto) throws NotfindUserException, IllegalAccessException {
         try {
             UserDto userInfo = userService.getUserInfo(userDto);
@@ -80,7 +80,7 @@ public class UserPageController {
         return result;
     }
 
-    @GetMapping("/getUserClearQuizzes")
+    @PostMapping("/getUserClearQuizzes")
     public List<SolvedQuizDto> findUserClearQuizzes(@RequestBody UserDto userDto){
         try{
             List<SolvedQuizDto> solveQuizList = userService.getSolveQuizList(userDto);

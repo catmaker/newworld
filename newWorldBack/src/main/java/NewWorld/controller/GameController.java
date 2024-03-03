@@ -19,7 +19,7 @@ public class GameController {
 
     private final QuizService quizService;
 
-    @PostMapping("/postCheckQuiz")
+    @PostMapping("/makeQuiz")
     public String makeQuiz(@RequestBody QuizDto quizDto, String nickName){
         try {
             String result = quizService.quizMake(quizDto, nickName);
@@ -29,7 +29,7 @@ public class GameController {
         }
     }
 
-    @GetMapping("/getQuiz")
+    @PostMapping("/getQuiz")
     public QuizDto findQuiz(QuizDto quizDto){
         QuizDto quiz = quizService.getQuiz(quizDto);
         return quiz;
@@ -42,7 +42,7 @@ public class GameController {
         return quizzes;
     }
 
-    @GetMapping("/postCheckPuzzle")
+    @PostMapping("/postCheckPuzzle")
     public String checkQuizAnswer(@RequestBody QuizDto quizDto){
         try {
             String result = quizService.checkAnswer(quizDto);
