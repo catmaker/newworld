@@ -1,11 +1,17 @@
 "use client";
 import Header from "@/components/header/page";
-import React from "react";
 import styles from "./community.module.scss";
+import { useState } from "react";
+import { postsCommunityCommentsAPI } from "@/app/lib/api/community";
 const Community = ({ communityList }: any) => {
+  const [postComments, setPostComments] = useState("");
+  console.log(postComments);
+  // console.log(session);
   if (!communityList) {
     return null; // or return a loading indicator
   }
+  console.log(communityList);
+  const postId = communityList.postId;
   const title = communityList.title;
   const nickname = communityList.nickname;
   const makedDate = communityList.makedDate;
@@ -14,14 +20,25 @@ const Community = ({ communityList }: any) => {
   const comments = communityList.comments?.length;
   const detail = communityList.detail;
   const date = new Date(makedDate);
+  const date2 = new Date(communityList.comments.makedDate);
   const formattedDate = `${date.getFullYear()}-${String(
     date.getMonth() + 1
   ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")} ${String(
     date.getHours()
   ).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
+  console.log(postId);
 
-  console.log(formattedDate);
-  console.log(communityList);
+  const postCommentsHandler = async () => {
+    const data = {
+      postId: postId,
+      comment: postComments,
+      // nickname: session?.user.nickname,
+    };
+    console.log(data);
+
+    await postsCommunityCommentsAPI(data);
+  };
+
   return (
     <div className={styles.background}>
       <Header></Header>
@@ -47,12 +64,25 @@ const Community = ({ communityList }: any) => {
         <div className={styles.like}>❤️ {likes}</div>
         <div className={styles.comment_box}>
           <div className={styles.comment_title}>전체 댓글</div>
-          <div className={styles.comments}>{comments}</div>
+          <div className={styles.comments}>
+            {communityList.comments.map((comment: any) => (
+              <div key={communityList.postId}>
+                <p>{comment.userNickName || "Anonymous"}</p>
+                <p>{comment.comment}</p>
+                <p>{new Date(comment.makedDate).toLocaleString()}</p>
+              </div>
+            ))}
+          </div>
         </div>
         <div className={styles.comment_input}>
-          <input type="text" />
+          <input
+            type="text"
+            onChange={(e) => setPostComments(e.target.value)}
+          />
         </div>
-        <button className={styles.comment_button}>등록</button>
+        <button onClick={postCommentsHandler} className={styles.comment_button}>
+          등록
+        </button>
       </div>
     </div>
   );
