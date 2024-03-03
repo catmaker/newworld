@@ -27,7 +27,7 @@ public class GameController {
     }
 
     @PostMapping("/getQuiz")
-    public ResponseEntity<QuizDto> findQuiz(QuizDto quizDto) {
+    public ResponseEntity<QuizDto> findQuiz(@RequestBody QuizDto quizDto) {
         QuizDto result = quizService.getQuiz(quizDto);
         return ResponseEntity.ok().body(result);
     }
