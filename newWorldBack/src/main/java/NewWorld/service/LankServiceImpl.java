@@ -3,11 +3,8 @@ package NewWorld.service;
 import NewWorld.domain.User;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,10 +15,8 @@ public class LankServiceImpl implements LankService{
 
     @Override
     public List<User> getAttendanceLank() {
-
         return userRepository.findTop100ByOrderByAttendanceAsc().orElseThrow(null);
     }
-
     @Override
     public List<User> getScoreLank() {
         return userRepository.findTop100ByOrderByPointAsc().orElseThrow(null);

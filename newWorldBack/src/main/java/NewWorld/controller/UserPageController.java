@@ -9,6 +9,7 @@ import NewWorld.service.ImageFileService;
 import NewWorld.service.QuizService;
 import NewWorld.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

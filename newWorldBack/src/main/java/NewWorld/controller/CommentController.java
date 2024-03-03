@@ -4,6 +4,7 @@ import NewWorld.domain.Comment;
 import NewWorld.dto.CommentDto;
 import NewWorld.exception.CustomError;
 import NewWorld.service.CommentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/postsCommunityComments")
-    public ResponseEntity<String> setComment(@RequestBody CommentDto commentDto) throws CustomError {
+    public ResponseEntity<String> setComment(@Valid @RequestBody CommentDto commentDto) throws CustomError {
         commentService.setComment(commentDto);
         return ResponseEntity.ok().body("ok");
     }

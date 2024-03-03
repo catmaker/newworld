@@ -1,6 +1,8 @@
 package NewWorld.dto;
 
 import NewWorld.domain.Comment;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,9 +21,12 @@ public class CommentDto {
 
     private Long commentId;
 
+
+    @NotEmpty(message = "댓글을 입력하지 않았습니다.")
     private String comment;
 
-    private String nickName;
+    @NotNull(message = "닉네임을 받아오지 못하였습니다.")
+    private String nickname;
 
     private LocalDateTime makedDate;
 
@@ -30,7 +35,7 @@ public class CommentDto {
         this.postId = postId;
         this.commentId = commentId;
         this.comment = comment;
-        this.nickName = nickName;
+        this.nickname = nickName;
         this.makedDate = makedDate;
     }
 
