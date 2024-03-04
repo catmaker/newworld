@@ -2,7 +2,10 @@
 import Header from "@/components/header/page";
 import styles from "./community.module.scss";
 import { useState } from "react";
-import { postsCommunityCommentsAPI } from "@/app/lib/api/community";
+import {
+  postsCommunityCommentsAPI,
+  postsLikeAPI,
+} from "@/app/lib/api/community";
 type Comment = {
   userNickName: string;
   comment: string;
@@ -53,7 +56,13 @@ const Community = ({ communityList, userNickname }: any) => {
       console.error("Failed to post comment:", newComment);
     }
   };
-
+  const postsLikeHandler = async () => {
+    const data = {
+      postId: postId,
+    };
+    const response = await postsLikeAPI(data);
+    console.log(response);
+  };
   return (
     <div className={styles.background}>
       <Header></Header>
@@ -76,7 +85,9 @@ const Community = ({ communityList, userNickname }: any) => {
           className={styles.detail}
           dangerouslySetInnerHTML={{ __html: detail }}
         ></div>
-        <div className={styles.like}>❤️ {likes}</div>
+        <div className={styles.like} onClick={postsLikeHandler}>
+          ❤️ {likes}
+        </div>
         <div className={styles.comment_box}>
           <div className={styles.comment_title}>전체 댓글</div>
           <div className={styles.comments}>

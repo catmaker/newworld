@@ -65,10 +65,10 @@ export const postsViewAPI = async (data: string) => {
   }
 };
 
-export const postsLikeAPI = async (data: string) => {
+export const postsLikeAPI = async (data: any) => {
   try {
     // 보낼 데이터는 게시글 id
-    const response = await axios.post("http://localhost:8080//postsLike", data);
+    const response = await axios.post("http://localhost:8080/postsLike", data);
     console.log(response);
     return response;
   } catch (error) {
