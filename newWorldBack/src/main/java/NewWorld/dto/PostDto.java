@@ -37,7 +37,7 @@ public class PostDto {
 
     private LocalDateTime makedDate;
 
-    @NotBlank(message = "게시물종류를 입력하지 않았습니다.")
+
     private PostType postType;
 
     private int like;
@@ -69,7 +69,7 @@ public class PostDto {
                 .comments(post.getCommentList() != null? post.getCommentList() : null)
                 .postId(post.getId())
                 .makedDate(post.getMakedDate())
-                .like((int)post.getPostPostLikes().stream().count())
+                .like(post.getPostPostLikes() ==null?0:(int)post.getPostPostLikes().stream().count())
                 .postType(post.getPostType())
                 .nickname(post.getUserNickName())
                 .build();
