@@ -14,15 +14,17 @@ import { Document as TiptapDocument } from "@tiptap/extension-document";
 import { Paragraph } from "@tiptap/extension-paragraph";
 import { Text as TiptapText } from "@tiptap/extension-text";
 import { Color } from "@tiptap/extension-color";
-import { RankingProps } from "@/app/types/Ranking";
-import { getRankingAPI } from "@/app/lib/api/ranking";
+
 import { postsCreateAPI } from "@/app/lib/api/community";
+import { useRouter } from "next/navigation";
 interface TiptapProps {
   content: string;
   nickname: string;
 }
 
 const Tiptap = ({ content, nickname }: TiptapProps) => {
+  const router = useRouter();
+  console.log(nickname);
   const [title, setTitle] = useState("");
   const [selectedOption, setSelectedOption] = useState("QUESTION");
   const lowlight = createLowlight(common);
@@ -64,18 +66,23 @@ const Tiptap = ({ content, nickname }: TiptapProps) => {
     e.preventDefault();
     const editorContent = getEditorContent();
     try {
-      const response = await postsCreateAPI({
-        title,
+      const data = await postsCreateAPI({
+        title: title,
         detail: editorContent,
         postType: selectedOption,
         nickname: nickname,
       });
 
-      console.log(response);
+      if (data?.status === 200) {
+        console.log(data);
+        console.log("게시글 등록 성공");
+        router.push(`/community/${data.data.postId}`);
+      }
     } catch (error) {
       console.error(error);
     }
   };
+
   return (
     <>
       <div className="border-2">
@@ -97,7 +104,7 @@ const Tiptap = ({ content, nickname }: TiptapProps) => {
           onClick={() => editor?.commands.focus()}
           className={styles.editor}
         />
-      </div>{" "}
+      </div>
       <div className={styles.button_box}>
         <button className={styles.tiptap_button}>취소</button>
         <button onClick={handleRegisterClick} className={styles.tiptap_button}>
