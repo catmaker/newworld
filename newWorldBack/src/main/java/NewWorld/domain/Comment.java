@@ -30,7 +30,7 @@ public class Comment {
 
     private String comment;
 
-    private String userNickname;
+    private String userNickName;
 
     private LocalDateTime makedDate;
 
@@ -38,7 +38,7 @@ public class Comment {
     public Comment(Long id, String comment, String userNickName, LocalDateTime makedDate) {
         this.id = id;
         this.comment = comment;
-        this.userNickname = userNickName;
+        this.userNickName = userNickName;
         this.makedDate = makedDate;
     }
 
