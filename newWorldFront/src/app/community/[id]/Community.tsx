@@ -3,6 +3,12 @@ import Header from "@/components/header/page";
 import styles from "./community.module.scss";
 import { useState } from "react";
 import { postsCommunityCommentsAPI } from "@/app/lib/api/community";
+type Comment = {
+  userNickName: string;
+  comment: string;
+  makedDate: string;
+};
+
 const Community = ({ communityList, userNickname }: any) => {
   const [postComments, setPostComments] = useState("");
   const [commentsList, setCommentsList] = useState(
@@ -12,9 +18,10 @@ const Community = ({ communityList, userNickname }: any) => {
   if (!communityList) {
     return null; // or return a loading indicator
   }
+
   const postId = communityList.postId;
   const title = communityList.title;
-  const nickname = communityList.nickname;
+  const nickname = communityList.userNickName;
   const makedDate = communityList.makedDate;
   const views = communityList.views;
   const likes = communityList.like;
@@ -27,18 +34,24 @@ const Community = ({ communityList, userNickname }: any) => {
   ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")} ${String(
     date.getHours()
   ).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
-  console.log(postId);
 
   const postCommentsHandler = async () => {
     const data = {
       postId: postId,
       comment: postComments,
-      nickname: userNickname,
+      userNickName: userNickname,
     };
-    console.log(data);
 
     const newComment = await postsCommunityCommentsAPI(data);
-    setCommentsList((prevComments) => [...prevComments, newComment]);
+
+    if (newComment && newComment.data) {
+      setCommentsList((prevComments: Comment[]) => [
+        ...prevComments,
+        newComment.data,
+      ]);
+    } else {
+      console.error("Failed to post comment:", newComment);
+    }
   };
 
   return (
@@ -68,7 +81,7 @@ const Community = ({ communityList, userNickname }: any) => {
           <div className={styles.comment_title}>전체 댓글</div>
           <div className={styles.comments}>
             {commentsList.map((comment: any) => (
-              <div key={communityList.postId}>
+              <div key={communityList.id}>
                 <p>{comment.userNickName || "Anonymous"}</p>
                 <p>{comment.comment}</p>
                 <p>{new Date(comment.makedDate).toLocaleString()}</p>
