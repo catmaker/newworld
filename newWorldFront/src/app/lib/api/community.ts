@@ -86,3 +86,17 @@ export const getPostAPI = async (postId: any) => {
     // console.error(error);
   }
 };
+
+export const postsCommunityCommentsAPI = async (data: any) => {
+  try {
+    // 보낼 데이터는 게시글 id, 댓글 내용
+    const response = await axios.post(
+      "http://localhost:8080/postsCommunityComments",
+      data
+    );
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
