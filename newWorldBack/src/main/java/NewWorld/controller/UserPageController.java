@@ -47,6 +47,13 @@ public class UserPageController {
         return ResponseEntity.ok().body(result);
     }
 
+    @PostMapping("/postUserProfile")
+    public ResponseEntity<UserDto> updatePw(@RequestBody ChangeInfoDto changeInfoDto) throws Exception {
+        UserDto result = userService.updateUserPw(changeInfoDto);
+
+        return ResponseEntity.ok().body(result);
+    }
+
     @PostMapping("/getUserProfileImage")
     public ResponseEntity<byte[]> getUserProfileImage(@RequestBody UserDto userDto) throws CustomError {
 

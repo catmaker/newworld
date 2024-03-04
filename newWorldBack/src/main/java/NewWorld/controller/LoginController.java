@@ -28,9 +28,7 @@ public class LoginController {
             if (user == null) {
                 return null;
             }
-
             result = user;
-
         } catch (Exception e) {
             return null;
         }
