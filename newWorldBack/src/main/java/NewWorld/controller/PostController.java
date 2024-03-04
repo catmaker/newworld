@@ -61,8 +61,8 @@ public class PostController {
     }
 
     @PostMapping("/postsLike")
-    public int addLike(@RequestBody PostDto postDto) {
-        int likes = postService.addLike(postDto);
+    public int addLike(@RequestBody PostDto postDto) throws CustomError {
+        int likes = postService.updateLike(postDto);
         return likes;
     }
 }

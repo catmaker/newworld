@@ -3,16 +3,12 @@ package NewWorld.dto;
 import NewWorld.PostType;
 import NewWorld.domain.Comment;
 import NewWorld.domain.Post;
-import NewWorld.domain.User;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,6 +18,8 @@ import java.util.List;
 @Getter
 @Setter
 public class PostDto {
+
+    private String userNickname;
 
     private String nickname;
 
@@ -71,7 +69,7 @@ public class PostDto {
                 .comments(post.getCommentList() != null? post.getCommentList() : null)
                 .postId(post.getId())
                 .makedDate(post.getMakedDate())
-                .like(post.getLikes())
+                .like((int)post.getPostPostLikes().stream().count())
                 .postType(post.getPostType())
                 .nickname(post.getUserNickName())
                 .build();

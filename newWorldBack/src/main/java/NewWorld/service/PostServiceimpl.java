@@ -1,5 +1,6 @@
 package NewWorld.service;
 
+import NewWorld.domain.PostLike;
 import NewWorld.domain.Post;
 import NewWorld.domain.User;
 import NewWorld.dto.PostDto;
@@ -9,14 +10,10 @@ import NewWorld.repository.PostRepository;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,9 +72,27 @@ public class PostServiceimpl implements PostService {
     }
 
     @Override
-    public int addLike(PostDto postDto) {
-        Post post = getPost(postDto.getPostId());
-        return post.addLike();
+    public int updateLike(PostDto postDto) throws CustomError {
+        User user = userRepository.findByNickname(postDto.getUserNickname())
+                .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
+        Post post = postRepository.findById(postDto.getPostId())
+                .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
+        boolean check = post.checkLike(user);
+
+        int result = 0;
+
+        if(check) {
+            List<PostLike> postLikes = post.minusLike(user);
+            if(postLikes == null){
+                return 0;
+            }
+            result = (int) postLikes.stream().count();
+        }else if(!check){
+            List<PostLike> postLikes = post.addLike(PostLike.of(user));
+            result = (int) postLikes.stream().count();
+        }
+
+        return result;
     }
 
 
