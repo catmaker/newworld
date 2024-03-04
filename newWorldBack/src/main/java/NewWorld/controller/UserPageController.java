@@ -47,7 +47,7 @@ public class UserPageController {
         return ResponseEntity.ok().body(result);
     }
 
-    @PostMapping("/postUserProfile")
+    @PostMapping("/postUserChangePw")
     public ResponseEntity<UserDto> updatePw(@RequestBody ChangeInfoDto changeInfoDto) throws Exception {
         UserDto result = userService.updateUserPw(changeInfoDto);
 
