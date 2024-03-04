@@ -30,7 +30,7 @@ public class Comment {
 
     private String comment;
 
-    private String userNickName;
+    private String userNickname;
 
     private LocalDateTime makedDate;
 
@@ -38,7 +38,7 @@ public class Comment {
     public Comment(Long id, String comment, String userNickName, LocalDateTime makedDate) {
         this.id = id;
         this.comment = comment;
-        this.userNickName = userNickName;
+        this.userNickname = userNickName;
         this.makedDate = makedDate;
     }
 
@@ -46,7 +46,7 @@ public class Comment {
         return Comment.builder()
                 .comment(commentDto.getComment())
                 .makedDate(LocalDateTime.now())
-                .userNickName(commentDto.getUserNickname())
+                .userNickName(commentDto.getNickname())
                 .build();
     }
 

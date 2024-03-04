@@ -26,7 +26,7 @@ public class CommentDto {
     private String comment;
 
     @NotNull(message = "닉네임을 받아오지 못하였습니다.")
-    private String userNickname;
+    private String nickname;
 
     private LocalDateTime makedDate;
 
@@ -35,7 +35,7 @@ public class CommentDto {
         this.postId = postId;
         this.commentId = commentId;
         this.comment = comment;
-        this.userNickname = nickName;
+        this.nickname = nickName;
         this.makedDate = makedDate;
     }
 
@@ -43,7 +43,7 @@ public class CommentDto {
        return CommentDto.builder()
                 .commentId(comment.getId())
                 .comment(comment.getComment())
-                .nickName(comment.getUserNickName())
+                .nickName(comment.getUserNickname())
                 .makedDate(comment.getMakedDate())
                 .build();
     }
