@@ -2,6 +2,7 @@ package NewWorld.controller;
 
 import NewWorld.domain.Comment;
 import NewWorld.dto.CommentDto;
+import NewWorld.dto.UserDto;
 import NewWorld.exception.CustomError;
 import NewWorld.service.CommentService;
 import jakarta.validation.Valid;
@@ -21,9 +22,9 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/postsCommunityComments")
-    public ResponseEntity<String> setComment(@Valid @RequestBody CommentDto commentDto) throws CustomError {
-        commentService.setComment(commentDto);
-        return ResponseEntity.ok().body("ok");
+    public ResponseEntity<CommentDto> setComment(@Valid @RequestBody CommentDto commentDto) throws CustomError {
+        CommentDto result = commentService.setComment(commentDto);
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping("/updateCommunityComments")
