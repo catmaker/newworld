@@ -9,13 +9,19 @@ const page = async (props: any) => {
   const postId = props.params.id;
   const newObject = { postId: postId };
   const session = (await getServerSession(authOptions)) as MySession;
+  const nickname = session.user.nickname;
   if (session && session.user) {
-    const sessions = session.user;
+    const sessions = session.user.nickname;
   } else {
     return redirect("/login");
   }
   const communityList = await getPostAPI(newObject);
-  return <Community communityList={communityList}> </Community>;
+  return (
+    <Community
+      communityList={communityList}
+      userNickname={nickname}
+    ></Community>
+  );
 };
 
 export default page;

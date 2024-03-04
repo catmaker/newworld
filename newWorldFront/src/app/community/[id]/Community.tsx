@@ -3,14 +3,15 @@ import Header from "@/components/header/page";
 import styles from "./community.module.scss";
 import { useState } from "react";
 import { postsCommunityCommentsAPI } from "@/app/lib/api/community";
-const Community = ({ communityList }: any) => {
+const Community = ({ communityList, userNickname }: any) => {
   const [postComments, setPostComments] = useState("");
-  console.log(postComments);
-  // console.log(session);
+  const [commentsList, setCommentsList] = useState(
+    communityList.comments || []
+  );
+
   if (!communityList) {
     return null; // or return a loading indicator
   }
-  console.log(communityList);
   const postId = communityList.postId;
   const title = communityList.title;
   const nickname = communityList.nickname;
@@ -32,11 +33,12 @@ const Community = ({ communityList }: any) => {
     const data = {
       postId: postId,
       comment: postComments,
-      // nickname: session?.user.nickname,
+      nickname: userNickname,
     };
     console.log(data);
 
-    await postsCommunityCommentsAPI(data);
+    const newComment = await postsCommunityCommentsAPI(data);
+    setCommentsList((prevComments) => [...prevComments, newComment]);
   };
 
   return (
@@ -65,7 +67,7 @@ const Community = ({ communityList }: any) => {
         <div className={styles.comment_box}>
           <div className={styles.comment_title}>전체 댓글</div>
           <div className={styles.comments}>
-            {communityList.comments.map((comment: any) => (
+            {commentsList.map((comment: any) => (
               <div key={communityList.postId}>
                 <p>{comment.userNickName || "Anonymous"}</p>
                 <p>{comment.comment}</p>
