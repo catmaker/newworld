@@ -70,6 +70,7 @@ public class PostDto {
                 .postId(post.getId())
                 .makedDate(post.getMakedDate())
                 .like(post.getPostPostLikes() ==null?0:(int)post.getPostPostLikes().stream().count())
+                .views(post.getViews())
                 .postType(post.getPostType())
                 .nickname(post.getUserNickName())
                 .build();
