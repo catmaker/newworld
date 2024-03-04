@@ -39,4 +39,6 @@ public interface UserService {
      * @return
      */
     List<SolvedQuizDto> getSolveQuizList(UserDto userDto) throws CustomError;
+
+    UserDto updateUserPw(ChangeInfoDto changeInfoDto) throws CustomError;
 }

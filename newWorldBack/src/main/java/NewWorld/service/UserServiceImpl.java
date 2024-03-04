@@ -93,6 +93,21 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * usespw 변경
+     */
+    @Override
+    public UserDto updateUserPw(ChangeInfoDto changeInfoDto) throws CustomError {
+
+        User user = userRepository.findUserByUserId(changeInfoDto.getUserId())
+                .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
+        if(changeInfoDto.getOriginPassword().equals(user.getUserPassword())){
+            return UserDto.builder().build();
+        }
+        user.changePassword(changeInfoDto.getNewPassword());
+        return UserDto.of(user);
+    }
+
+    /**
      * user기본정보 조회
      */
     @Override
