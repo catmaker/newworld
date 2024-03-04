@@ -43,7 +43,7 @@ public class CommentDto {
        return CommentDto.builder()
                 .commentId(comment.getId())
                 .comment(comment.getComment())
-                .nickName(comment.getUserNickName())
+                .nickName(comment.getUserNickname())
                 .makedDate(comment.getMakedDate())
                 .build();
     }
