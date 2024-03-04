@@ -46,7 +46,7 @@ public class Comment {
         return Comment.builder()
                 .comment(commentDto.getComment())
                 .makedDate(LocalDateTime.now())
-                .userNickName(commentDto.getUserNickname())
+                .userNickName(commentDto.getUserNickName())
                 .build();
     }
 
