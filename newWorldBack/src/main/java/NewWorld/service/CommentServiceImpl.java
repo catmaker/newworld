@@ -25,12 +25,14 @@ public class CommentServiceImpl implements CommentService {
     private final PostRepository postRepository;
 
     @Override
-    public void setComment(CommentDto commentDto) throws CustomError {
+    public CommentDto setComment(CommentDto commentDto) throws CustomError {
         Post post = postRepository.findById(commentDto.getPostId())
                 .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
 
         Comment comment = Comment.of(commentDto);
         post.setComment(comment);
+
+        return CommentDto.of(comment);
     }
 
     @Override

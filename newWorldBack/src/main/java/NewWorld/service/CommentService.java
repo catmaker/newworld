@@ -9,7 +9,7 @@ import NewWorld.exception.CustomError;
  * 댓글기능
  */
 public interface CommentService {
-    public void setComment(CommentDto commentDto) throws CustomError;
+    public CommentDto setComment(CommentDto commentDto) throws CustomError;
     public Comment modifyComment(CommentDto commentDto) throws CustomError;
     public void deleteComment(CommentDto commentDto) throws CustomError;
 }
