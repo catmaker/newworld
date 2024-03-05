@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import styles from "./login.module.scss";
 import Link from "next/link";
-import { getSession, signIn as nextAuthSignIn, signIn } from "next-auth/react";
+import { signIn as nextAuthSignIn, signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
 
 const Login = () => {
