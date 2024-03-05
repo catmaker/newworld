@@ -1,12 +1,18 @@
 // SelectedItemInfoManagement.tsx
 import React, { useEffect, useState } from "react";
 import styles from "@/app/mypage/mypage.module.scss";
-import { deleteUserProfile, postUserProfileAPI } from "@/app/lib/api/mypageapi";
+import {
+  deleteUserProfile,
+  postUserChangePwAPI,
+} from "@/app/lib/api/mypageapi";
 import { MypageProps } from "@/app/types/mypage";
 import Modal from "@/components/util/modal/Modal";
+import { useRouter } from "next/navigation";
 import { redirect } from "next/navigation";
 const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
-  let name, id, nickname;
+  const [passwordChanged, setPasswordChanged] = useState(false);
+  const router = useRouter();
+  let name, id: string, nickname;
   if (session) {
     ({ name, id, nickname } = session);
   } else {
@@ -21,17 +27,22 @@ const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
   useEffect(() => {
     const updateProfile = async () => {
       const data = {
-        currentPassword,
-        newPassword,
+        userId: id,
+        originPassword: currentPassword,
+        newPassword: newPassword,
       };
 
       try {
-        await postUserProfileAPI(data);
+        const response = await postUserChangePwAPI(data);
+        if (response?.status === 200) {
+          setNewPassword("");
+          setCurrentPassword("");
+          router.refresh();
+        }
       } catch (error) {
         console.error(error);
       }
     };
-
     if (shouldUpdateProfile) {
       updateProfile();
       setShouldUpdateProfile(false);

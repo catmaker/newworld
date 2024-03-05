@@ -15,16 +15,17 @@ export const getUserProfileAPI = async () => {
   }
 };
 
-export const postUserProfileAPI = async (data: postUserProfileInterface) => {
+export const postUserChangePwAPI = async (data: any) => {
   try {
     // 보낼 데이터는 현재 비밀번호, 새 비밀번호, 닉네임
     console.log(data);
     const response = await axios.post(
-      "http://localhost:8080/postUserProfile",
+      "http://localhost:8080/postUserChangePw",
       data
     );
     console.log(response);
     alert("프로필 업데이트에 성공했습니다.");
+
     return response;
   } catch (error) {
     console.error(error);

@@ -25,6 +25,7 @@ export interface MypageProps {
     id: string;
     nickname: string;
   };
+  status?: any;
 }
 export interface WelcomeMessageProps {
   session: {
