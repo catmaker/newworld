@@ -6,6 +6,7 @@ import NewWorld.domain.User;
 import NewWorld.dto.PostDto;
 import NewWorld.exception.CustomError;
 import NewWorld.exception.ErrorCode;
+import NewWorld.repository.LikeRepository;
 import NewWorld.repository.PostRepository;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ public class PostServiceimpl implements PostService {
 
     private final UserRepository userRepository;
     private final PostRepository postRepository;
+    private final LikeRepository likeRepository;
 
     @Override
     public Page<Post> getAllPost(Pageable pageable) {
@@ -35,9 +37,9 @@ public class PostServiceimpl implements PostService {
     public PostDto getPost(PostDto info) throws CustomError {
         Post post = postRepository.findById(info.getPostId())
                 .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
-
+        int count = likeRepository.countAllByPost(post);
         post.addview();
-        PostDto postDto = PostDto.of(post);
+        PostDto postDto = PostDto.of(post, count);
 
         return postDto;
     }
@@ -50,25 +52,29 @@ public class PostServiceimpl implements PostService {
 
         Post post = Post.of(postDto);
         Post savedPost = postRepository.save(post);
-
+        int count = likeRepository.countAllByPost(post);
         user.getPostList().add(savedPost);
 
-        return PostDto.of(savedPost);
+
+        return PostDto.of(savedPost, count);
     }
 
     @Override
     public PostDto changePost(PostDto postDto) {
-
         Post post = getPost(postDto.getPostId());
-
+        int count = likeRepository.countAllByPost(post);
         Post changedPost = post.chagePost(postDto);
-        return PostDto.of(changedPost);
+
+        return PostDto.of(changedPost,count);
     }
 
     @Override
-    public void deletePost(PostDto postDto) {
+    public void deletePost(PostDto postDto) throws CustomError {
+        User user = userRepository.findByNickname(postDto.getNickname())
+                .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
         Post post = getPost(postDto.getPostId());
-        postRepository.delete(post);
+
+        user.deletePost(post);
     }
 
     @Override
@@ -77,19 +83,17 @@ public class PostServiceimpl implements PostService {
                 .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
         Post post = postRepository.findById(postDto.getPostId())
                 .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
-        boolean check = post.checkLike(user);
+        PostLike check = likeRepository.findByPostAndUser(post, user);
 
         int result = 0;
 
-        if(check) {
-            List<PostLike> postLikes = post.minusLike(user);
-            if(postLikes == null){
-                return 0;
-            }
-            result = (int) postLikes.stream().count();
-        }else if(!check){
-            List<PostLike> postLikes = post.addLike(PostLike.of(user));
-            result = (int) postLikes.stream().count();
+        if(check == null) {
+            likeRepository.save(PostLike.of(user, post));
+            return 1;
+
+        }else if(check != null){
+            likeRepository.deleteByPostAndUser(post, user);
+            result = likeRepository.countAllByPost(post);
         }
 
         return result;

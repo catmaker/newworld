@@ -97,10 +97,8 @@ public class QuizServiceImpl implements QuizService {
      */
     @Override
     public void deleteQuiz(QuizDto quizDto) throws CustomError {
-        String quizTitle = quizDto.getQuizTitle();
-        String maker = quizDto.getMaker();
 
-        Quiz q = quizRepository.findByTitleAndAndMaker(quizTitle, maker)
+        Quiz q = quizRepository.findById(quizDto.getQuizId())
                 .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
 
         UserQuizSolvedDate byDate = userQuizSolvedDateRepository.findByQuiz(q);

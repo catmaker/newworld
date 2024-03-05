@@ -55,7 +55,7 @@ public class PostController {
     }
 
     @PostMapping("/postsDelete")
-    public ResponseEntity<HttpStatus> deletePost(@RequestBody PostDto postDto) {
+    public ResponseEntity<HttpStatus> deletePost(@RequestBody PostDto postDto) throws CustomError {
         postService.deletePost(postDto);
         return RESPONSE_ENTITY_NO_CONTENT;
     }
