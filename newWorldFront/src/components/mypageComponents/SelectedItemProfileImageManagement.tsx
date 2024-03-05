@@ -13,7 +13,7 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
 }) => {
   const [preview, setPreview] = useState(profilePicture);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [nickname, setNickname] = useState(""); // 닉네임 상태를 추가합니다.
+  const [nickname, setNickname] = useState("");
 
   const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
