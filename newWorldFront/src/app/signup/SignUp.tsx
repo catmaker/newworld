@@ -10,8 +10,9 @@ import {
 import Image from "next/image";
 import hide from "/public/img/hide-password.png";
 import show from "/public/img/show-password.png";
-
+import { useRouter } from "next/navigation";
 const SignUp = () => {
+  const router = useRouter();
   // 패스워드 보이기/숨기기
   const [showPassword, setShowPassword] = useState(false);
   // 이름 입력시 13자 제한 커스텀 훅
@@ -89,7 +90,9 @@ const SignUp = () => {
         },
         body: JSON.stringify(formData),
       });
-
+      if (response.ok) {
+        router.push("/login");
+      }
       if (!response.ok) {
         console.log(response.ok);
         throw new Error("Signup request failed");
