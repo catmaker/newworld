@@ -9,7 +9,7 @@ const Quiz = ({ quiz }: any) => {
     console.error("quiz or quiz.hints is not an array:", quiz);
     return null;
   }
-  console.log(quiz.quizTitle);
+  console.log(quiz);
   const checkAnswer = async () => {
     const data = {
       quizId: quiz.quizTitle,
@@ -20,26 +20,30 @@ const Quiz = ({ quiz }: any) => {
     console.log(response);
   };
   return (
-    <div className={styles.background}>
+    <>
       <Header></Header>
-      <div style={{ color: "white" }}>
-        <h1>{quiz.quizTitle}</h1>
-        <p>{quiz.quizDetail}</p>
-        {/* <p>Answer: {quiz.answer}</p> */}
-        <input
-          type="text"
-          onChange={(e) => {
-            setAnswer(e.target.value);
-          }}
-        />
-        <div>{quiz.hints[0].hint}</div>
-        <div>{quiz.hints[1].hint}</div>
-        <div>{quiz.hints[2].hint}</div>
-        <button type="submit" onClick={checkAnswer}>
-          제출
-        </button>
+      <div className={styles.background}>
+        <div className={styles.quiz_contents_box}>
+          <h1>{quiz.quizTitle}</h1>
+          <p>{quiz.quizDetail}</p>
+          {/* <p>Answer: {quiz.answer}</p> */}
+          <input
+            type="text"
+            onChange={(e) => {
+              setAnswer(e.target.value);
+            }}
+          />
+          <div>
+            <div>{quiz.hints[0].hint}</div>
+            <div>{quiz.hints[1].hint}</div>
+            <div>{quiz.hints[2].hint}</div>
+          </div>
+          <button type="submit" onClick={checkAnswer}>
+            제출
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
