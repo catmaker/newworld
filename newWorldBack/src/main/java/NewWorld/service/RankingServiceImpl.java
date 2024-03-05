@@ -9,21 +9,21 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class LankServiceImpl implements LankService{
+public class RankingServiceImpl implements RankingService{
 
     private final UserRepository userRepository;
 
     @Override
-    public List<User> getAttendanceLank() {
+    public List<User> getAttendanceRanking() {
         return userRepository.findTop100ByOrderByAttendanceAsc().orElseThrow(null);
     }
     @Override
-    public List<User> getScoreLank() {
+    public List<User> getScoreRanking() {
         return userRepository.findTop100ByOrderByPointAsc().orElseThrow(null);
     }
 
     @Override
-    public List<User> getTotalLank() {
+    public List<User> getTotalRanking() {
         return userRepository.findTop100ByOrderByAttendanceAscPointAsc().orElseThrow(null);
     }
 }

@@ -1,7 +1,7 @@
 package NewWorld.controller;
 
 import NewWorld.domain.User;
-import NewWorld.service.LankService;
+import NewWorld.service.RankingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,24 +11,24 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class LankController {
-    private final LankService lankService;
+public class RankingController {
+    private final RankingService rankingService;
 
-    @GetMapping("/getAttendanceLank")
+    @GetMapping("/getAttendanceRanking")
     public ResponseEntity<List<User>> getAttendanceLank() {
-        List<User> allPost = lankService.getAttendanceLank();
+        List<User> allPost = rankingService.getAttendanceRanking();
         return ResponseEntity.ok().body(allPost);
     }
 
-    @GetMapping("/getScoreLank")
+    @GetMapping("/getScoreRanking")
     public ResponseEntity<List<User>> getScoreLank() {
-        List<User> allPost = lankService.getScoreLank();
+        List<User> allPost = rankingService.getScoreRanking();
         return ResponseEntity.ok().body(allPost);
     }
 
-    @GetMapping("/getTotalLank")
+    @GetMapping("/getTotalRanking")
     public ResponseEntity<List<User>> getTotalLank() {
-        List<User> allPost = lankService.getTotalLank();
+        List<User> allPost = rankingService.getTotalRanking();
         return ResponseEntity.ok().body(allPost);
     }
 }
