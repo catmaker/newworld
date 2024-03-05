@@ -36,8 +36,6 @@ public class Post {
     //조회수
     private int views;
 
-    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<PostLike> postPostLikes;
     //종류 (기타,질문)
     @Enumerated(EnumType.STRING)
     private PostType postType;
@@ -49,14 +47,13 @@ public class Post {
     private List<Comment> commentList;
 
     @Builder
-    public Post(Long id, String title, String detail, LocalDateTime makedDate, String userNickName, int views, List<PostLike> postLikes, PostType postType, ImageFile imageFile, List<Comment> commentList) {
+    public Post(Long id, String title, String detail, LocalDateTime makedDate, String userNickName, int views,  PostType postType, ImageFile imageFile, List<Comment> commentList) {
         this.id = id;
         this.title = title;
         this.detail = detail;
         this.makedDate = makedDate;
         this.userNickName = userNickName;
         this.views = views;
-        this.postPostLikes = postLikes;
         this.postType = postType;
         this.imageFile = imageFile;
         this.commentList = commentList;
@@ -104,28 +101,7 @@ public class Post {
         return this;
     }
 
-    public boolean checkLike(User user){
-        boolean result = this.postPostLikes.stream().filter(s -> s.getUser().equals(user)).findFirst().isPresent();
 
-        return result;
-    }
-
-    public List<PostLike> addLike(PostLike postLike){
-        if(this.postPostLikes == null){
-           this.postPostLikes = List.of(postLike);
-        }else{
-            this.postPostLikes.add(postLike);
-        }
-
-        return this.postPostLikes;
-    }
-
-    public List<PostLike> minusLike(User user){
-        this.postPostLikes.removeIf(l->this.postPostLikes.stream()
-                        .filter(s->s.getUser().getId().equals(user.getId()))
-                .findFirst().isPresent());
-        return this.postPostLikes;
-    }
 
     public void addview(){
         this.views = this.views + 1;
