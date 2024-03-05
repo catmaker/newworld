@@ -17,6 +17,7 @@ const Community = ({ communityList, userNickname }: any) => {
   const [commentsList, setCommentsList] = useState(
     communityList.comments || []
   );
+  const [like, setLike] = useState(communityList.like);
 
   if (!communityList) {
     return null; // or return a loading indicator
@@ -26,12 +27,11 @@ const Community = ({ communityList, userNickname }: any) => {
   const title = communityList.title;
   const nickname = communityList.userNickName;
   const makedDate = communityList.makedDate;
-  const views = communityList.views;
   const likes = communityList.like;
+  const views = communityList.views;
   const comments = communityList.comments?.length;
   const detail = communityList.detail;
   const date = new Date(makedDate);
-  const date2 = new Date(communityList.comments.makedDate);
   const formattedDate = `${date.getFullYear()}-${String(
     date.getMonth() + 1
   ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")} ${String(
@@ -44,7 +44,6 @@ const Community = ({ communityList, userNickname }: any) => {
       comment: postComments,
       userNickName: userNickname,
     };
-
     const newComment = await postsCommunityCommentsAPI(data);
 
     if (newComment && newComment.data) {
@@ -59,10 +58,14 @@ const Community = ({ communityList, userNickname }: any) => {
   const postsLikeHandler = async () => {
     const data = {
       postId: postId,
+      userNickname: userNickname,
     };
     const response = await postsLikeAPI(data);
-    console.log(response);
+    if (response?.status === 200) {
+      setLike(response.data);
+    }
   };
+  console.log(commentsList.length);
   return (
     <div className={styles.background}>
       <Header></Header>
@@ -76,8 +79,8 @@ const Community = ({ communityList, userNickname }: any) => {
             </div>
             <div className={styles.interaction_box}>
               <div>조회 : {views}</div>
-              <div>추천 : {likes}</div>
-              <div>댓글 수 : {comments}</div>
+              <div>추천 : {like}</div>
+              <div>댓글 수 : {commentsList.length}</div>
             </div>
           </div>
         </div>
@@ -86,7 +89,7 @@ const Community = ({ communityList, userNickname }: any) => {
           dangerouslySetInnerHTML={{ __html: detail }}
         ></div>
         <div className={styles.like} onClick={postsLikeHandler}>
-          ❤️ {likes}
+          ❤️ {like || 0}
         </div>
         <div className={styles.comment_box}>
           <div className={styles.comment_title}>전체 댓글</div>
