@@ -2,6 +2,7 @@ package NewWorld.domain;
 
 import NewWorld.PostType;
 import NewWorld.dto.PostDto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -33,6 +34,10 @@ public class Post {
 
     private String userNickName;
 
+    @JsonBackReference
+    @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private List<PostLike> likes;
+
     //조회수
     private int views;
 
@@ -45,14 +50,14 @@ public class Post {
 
     @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Comment> commentList;
-
     @Builder
-    public Post(Long id, String title, String detail, LocalDateTime makedDate, String userNickName, int views,  PostType postType, ImageFile imageFile, List<Comment> commentList) {
+    public Post(Long id, String title, String detail, LocalDateTime makedDate, String userNickName, List<PostLike> likes, int views, PostType postType, ImageFile imageFile, List<Comment> commentList) {
         this.id = id;
         this.title = title;
         this.detail = detail;
         this.makedDate = makedDate;
         this.userNickName = userNickName;
+        this.likes = likes;
         this.views = views;
         this.postType = postType;
         this.imageFile = imageFile;
