@@ -106,7 +106,7 @@ const Community = (data: any) => {
                       👁️‍🗨️{item.views}
                     </div>
                     <div className={styles.contents_Layout_item_like}>
-                      ❤️{item.likes}
+                      ❤️{item.likes || 0}
                     </div>
                   </div>
                 </Link>
