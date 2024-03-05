@@ -38,7 +38,7 @@ const Post = ({ session }: { session: Session }) => {
         name: session.user.name,
         quizTitle,
         quizDetail,
-        hints,
+        hints: hints.map((hint) => ({ hint })),
         maker: session.user.nickname,
         answer,
         quizDifficulty,
