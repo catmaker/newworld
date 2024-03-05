@@ -175,16 +175,22 @@ public class UserServiceImpl implements UserService {
     }
 
     private String validateJoinUser(UserDto joinInfo) throws CustomError {
-        if (isLoginIdPresent(joinInfo.getUserId())) {
-            return "f1";
+        boolean idCheck = userRepository.findUserByUserId(joinInfo.getUserId())
+                .isPresent();
+        boolean userCheck = userRepository.findUserByNameAndPhoneNumber(joinInfo.getName(), joinInfo.getPhoneNumber())
+                .isPresent();
+        boolean nameCheck = userRepository.findByNickname(joinInfo.getNickname())
+                .isPresent();
+        if (idCheck) {
+            return "id duplication";
         }
 
-        if (isUserPresent(joinInfo.getName(), joinInfo.getPhoneNumber())) {
-            return "f2";
+        if (userCheck) {
+            return "user duplication";
         }
 
-        if (isNicknamePresent(joinInfo.getNickname())) {
-            return "f3";
+        if (nameCheck) {
+            return "nickname duplication";
         }
 
         return null;
