@@ -103,8 +103,11 @@ public class QuizServiceImpl implements QuizService {
 
         UserQuizSolvedDate byDate = userQuizSolvedDateRepository.findByQuiz(q);
 
+        User user = userRepository.findByNickname(quizDto.getNickname())
+                .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
+
+        user.deleteQuiz(q);
         userQuizSolvedDateRepository.delete(byDate);
-        quizRepository.delete(q);
     }
 
     /**

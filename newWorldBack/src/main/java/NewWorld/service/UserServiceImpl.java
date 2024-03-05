@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByNickname(changeInfoDto.getNickname())
                 .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
 
-        User changeNickname = user.changeNickname(changeInfoDto.getNickname());
+        User changeNickname = user.changeNickname(changeInfoDto.getNewNickname());
 
         return UserDto.of(changeNickname).hideInfo();
     }
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto updateUserPw(ChangeInfoDto changeInfoDto) throws CustomError {
 
-        User user = userRepository.findUserByUserId(changeInfoDto.getUserId())
+        User user = userRepository.findUserByUserIdAndUserPassword(changeInfoDto.getUserId(), changeInfoDto.getOriginPassword())
                 .orElse(null);
         if(user == null){
            return UserDto.builder().userId(changeInfoDto.getUserId()).build();

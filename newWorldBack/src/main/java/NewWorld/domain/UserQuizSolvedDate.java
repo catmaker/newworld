@@ -16,7 +16,7 @@ public class UserQuizSolvedDate {
 
     private String solvedTime;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Quiz quiz;
 
     @Builder

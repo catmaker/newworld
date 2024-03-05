@@ -48,12 +48,11 @@ public class User {
     @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private ImageFile imageFile;
 
-    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<UserQuizSolvedDate> quizList;
 
-    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Post> postList;
-
 
     @Builder
     public User(Long id, String name, String userId, String nickname, String phoneNumber, String userPassword, String birthday, int point, LocalDateTime loginDate, int attendance, MemberType memberType, LocalDateTime joinDate, ImageFile imageFile, List<UserQuizSolvedDate> quizList, List<Post> postList) {
@@ -146,5 +145,8 @@ public class User {
 
     public void deletePost(Post post){
         this.postList.removeIf(s->s.equals(post));
+    }
+    public void deleteQuiz(Quiz quiz){
+        this.quizList.removeIf(s->s.equals(quiz));
     }
 }
