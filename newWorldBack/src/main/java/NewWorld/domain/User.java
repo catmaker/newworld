@@ -143,4 +143,8 @@ public class User {
     public void changePassword(String newPassword) {
         this.userPassword = newPassword;
     }
+
+    public void deletePost(Post post){
+        this.postList.removeIf(s->s.equals(post));
+    }
 }

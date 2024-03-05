@@ -35,7 +35,7 @@ public class Post {
     private String userNickName;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<PostLike> likes;
 
     //조회수

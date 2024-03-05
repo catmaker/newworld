@@ -69,9 +69,12 @@ public class PostServiceimpl implements PostService {
     }
 
     @Override
-    public void deletePost(PostDto postDto) {
+    public void deletePost(PostDto postDto) throws CustomError {
+        User user = userRepository.findByNickname(postDto.getNickname())
+                .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
         Post post = getPost(postDto.getPostId());
-        postRepository.delete(post);
+
+        user.deletePost(post);
     }
 
     @Override

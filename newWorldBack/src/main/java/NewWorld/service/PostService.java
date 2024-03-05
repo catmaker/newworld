@@ -22,6 +22,6 @@ public interface PostService {
     public PostDto getPost(PostDto postDto) throws CustomError;
     public PostDto makePost(PostDto postDto) throws CustomError;
     public PostDto changePost(PostDto postDto);
-    public void deletePost(PostDto postDto);
+    public void deletePost(PostDto postDto) throws CustomError;
     public int updateLike(PostDto postDto) throws CustomError;
 }
