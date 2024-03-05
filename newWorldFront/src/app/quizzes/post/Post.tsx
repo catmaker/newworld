@@ -1,6 +1,6 @@
 "use client";
 import React, { ChangeEvent, useState } from "react";
-import { postCheckQuiz } from "@/app/lib/api/quizzes";
+import { postMakeQuiz } from "@/app/lib/api/quizzes";
 import Header from "@/components/header/page";
 import styles from "./post.module.scss";
 interface Session {
