@@ -116,6 +116,14 @@ const SignUp = () => {
       if (response?.status === 200) {
         alert("회원가입이 완료되었습니다.");
         router.push("/login");
+      } else if (response?.status === 226) {
+        if (response.data === "USER_ID_DUPLICATION") {
+          alert("이미 사용중인 이메일입니다. 다른 이메일을 입력해주세요.");
+        } else if (response.data === "USER_NICKNAME_DUPLICATION") {
+          alert("이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.");
+        } else {
+          alert("이미 가입된 회원입니다.");
+        }
       }
     } catch (error) {
       console.error(error);
