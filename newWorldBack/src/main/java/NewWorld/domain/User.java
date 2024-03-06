@@ -49,13 +49,10 @@ public class User {
     private ImageFile imageFile;
 
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<UserQuizSolvedDate> quizList;
-
-    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Post> postList;
 
     @Builder
-    public User(Long id, String name, String userId, String nickname, String phoneNumber, String userPassword, String birthday, int point, LocalDateTime loginDate, int attendance, MemberType memberType, LocalDateTime joinDate, ImageFile imageFile, List<UserQuizSolvedDate> quizList, List<Post> postList) {
+    public User(Long id, String name, String userId, String nickname, String phoneNumber, String userPassword, String birthday, int point, LocalDateTime loginDate, int attendance, MemberType memberType, LocalDateTime joinDate, ImageFile imageFile, List<Post> postList) {
         this.id = id;
         this.name = name;
         this.userId = userId;
@@ -69,7 +66,6 @@ public class User {
         this.memberType = memberType;
         this.joinDate = joinDate;
         this.imageFile = imageFile;
-        this.quizList = quizList;
         this.postList = postList;
     }
 
@@ -131,13 +127,6 @@ public class User {
     public void addPoint(){
         this.point = this.point + 20;
     }
-    public void addSolvedQuiz(UserQuizSolvedDate solvedQuiz){
-        if(this.quizList == null){
-            this.quizList = List.of(solvedQuiz);
-        }else {
-            this.quizList.add(solvedQuiz);
-        }
-    }
 
     public void changePassword(String newPassword) {
         this.userPassword = newPassword;
@@ -145,8 +134,5 @@ public class User {
 
     public void deletePost(Post post){
         this.postList.removeIf(s->s.equals(post));
-    }
-    public void deleteQuiz(Quiz quiz){
-        this.quizList.removeIf(s->s.equals(quiz));
     }
 }

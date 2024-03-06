@@ -21,7 +21,7 @@ public class GameController {
 
     private final QuizService quizService;
 
-    @PostMapping("/makeQuiz")
+    @PostMapping("/postMakeQuiz")
     public ResponseEntity<QuizDto> makeQuiz(@Valid @RequestBody QuizDto quizDto) throws CustomError {
         QuizDto result = quizService.quizMake(quizDto);
         return ResponseEntity.ok().body(result);
@@ -40,7 +40,7 @@ public class GameController {
         return ResponseEntity.ok().body(result);
     }
 
-    @PostMapping("/postCheckPuzzle")
+    @PostMapping("/postCheckQuiz")
     public ResponseEntity<String> checkQuizAnswer(@RequestBody QuizDto quizDto) throws CustomError {
         String result = quizService.checkAnswer(quizDto);
         return ResponseEntity.ok().body(result);
@@ -52,7 +52,7 @@ public class GameController {
         return ResponseEntity.ok().body(result);
     }
 
-    @PostMapping("/deletePuzzle")
+    @PostMapping("/deleteQuiz")
     public ResponseEntity<HttpStatus> deleteQuiz(@RequestBody QuizDto quizDto) throws CustomError {
         quizService.deleteQuiz(quizDto);
         return RESPONSE_ENTITY_NO_CONTENT;

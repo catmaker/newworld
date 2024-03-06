@@ -6,6 +6,7 @@ import NewWorld.dto.SolvedQuizDto;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.CustomError;
 import NewWorld.exception.ErrorCode;
+import NewWorld.repository.UserQuizSolvedDateRepository;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,42 +26,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    /**
-     * 회원가입 아이디 중복체크
-     *
-     * @param loginId
-     * @return
-     */
-    public Boolean isLoginIdPresent(String loginId) throws CustomError {
-        User idCheck = userRepository.findUserByUserId(loginId)
-                .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
-        ;
-        return idCheck != null;
-    }
-
-    /**
-     * 회원가입 중복체크
-     *
-     * @param phoneNumber
-     * @param name
-     * @return
-     */
-    public Boolean isUserPresent(String phoneNumber, String name) throws CustomError {
-        User userCheck = userRepository.findUserByNameAndPhoneNumber(name, phoneNumber)
-                .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
-        return userCheck != null;
-    }
-
-    /**
-     * 회원가입 중복체크
-     *
-     * @param nickname
-     * @return
-     */
-    public Boolean isNicknamePresent(String nickname) throws CustomError {
-        User userCheck = getUser(nickname);
-        return userCheck != null;
-    }
+    private final UserQuizSolvedDateRepository userQuizSolvedDateRepository;
 
     /**
      * 회원가입
@@ -72,6 +38,9 @@ public class UserServiceImpl implements UserService {
         //유저 정보 중복체크
         String result = validateJoinUser(joinInfo);
 
+        if(result != null){
+            return result;
+        }
         User user = User.of(joinInfo);
 
         userRepository.save(user);
@@ -130,15 +99,14 @@ public class UserServiceImpl implements UserService {
 //
 //        if(!file.isFile()) return null;
 //        result.setImageFile(file);
-
-        List<UserQuizSolvedDate> quizList = user.getQuizList();
+        List<UserQuizSolvedDate> quizList = userQuizSolvedDateRepository.findAllByUser(user).orElse(null);
         if (quizList == null) {
             result.setPuzzleCount(0);
         } else {
             result.setPuzzleCount(quizList.size());
         }
 
-        return result;
+        return result.hideInfo();
     }
 
     /**
@@ -148,12 +116,13 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     public List<SolvedQuizDto> getSolveQuizList(UserDto userDto) throws CustomError {
-        List<SolvedQuizDto> result = new ArrayList<>();
+        List<SolvedQuizDto> result = null;
         User user = userRepository.findByNickname(userDto.getNickname())
                 .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
+        List<UserQuizSolvedDate> quizSolvedDate = userQuizSolvedDateRepository.findAllByUser(user)
+                .orElse(null);
 
-        List<UserQuizSolvedDate> solvedQuizList = user.getQuizList();
-        solvedQuizList.stream().forEach(s->result.add(SolvedQuizDto.of(s)));
+        quizSolvedDate.stream().forEach(s->result.add(SolvedQuizDto.of(s)));
 
         return result;
     }
@@ -161,9 +130,14 @@ public class UserServiceImpl implements UserService {
     /**
      * 회원탈퇴
      *
-     * @param userInfo
+     * @param userDto
      */
-    public void withdraw(String userInfo) {
+    public void withdraw(UserDto userDto) throws CustomError {
+        User user = userRepository.findByNickname(userDto.getNickname())
+                .orElseThrow(()->new CustomError(ErrorCode.NOT_FOUND));
+
+        userQuizSolvedDateRepository.deleteAllByUser(user);
+        userRepository.deleteByNickname(userDto.getNickname());
         // 플레이기록 , 게시물 제거
     }
 

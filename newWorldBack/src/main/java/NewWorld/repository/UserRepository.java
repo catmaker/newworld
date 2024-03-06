@@ -57,4 +57,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<List<User>> findTop100ByOrderByAttendanceAsc();
     Optional<List<User>> findTop100ByOrderByPointAsc();
     Optional<List<User>> findTop100ByOrderByAttendanceAscPointAsc();
+
+    void deleteByNickname(String userNickname);
 }

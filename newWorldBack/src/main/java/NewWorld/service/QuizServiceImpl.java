@@ -98,16 +98,11 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public void deleteQuiz(QuizDto quizDto) throws CustomError {
 
-        Quiz q = quizRepository.findById(quizDto.getQuizId())
+        Quiz quiz = quizRepository.findById(quizDto.getQuizId())
                 .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
 
-        UserQuizSolvedDate byDate = userQuizSolvedDateRepository.findByQuiz(q);
-
-        User user = userRepository.findByNickname(quizDto.getNickname())
-                .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
-
-        user.deleteQuiz(q);
-        userQuizSolvedDateRepository.delete(byDate);
+        userQuizSolvedDateRepository.deleteAllByQuiz(quiz);
+        quizRepository.deleteById(quiz.getId());
     }
 
     /**
@@ -151,13 +146,12 @@ public class QuizServiceImpl implements QuizService {
         if (collectAnswer.equals(quizDto.getAnswer())) {
             User user = userRepository.findByNickname(quizDto.getNickname())
                     .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
-            UserQuizSolvedDate solvedDate = UserQuizSolvedDate.of(quiz);
+            UserQuizSolvedDate solvedDate = UserQuizSolvedDate.of(quiz, user);
             user.addPoint();
 
-            user.addSolvedQuiz(solvedDate);
+            userQuizSolvedDateRepository.save(solvedDate);
             return "success";
         }
-
         return "wrong answer";
     }
 }

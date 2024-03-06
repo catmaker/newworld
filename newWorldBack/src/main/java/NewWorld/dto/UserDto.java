@@ -84,6 +84,7 @@ public class UserDto {
     public UserDto hideInfo(){
         this.userPassword = "";
         this.phoneNumber = "";
+        this.birthday = "";
         return this;
     }
 }
