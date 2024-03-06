@@ -3,6 +3,7 @@ import React, { ChangeEvent, useState } from "react";
 import { postMakeQuiz } from "@/app/lib/api/quizzes";
 import Header from "@/components/header/page";
 import styles from "./post.module.scss";
+import { useRouter } from "next/navigation";
 interface Session {
   user: {
     nickname: string;
@@ -11,6 +12,7 @@ interface Session {
 }
 
 const Post = ({ session }: { session: Session }) => {
+  const router = useRouter();
   const [quizTitle, setQuizTitle] = useState("");
   const [quizDetail, setQuizDetail] = useState("");
   const [hints, setHints] = useState(["", "", ""]);
@@ -43,7 +45,10 @@ const Post = ({ session }: { session: Session }) => {
         answer,
         quizDifficulty,
       });
-
+      if (response?.status === 200) {
+        alert("퀴즈가 등록되었습니다.");
+        router.push("/quizzes");
+      }
       console.log(response);
     } catch (error) {
       console.error(error);
@@ -87,9 +92,9 @@ const Post = ({ session }: { session: Session }) => {
               value={quizDifficulty}
               onChange={(e) => setQuizDifficulty(e.target.value)}
             >
-              <option value="1">EASY</option>
-              <option value="2">NORMAL</option>
-              <option value="3">HARD</option>
+              <option value="EASY">EASY</option>
+              <option value="NORMAL">NORMAL</option>
+              <option value="HARD">HARD</option>
             </select>
             <button type="submit" onClick={handleRegisterClick}>
               등록
