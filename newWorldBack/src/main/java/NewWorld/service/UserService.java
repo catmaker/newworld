@@ -4,6 +4,8 @@ import NewWorld.dto.ChangeInfoDto;
 import NewWorld.dto.SolvedQuizDto;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.CustomError;
+import NewWorld.exception.ErrorCode;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ public interface UserService {
      * @param joinInfo
      * @return
      */
-    public String join(UserDto joinInfo) throws CustomError;
+    public ErrorCode join(UserDto joinInfo) throws CustomError;
 
     /**
      * 회원정보 수정

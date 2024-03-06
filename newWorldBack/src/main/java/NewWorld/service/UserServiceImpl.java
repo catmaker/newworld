@@ -9,6 +9,7 @@ import NewWorld.exception.ErrorCode;
 import NewWorld.repository.UserQuizSolvedDateRepository;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +28,42 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     private final UserQuizSolvedDateRepository userQuizSolvedDateRepository;
+    /**
+     * 회원가입 아이디 중복체크
+     *
+     * @param loginId
+     * @return
+     */
+    public Boolean isLoginIdPresent(String loginId) throws CustomError {
+        User idCheck = userRepository.findUserByUserId(loginId)
+                .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
+        ;
+        return idCheck != null;
+    }
+
+    /**
+     * 회원가입 중복체크
+     *
+     * @param phoneNumber
+     * @param name
+     * @return
+     */
+    public Boolean isUserPresent(String phoneNumber, String name) throws CustomError {
+        User userCheck = userRepository.findUserByNameAndPhoneNumber(name, phoneNumber)
+                .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
+        return userCheck != null;
+    }
+
+    /**
+     * 회원가입 중복체크
+     *
+     * @param nickname
+     * @return
+     */
+    public Boolean isNicknamePresent(String nickname) throws CustomError {
+        User userCheck = getUser(nickname);
+        return userCheck != null;
+    }
 
     /**
      * 회원가입
@@ -34,9 +71,9 @@ public class UserServiceImpl implements UserService {
      * @param joinInfo
      */
     @Override
-    public String join(UserDto joinInfo) throws CustomError {
+    public ErrorCode join(UserDto joinInfo) throws CustomError {
         //유저 정보 중복체크
-        String result = validateJoinUser(joinInfo);
+        ErrorCode result = validateJoinUser(joinInfo);
 
         if(result != null){
             return result;
@@ -152,7 +189,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    private String validateJoinUser(UserDto joinInfo) throws CustomError {
+    private ErrorCode validateJoinUser(UserDto joinInfo) throws CustomError {
         boolean idCheck = userRepository.findUserByUserId(joinInfo.getUserId())
                 .isPresent();
         boolean userCheck = userRepository.findUserByNameAndPhoneNumber(joinInfo.getName(), joinInfo.getPhoneNumber())
@@ -160,17 +197,17 @@ public class UserServiceImpl implements UserService {
         boolean nameCheck = userRepository.findByNickname(joinInfo.getNickname())
                 .isPresent();
         if (idCheck) {
-            return "id duplication";
+            return ErrorCode.USER_ID_DUPLICATION;
         }
 
         if (userCheck) {
-            return "user duplication";
+            return ErrorCode.USER_DUPLICATION;
         }
 
         if (nameCheck) {
-            return "nickname duplication";
+            return ErrorCode.USER_NICKNAME_DUPLICATION;
         }
 
-        return null;
+        return ErrorCode.SUCCESS;
     }
 }

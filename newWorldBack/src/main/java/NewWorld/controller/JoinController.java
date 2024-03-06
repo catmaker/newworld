@@ -2,10 +2,12 @@ package NewWorld.controller;
 
 import NewWorld.dto.UserDto;
 import NewWorld.exception.CustomError;
+import NewWorld.exception.ErrorCode;
 import NewWorld.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +19,8 @@ public class JoinController {
     private final UserService userService;
 
     @PostMapping(value = "/join")
-    public ResponseEntity<String> join(@Valid @RequestBody UserDto userDto) throws CustomError {
-        String user = userService.join(userDto);
+    public ResponseEntity<ErrorCode> join(@Valid @RequestBody UserDto userDto) throws CustomError {
+        ErrorCode user = userService.join(userDto);
         return ResponseEntity.ok().body(user);
     }
 }
