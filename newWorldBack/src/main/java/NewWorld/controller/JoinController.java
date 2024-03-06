@@ -20,7 +20,7 @@ public class JoinController {
 
     @PostMapping(value = "/join")
     public ResponseEntity<ErrorCode> join(@Valid @RequestBody UserDto userDto) throws CustomError {
-        ErrorCode user = userService.join(userDto);
-        return ResponseEntity.ok().body(user);
+        ErrorCode result = userService.join(userDto);
+        return ResponseEntity.status(result.getStatus()).body(result);
     }
 }
