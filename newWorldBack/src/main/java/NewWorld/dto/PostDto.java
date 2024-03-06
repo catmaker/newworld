@@ -4,9 +4,9 @@ import NewWorld.PostType;
 import NewWorld.domain.Comment;
 import NewWorld.domain.Post;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,6 +17,7 @@ import java.util.List;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 public class PostDto {
 
     private String userNickname;
@@ -37,7 +38,7 @@ public class PostDto {
 
     private LocalDateTime makedDate;
 
-
+    @NotNull(message = "게시물타입을 입력하지 않았습니다.")
     private PostType postType;
 
     private int like;

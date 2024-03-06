@@ -3,11 +3,14 @@ package NewWorld.dto;
 import NewWorld.QuizDifficulty;
 import NewWorld.domain.Hint;
 import NewWorld.domain.Quiz;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -16,6 +19,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class QuizDto {
 
     private Long quizId;
@@ -42,7 +46,7 @@ public class QuizDto {
     @NotEmpty(message = "정답을 입력하지 않았습니다.")
     private String answer;
 
-    @NotEmpty(message = "난이도를 설정하지 않습니다.")
+    @NotNull(message = "난이도를 설정하지 않습니다.")
     private QuizDifficulty quizDifficulty;
 
     @Builder
