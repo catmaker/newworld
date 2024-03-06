@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { postCheckPuzzleAPI } from "@/app/lib/api/quizzes";
+import { postCheckQuizAPI } from "@/app/lib/api/quizzes";
 import Header from "@/components/header/page";
 import styles from "./quiz.module.scss";
 import { useRouter } from "next/navigation";
@@ -19,7 +19,7 @@ const Quiz = ({ quiz, quizId, nickname }: any) => {
       nickname: nickname,
     };
     console.log(data);
-    const response = await postCheckPuzzleAPI(data);
+    const response = await postCheckQuizAPI(data);
     if (response?.data === "success") {
       console.log(response);
       alert("정답입니다!");

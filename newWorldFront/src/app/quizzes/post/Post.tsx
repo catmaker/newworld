@@ -1,6 +1,6 @@
 "use client";
 import React, { ChangeEvent, useState } from "react";
-import { postMakeQuiz } from "@/app/lib/api/quizzes";
+import { postMakeQuizAPI } from "@/app/lib/api/quizzes";
 import Header from "@/components/header/page";
 import styles from "./post.module.scss";
 import { useRouter } from "next/navigation";
@@ -35,7 +35,7 @@ const Post = ({ session }: { session: Session }) => {
   const handleRegisterClick = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await postMakeQuiz({
+      const response = await postMakeQuizAPI({
         nickname: session.user.nickname,
         name: session.user.name,
         quizTitle,
