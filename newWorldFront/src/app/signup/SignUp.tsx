@@ -11,6 +11,7 @@ import Image from "next/image";
 import hide from "/public/img/hide-password.png";
 import show from "/public/img/show-password.png";
 import { useRouter } from "next/navigation";
+import { postJoinAPI } from "../lib/api/join";
 const SignUp = () => {
   const router = useRouter();
   // 패스워드 보이기/숨기기
@@ -41,7 +42,10 @@ const SignUp = () => {
       !FirstNameField.value ||
       !EmailField.value ||
       !PasswordField.value ||
-      !ConfirmPasswordField.value
+      !ConfirmPasswordField.value ||
+      !NicknameField.value ||
+      !PhoneNumberField.value ||
+      !BirthdayField.value
     ) {
       alert("모든 필드를 채워주세요.");
       return;
@@ -73,7 +77,7 @@ const SignUp = () => {
     }
 
     // 모든 조건이 충족되면, 폼 제출 처리를 계속 진행
-    const formData = {
+    const data = {
       name: FirstNameField.value,
       userId: EmailField.value,
       userPassword: PasswordField.value,
@@ -81,33 +85,15 @@ const SignUp = () => {
       phoneNumber: PhoneNumberField.value,
       birthday: BirthdayField.value.replaceAll("-", ""),
     };
-    console.log(formData);
+    console.log(data);
     try {
-      const response = await fetch("http://localhost:8080/join", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      if (response.ok) {
-        router.push("/login");
+      const response = await postJoinAPI(data);
+      if (response.status === 200) {
+        console.log("response :" + response);
+        router.push("/");
+      } else {
+        alert("회원가입에 실패했습니다.");
       }
-      if (!response.ok) {
-        console.log(response.ok);
-        throw new Error("Signup request failed");
-      }
-
-      // 서버에서 받은 응답을 JSON 형태로 파싱
-      const data = await response.text();
-      if (data === "f3") {
-        alert("닉네임이 중복되었습니다.");
-      }
-      if (data === "f1") {
-        alert("이미 가입된 이메일입니다.");
-      }
-      // 콘솔에 출력
-      console.log(data);
     } catch (error) {
       console.error(error);
     }
