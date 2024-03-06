@@ -11,7 +11,7 @@ import Image from "next/image";
 import hide from "/public/img/hide-password.png";
 import show from "/public/img/show-password.png";
 import { useRouter } from "next/navigation";
-import { postJoinAPI } from "../lib/api/join";
+import { postJoinAPI } from "@/app/lib/api/join";
 const SignUp = () => {
   const router = useRouter();
   // 패스워드 보이기/숨기기
@@ -37,35 +37,60 @@ const SignUp = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    // 모든 인풋 필드가 채워져 있는지 확인
-    if (
-      !FirstNameField.value ||
-      !EmailField.value ||
-      !PasswordField.value ||
-      !ConfirmPasswordField.value ||
-      !NicknameField.value ||
-      !PhoneNumberField.value ||
-      !BirthdayField.value
-    ) {
-      alert("모든 필드를 채워주세요.");
-      return;
-    }
+    const fields = [
+      {
+        field: FirstNameField,
+        min: 1,
+        max: 13,
+        message: "이름은 13자 이내로 작성해주세요.",
+      },
+      { field: EmailField, min: 1, message: "이메일을 입력해주세요." },
+      {
+        field: PasswordField,
+        min: 8,
+        max: 13,
+        message: "패스워드는 8~13자 이내로 작성해주세요.",
+      },
+      {
+        field: ConfirmPasswordField,
+        min: 8,
+        max: 13,
+        message: "패스워드 확인은 8~13자 이내로 작성해주세요.",
+      },
+      {
+        field: NicknameField,
+        min: 5,
+        max: 13,
+        message: "닉네임은 13자 이내로 작성해주세요.",
+      },
+      {
+        field: PhoneNumberField,
+        min: 11,
+        max: 11,
+        message: "휴대폰 번호는 11자 이내로 작성해주세요.",
+      },
+      {
+        field: BirthdayField,
+        min: 7,
+        max: 10,
+        message: "생년월일은 8자 이내로 작성해주세요.",
+      },
+    ];
 
-    // 패스워드가 8자 이상인지 확인
-    if (PasswordField.value.length < 8) {
-      alert("패스워드는 8자 이상이어야 합니다.");
-      return;
+    for (let { field, min, max, message } of fields) {
+      if (
+        !field.value ||
+        field.value.length < min ||
+        (max && field.value.length > max)
+      ) {
+        alert(message);
+        return;
+      }
     }
 
     // 패스워드가 서로 일치하는지 확인
     if (PasswordField.value !== ConfirmPasswordField.value) {
       alert("패스워드가 일치하지 않습니다.");
-      return;
-    }
-
-    // 이름과 패스워드가 13자 이하인지 확인
-    if (FirstNameField.value.length > 13 || PasswordField.value.length > 13) {
-      alert("이름과 패스워드는 13자 이내로 작성해주세요.");
       return;
     }
 
@@ -88,11 +113,9 @@ const SignUp = () => {
     console.log(data);
     try {
       const response = await postJoinAPI(data);
-      if (response.status === 200) {
-        console.log("response :" + response);
-        router.push("/");
-      } else {
-        alert("회원가입에 실패했습니다.");
+      if (response?.status === 200) {
+        alert("회원가입이 완료되었습니다.");
+        router.push("/login");
       }
     } catch (error) {
       console.error(error);
