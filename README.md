@@ -11,6 +11,15 @@
 [![버그 트래커](https://img.shields.io/badge/%EB%B2%84%EA%B7%B8%20%ED%8A%B8%EB%9E%98%EC%BB%A4-Notion-%23000000)](https://www.notion.so/0ccac465af1c4b24bd611917a00d25d0?pvs=21)
 [![API / Parameter](https://img.shields.io/badge/API%20/%20Parameter-Notion-%23000000)](https://www.notion.so/API-Parameter-5083c1d01fb243c2bd4265a867596cde?pvs=21)
 
+[![FrontEnd](https://img.shields.io/badge/FrontEnd-NEXTJS-green)](#)
+[![FrontEnd](https://img.shields.io/badge/FrontEnd-AXIOS-blue)](#)
+[![FrontEnd](https://img.shields.io/badge/FrontEnd-NEXTAUTH-yellow)](#)
+[![FrontEnd](https://img.shields.io/badge/FrontEnd-TYPESCRIPT-lightgrey)](#)
+[![FrontEnd](https://img.shields.io/badge/FrontEnd-SCSS-pink)](#)
+
+[![Backend](https://img.shields.io/badge/Backend-SPRING%20BOOT-success)](#)
+[![Backend](https://img.shields.io/badge/Backend-MY%20SQL-informational)](#)
+
 ## 🚀 팀 소개
 
 ---
