@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
         //유저 정보 중복체크
         ErrorCode result = validateJoinUser(joinInfo);
 
-        if(result != null){
+        if(result != ErrorCode.SUCCESS){
             return result;
         }
         User user = User.of(joinInfo);
