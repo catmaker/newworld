@@ -189,7 +189,8 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    private ErrorCode validateJoinUser(UserDto joinInfo) throws CustomError {
+    @Transactional(readOnly = true)
+    public ErrorCode validateJoinUser(UserDto joinInfo) throws CustomError {
         boolean idCheck = userRepository.findUserByUserId(joinInfo.getUserId())
                 .isPresent();
         boolean userCheck = userRepository.findUserByNameAndPhoneNumber(joinInfo.getName(), joinInfo.getPhoneNumber())

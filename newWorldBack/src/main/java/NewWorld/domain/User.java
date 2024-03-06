@@ -25,8 +25,11 @@ public class User {
 
     private String name;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, updatable = false)
     private String userId;
+
+    @Version
+    private Long version;
 
     private String nickname;
 
