@@ -89,14 +89,18 @@ public class UserServiceImpl implements UserService {
      * user기본정보 수정
      */
     @Override
-    public UserDto updateUserInfo(ChangeInfoDto changeInfoDto) throws CustomError {
+    public ErrorCode updateUserInfo(ChangeInfoDto changeInfoDto) throws CustomError {
 
         User user = userRepository.findByNickname(changeInfoDto.getNickname())
                 .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
 
-        User changeNickname = user.changeNickname(changeInfoDto.getNewNickname());
+        if(changeInfoDto.getNewNickname().equals(changeInfoDto.getNickname())){
+            return ErrorCode.NOT_CHANGE;
+        }
 
-        return UserDto.of(changeNickname).hideInfo();
+        user.changeNickname(changeInfoDto.getNewNickname());
+
+        return ErrorCode.SUCCESS;
     }
 
     /**

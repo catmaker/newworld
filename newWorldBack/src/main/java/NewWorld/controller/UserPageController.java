@@ -5,6 +5,7 @@ import NewWorld.dto.ChangeInfoDto;
 import NewWorld.dto.SolvedQuizDto;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.CustomError;
+import NewWorld.exception.ErrorCode;
 import NewWorld.service.ImageFileService;
 import NewWorld.service.QuizService;
 import NewWorld.service.UserService;
@@ -40,13 +41,6 @@ public class UserPageController {
             return ResponseEntity.ok().body(userInfo);
     }
 
-    @PostMapping("/postUserProfile")
-    public ResponseEntity<UserDto> updateUserProfile(@RequestBody ChangeInfoDto changeInfoDto) throws Exception {
-        UserDto result = userService.updateUserInfo(changeInfoDto);
-
-        return ResponseEntity.ok().body(result);
-    }
-
     @PostMapping("/postUserChangePw")
     public ResponseEntity<UserDto> updatePw(@RequestBody ChangeInfoDto changeInfoDto) throws Exception {
         UserDto result = userService.updateUserPw(changeInfoDto);
@@ -55,10 +49,10 @@ public class UserPageController {
     }
 
     @PostMapping("/postUserChangeInfo")
-    public ResponseEntity<UserDto> updateInfo(@RequestBody ChangeInfoDto changeInfoDto) throws Exception {
-        UserDto result = userService.updateUserInfo(changeInfoDto);
+    public ResponseEntity<ErrorCode> updateInfo(@RequestBody ChangeInfoDto changeInfoDto) throws Exception {
+        ErrorCode result = userService.updateUserInfo(changeInfoDto);
 
-        return ResponseEntity.ok().body(result);
+        return ResponseEntity.status(result.getStatus()).body(result);
     }
 
     @PostMapping("/getUserProfileImage")

@@ -101,6 +101,10 @@ public class QuizServiceImpl implements QuizService {
         Quiz quiz = quizRepository.findById(quizDto.getQuizId())
                 .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
 
+        if(quizDto.getNickname() != quiz.getMaker()){
+            return;
+        }
+        
         userQuizSolvedDateRepository.deleteAllByQuiz(quiz);
         quizRepository.deleteById(quiz.getId());
     }
