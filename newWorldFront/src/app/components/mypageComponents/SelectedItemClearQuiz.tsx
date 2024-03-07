@@ -1,11 +1,10 @@
 // ClearQuiz.tsx
 
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Pagination from "@/app/components/pagination/Pagination";
-import styles from "@/app/mypage/mypage.module.scss";
+import styles from "@/app/(root)/mypage/mypage.module.scss";
 import { ClearQuizProps } from "@/app/types/mypage";
-import { getUserClearQuizzes } from "@/app/lib/api/mypageapi";
 const SelectedItemClearQuiz: React.FC<ClearQuizProps> = ({
   currentItems,
   totalPages,

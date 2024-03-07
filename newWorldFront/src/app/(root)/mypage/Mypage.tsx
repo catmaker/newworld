@@ -3,7 +3,6 @@ import React from "react";
 import styles from "./mypage.module.scss";
 import dummy from "./dummy.json";
 import dummy2 from "./dummy2.json";
-import dummy3 from "./dummy3.json";
 import { useState, useEffect } from "react";
 import Profile from "@/app/components/mypageComponents/Profile";
 import Badge from "@/app/components/mypageComponents/Badge";

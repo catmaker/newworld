@@ -6,6 +6,67 @@
   <component name="ChangeListManager">
     <list default="true" id="6fdb512a-0c1b-4c26-82ff-5f9bd5a06e39" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/community/Community.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/community/Community.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/community/[id]/Community.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/community/[id]/Community.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/community/post/Post.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/community/post/Post.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/community/post/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/community/post/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/mypage/Mypage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/mypage/Mypage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/mypage/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/mypage/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/quizzes/Quizzes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/quizzes/Quizzes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/quizzes/[id]/Quiz.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/quizzes/[id]/Quiz.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/quizzes/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/quizzes/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/quizzes/post/Post.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/quizzes/post/Post.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/ranking/Ranking.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/ranking/Ranking.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/signup/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/signup/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/app/signup/useInputField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/signup/useInputField.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/footer/footer.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/footer/footer.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/footer/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/footer/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/header/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/header/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/intropageComponents/facebookfeed/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/intropageComponents/imageElement/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/intropageComponents/useScrollPosition/useScrollPosition.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/intropageComponents/useTypingAnimation/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/intropageComponents/useTypingAnimation/useTypingAnimation.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/labyrinthComponents/rain/Rain.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/labyrinthComponents/rain/Rain.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/labyrinthComponents/rain/Rains.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/labyrinthComponents/rain/Rains.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/main/Intro.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/main/Intro.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/main/Playbutton.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/main/Playbutton.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/main/Playbutton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/main/Playbutton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/main/intro.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/main/intro.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/main/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/main/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/mypageComponents/Badge.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/mypageComponents/Badge.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/mypageComponents/PrivacyControlBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/mypageComponents/PrivacyControlBox.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/mypageComponents/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/mypageComponents/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/mypageComponents/SelectedItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/mypageComponents/SelectedItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/mypageComponents/SelectedItemClearQuiz.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/mypageComponents/SelectedItemClearQuiz.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/mypageComponents/SelectedItemInfoManagement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/mypageComponents/SelectedItemInfoManagement.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/mypageComponents/SelectedItemProfileImageManagement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/mypageComponents/SelectedItemProfileImageManagement.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/mypageComponents/WelcomeMessage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/mypageComponents/WelcomeMessage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/pagination/Pagination.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/pagination/Pagination.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/pagination/pagination.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/pagination/pagination.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/sessionProvider/Provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/sessionProvider/Provider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/signInButton/SignInButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/signInButton/SignInButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/tiptap/Icons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/tiptap/Icons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/tiptap/Tiptap.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/tiptap/Tiptap.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/tiptap/Toolbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/tiptap/Toolbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/tiptap/icons.css" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/tiptap/icons.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/tiptap/img/bold.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/tiptap/img/bold.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/tiptap/img/code.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/tiptap/img/code.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/tiptap/img/color.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/tiptap/img/color.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/tiptap/img/h1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/tiptap/img/h1.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/tiptap/img/h2.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/tiptap/img/h2.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/tiptap/img/h3.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/tiptap/img/h3.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/tiptap/img/image.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/tiptap/img/image.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/tiptap/img/italic.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/tiptap/img/italic.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/tiptap/img/quote.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/tiptap/img/quote.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/tiptap/img/strikethrough.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/tiptap/img/strikethrough.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/tiptap/toolbar.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/tiptap/toolbar.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/util/daysSince/DaysSince.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/daysSince/DaysSince.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/util/modal/Modal.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/util/modal/Modal.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../newWorldFront/src/components/util/modal/Modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../newWorldFront/src/app/components/util/modal/Modal.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

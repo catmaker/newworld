@@ -1,7 +1,7 @@
 import React from "react";
 import Quizzes from "./Quizzes";
 import Header from "@/app/components/header/page";
-import { getQuizzesAPI } from "../lib/api/quizzes";
+import { getQuizzesAPI } from "../../lib/api/quizzes";
 const page = async () => {
   let data: any = [];
   let page = 0;

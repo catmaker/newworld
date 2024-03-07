@@ -1,6 +1,6 @@
 // SelectedItemInfoManagement.tsx
 import React, { useEffect, useState } from "react";
-import styles from "@/app/mypage/mypage.module.scss";
+import styles from "@/app/(root)/mypage/mypage.module.scss";
 import {
   deleteUserProfile,
   postUserChangePwAPI,

@@ -1,6 +1,6 @@
 import React from "react";
 import Community from "./Community";
-import { getCommunityAPI } from "../lib/api/community";
+import { getCommunityAPI } from "../../lib/api/community";
 
 const page = async () => {
   let data: any = [];
