@@ -2,7 +2,7 @@
 
 "use client";
 import React, { useEffect, useState } from "react";
-import Pagination from "@/components/pagination/Pagination";
+import Pagination from "@/app/components/pagination/Pagination";
 import styles from "@/app/mypage/mypage.module.scss";
 import { ClearQuizProps } from "@/app/types/mypage";
 import { getUserClearQuizzes } from "@/app/lib/api/mypageapi";

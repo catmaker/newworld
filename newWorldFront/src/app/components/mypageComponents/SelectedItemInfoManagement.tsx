@@ -6,7 +6,7 @@ import {
   postUserChangePwAPI,
 } from "@/app/lib/api/mypageapi";
 import { MypageProps } from "@/app/types/mypage";
-import Modal from "@/components/util/modal/Modal";
+import Modal from "@/app/components/util/modal/Modal";
 import { useRouter } from "next/navigation";
 import { redirect } from "next/navigation";
 const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {

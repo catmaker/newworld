@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import styles from "@/components/main/intro.module.scss";
+import styles from "@/app/components/main/intro.module.scss";
 import { useEffect, useState } from "react";
 import { throttle } from "lodash";
 import { signOut, useSession } from "next-auth/react";

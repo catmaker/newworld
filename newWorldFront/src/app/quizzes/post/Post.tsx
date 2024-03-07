@@ -1,7 +1,7 @@
 "use client";
 import React, { ChangeEvent, useState } from "react";
 import { postMakeQuizAPI } from "@/app/lib/api/quizzes";
-import Header from "@/components/header/page";
+import Header from "@/app/components/header/page";
 import styles from "./post.module.scss";
 import { useRouter } from "next/navigation";
 interface Session {

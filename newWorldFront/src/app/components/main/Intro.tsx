@@ -4,13 +4,9 @@ import styles from "./intro.module.scss";
 import Playbutton from "./Playbutton";
 import Link from "next/link";
 import { Element } from "react-scroll";
-import FacebookFeed from "@/components/intropageComponents/facebookfeed/page";
-import TypingAnimation from "@/components/intropageComponents/useTypingAnimation/page";
-import { useTypingAnimation } from "@/components/intropageComponents/useTypingAnimation/useTypingAnimation";
-import { useScrollToContainer } from "@/components/intropageComponents/useScrollPosition/useScrollPosition";
-import { ImageElement } from "@/components/intropageComponents/imageElement/page";
-import Footer from "@/components/footer/page";
-import Header from "@/components/header/page";
+
+import Footer from "@/app/components/footer/page";
+import Header from "@/app/components/header/page";
 import { useSession } from "next-auth/react";
 const Intro = () => {
   const [lines, setLines] = useState([
@@ -19,8 +15,8 @@ const Intro = () => {
     "당신의 상상력과 이야기를 우리와 함께 나누어보세요.",
     "특별한 순간을 만들어내는데 참여하실 수 있습니다.",
   ]);
-  const { key, startTyping } = useScrollToContainer();
-  const { currentLines, typingDone } = useTypingAnimation(startTyping, lines);
+  // const { key, startTyping } = useScrollToContainer();
+  // const { currentLines, typingDone } = useTypingAnimation(startTyping, lines);
   const { data: session } = useSession();
   console.log(session);
   return (
@@ -31,7 +27,7 @@ const Intro = () => {
           <div className={styles.flexbox}>
             <div className={styles.main_box}>
               <div className={styles.contents}>
-                <div key={key} className={styles.title}>
+                <div className={styles.title}>
                   <div className={styles.title_text}>
                     <div>
                       <p>붉은 망토 ,</p>
@@ -63,7 +59,6 @@ const Intro = () => {
                     <div>Notice from @minimalmocha</div>
                     <div className={styles.follow}>Follow on Facebook</div>
                   </div>
-                  <FacebookFeed></FacebookFeed>
                 </div>
               </div>
             </div>
@@ -74,36 +69,7 @@ const Intro = () => {
         <div className={styles.container3}>
           <div className={styles.main_box3}>
             <div className={styles.main_box3_container}>
-              <div className={styles.flex1}>
-                <ImageElement
-                  className="img-left"
-                  src="/img/yourstory.jpg"
-                  alt=""
-                />
-                <ImageElement
-                  className="img-right"
-                  src="/img/yourstory2.jpg"
-                  alt=""
-                />
-                <ImageElement
-                  className="img-left"
-                  src="/img/yourstory3.jpg"
-                  alt=""
-                />
-                <ImageElement
-                  className="img-right"
-                  src="/img/yourstory4.jpg"
-                  alt=""
-                />
-              </div>
-              <div className={styles.flex2}>
-                <TypingAnimation startTyping={startTyping} lines={lines} />
-                {typingDone && (
-                  <Link href={`/community`}>
-                    <button className={styles.button}>커뮤니티로 이동</button>
-                  </Link>
-                )}
-              </div>
+              <div className={styles.flex1}></div>
             </div>
           </div>
         </div>

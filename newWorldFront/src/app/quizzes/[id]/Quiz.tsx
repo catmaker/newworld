@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { postCheckQuizAPI } from "@/app/lib/api/quizzes";
-import Header from "@/components/header/page";
+import Header from "@/app/components/header/page";
 import styles from "./quiz.module.scss";
 import { useRouter } from "next/navigation";
 const Quiz = ({ quiz, quizId, nickname }: any) => {

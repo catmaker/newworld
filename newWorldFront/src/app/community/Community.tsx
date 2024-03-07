@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import styles from "./community.module.scss";
-import Header from "@/components/header/page";
+import Header from "@/app/components/header/page";
 import UseCategory from "@/app/hooks/UseCategory";
 import { useState } from "react";
 interface Post {

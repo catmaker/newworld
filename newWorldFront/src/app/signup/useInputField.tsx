@@ -1,5 +1,4 @@
 "use client";
-import { min } from "lodash";
 import { useState } from "react";
 
 export const useInputField = (maxLength: number) => {

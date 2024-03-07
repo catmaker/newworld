@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import styles from "./post.module.scss";
-import Tiptap from "@/components/tiptap/Tiptap";
+import Tiptap from "@/app/components/tiptap/Tiptap";
 
 const Post = (session: any) => {
   console.log(session.session.user.nickname);

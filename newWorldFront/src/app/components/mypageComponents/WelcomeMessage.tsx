@@ -4,7 +4,7 @@ import styles from "@/app/mypage/mypage.module.scss";
 import Image from "next/image";
 import { WelcomeMessageProps } from "@/app/types/mypage";
 import { redirect } from "next/navigation";
-import DaysSince from "../util/daysSince/DaysSince";
+import DaysSince from "@/app/components/daysSince/DaysSince";
 const WelcomeMessage: React.FC<WelcomeMessageProps> = ({ session }) => {
   let name, id, nickname, signupDate, puzzleCount, point;
   if (session) {

@@ -1,5 +1,5 @@
 "use client";
-import Header from "@/components/header/page";
+import Header from "@/app/components/header/page";
 import styles from "./community.module.scss";
 import { useState } from "react";
 import {

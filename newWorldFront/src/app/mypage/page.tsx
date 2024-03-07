@@ -1,6 +1,6 @@
 import React from "react";
 import Mypage from "./Mypage";
-import Header from "@/components/header/page";
+import Header from "@/app/components/header/page";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/utils/authOptions";
 import { redirect } from "next/navigation";

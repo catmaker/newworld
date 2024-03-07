@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import styles from "./quizzes.module.scss";
-import Rains from "@/components/labyrinthComponents/rain/Rains";
+import Rains from "@/app/components/labyrinthComponents/rain/Rains";
 import { getQuizzesAPI } from "../lib/api/quizzes";
 import Link from "next/link";
 

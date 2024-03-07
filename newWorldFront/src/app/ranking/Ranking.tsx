@@ -2,7 +2,7 @@
 import React, { use, useEffect } from "react";
 import styles from "./ranking.module.scss";
 import Link from "next/link";
-import Header from "@/components/header/page";
+import Header from "@/app/components/header/page";
 import { RankingProps } from "@/app/types/Ranking";
 import useCategory from "@/app/hooks/UseCategory";
 const Ranking: React.FC<RankingProps> = ({ data }) => {
