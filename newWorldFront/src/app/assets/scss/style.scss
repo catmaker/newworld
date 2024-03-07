@@ -6,3 +6,6 @@
 @import "setting/mixin"; // 믹스인과 관련된 CSS를 설정합니다.
 @import "setting/reset"; // 리셋 CSS를 설정합니다.
 @import "setting/common"; // 공통 CSS를 설정합니다.
+
+// section
+@import "section/header.module"; // 헤더와 관련된 CSS를 설정합니다.
