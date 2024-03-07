@@ -27,7 +27,7 @@ public class RankingServiceImpl implements RankingService{
     @Override
     public List<UserDto> getScoreRanking() {
         List<UserDto> results = null;
-        List<User> users = userRepository.findTop100ByOrderByPointAsc().orElseThrow(null)
+        List<User> users = userRepository.findTop100ByOrderByPointAsc().orElseThrow(null);
         if (users != null){
             users.stream().forEach(s->results.add(UserDto.of(s).hideInfo()));
         }
