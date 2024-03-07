@@ -1,0 +1,22 @@
+spring:
+  docker:
+    compose:
+      enabled: false
+
+  # database 연동 설정
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://158.180.73.184/newworld?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: newworld
+    password: newworld12 # 자신의 mysql 비밀번호
+
+  # spring data jpa 설정
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
