@@ -1,13 +1,14 @@
 package NewWorld.service;
 
 import NewWorld.domain.User;
+import NewWorld.dto.UserDto;
 
 import java.util.List;
 
 public interface RankingService {
-    List<User> getAttendanceRanking();
+    List<UserDto> getAttendanceRanking();
 
-    List<User> getScoreRanking();
+    List<UserDto> getScoreRanking();
 
-    List<User> getTotalRanking();
+    List<UserDto> getTotalRanking();
 }
