@@ -9,11 +9,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
 }
 
 .modal {
-  background-color: white;
+  background-color: var(--white100);
   padding: 20px;
   border-radius: 10px;
   width: 500px;
@@ -23,11 +22,13 @@
 .title {
   font-size: 20px;
   margin-bottom: 10px;
+  color: black;
 }
 
 .content {
   font-size: 16px;
   margin-bottom: 20px;
+  color: black;
 }
 
 .buttons {
@@ -46,12 +47,18 @@
 }
 
 .confirm_button {
-  background-color: #007bff;
+  background-color: var(--greyShades60);
   color: white;
   margin-left: 10px;
+  &:hover {
+    background-color: var(--greyShades40);
+  }
 }
 
 .cancel_button {
-  background-color: #6c757d;
-  color: white;
+  background-color: var(--green60);
+  color: var(--black100);
+  &:hover {
+    background-color: var(--green75);
+  }
 }

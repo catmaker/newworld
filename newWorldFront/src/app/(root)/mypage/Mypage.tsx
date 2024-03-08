@@ -86,18 +86,12 @@ const Mypage: React.FC<CombinedProps> = ({ session }) => {
     <div className={styles.background}>
       <div className={styles.container}>
         <div className={styles.layout}>
-          <div className={styles.left_layout}>
-            <Profile session={session} />
-            <Badge
-              badges={dummy2.users && dummy2.users[0] && dummy2.users[0].badges}
-            />
-          </div>
+          <PrivacyControlBox
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem}
+          />
           <div className={styles.right_layout}>
             <WelcomeMessage session={session} />
-            <PrivacyControlBox
-              selectedItem={selectedItem}
-              setSelectedItem={setSelectedItem}
-            />
             <div className={styles.infomation}>
               <SelectedItem
                 session={session}

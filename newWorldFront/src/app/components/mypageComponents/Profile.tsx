@@ -7,18 +7,6 @@ const Profile: React.FC<MypageProps> = ({ session }) => {
   return (
     <div className={styles.profile}>
       <div className={styles.profile_icon}></div>
-      <div className={styles.profile_image}>
-        {/* {user ? (
-          <Image
-            src={user.profilePicture}
-            alt="Profile"
-            width={200}
-            height={200}
-          />
-        ) : (
-          <div>No user data</div>
-        )} */}
-      </div>
       <div className={styles.profile_info}>
         <div>
           <div>Name</div>
