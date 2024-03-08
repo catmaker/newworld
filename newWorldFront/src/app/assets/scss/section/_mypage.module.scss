@@ -1,7 +1,10 @@
 @import "../setting/_mixin.scss";
 
 @include respond-to("mobile") {
-  .background {
+  .profile_box {
+    img {
+      margin-top: 0px !important;
+    }
   }
   .container {
     margin-top: 80px !important;
@@ -16,10 +19,6 @@
   }
   .privacy_control_box {
     font-size: clamp(0.8rem, 1.5vw, 1.2rem);
-  }
-  .button {
-    width: 80px !important;
-    height: 30px !important;
   }
 }
 @include respond-to("desktop") {

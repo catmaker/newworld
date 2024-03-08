@@ -1,0 +1,107 @@
+@import "../setting/mixin";
+
+@include respond-to("mobile") {
+  .container {
+    margin-top: 100px !important;
+  }
+}
+.background {
+  background-color: var(--black100);
+  width: 100vw;
+  min-height: 100vh;
+  color: var(--white100);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  overflow: auto;
+  font-weight: 700 !important;
+}
+.container {
+  margin-top: 150px;
+  width: 90%;
+  border-radius: 20px;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+  }
+}
+.greeting_box {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  z-index: 1;
+  p:nth-child(1) {
+    font-size: clamp(1.75rem, 1.5vw, 3rem);
+    color: var(--green60);
+    margin-bottom: 10px;
+  }
+  p:nth-child(2) {
+    font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+    color: var(--greyShades75);
+  }
+}
+.content_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.content_input_box {
+  background-color: var(--greyShades10);
+  width: 300px;
+  border-radius: 87px;
+  margin-bottom: 24px;
+  height: 56px;
+  padding: 20px;
+}
+.warning {
+  font-size: 14px;
+  color: var(--white100);
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+.success {
+  font-size: 14px;
+  color: var(--green60);
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+.button {
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: var(--white100);
+  color: var(--black100);
+  font-size: clamp(1rem, 1.5vw, 1rem);
+  font-weight: 700;
+  margin-top: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--green60);
+    transition: all 0.3s ease-in-out;
+  }
+  &:last-of-type {
+    margin-bottom: 50px;
+  }
+}
