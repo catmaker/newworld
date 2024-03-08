@@ -1,7 +1,7 @@
 // ProfileManagement.tsx
 import React, { useState } from "react";
 import Image from "next/image";
-import styles from "@/app/(root)/mypage/mypage.module.scss";
+import styles from "@/app/assets/scss/section/_mypage.module.scss";
 import {
   postUserProfileImageAPI,
   updateUserProfileAPI,

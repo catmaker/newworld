@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import styles from "./mypage.module.scss";
+import styles from "@/app/assets/scss/section/_mypage.module.scss";
 import dummy from "./dummy.json";
 import dummy2 from "./dummy2.json";
 import { useState, useEffect } from "react";

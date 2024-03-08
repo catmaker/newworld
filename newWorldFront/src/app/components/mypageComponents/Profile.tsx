@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import styles from "@/app/(root)/mypage/mypage.module.scss";
+import styles from "@/app/assets/scss/section/_mypage.module.scss";
 import { MypageProps } from "@/app/types/mypage";
 const Profile: React.FC<MypageProps> = ({ session }) => {
   const { name, id, nickname } = session;

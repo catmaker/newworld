@@ -3,7 +3,7 @@
 "use client";
 import React from "react";
 import Pagination from "@/app/components/pagination/Pagination";
-import styles from "@/app/(root)/mypage/mypage.module.scss";
+import styles from "@/app/assets/scss/section/_mypage.module.scss";
 import { ClearQuizProps } from "@/app/types/mypage";
 const SelectedItemClearQuiz: React.FC<ClearQuizProps> = ({
   currentItems,

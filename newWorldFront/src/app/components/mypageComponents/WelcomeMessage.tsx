@@ -1,6 +1,6 @@
 // WelcomeMessage.tsx
 import React from "react";
-import styles from "@/app/(root)/mypage/mypage.module.scss";
+import styles from "@/app/assets/scss/section/_mypage.module.scss";
 import Image from "next/image";
 import { WelcomeMessageProps } from "@/app/types/mypage";
 import { redirect } from "next/navigation";
