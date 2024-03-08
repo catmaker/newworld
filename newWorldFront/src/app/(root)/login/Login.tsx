@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import styles from "./login.module.scss";
+import styles from "@/app/assets/scss/section/_login.module.scss";
 import Link from "next/link";
 import { signIn as nextAuthSignIn, signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
@@ -52,47 +52,51 @@ const Login = () => {
   const { data: session } = useSession();
   return (
     <div className={styles.container}>
-      <div className={styles.flexbox}>
-        <div className={styles.login_box}>
-          <div className={styles.background}></div> {/* 새로 추가된 div */}
-          <div className={styles.content}>
-            <div>
-              <p className={styles.content_p}>어서오세요. 오랜만입니다.</p>
-              <h1>로그인</h1>
-              <p className={styles.content_p}>방문하신 적이 있나요?</p>
-            </div>
-            <form action="" onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor="Username">
-                  <input
-                    className={`${styles.content_input_box} ${
-                      typing ? styles.typing : ""
-                    }`}
-                    type="text"
-                    placeholder="아이디"
-                    onChange={handleIdChange}
-                  />
-                </label>
-                <label htmlFor="Password">
-                  <input
-                    className={`${styles.content_input_box} ${
-                      typing ? styles.typing : ""
-                    }`}
-                    type="password"
-                    placeholder="비밀번호"
-                    onChange={handlePasswordChange}
-                  />
-                </label>
-              </div>
-              <div>
-                <Link href={`/signup`}>
-                  <button onClick={handleSubmit} className={styles.button}>
-                    로그인
-                  </button>
-                </Link>
-              </div>
-            </form>
+      <div className={styles.login_box}>
+        <div className={styles.content}>
+          <div className={styles.greeting_box}>
+            <p>Login</p>
+            <p>Please log in to access your account.</p>
           </div>
+          <form className={styles.content_form} onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="Username">
+                <input
+                  className={`${styles.content_input_box} ${
+                    typing ? styles.typing : ""
+                  }`}
+                  type="text"
+                  placeholder="아이디"
+                  onChange={handleIdChange}
+                />
+              </label>
+              <label htmlFor="Password">
+                <input
+                  className={`${styles.content_input_box} ${
+                    typing ? styles.typing : ""
+                  }`}
+                  type="password"
+                  placeholder="비밀번호"
+                  onChange={handlePasswordChange}
+                />
+              </label>
+            </div>
+            <div className={styles.button_container}>
+              <Link href={`/`}>
+                <button className={styles.forgot_password}>
+                  Forgot Password?
+                </button>
+              </Link>
+              <Link href={`/signup`}>
+                <button onClick={handleSubmit} className={styles.login_button}>
+                  로그인
+                </button>
+              </Link>
+              <Link href={`/signup`}>
+                <button className={styles.sign_button}>Sign Up</button>
+              </Link>
+            </div>
+          </form>
         </div>
       </div>
     </div>

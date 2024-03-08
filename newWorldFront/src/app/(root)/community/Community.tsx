@@ -58,7 +58,6 @@ const Community = (data: any) => {
   }
   return (
     <div className={styles.background}>
-      <Header />
       <div className={styles.nav_bg}>커뮤니티</div>
       <div className={styles.nav2}>
         <ul>

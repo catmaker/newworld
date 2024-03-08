@@ -32,7 +32,6 @@ const Ranking: React.FC<RankingProps> = ({ data }) => {
   );
   return (
     <div className={styles.background}>
-      <Header />
       <div className={styles.nav_bg}>랭킹</div>
       <div className={styles.nav2}>
         <ul>

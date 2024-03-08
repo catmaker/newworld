@@ -1,6 +1,7 @@
 :root {
+    --mainfont-pretendard: "pretendard"
     --mainfont-nexon: "nexonLv1"
-    --mainfont-pretendart: "pretendard"
+   
 
     --black: #000;
     --black100: #000;
@@ -16,8 +17,33 @@
     --white400: #fff;
     --white500: #fff;
 
+    --green60: #CAFF33;
+    --green65: #D1FF4C;
+    --green70: #D8FF66;
+    --green75: #E5FF99;
+    --green90: #F2FFCC;
+    --green95: #F8FFE5;
+    --green97: #fbfff0;
+    --green99: #fefffa;
+
+    --whiteShades90: #e4e4e7;
+    --whiteShades95: #f1f1f3;
+    --whiteShades97: #f7f7f8;
+    --whiteShades99: #fcfcfd;
+
+    --greyShades10: #191919;
+    --greyShades11: #1C1C1C;
+    --greyShades15: #1F1F1F;
+    --greyShades20: #262626;
+    --greyShades30: #333333;
+    --greyShades35: #4C4C4D;
+    --greyShades40: #59595A;
+    --greyShades60: #656567;
+    --greyShades70: #98989A;
+    --greyShades75: #B3B3B3;
+
     // 폰트 셋팅
-    font-family: var(--mainfont-nexon), var(--mainfont-pretendard), "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", helvetica, sans-serif;
+    font-family: var(--mainfont-pretendard),var(--mainfont-nexon),  "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", helvetica, sans-serif;
     font-size: 16px;
     line-height: 1.5;
     font-weight: 400;
