@@ -29,16 +29,7 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!nickname) {
-      alert("변경할 사항을 입력해주세요.");
-      return;
-    } else {
-      try {
-        await updateUserProfileAPI(nickname);
-      } catch (error) {
-        console.error(error);
-      }
-    }
+
     // if (selectedFile) {
     //   try {
     //     await postUserProfileImageAPI(selectedFile);
@@ -50,25 +41,27 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
 
   return (
     <div className={styles.profile_box}>
+      <div>
+        <div>프로필 관리</div>
+        <p className={styles.info_alert}>
+          프로필 사진을 변경할 수 있습니다. 최적 사이즈는 200x200 입니다.
+        </p>
+      </div>
       <Image src={preview} alt="Profile" width={200} height={200} />
       <div>
-        <form action="" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <input
             type="file"
             id="file"
             style={{ display: "none" }}
             onChange={fileChangeHandler}
           />
-          <label htmlFor="file" className={styles.custom_file_upload}>
+          <label className={styles.file_label} htmlFor="file">
             파일 선택
           </label>
-          <input
-            type="text"
-            className={styles.nickname_input}
-            placeholder="변경할 닉네임을 입력해주세요."
-            onChange={(e) => setNickname(e.target.value)}
-          />
-          <button type="submit">변경하기</button>
+          <button className={styles.button} type="submit">
+            변경하기
+          </button>
         </form>
       </div>
     </div>

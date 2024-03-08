@@ -4,6 +4,7 @@ import styles from "@/app/assets/scss/section/_mypage.module.scss";
 import {
   deleteUserProfile,
   postUserChangePwAPI,
+  updateUserProfileAPI,
 } from "@/app/lib/api/mypageapi";
 import { MypageProps } from "@/app/types/mypage";
 import Modal from "@/app/components/util/modal/Modal";
@@ -11,19 +12,19 @@ import { useRouter } from "next/navigation";
 import { redirect } from "next/navigation";
 const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
   const [passwordChanged, setPasswordChanged] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [shouldUpdateProfile, setShouldUpdateProfile] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
-  let name, id: string, nickname;
+  let name: string, id: string, nickname: string;
   if (session) {
     ({ name, id, nickname } = session);
   } else {
     return redirect("/login");
   }
-
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [shouldUpdateProfile, setShouldUpdateProfile] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [onChangeNickname, setOnChangeNickname] = useState(nickname);
+
   useEffect(() => {
     const updateProfile = async () => {
       const data = {
@@ -64,6 +65,19 @@ const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
       console.error(error);
     }
   };
+  const nickNamehandleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!onChangeNickname) {
+      alert("변경할 사항을 입력해주세요.");
+      return;
+    } else {
+      try {
+        await updateUserProfileAPI(onChangeNickname);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
   return (
     <>
       <form className={styles.infomation_box} onSubmit={handleSubmit}>
@@ -97,7 +111,9 @@ const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
                 setOnChangeNickname(e.target.value);
               }}
             />
-            <button className={styles.info_button}>수정하기</button>
+            <button onClick={nickNamehandleSubmit} className={styles.button}>
+              수정하기
+            </button>
           </div>
         </div>
         <div>
@@ -124,7 +140,7 @@ const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
             />
-            <button className={styles.info_button} type="submit">
+            <button className={styles.button} type="submit">
               수정하기
             </button>
           </div>
@@ -135,7 +151,7 @@ const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
             회원탈퇴 시 모든 정보가 삭제되며 복구가 불가능합니다.
           </p>
           <button
-            className={styles.info_button}
+            className={styles.button}
             type="button"
             onClick={() => setIsModalOpen(true)}
           >
