@@ -54,11 +54,20 @@ export const usePasswordField = (minLength: number, maxLength: number) => {
 
 export const usePhoneNumberField = (minLength: number, maxLength: number) => {
   const [value, setValue] = useState("");
+  const [warning, setWarning] = useState("");
 
   const handleChange = (e: any) => {
     setValue(e.target.value);
+    if (e.target.value.length < minLength) {
+      setWarning("휴대폰 번호는 최소 11자 이상이어야 합니다.");
+    } else if (e.target.value.length > maxLength) {
+      setWarning("휴대폰 번호는 최대 11자까지 가능합니다.");
+    } else {
+      setWarning("");
+    }
   };
-  return { value, handleChange };
+
+  return { value, warning, handleChange };
 };
 
 export const useNicknameField = (minLength: number, maxLength: number) => {
@@ -78,7 +87,6 @@ export const useNicknameField = (minLength: number, maxLength: number) => {
 
   return { value, warning, handleChange };
 };
-
 export const useBirthDayField = () => {
   const [value, setValue] = useState("");
 
