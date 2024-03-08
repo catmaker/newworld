@@ -1,8 +1,6 @@
 "use client";
-import React, { use, useEffect } from "react";
-import styles from "./ranking.module.scss";
-import Link from "next/link";
-import Header from "@/app/components/header/page";
+import React from "react";
+import styles from "@/app/assets/scss/section/_ranking.module.scss";
 import { RankingProps } from "@/app/types/Ranking";
 import useCategory from "@/app/hooks/UseCategory";
 const Ranking: React.FC<RankingProps> = ({ data }) => {
