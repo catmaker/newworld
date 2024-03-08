@@ -1,0 +1,81 @@
+@import "../setting/_mixin.scss";
+
+@include respond-to("mobile") {
+  .container {
+    margin-top: 80px !important;
+  }
+}
+
+.background {
+  background-color: black;
+  width: 100vw;
+  min-height: 100vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+}
+.container {
+  margin-top: 150px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.alert {
+  font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+  color: var(--greyShades70);
+  border-bottom: 1px solid var(--greyShades30);
+  padding-top: 10px;
+  padding-bottom: 3px;
+  margin-bottom: 20px;
+}
+.sub_title {
+  font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+  color: var(--greyShades70);
+  padding-top: 10px;
+  padding-bottom: 3px;
+  margin-bottom: 5px;
+}
+.input_box {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  background-color: var(--greyShades20);
+  color: var(--white100);
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  &:focus {
+    outline: none;
+  }
+}
+.button_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button {
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: var(--white100);
+  color: var(--black100);
+  font-size: clamp(1rem, 1.5vw, 1rem);
+  font-weight: 700;
+  margin-top: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--green60);
+    transition: all 0.3s ease-in-out;
+  }
+  &:last-of-type {
+    margin-bottom: 50px;
+  }
+}
