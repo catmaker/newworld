@@ -2,7 +2,8 @@
 import React from "react";
 import { Editor } from "@tiptap/react";
 import { Icon } from "./Icons";
-import styles from "./toolbar.module.scss";
+import styles from "@/app/assets/scss/section/_communityPostToolbar.module.scss";
+
 interface ToolBarProps {
   editor: Editor | null;
 }
