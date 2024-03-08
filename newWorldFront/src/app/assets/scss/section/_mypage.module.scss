@@ -1,6 +1,8 @@
 @import "../setting/_mixin.scss";
 
 @include respond-to("mobile") {
+  .background {
+  }
   .container {
     margin-top: 80px !important;
   }
@@ -33,10 +35,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   user-select: none;
   overflow: auto;
-  min-height: 600px;
 }
 .container {
   margin-top: 150px;
@@ -358,15 +358,15 @@
 
 //SelectedItemClearQuiz.tsx
 .clear_quiz {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  gap: 20px;
   width: 100%;
   min-height: 100vh;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  div {
+    width: 100%;
+  }
   .clear_list {
     width: 80%;
     height: 10%;
@@ -381,22 +381,11 @@
       padding: 8px;
     }
   }
-  div {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    font-size: clamp(0.8rem, 1vw, 1.2rem);
-
-    .problem_name {
-      flex: 1;
-    }
-    .difficulty {
-      flex: 1;
-    }
-    .clear_date {
-      flex: 1;
-    }
-  }
+}
+//Badge.tsx
+.badge {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
