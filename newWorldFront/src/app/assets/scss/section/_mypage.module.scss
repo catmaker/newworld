@@ -15,7 +15,7 @@
   .privacy_control_box {
     font-size: clamp(0.8rem, 1.5vw, 1.2rem);
   }
-  .info_button {
+  .button {
     width: 80px !important;
     height: 30px !important;
   }
@@ -225,46 +225,7 @@
   color: var(--green60);
   border-bottom: 2px solid var(--green60);
 }
-.profile_box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  gap: 20px;
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    button {
-      width: 100px;
-      height: 40px;
-      border-radius: 10px;
-      background-color: white;
-      color: black;
-      border: none;
-      font-size: 1.2rem;
-      font-weight: bold;
-      cursor: pointer;
-      &:hover {
-        background-color: #db6f39;
-        transition: all 0.3s ease-in-out;
-      }
-    }
-  }
-  img {
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  .custom_file_upload {
-    cursor: pointer;
-    background-color: #2f323e;
-    border-radius: 10px;
-    padding: 10px;
-  }
-}
+
 .clear_quiz {
   display: flex;
   flex-direction: column;
@@ -343,15 +304,15 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    .info_alert {
-      font-size: clamp(0.7rem, 1.5vw, 0.8rem);
-      color: var(--greyShades70);
-      border-bottom: 1px solid var(--greyShades30);
-      padding-top: 10px;
-      padding-bottom: 3px;
-      margin-bottom: 20px;
-    }
   }
+}
+.info_alert {
+  font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+  color: var(--greyShades70);
+  border-bottom: 1px solid var(--greyShades30);
+  padding-top: 10px;
+  padding-bottom: 3px;
+  margin-bottom: 20px;
 }
 .info {
   margin-bottom: 20px;
@@ -379,7 +340,7 @@
     outline: none;
   }
 }
-.info_button {
+.button {
   width: 100px;
   height: 40px;
   border-radius: 10px;
@@ -395,5 +356,45 @@
   }
   &:last-of-type {
     margin-bottom: 50px;
+  }
+}
+
+//SelectedItemProfileImageManagement.tsx
+.profile_box {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  div:nth-child(1) {
+    width: 100%;
+  }
+  img {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-top: 70px;
+  }
+}
+.file_label {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  background-color: var(--greyShades20);
+  color: var(--white100);
+  border: none;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: var(--greyShades30);
+    transition: all 0.3s ease-in-out;
   }
 }

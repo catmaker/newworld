@@ -31,7 +31,7 @@ const Mypage: React.FC<CombinedProps> = ({ session }) => {
       const data = { nickname: session?.nickname };
       const result = await getUserClearQuizzes(data);
       setQuizzes(result);
-      setQuizzesLength(result.puzzleTitle || []); // puzzleTitle이 undefined인 경우 빈 배열을 설정
+      setQuizzesLength(result?.puzzleTitle || []); // puzzleTitle이 undefined인 경우 빈 배열을 설정
     };
 
     fetchData();
