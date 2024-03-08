@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.scss";
+import "@/app/assets/scss/style.scss";
 import Header from "@/app/components/header/page";
 import Providers from "@/app/components/sessionProvider/Provider";
 export const metadata: Metadata = {
@@ -15,7 +15,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
       </body>
     </html>
   );

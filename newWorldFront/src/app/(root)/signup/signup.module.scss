@@ -1,0 +1,221 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  background-color: black;
+}
+.flexbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.login_box {
+  position: relative;
+  width: 80%;
+  height: 80%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.background {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 10px;
+  height: 100%;
+  background-color: blue;
+  z-index: -1;
+}
+
+.header {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  z-index: 1;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+.img_box {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+}
+.img_box > img {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  object-fit: contain;
+}
+.img_box img:hover {
+  scale: (1.1);
+}
+.flex {
+  display: flex;
+}
+.flex > ul > a {
+  margin-left: 9rem;
+}
+.flex > ul > a:hover {
+  scale: (1.1);
+}
+.flex > h1 {
+  margin-left: 2rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+.flex > h1 > span {
+  animation: colorChange 3s infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    color: rgb(75, 183, 255);
+  }
+  50% {
+    color: rgb(50, 136, 169);
+  }
+  100% {
+    color: rgb(145, 145, 255);
+  }
+}
+
+// content & form
+.content {
+  margin-left: 10rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.box_size {
+  display: inline-flex;
+  flex-direction: row;
+  width: auto;
+}
+.content > div > h1 {
+  margin-top: clamp(0.3rem, 3vw, 1rem);
+  margin-bottom: clamp(0.3rem, 3vw, 1rem);
+  font-size: clamp(1rem, 5vw, 2rem);
+}
+
+.content_p {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  display: inline-flex;
+}
+
+.content_p > a {
+  margin-left: 1rem;
+  color: blue;
+}
+.content_input_name_box {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 1.5rem;
+  border: none;
+  border-radius: 1.5rem;
+  margin-right: 1rem;
+  width: 15rem;
+}
+.content_input_box {
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  padding-right: 40px;
+  display: flex;
+  margin-top: clamp(0.3rem, 1vw, 1rem);
+  margin-bottom: clamp(0.3rem, 1vw, 1rem);
+  padding: clamp(0.3rem, 1vw, 1rem);
+  border: none;
+  border-radius: 1.5rem;
+  margin-right: 1rem;
+  width: clamp(25rem, 1vw, 34rem);
+}
+.password_wrapper {
+  display: inline-flex;
+  flex-direction: column;
+}
+.input_wrapper {
+  display: flex;
+  align-items: center;
+  width: 34rem;
+}
+
+.password_toggle {
+  width: 20px;
+  height: 20px;
+
+  cursor: pointer;
+}
+.signUp_button {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: clamp(0.3rem, 1vw, 1.5rem);
+  border: none;
+  border-radius: 1.5rem;
+  margin-right: 1rem;
+  width: 15rem;
+  background-color: #262835;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.warning {
+  display: block;
+  color: red;
+  font-size: 1.2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.success {
+  display: block;
+  color: blue;
+  font-size: 1.2rem;
+}
+@media screen and (max-width: 768px) {
+  .content {
+    justify-content: center;
+    align-items: center;
+    margin-left: 0 !important;
+    transition: all 0.3s ease;
+    form {
+      div {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+  .message_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .input_wrapper {
+    margin-bottom: 1rem;
+  }
+}

@@ -1,6 +1,6 @@
 // SelectedItemInfoManagement.tsx
 import React, { useEffect, useState } from "react";
-import styles from "@/app/mypage/mypage.module.scss";
+import styles from "@/app/assets/scss/section/_mypage.module.scss";
 import {
   deleteUserProfile,
   postUserChangePwAPI,
@@ -23,7 +23,7 @@ const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
   const [newPassword, setNewPassword] = useState("");
   const [shouldUpdateProfile, setShouldUpdateProfile] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [onChangeNickname, setOnChangeNickname] = useState(nickname);
   useEffect(() => {
     const updateProfile = async () => {
       const data = {
@@ -67,38 +67,82 @@ const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
   return (
     <>
       <form className={styles.infomation_box} onSubmit={handleSubmit}>
-        <div className={styles.id_box}>
+        <div>
           <div>
-            아이디 <span>{id}</span>
+            <p>기본정보 </p>
+            <p className={styles.info_alert}>
+              일부 정보가 서비스를 사용하는 다른 사람에게 표시될 수 있습니다.
+              <br />
+              기본 정보는 변경할 수 없습니다.
+            </p>
+          </div>
+          <div className={styles.info}>
+            <p>이름</p> {name}
+          </div>
+          <div className={styles.info}>
+            <p>아이디</p> {id}
           </div>
         </div>
-        <div className={styles.password_box}>
-          <div>현재 비밀번호</div>
-          <div>
+        <div>
+          <div>닉네임 관리</div>
+          <p className={styles.info_alert}>
+            닉네임은 변경이 가능하나 중복 닉네임은 사용할 수 없습니다.
+          </p>
+          <div className={styles.info_input_box}>
             <input
+              className={styles.info_input}
+              type="text"
+              value={onChangeNickname}
+              onChange={(e) => {
+                setOnChangeNickname(e.target.value);
+              }}
+            />
+            <button className={styles.info_button}>수정하기</button>
+          </div>
+        </div>
+        <div>
+          <div>비밀번호 관리</div>
+          <p className={styles.info_alert}>
+            비밀번호는 8자 이상, 영문, 숫자, 특수문자를 포함해야 합니다.
+          </p>
+          <div>현재 비밀번호</div>
+          <div className={styles.info_input_box}>
+            <input
+              className={styles.info_input}
               type="password"
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
             />
           </div>
         </div>
-        <div className={styles.password_check_box}>
+        <div>
           <div>변경할 비밀번호</div>
-          <div>
+          <div className={styles.info_input_box}>
             <input
+              className={styles.info_input}
               type="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
             />
+            <button className={styles.info_button} type="submit">
+              수정하기
+            </button>
           </div>
         </div>
-
-        <div className={styles.button_box}>
-          <button type="submit">수정하기</button>
-          <button type="button" onClick={() => setIsModalOpen(true)}>
+        <div>
+          <div>회원탈퇴</div>
+          <p className={styles.info_alert}>
+            회원탈퇴 시 모든 정보가 삭제되며 복구가 불가능합니다.
+          </p>
+          <button
+            className={styles.info_button}
+            type="button"
+            onClick={() => setIsModalOpen(true)}
+          >
             탈퇴하기
           </button>
         </div>
+        <div></div>
       </form>
       {isModalOpen && (
         <Modal

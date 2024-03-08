@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+// setting
+@import "setting/fonts"; // 폰트 파일과 관련된 CSS를 설정합니다.
+@import "setting/vars"; // 변수와 관련된 CSS를 설정합니다.
+@import "setting/mixin"; // 믹스인과 관련된 CSS를 설정합니다.
+@import "setting/reset"; // 리셋 CSS를 설정합니다.
+@import "setting/common"; // 공통 CSS를 설정합니다.
+
+// section
+@import "section/header.module"; // 헤더와 관련된 CSS를 설정합니다.
+@import "section/login.module"; // 로그인과 관련된 CSS를 설정합니다.
+@import "section/mypage.module"; // 마이페이지와 관련된 CSS를 설정합니다.

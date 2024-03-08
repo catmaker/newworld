@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "name": "이지은",
+      "id": "rzt0317",
+      "nickname": "이지은123",
+      "signUpDate": "2019-01-01",
+      "clear": 53,
+      "point": 100,
+      "badges": [
+        {
+          "name": "Badge 1",
+          "level": 3,
+          "description": "250단계를 돌파해야 얻는 금메달입니다! 굉장하군요!",
+          "image": "/img/medal/medal1.svg"
+        },
+        {
+          "name": "Badge 2",
+          "level": 2,
+          "description": "150단계를 돌파해야 얻는 은메달입니다.",
+          "image": "/img/medal/medal2.svg"
+        },
+        {
+          "name": "Badge 3",
+          "level": 1,
+          "description": "50단계를 돌파해야 얻는 동메달입니다.",
+          "image": "/img/medal/medal3.svg"
+        }
+      ]
+    }
+  ]
+}
