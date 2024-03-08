@@ -28,10 +28,10 @@
 }
 
 .background {
-  background-color: black;
+  background-color: var(--black100);
   width: 100vw;
   min-height: 100vh;
-  color: white;
+  color: var(--white100);
   display: flex;
   flex-direction: column;
   align-items: center;
