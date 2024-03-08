@@ -1,6 +1,6 @@
 "use client";
-import React, { useEffect } from "react";
-import styles from "./quizzes.module.scss";
+import React from "react";
+import styles from "@/app/assets/scss/section/_quizzes.module.scss";
 import Rains from "@/app/components/labyrinthComponents/rain/Rains";
 import Link from "next/link";
 

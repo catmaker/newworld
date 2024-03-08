@@ -15,8 +15,9 @@ interface BadgeProps {
 const Badge: React.FC<BadgeProps> = ({ badges }) => {
   return (
     <div className={styles.badge}>
+      <div>획득한 뱃지</div>
       <div className={styles.badge_container}>
-        <div className={styles.badge_title}>Badge</div>
+        <div className={styles.info_alert}>획득한 뱃지 목록입니다.</div>
         <div className={styles.my_badge}>
           {badges &&
             badges.map((badge, index) => (

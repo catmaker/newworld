@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import ToolBar from "./Toolbar";
-import styles from "./toolbar.module.scss";
+import styles from "@/app/assets/scss/section/_communityPostToolbar.module.scss";
 //tiptap
 import StarterKit from "@tiptap/starter-kit";
 import Highlight from "@tiptap/extension-highlight";
@@ -86,11 +86,24 @@ const Tiptap = ({ content, nickname }: TiptapProps) => {
   return (
     <>
       <div className="border-2">
-        <ToolBar editor={editor} />
-        <select value={selectedOption} onChange={handleChange}>
+        <div>커뮤니티 글 작성 공간입니다.</div>
+        <p className={styles.alert}>
+          경고: 비방, 불법 콘텐츠, 스팸은 금지되며 위반 시 조치가 취해질 수
+          있습니다. 커뮤니티 규칙을 준수해주세요.
+        </p>
+        <div className={styles.select_category_label}>
+          카테고리를 선택해주세요.
+        </div>
+        <select
+          className={styles.select_category}
+          value={selectedOption}
+          onChange={handleChange}
+        >
           <option value="QUESTION">질문</option>
           <option value="NORMAL">기타</option>
         </select>
+        <ToolBar editor={editor} />
+
         <input
           type="text"
           className={styles.h1}

@@ -16,6 +16,12 @@ const SelectedItemClearQuiz: React.FC<ClearQuizProps> = ({
   console.log(quizzes);
   return (
     <div className={styles.clear_quiz}>
+      <div>
+        <div className={styles.clear_quiz_title}>클리어 퀴즈</div>
+        <p className={styles.info_alert}>
+          {session?.nickname}님이 푼 퀴즈 목록입니다.
+        </p>
+      </div>
       {quizzes?.map(
         ({ puzzleTitle, puzzleDifficulty, puzzleClearDate }, index) => (
           <div key={index} className={styles.clear_list}>

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import styles from "./post.module.scss";
+import styles from "@/app/assets/scss/section/_communityPost.module.scss";
 import Tiptap from "@/app/components/tiptap/Tiptap";
 
 const Post = (session: any) => {

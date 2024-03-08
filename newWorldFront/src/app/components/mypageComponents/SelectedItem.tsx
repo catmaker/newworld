@@ -4,6 +4,7 @@ import InfoManagement from "./SelectedItemInfoManagement";
 import ProfileImageManagement from "./SelectedItemProfileImageManagement";
 import ClearQuiz from "./SelectedItemClearQuiz";
 import { SelectedItemComponentProps, MypageProps } from "@/app/types/mypage";
+import Badge from "./Badge";
 type SelectedItemProps = SelectedItemComponentProps & MypageProps;
 const SelectedItem: React.FC<SelectedItemProps> = ({
   selectedItem,
@@ -36,7 +37,7 @@ const SelectedItem: React.FC<SelectedItemProps> = ({
           quizzes={quizzes}
         />
       )}
-      {selectedItem === "뱃지" && <div>이런 획득한 뱃지가 없군요!</div>}
+      {selectedItem === "뱃지" && <Badge badges={[]} />}
     </>
   );
 };
