@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.List;
+
 import static NewWorld.common.ResponseEntityConstants.RESPONSE_ENTITY_NO_CONTENT;
 
 @RestController
@@ -24,9 +26,9 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/getCommunity")
-    public ResponseEntity<Page<Post>> findPostList(@RequestParam(required = false, defaultValue = "0", value = "page") int pageNo) {
+    public ResponseEntity<List<PostDto>> findPostList(@RequestParam(required = false, defaultValue = "0", value = "page") int pageNo) {
         Pageable pageable = PageRequest.of(pageNo, 5, Sort.by("makedDate"));
-        Page<Post> allPost = postService.getAllPost(pageable);
+        List<PostDto> allPost = postService.getAllPost(pageable);
 
         return ResponseEntity.ok().body(allPost);
     }

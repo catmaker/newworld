@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +30,12 @@ public class PostServiceimpl implements PostService {
     private final LikeRepository likeRepository;
 
     @Override
-    public Page<Post> getAllPost(Pageable pageable) {
-        return postRepository.findAll(pageable);
+    public List<PostDto> getAllPost(Pageable pageable) {
+        List<PostDto> result = new ArrayList<>();
+        Page<Post> posts = postRepository.findAll(pageable);
+
+        posts.getContent().stream().forEach(s->result.add(PostDto.of(s)));
+        return result;
     }
 
     @Override
@@ -39,7 +44,7 @@ public class PostServiceimpl implements PostService {
                 .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
         int count = likeRepository.countAllByPost(post);
         post.addview();
-        PostDto postDto = PostDto.of(post, count);
+        PostDto postDto = PostDto.of(post);
 
         return postDto;
     }
@@ -56,7 +61,7 @@ public class PostServiceimpl implements PostService {
         user.getPostList().add(savedPost);
 
 
-        return PostDto.of(savedPost, count);
+        return PostDto.of(savedPost);
     }
 
     @Override
@@ -65,7 +70,7 @@ public class PostServiceimpl implements PostService {
         int count = likeRepository.countAllByPost(post);
         Post changedPost = post.chagePost(postDto);
 
-        return PostDto.of(changedPost,count);
+        return PostDto.of(changedPost);
     }
 
     @Override

@@ -63,14 +63,14 @@ public class PostDto {
      * 게사판정보 ->dto
      * @param post
      */
-    public static PostDto of(Post post, int like){
+    public static PostDto of(Post post){
        return PostDto.builder()
                 .title(post.getTitle())
                 .detail(post.getDetail())
                 .comments(post.getCommentList() != null? post.getCommentList() : null)
                 .postId(post.getId())
                 .makedDate(post.getMakedDate())
-                .like(like)
+                .like(post.getLikes() != null ? post.getLikes().size() : 0)
                 .views(post.getViews())
                 .postType(post.getPostType())
                 .nickname(post.getUserNickName())
