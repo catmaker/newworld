@@ -17,7 +17,7 @@
 .background {
   background-color: var(--black100);
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   color: white;
   display: flex;
   flex-direction: column;
@@ -93,7 +93,7 @@
   align-items: center;
   border-bottom: 1px solid #7b7b7b7e;
   justify-content: space-between;
-  font-size: 1.3rem;
+  font-size: 0.8rem;
   color: #898c92;
   &:hover {
     color: #db6f39;
