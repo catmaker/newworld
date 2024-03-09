@@ -1,6 +1,5 @@
 "use client";
-import Header from "@/app/components/header/page";
-import styles from "./community.module.scss";
+import styles from "@/app/assets/scss/section/_communityPosting.module.scss";
 import { useState } from "react";
 import {
   postsCommunityCommentsAPI,
@@ -65,10 +64,13 @@ const Community = ({ communityList, userNickname }: any) => {
       setLike(response.data);
     }
   };
-  console.log(commentsList.length);
+  // 유저 닉네임이랑 comment의 userNickName이랑 같으면 삭제버튼 보이게
+  console.log(commentsList);
+
+  const deleteCommentHandler = async (commentId: number) => {};
+
   return (
     <div className={styles.background}>
-      <Header></Header>
       <div className={styles.content_box}>
         <div className={styles.title_box}>
           <div className={styles.title}>{title}</div>
@@ -95,10 +97,15 @@ const Community = ({ communityList, userNickname }: any) => {
           <div className={styles.comment_title}>전체 댓글</div>
           <div className={styles.comments}>
             {commentsList.map((comment: any) => (
-              <div key={communityList.id}>
+              <div key={comment.id}>
                 <p>{comment.userNickName || "Anonymous"}</p>
                 <p>{comment.comment}</p>
                 <p>{new Date(comment.makedDate).toLocaleString()}</p>
+                {comment.userNickName === userNickname && (
+                  <button onClick={() => deleteCommentHandler(comment.id)}>
+                    삭제
+                  </button>
+                )}
               </div>
             ))}
           </div>
