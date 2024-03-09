@@ -19,7 +19,7 @@ public class RankingServiceImpl implements RankingService{
     public List<UserDto> getAttendanceRanking() {
         List<UserDto> results = new ArrayList<>();
 
-        List<User> users = userRepository.findTop100ByOrderByAttendanceAsc().orElseThrow(null);
+        List<User> users = userRepository.findTop100ByOrderByAttendanceDesc().orElseThrow(null);
         if (users != null){
             users.stream().forEach(s-> results.add(UserDto.of(s).hideInfo()));
         }
@@ -28,7 +28,7 @@ public class RankingServiceImpl implements RankingService{
     @Override
     public List<UserDto> getScoreRanking() {
         List<UserDto> results = new ArrayList<>();
-        List<User> users = userRepository.findTop100ByOrderByPointAsc().orElseThrow(null);
+        List<User> users = userRepository.findTop100ByOrderByPointDesc().orElseThrow(null);
         if (users != null){
             users.stream().forEach(s->results.add(UserDto.of(s).hideInfo()));
         }
@@ -38,7 +38,7 @@ public class RankingServiceImpl implements RankingService{
     @Override
     public List<UserDto> getTotalRanking() {
         List<UserDto> results = new ArrayList<>();
-        List<User> users = userRepository.findTop100ByOrderByAttendanceAscPointAsc().orElseThrow(null);
+        List<User> users = userRepository.findTop100ByOrderByAttendanceAscPointDesc().orElseThrow(null);
         if (users != null){
             users.stream().forEach(s->results.add(UserDto.of(s).hideInfo()));
         }
