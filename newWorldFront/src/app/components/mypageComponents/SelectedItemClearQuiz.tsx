@@ -22,7 +22,7 @@ const SelectedItemClearQuiz: React.FC<ClearQuizProps> = ({
           {session?.nickname}님이 푼 퀴즈 목록입니다.
         </p>
       </div>
-      {/* {quizzes?.map(
+      {quizzes?.map(
         ({ puzzleTitle, puzzleDifficulty, puzzleClearDate }, index) => (
           <div key={index} className={styles.clear_list}>
             <div className={styles.problem_name}>{puzzleTitle}</div>
@@ -30,11 +30,11 @@ const SelectedItemClearQuiz: React.FC<ClearQuizProps> = ({
               className={styles.difficulty}
               style={{
                 color:
-                  puzzleDifficulty === "초급"
+                  puzzleDifficulty === "EASY"
                     ? "green"
-                    : puzzleDifficulty === "중급"
+                    : puzzleDifficulty === "NORMAL"
                     ? "orange"
-                    : puzzleDifficulty === "고급"
+                    : puzzleDifficulty === "HARD"
                     ? "red"
                     : "black",
               }}
@@ -44,7 +44,7 @@ const SelectedItemClearQuiz: React.FC<ClearQuizProps> = ({
             <div className={styles.clear_date}>{puzzleClearDate}</div>
           </div>
         )
-      )} */}
+      )}
 
       <Pagination
         totalPages={totalPages}
