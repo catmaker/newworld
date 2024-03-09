@@ -17,6 +17,7 @@ import { Color } from "@tiptap/extension-color";
 
 import { postsCreateAPI } from "@/app/lib/api/community";
 import { useRouter } from "next/navigation";
+import { detail } from "@/app/(root)/community/[id]/community.module.scss";
 interface TiptapProps {
   content: string;
   nickname: string;
@@ -24,7 +25,6 @@ interface TiptapProps {
 
 const Tiptap = ({ content, nickname }: TiptapProps) => {
   const router = useRouter();
-  console.log(nickname);
   const [title, setTitle] = useState("");
   const [selectedOption, setSelectedOption] = useState("QUESTION");
   const lowlight = createLowlight(common);
@@ -65,6 +65,10 @@ const Tiptap = ({ content, nickname }: TiptapProps) => {
   const handleRegisterClick = async (e: any) => {
     e.preventDefault();
     const editorContent = getEditorContent();
+    console.log(title);
+    console.log(editorContent);
+    console.log(selectedOption);
+    console.log(nickname);
     try {
       const data = await postsCreateAPI({
         title: title,
@@ -72,9 +76,9 @@ const Tiptap = ({ content, nickname }: TiptapProps) => {
         postType: selectedOption,
         nickname: nickname,
       });
+      console.log(data);
 
       if (data?.status === 200) {
-        console.log(data);
         console.log("게시글 등록 성공");
         router.push(`/community/${data.data.postId}`);
       }
