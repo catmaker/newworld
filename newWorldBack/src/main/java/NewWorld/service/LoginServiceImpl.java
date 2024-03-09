@@ -45,6 +45,7 @@ public class LoginServiceImpl implements LoginService {
 
         if (now>loginDay || user.getAttendance() == 0){
             user.checkAttendance();
+            user.addPoint();
         }
 
         UserDto userDto = UserDto.of(user);
