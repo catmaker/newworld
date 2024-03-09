@@ -85,8 +85,7 @@ public class UserPageController {
     @PostMapping("/postUserProfileImage")
     public ResponseEntity<byte[]>  updateUserProfileImage(MultipartFile uploadFile, HttpServletRequest request,@RequestBody UserDto userDto) throws CustomError, IOException {
         ResponseEntity<byte[]> result;
-        String realPath = request.getServletContext().getRealPath("/upload");
-        File imageFile = imageFileService.saveImageFile(uploadFile, realPath, userDto.getName(), userDto.getNickname());
+        File imageFile = imageFileService.saveImageFile(uploadFile, userDto.getName(), userDto.getNickname());
 
         try{
             HttpHeaders header = new HttpHeaders();

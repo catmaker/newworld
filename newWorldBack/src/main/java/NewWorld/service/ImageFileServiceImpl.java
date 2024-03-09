@@ -9,10 +9,8 @@ import NewWorld.repository.ImageFileRepository;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedOutputStream;
@@ -29,17 +27,17 @@ public class ImageFileServiceImpl implements ImageFileService {
     private final ImageFileRepository imageFileRepository;
     private final UserRepository userRepository;
 
-
+    @Value("${url.downLoad.path}")
+    private String dowmLoadPath;
 
     /**
      * Saves the uploaded image file.
      *
      * @param uploadFile The uploaded image file.
-     * @param realpath The path to save the image file.
      * @return The status of the save operation. Possible values are "s" for success and "f" for failure.
      */
     @Override
-    public File saveImageFile(MultipartFile uploadFile, String realpath, String userName, String userNickname) throws CustomError, IOException {
+    public File saveImageFile(MultipartFile uploadFile, String userName, String userNickname) throws CustomError, IOException {
 
         // 이미지 파일만 업로드
         if (!Objects.requireNonNull(uploadFile.getContentType()).startsWith("image")) {
@@ -47,7 +45,7 @@ public class ImageFileServiceImpl implements ImageFileService {
         }
 
         String originalFilename = uploadFile.getOriginalFilename();
-        String path = realpath + "/" + originalFilename;
+        String path = dowmLoadPath + originalFilename;
 
         ImageFileDto imageFileDto = ImageFileDto.of(path, originalFilename);
 
