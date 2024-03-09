@@ -38,7 +38,7 @@ public class UserPageController {
     private final ImageFileService imageFileService;
 
     @PostMapping("/withdrawal")
-    public ResponseEntity<HttpStatus> UserWithdrawal(UserDto userDto){
+    public ResponseEntity<HttpStatus> UserWithdrawal(@RequestBody UserDto userDto) throws CustomError {
         userService.withdraw(userDto);
         return RESPONSE_ENTITY_NO_CONTENT;
     }
