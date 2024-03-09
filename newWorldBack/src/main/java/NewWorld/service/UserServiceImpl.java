@@ -157,7 +157,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     public List<SolvedQuizDto> getSolveQuizList(UserDto userDto) throws CustomError {
-        List<SolvedQuizDto> result = null;
+        List<SolvedQuizDto> result = new ArrayList<>();
         User user = userRepository.findByNickname(userDto.getNickname())
                 .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
         List<UserQuizSolvedDate> quizSolvedDate = userQuizSolvedDateRepository.findAllByUser(user)
