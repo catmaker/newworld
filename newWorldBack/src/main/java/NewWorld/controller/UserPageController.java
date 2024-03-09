@@ -42,10 +42,10 @@ public class UserPageController {
     }
 
     @PostMapping("/postUserChangePw")
-    public ResponseEntity<UserDto> updatePw(@RequestBody ChangeInfoDto changeInfoDto) throws Exception {
-        UserDto result = userService.updateUserPw(changeInfoDto);
+    public ResponseEntity<ErrorCode> updatePw(@RequestBody ChangeInfoDto changeInfoDto) throws Exception {
+        ErrorCode result = userService.updateUserPw(changeInfoDto);
 
-        return ResponseEntity.ok().body(result);
+        return ResponseEntity.status(result.getStatus()).body(result);
     }
 
     @PostMapping("/postUserChangeInfo")
