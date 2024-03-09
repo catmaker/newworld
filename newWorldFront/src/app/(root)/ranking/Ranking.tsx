@@ -1,15 +1,27 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/app/assets/scss/section/_ranking.module.scss";
 import { RankingProps } from "@/app/types/Ranking";
 import useCategory from "@/app/hooks/UseCategory";
+interface DataItem {
+  nickname: string;
+  point: number;
+}
 const Ranking: React.FC<RankingProps> = ({ total }) => {
-  const { selectedCategory, handleCategoryClick } = useCategory(
-    "종합",
-    () => {}
-  );
-  console.log(total);
+  const {
+    selectedCategory,
+    handleCategoryClick,
+    data: categoryData,
+  } = useCategory("종합", () => {});
+  const [data, setData] = useState<DataItem[]>([]);
 
+  useEffect(() => {
+    if (categoryData) {
+      setData(categoryData);
+    }
+  }, [categoryData]);
+
+  // ... (나머지 코드 생략
   return (
     <div className={styles.background}>
       <div className={styles.nav_bg}>랭킹</div>
@@ -22,13 +34,23 @@ const Ranking: React.FC<RankingProps> = ({ total }) => {
       </div>
       <div className={styles.contents_wrapper}>
         <div className={styles.contents_Layout}>
-          {/* {sortedByCategory.map(([name, points], index) => (
-            <div className={styles.contents_Layout_item} key={name}>
-              <div>Rank: {index + 1}</div>
-              <div>{name}</div>
-              <div>Points: {points[pointKey]}</div>
-            </div>
-          ))} */}
+          <div className={styles.contents_Layout}>
+            <p className={styles.alert}>랭킹은 100위까지만 표시됩니다.</p>
+            {data &&
+              data.map((item, index) => {
+                return (
+                  <div className={styles.contents} key={index}>
+                    <div className={styles.contents_rank}>
+                      Rank : {index + 1}
+                    </div>
+                    <div className={styles.contents_user}>{item.nickname}</div>
+                    <div className={styles.contents_score}>
+                      Total : {item.point}
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
         </div>
       </div>
     </div>

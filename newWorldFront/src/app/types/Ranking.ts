@@ -1,9 +1,8 @@
 export interface UserPoints {
-  clearPoints?: number;
-  attendancePoints?: number;
-  totalPoints?: number;
+  nickname: string;
+  point: number;
 }
 
 export interface RankingProps {
-  [username: string]: UserPoints;
+  total: UserPoints[];
 }

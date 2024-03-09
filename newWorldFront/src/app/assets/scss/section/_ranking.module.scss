@@ -72,9 +72,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  a {
-    width: 90%;
-    height: 100%;
+  margin-top: 10px;
+}
+.contents {
+  width: 100%;
+  justify-content: center;
+  padding: 5px;
+  div {
+    width: 100%;
+    justify-content: center;
+  }
+  &:hover {
+    background-color: var(--greyShades30);
+    border-radius: 10px;
+    scale: 1.01;
+    transition: all 0.1s ease-in-out;
   }
 }
 .contents_Layout_item {
@@ -87,4 +99,11 @@
   justify-content: space-between;
   font-size: 0.8rem;
   color: #898c92;
+}
+.alert {
+  font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+  color: var(--greyShades70);
+  border-bottom: 1px solid var(--greyShades30);
+  padding-bottom: 3px;
+  margin-bottom: 20px;
 }
