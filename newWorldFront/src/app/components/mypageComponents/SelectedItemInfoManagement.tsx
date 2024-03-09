@@ -1,15 +1,13 @@
 // SelectedItemInfoManagement.tsx
 import React, { useEffect, useState } from "react";
 import styles from "@/app/assets/scss/section/_mypage.module.scss";
-import {
-  deleteUserProfile,
-  postUserChangePwAPI,
-  updateUserProfileAPI,
-} from "@/app/lib/api/mypageapi";
+import { withdrawal, postUserChangePwAPI } from "@/app/lib/api/mypageapi";
 import { MypageProps } from "@/app/types/mypage";
 import Modal from "@/app/components/util/modal/Modal";
 import { useRouter } from "next/navigation";
 import { redirect } from "next/navigation";
+import { postUserChangeInfoAPI } from "../../lib/api/mypageapi";
+import { signOut } from "next-auth/react";
 const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
   const [passwordChanged, setPasswordChanged] = useState(false);
   const [currentPassword, setCurrentPassword] = useState("");
@@ -60,7 +58,8 @@ const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
   };
   const handleDelete = async () => {
     try {
-      await deleteUserProfile();
+      const data = await withdrawal(nickname);
+      alert("회원 탈퇴가 완료되었습니다.");
     } catch (error) {
       console.error(error);
     }
@@ -71,8 +70,15 @@ const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
       alert("변경할 사항을 입력해주세요.");
       return;
     } else {
+      const data = {
+        nickname: nickname,
+        newNickname: onChangeNickname,
+      };
       try {
-        await updateUserProfileAPI(onChangeNickname);
+        const response = await postUserChangeInfoAPI(data);
+        if (response?.status === 226) {
+          alert("중복된 닉네임입니다.");
+        }
       } catch (error) {
         console.error(error);
       }

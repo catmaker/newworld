@@ -49,13 +49,13 @@ export const postUserProfileImageAPI = async (data: File) => {
   }
 };
 
-export const deleteUserProfile = async () => {
+export const withdrawal = async (nickname: string) => {
   try {
-    const response = await axios.delete(
-      "http://localhost:8080/deleteUserProfile"
+    const response = await axios.post(
+      "http://localhost:8080/withdrawal",
+      nickname
     );
     console.log(response);
-    alert("회원 탈퇴에 성공했습니다.");
     return response;
   } catch (error) {
     console.error(error);
@@ -78,11 +78,14 @@ export const getUserClearQuizzes = async (data: any) => {
   }
 };
 
-export const updateUserProfileAPI = async (nickname: string) => {
+export const postUserChangeInfoAPI = async (data: {
+  nickname: string;
+  newNickname: string;
+}) => {
   try {
     const response = await axios.post(
-      "http://localhost:8080/updateUserProfile",
-      nickname
+      "http://localhost:8080/postUserChangeInfo",
+      data
     );
     console.log(response);
     return response;

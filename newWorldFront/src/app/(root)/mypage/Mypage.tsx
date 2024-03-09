@@ -4,8 +4,6 @@ import styles from "@/app/assets/scss/section/_mypage.module.scss";
 import dummy from "./dummy.json";
 import dummy2 from "./dummy2.json";
 import { useState, useEffect } from "react";
-import Profile from "@/app/components/mypageComponents/Profile";
-import Badge from "@/app/components/mypageComponents/Badge";
 import WelcomeMessage from "@/app/components/mypageComponents/WelcomeMessage";
 import PrivacyControlBox from "@/app/components/mypageComponents/PrivacyControlBox";
 import SelectedItem from "@/app/components/mypageComponents/SelectedItem";
