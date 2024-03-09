@@ -27,6 +27,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
+import static NewWorld.common.ResponseEntityConstants.RESPONSE_ENTITY_NO_CONTENT;
+
 @RestController
 @RequiredArgsConstructor
 public class UserPageController {
@@ -35,6 +37,11 @@ public class UserPageController {
     private final QuizService quizService;
     private final ImageFileService imageFileService;
 
+    @PostMapping("/withdrawal")
+    public ResponseEntity<HttpStatus> UserWithdrawal(UserDto userDto){
+        userService.withdraw(userDto);
+        return RESPONSE_ENTITY_NO_CONTENT;
+    }
     @PostMapping("/getUserProfile")
     public ResponseEntity<UserDto> findUserProfile(@RequestBody UserDto userDto) throws CustomError {
             UserDto userInfo = userService.getUserInfo(userDto);

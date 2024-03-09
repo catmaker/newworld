@@ -43,4 +43,6 @@ public interface UserService {
     List<SolvedQuizDto> getSolveQuizList(UserDto userDto) throws CustomError;
 
     ErrorCode updateUserPw(ChangeInfoDto changeInfoDto) throws CustomError;
+
+    void withdraw(UserDto userDto);
 }
