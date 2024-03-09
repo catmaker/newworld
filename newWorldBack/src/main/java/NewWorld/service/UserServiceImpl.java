@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
             return ErrorCode.NOT_CHANGE;
         }
 
-        if(checkUser == null){
+        if(checkUser != null){
             return ErrorCode.USER_NICKNAME_DUPLICATION;
         }
 
