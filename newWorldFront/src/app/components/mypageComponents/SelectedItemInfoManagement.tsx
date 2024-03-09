@@ -83,6 +83,11 @@ const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
       };
       try {
         const response = await postUserChangeInfoAPI(data);
+        if (response?.status === 200) {
+          alert("닉네임이 변경되었습니다. 다시 로그인해주세요.");
+          signOut();
+          router.push("/login");
+        }
         if (response?.status === 226) {
           alert("중복된 닉네임입니다.");
         }
