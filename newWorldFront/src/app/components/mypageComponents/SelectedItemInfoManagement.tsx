@@ -57,9 +57,16 @@ const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
     setShouldUpdateProfile(true);
   };
   const handleDelete = async () => {
+    const data = {
+      nickname: nickname,
+    };
     try {
-      const data = await withdrawal(nickname);
-      alert("회원 탈퇴가 완료되었습니다.");
+      const response = await withdrawal(data);
+      console.log(response);
+      if (response) {
+        alert("회원탈퇴가 완료되었습니다.");
+        signOut();
+      }
     } catch (error) {
       console.error(error);
     }

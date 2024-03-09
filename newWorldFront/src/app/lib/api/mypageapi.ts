@@ -49,12 +49,9 @@ export const postUserProfileImageAPI = async (data: File) => {
   }
 };
 
-export const withdrawal = async (nickname: string) => {
+export const withdrawal = async (data: { nickname: string }) => {
   try {
-    const response = await axios.post(
-      "http://localhost:8080/withdrawal",
-      nickname
-    );
+    const response = await axios.post("http://localhost:8080/withdrawal", data);
     console.log(response);
     return response;
   } catch (error) {
