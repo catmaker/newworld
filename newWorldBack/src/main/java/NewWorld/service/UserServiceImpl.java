@@ -93,9 +93,15 @@ public class UserServiceImpl implements UserService {
 
         User user = userRepository.findByNickname(changeInfoDto.getNickname())
                 .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
+        User checkUser = userRepository.findByNickname(changeInfoDto.getNewNickname())
+                .orElse(null);
 
         if(changeInfoDto.getNewNickname().equals(changeInfoDto.getNickname())){
             return ErrorCode.NOT_CHANGE;
+        }
+
+        if(checkUser == null){
+            return ErrorCode.USER_NICKNAME_DUPLICATION;
         }
 
         user.changeNickname(changeInfoDto.getNewNickname());

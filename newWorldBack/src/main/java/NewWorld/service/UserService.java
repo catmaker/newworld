@@ -44,5 +44,5 @@ public interface UserService {
 
     ErrorCode updateUserPw(ChangeInfoDto changeInfoDto) throws CustomError;
 
-    void withdraw(UserDto userDto);
+    void withdraw(UserDto userDto) throws CustomError;
 }
