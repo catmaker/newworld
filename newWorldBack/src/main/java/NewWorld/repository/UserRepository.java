@@ -56,7 +56,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByNameAndPhoneNumber(String userName, String phoneNumber);
     Optional<List<User>> findTop100ByOrderByAttendanceDesc();
     Optional<List<User>> findTop100ByOrderByPointDesc();
-    Optional<List<User>> findTop100ByOrderByAttendanceAscPointDesc();
+    Optional<List<User>> findTop100ByOrderByAttendanceDescPointDesc();
 
     void deleteByNickname(String userNickname);
 }
