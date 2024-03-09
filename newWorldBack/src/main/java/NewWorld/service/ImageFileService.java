@@ -7,5 +7,5 @@ import java.io.File;
 import java.io.IOException;
 
 public interface ImageFileService {
-    File saveImageFile(MultipartFile multipartFile, String realPath, String userName, String userNickname) throws CustomError, IOException;
+    File saveImageFile(MultipartFile multipartFile, String userName, String userNickname) throws CustomError, IOException;
 }
