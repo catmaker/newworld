@@ -2,10 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import styles from "@/app/assets/scss/section/_mypage.module.scss";
-import {
-  postUserProfileImageAPI,
-  updateUserProfileAPI,
-} from "@/app/lib/api/mypageapi";
+import { postUserProfileImageAPI } from "@/app/lib/api/mypageapi";
 import { ProfileImageManagement } from "@/app/types/mypage";
 
 const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({

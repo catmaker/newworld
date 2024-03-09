@@ -17,7 +17,6 @@ import { Color } from "@tiptap/extension-color";
 
 import { postsCreateAPI } from "@/app/lib/api/community";
 import { useRouter } from "next/navigation";
-import { detail } from "@/app/(root)/community/[id]/community.module.scss";
 interface TiptapProps {
   content: string;
   nickname: string;
