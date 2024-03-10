@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.13.0",
+    "@cloudinary/url-gen": "^1.19.0",
     "@looop/quill-image-resize-module-react": "^3.1.5",
     "@tiptap/extension-code-block-lowlight": "^2.2.1",
     "@tiptap/extension-color": "^2.2.1",
@@ -28,6 +30,7 @@
     "lowlight": "^3.1.0",
     "next": "13.5.6",
     "next-auth": "^4.24.5",
+    "next-cloudinary": "^6.2.1",
     "quill-image-resize": "^3.0.9",
     "quill-image-resize-module": "^3.0.0",
     "quill-image-resize-module-react": "^3.0.0",

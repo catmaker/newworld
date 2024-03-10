@@ -1,6 +1,5 @@
 import axios from "axios";
 import FormData from "form-data";
-import { IncomingForm } from "formidable";
 // myPageAPI
 export const getUserProfileAPI = async () => {
   try {
@@ -34,14 +33,14 @@ export const postUserChangePwAPI = async (data: any) => {
   }
 };
 
-export const updateUserProfileAPI = async (data: any) => {
+export const updateUserProfileAPI = async (data: {
+  nickname: string;
+  url: string;
+}) => {
   try {
-    const formData = new FormData();
-    formData.append("image", data.image);
-
     const response = await axios.post(
       "http://localhost:8080/postUserProfileImage",
-      formData
+      data
     );
 
     console.log(response);
