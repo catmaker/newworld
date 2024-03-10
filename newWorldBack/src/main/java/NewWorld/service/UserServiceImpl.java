@@ -143,12 +143,6 @@ public class UserServiceImpl implements UserService {
         }
         UserDto result = UserDto.of(user);
 
-        if(user.getImageFile() != null){
-            ImageFile imageFile = user.getImageFile();
-            String path = downLoadPath + File.separator + imageFile.getFileName();
-            result.setImageFilePath(path);
-        }
-
         List<UserQuizSolvedDate> quizList = userQuizSolvedDateRepository.findAllByUser(user).orElse(null);
         if (quizList == null) {
             result.setPuzzleCount(0);
