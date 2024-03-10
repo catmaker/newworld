@@ -24,12 +24,11 @@ export const postUserChangePwAPI = async (data: any) => {
       data
     );
     console.log(response);
-    alert("프로필 업데이트에 성공했습니다.");
-
+    alert("비밀번호가 변경되었습니다. 다시 로그인해주세요.");
     return response;
   } catch (error) {
     console.error(error);
-    alert("프로필 업데이트에 실패했습니다.");
+    alert("현재 비밀번호가 일치하지 않습니다.");
   }
 };
 

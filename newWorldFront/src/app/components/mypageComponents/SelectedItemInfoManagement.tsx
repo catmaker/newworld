@@ -36,7 +36,9 @@ const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
         if (response?.status === 200) {
           setNewPassword("");
           setCurrentPassword("");
-          router.refresh();
+
+          signOut();
+          router.push("/login");
         }
       } catch (error) {
         console.error(error);
