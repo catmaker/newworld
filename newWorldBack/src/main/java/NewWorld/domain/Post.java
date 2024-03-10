@@ -107,7 +107,9 @@ public class Post {
         return this;
     }
 
-
+    public void changeNickname(String nickname){
+        this.userNickName = nickname;
+    }
 
     public void addview(){
         this.views = this.views + 1;

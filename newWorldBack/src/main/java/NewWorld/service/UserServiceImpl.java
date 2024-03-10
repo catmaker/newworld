@@ -125,6 +125,9 @@ public class UserServiceImpl implements UserService {
 
         user.changeNickname(changeInfoDto.getNewNickname());
 
+        if(user.getPostList() != null){
+            user.getPostList().stream().forEach(s->s.changeNickname(changeInfoDto.getNewNickname()));
+        }
         return ErrorCode.SUCCESS;
     }
 
