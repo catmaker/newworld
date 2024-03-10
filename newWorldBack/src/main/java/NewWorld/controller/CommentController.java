@@ -35,7 +35,7 @@ public class CommentController {
         return ResponseEntity.ok().body(result);
     }
 
-    @PostMapping("/deletePostsComments")
+    @PostMapping("/deletePostsComment")
     public ResponseEntity<HttpStatus> deleteComment(@RequestBody CommentDto commentDto) throws CustomError {
         commentService.deleteComment(commentDto);
         return RESPONSE_ENTITY_NO_CONTENT;
