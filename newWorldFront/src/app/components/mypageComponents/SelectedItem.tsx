@@ -18,12 +18,14 @@ const SelectedItem: React.FC<SelectedItemProps> = ({
   session,
   quizzes,
 }) => {
+  const { name, id, nickname, point, signupDate, puzzleCount, imageFile } =
+    session;
   return (
     <>
       {selectedItem === "개인정보 관리" && <InfoManagement session={session} />}
       {selectedItem === "프로필 관리" && (
         <ProfileImageManagement
-          profilePicture={dummy.users[0].profilePicture}
+          profilePicture={imageFile}
           handleFileChange={handleFileChange}
         />
       )}

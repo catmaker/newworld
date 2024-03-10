@@ -4,7 +4,7 @@ export interface MySession extends Session {
   user: {
     name: string;
     email: string;
-    image: string;
+    imageFile: string;
     nickname: string;
     id: string;
     signupDate: string;

@@ -45,7 +45,7 @@ const Quiz = ({ quiz, quizId, nickname }: any) => {
             퀴즈를 틀렸을 때 나머지 힌트가 나타납니다!
           </p>
           <div className={styles.quiz_box}>
-            <div className={styles.quiz_detail}>
+            <div>
               <p>{quiz.quizDetail}</p>
             </div>
             {/* <p>Answer: {quiz.answer}</p> */}

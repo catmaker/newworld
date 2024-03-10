@@ -24,6 +24,10 @@ export interface MypageProps {
     name: string;
     id: string;
     nickname: string;
+    imageFile: string;
+    point: number;
+    signupDate: string;
+    puzzleCount: number;
   };
   status?: any;
 }

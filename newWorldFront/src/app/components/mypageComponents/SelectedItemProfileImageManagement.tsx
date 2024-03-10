@@ -4,12 +4,15 @@ import Image from "next/image";
 import styles from "@/app/assets/scss/section/_mypage.module.scss";
 import { updateUserProfileAPI } from "@/app/lib/api/mypageapi";
 import { ProfileImageManagement } from "@/app/types/mypage";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { MySession } from "@/app/types/Session";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
   profilePicture,
 }) => {
+  console.log(profilePicture);
+  const router = useRouter();
   const [preview, setPreview] = useState(profilePicture);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [nickname, setNickname] = useState("");
@@ -43,8 +46,13 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
             },
           }
         );
-
+        console.log("Sent data:", res.config.data);
         console.log(res);
+        if (res.status === 200) {
+          alert("프로필 이미지 업데이트에 성공했습니다. 다시 로그인해주세요.");
+          signOut();
+          router.push("/login");
+        }
       } catch (error) {
         console.error(error);
       }

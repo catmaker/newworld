@@ -10,12 +10,20 @@ const page = async () => {
   const session = (await getServerSession(authOptions)) as MySession;
 
   if (session && session.user) {
-    const { name, id, nickname, point, signupDate, puzzleCount } = session.user;
+    const { name, id, nickname, point, signupDate, puzzleCount, imageFile } =
+      session.user;
     return (
       <div>
-        <Header></Header>
         <Mypage
-          session={{ name, id, nickname, point, signupDate, puzzleCount }}
+          session={{
+            name,
+            id,
+            nickname,
+            point,
+            signupDate,
+            puzzleCount,
+            imageFile,
+          }}
         />
       </div>
     );

@@ -36,6 +36,7 @@ export const authOptions: NextAuthOptions = {
           if (result) {
             // 검증이 성공하면 사용자 객체를 반환합니다.
             // 이 객체는 JWT의 `user` 속성에 저장됩니다.
+            console.log(result);
             return {
               id: userId,
               name: result.name,
@@ -43,7 +44,7 @@ export const authOptions: NextAuthOptions = {
               signupDate: result.signupDate,
               puzzleCount: result.puzzleCount,
               point: result.point,
-              imageFile: result.imageFile,
+              imageFilePath: result.imageFilePath,
             };
           } else {
             // 검증이 실패하면 null을 반환합니다.
