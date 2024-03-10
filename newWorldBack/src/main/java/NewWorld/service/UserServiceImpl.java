@@ -145,7 +145,7 @@ public class UserServiceImpl implements UserService {
 
         if(user.getImageFile() != null){
             ImageFile imageFile = user.getImageFile();
-            String path = downLoadPath + File.separator + imageFile.getPath();
+            String path = downLoadPath + File.separator + imageFile.getFileName();
             result.setImageFilePath(path);
         }
 
