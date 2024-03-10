@@ -37,7 +37,7 @@ public class ImageFileServiceImpl implements ImageFileService {
      * @return The status of the save operation. Possible values are "s" for success and "f" for failure.
      */
     @Override
-    public File saveImageFile(MultipartFile uploadFile, String userName, String userNickname) throws CustomError, IOException {
+    public File saveImageFile(MultipartFile uploadFile,  String userNickname) throws CustomError, IOException {
 
         // 이미지 파일만 업로드
         if (!Objects.requireNonNull(uploadFile.getContentType()).startsWith("image")) {

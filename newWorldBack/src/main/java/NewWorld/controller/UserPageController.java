@@ -68,7 +68,6 @@ public class UserPageController {
         ResponseEntity<byte[]> result;
         UserDto userInfo = userService.getUserInfo(userDto);
         File imageFile = userInfo.getImageFile();
-        String path = imageFile.getPath();
 
         try{
             HttpHeaders header = new HttpHeaders();
@@ -83,9 +82,10 @@ public class UserPageController {
     }
 
     @PostMapping("/postUserProfileImage")
-    public ResponseEntity<byte[]>  updateUserProfileImage(MultipartFile uploadFile, HttpServletRequest request,@RequestBody UserDto userDto) throws CustomError, IOException {
+    public ResponseEntity<byte[]> updateUserProfileImage(@RequestPart(name = "image") MultipartFile uploadFile, HttpServletRequest request, @RequestParam(name = "nickname") String nickname) throws CustomError, IOException {
+
         ResponseEntity<byte[]> result;
-        File imageFile = imageFileService.saveImageFile(uploadFile, userDto.getName(), userDto.getNickname());
+        File imageFile = imageFileService.saveImageFile(uploadFile, nickname);
 
         try{
             HttpHeaders header = new HttpHeaders();
