@@ -40,13 +40,9 @@ const Ranking: React.FC<RankingProps> = ({ total }) => {
               data.map((item, index) => {
                 return (
                   <div className={styles.contents} key={index}>
-                    <div className={styles.contents_rank}>
-                      Rank : {index + 1}
-                    </div>
-                    <div className={styles.contents_user}>{item.nickname}</div>
-                    <div className={styles.contents_score}>
-                      Total : {item.point}
-                    </div>
+                    <div>Rank : {index + 1}</div>
+                    <div>{item.nickname}</div>
+                    <div>Total : {item.point}</div>
                   </div>
                 );
               })}

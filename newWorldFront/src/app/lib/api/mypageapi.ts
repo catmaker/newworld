@@ -35,15 +35,25 @@ export const postUserChangePwAPI = async (data: any) => {
 
 export const updateUserProfileAPI = async (data: any) => {
   try {
-    // 보낼 데이터는 이미지 파일 (File 객체 JPG,PNG)
+    const formData = new FormData();
+    formData.append("file", data.file);
+    formData.append("nickname", data.nickname);
     const response = await axios.post(
       "http://localhost:8080/postUserProfileImage",
-      data
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
     );
+
+    console.log(`Content-Type: ${response.config.headers["Content-Type"]}`);
     console.log(response);
     alert("프로필 이미지 업데이트에 성공했습니다.");
     return response;
   } catch (error) {
+    console.error(`Content-Type: ${error.config.headers["Content-Type"]}`);
     console.error(error);
     alert("프로필 이미지 업데이트에 실패했습니다.");
   }

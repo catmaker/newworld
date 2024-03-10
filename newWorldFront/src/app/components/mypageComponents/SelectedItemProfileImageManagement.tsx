@@ -5,6 +5,7 @@ import styles from "@/app/assets/scss/section/_mypage.module.scss";
 import { updateUserProfileAPI } from "@/app/lib/api/mypageapi";
 import { ProfileImageManagement } from "@/app/types/mypage";
 import { useSession } from "next-auth/react";
+import { MySession } from "@/app/types/Session";
 const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
   profilePicture,
 }) => {
@@ -22,7 +23,7 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
       }
     }
   };
-  const { data: session } = useSession();
+  const { data: session } = useSession() as { data: MySession | null };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
