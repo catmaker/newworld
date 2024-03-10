@@ -55,12 +55,7 @@ public class LoginServiceImpl implements LoginService {
 
         UserDto userDto = UserDto.of(user);
 
-        if(user.getImageFile() != null){
-            ImageFile imageFile = user.getImageFile();
-            String path = downLoadPath + File.separator + imageFile.getFileName();
-            File userimage = new File(path, imageFile.getFileName());
-            userDto.setImageFilePath(userimage);
-        }
+
 
         UserDto info = userDto.hideInfo();
 

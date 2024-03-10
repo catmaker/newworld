@@ -7,6 +7,7 @@ import NewWorld.exception.CustomError;
 import NewWorld.exception.ErrorCode;
 import org.springframework.http.HttpStatus;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -34,6 +35,14 @@ public interface UserService {
      * @return
      */
     UserDto getUserInfo(UserDto userDto) throws CustomError;
+
+    /**
+     *
+     * @param userDto
+     * @return
+     * @throws CustomError
+     */
+    File getUserImageFile(UserDto userDto) throws CustomError;
 
     /**
      * user내가푼문제 조히

@@ -62,6 +62,13 @@ public class UserPageController {
         return ResponseEntity.status(result.getStatus()).body(result);
     }
 
+    @PostMapping("/getUserProfileImage")
+    public ResponseEntity<File> getUserProfileImage(@RequestBody UserDto userDto) throws Exception {
+        File result = userService.getUserImageFile(userDto);
+
+        return ResponseEntity.ok().body(result);
+    }
+
 
     @PostMapping("/postUserProfileImage")
     public ResponseEntity<byte[]> updateUserProfileImage(@RequestPart(name = "image") MultipartFile uploadFile, HttpServletRequest request, @RequestParam(name = "nickname") String nickname) throws CustomError, IOException {

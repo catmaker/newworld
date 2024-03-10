@@ -1,6 +1,8 @@
 package NewWorld.service;
 
-import NewWorld.domain.*;
+import NewWorld.domain.ImageFile;
+import NewWorld.domain.User;
+import NewWorld.domain.UserQuizSolvedDate;
 import NewWorld.dto.ChangeInfoDto;
 import NewWorld.dto.SolvedQuizDto;
 import NewWorld.dto.UserDto;
@@ -10,14 +12,12 @@ import NewWorld.repository.UserQuizSolvedDateRepository;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * 로그인 처리
@@ -88,6 +88,21 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+    @Override
+    public File getUserImageFile(UserDto userDto) throws CustomError {
+        User user = userRepository.findByNickname(userDto.getNickname())
+                .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
+
+        if(user.getImageFile() != null){
+            ImageFile imageFile = user.getImageFile();
+            String path = downLoadPath + File.separator + imageFile.getFileName();
+            File userimage = new File(path, imageFile.getFileName());
+
+            return userimage;
+        }
+
+        return null;
+    }
 
     /**
      * user기본정보 수정
