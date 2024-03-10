@@ -38,6 +38,8 @@ public class ImageFileServiceImpl implements ImageFileService {
      */
     @Override
     public File saveImageFile(MultipartFile uploadFile,  String userNickname) throws CustomError, IOException {
+        User user = userRepository.findByNickname(userNickname)
+                .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
 
         // 이미지 파일만 업로드
         if (!Objects.requireNonNull(uploadFile.getContentType()).startsWith("image")) {
@@ -45,12 +47,17 @@ public class ImageFileServiceImpl implements ImageFileService {
         }
 
         String originalFilename = uploadFile.getOriginalFilename();
-        String path = dowmLoadPath + originalFilename;
+        String path = dowmLoadPath + File.separator+ originalFilename;
 
         ImageFileDto imageFileDto = ImageFileDto.of(path, originalFilename);
-
         ImageFile imageFile = ImageFile.of(imageFileDto);
-        ImageFile save = imageFileRepository.save(imageFile);
+
+        if(user.getImageFile() != null){
+            user.saveImage(imageFile);
+        }else{
+           imageFile = imageFileRepository.save(imageFile);
+           user.saveImage(imageFile);
+        }
 
         File file = new File(path);
 
@@ -63,12 +70,6 @@ public class ImageFileServiceImpl implements ImageFileService {
            throw e;
         }
 
-        User user = userRepository.findByNickname(userNickname)
-                .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
-
-        if(user != null){
-            user.saveImage(save);
-        }
         return file;
     }
 

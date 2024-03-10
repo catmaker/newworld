@@ -1,6 +1,6 @@
 url:
   downLoad:
-    path: "resources/upload"
+    path: "/Users/jeonbyeong-il/Desktop/teamProject/newworld/newWorldBack/src/main/resources/upload"
 
 spring:
   docker:
