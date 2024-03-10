@@ -53,6 +53,9 @@ const Quizzes = (data: Quiz) => {
       <Rains />
       <div className={styles.container}>
         <div className={styles.contents_box}>
+          <Link href={`/quizzes/post`}>
+            <div className={styles.makeQuiz}>퀴즈만들기</div>
+          </Link>
           {quizList.length > 0 ? (
             quizList.map((quiz) => (
               <div key={quiz.id} className={styles.contents}>

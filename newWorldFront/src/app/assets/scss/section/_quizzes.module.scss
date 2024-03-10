@@ -111,3 +111,25 @@
     gap: 3rem;
   }
 }
+.makeQuiz {
+  color: white;
+  position: absolute;
+  top: 11%;
+  left: 11%;
+  width: 100px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: var(--white100);
+  color: var(--black100);
+  font-size: clamp(1rem, 1.5vw, 1rem);
+  font-weight: 700;
+  margin-top: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--green60);
+    transition: all 0.3s ease-in-out;
+  }
+}

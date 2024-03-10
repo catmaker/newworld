@@ -6,9 +6,13 @@ import { getUserClearQuizzes } from "@/app/lib/api/mypageapi";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/utils/authOptions";
 import { MySession } from "@/app/types/Session";
+import { redirect } from "next/navigation";
 const page = async () => {
   const session = (await getServerSession(authOptions)) as MySession;
-  const { nickname } = session.user;
+  if (!session) {
+    return redirect("/login");
+  }
+  const { nickname } = session?.user;
   let data: any = [];
   let page = 0;
 
