@@ -18,14 +18,16 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
   const [preview, setPreview] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [nickname, setNickname] = useState("");
+  const { data: session } = useSession() as { data: MySession | null };
   useEffect(() => {
     userProfileImage();
-  }, []);
+  }, [session]);
   const userProfileImage = async () => {
     const result = await getUserProfileImageAPI({
       nickname: session?.user.nickname,
     });
     console.log(result);
+    console.log(result?.data);
     setPreview(result?.data);
   };
   const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +41,6 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
       }
     }
   };
-  const { data: session } = useSession() as { data: MySession | null };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -79,8 +80,11 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
           프로필 사진을 변경할 수 있습니다. 최적 사이즈는 200x200 입니다.
         </p>
       </div>
-      <img src={preview} alt="" />
       <Image src={preview} alt="Profile" width={200} height={200} />
+      <div
+        className={styles.background}
+        style={{ backgroundImage: `url(${preview})` }}
+      ></div>
       <div>
         <form onSubmit={handleSubmit}>
           <input
