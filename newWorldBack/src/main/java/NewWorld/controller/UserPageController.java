@@ -63,8 +63,8 @@ public class UserPageController {
     }
 
     @PostMapping("/getUserProfileImage")
-    public ResponseEntity<File> getUserProfileImage(@RequestBody UserDto userDto) throws Exception {
-        File result = userService.getUserImageFile(userDto);
+    public ResponseEntity<String> getUserProfileImage(@RequestBody UserDto userDto) throws Exception {
+        String result = userService.getUserImageFile(userDto);
 
         return ResponseEntity.ok().body(result);
     }

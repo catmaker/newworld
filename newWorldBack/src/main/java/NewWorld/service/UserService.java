@@ -42,7 +42,7 @@ public interface UserService {
      * @return
      * @throws CustomError
      */
-    File getUserImageFile(UserDto userDto) throws CustomError;
+    String getUserImageFile(UserDto userDto) throws CustomError;
 
     /**
      * user내가푼문제 조히

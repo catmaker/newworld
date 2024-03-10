@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public File getUserImageFile(UserDto userDto) throws CustomError {
+    public String getUserImageFile(UserDto userDto) throws CustomError {
         User user = userRepository.findByNickname(userDto.getNickname())
                 .orElseThrow(() -> new CustomError(ErrorCode.USER_NOT_FOUND));
 
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
             String path = downLoadPath + File.separator + imageFile.getFileName();
             File userimage = new File(path, imageFile.getFileName());
 
-            return userimage;
+            return path;
         }
 
         return null;
