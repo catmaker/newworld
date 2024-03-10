@@ -24,7 +24,15 @@ const Quizzes = (data: Quiz) => {
   console.log(session);
   const userNickname = session?.user?.nickname;
   const [quizList, setQuizList] = React.useState(data.data); // useState를 사용하여 quizList를 상태 변수로 만듭니다.
+  const [difficulty, setDifficulty] = useState("전체"); // useState를 사용하여 difficulty를 상태 변수로 만듭니다.
+  const handleDifficultyChange = (newDifficulty: string) => {
+    setDifficulty(newDifficulty);
+  };
 
+  const filteredQuizList =
+    difficulty === "전체"
+      ? quizList
+      : quizList.filter((quiz) => quiz.quizDifficulty === difficulty);
   useEffect(() => {
     const fetchData = async () => {
       if (session) {
@@ -56,14 +64,39 @@ const Quizzes = (data: Quiz) => {
           <Link href={`/quizzes/post`}>
             <div className={styles.makeQuiz}>퀴즈만들기</div>
           </Link>
-          {quizList.length > 0 ? (
-            quizList.map((quiz) => (
+          <div className={styles.difficulty}>
+            <div
+              onClick={() => handleDifficultyChange("전체")}
+              className={difficulty === "전체" ? styles.selected : ""}
+            >
+              전체
+            </div>
+            <div
+              onClick={() => handleDifficultyChange("EASY")}
+              className={difficulty === "EASY" ? styles.selected : ""}
+            >
+              EASY
+            </div>
+            <div
+              onClick={() => handleDifficultyChange("NORMAL")}
+              className={difficulty === "NORMAL" ? styles.selected : ""}
+            >
+              NORMAL
+            </div>
+            <div
+              onClick={() => handleDifficultyChange("HARD")}
+              className={difficulty === "HARD" ? styles.selected : ""}
+            >
+              HARD
+            </div>
+          </div>
+          {filteredQuizList.length > 0 ? (
+            filteredQuizList.map((quiz) => (
               <div key={quiz.id} className={styles.contents}>
                 <Link href={`/quizzes/${quiz.id}`}>
-                  <h1>{quiz.title}</h1>
+                  <p>{quiz.title}</p>
                   <p>{quiz.quizDifficulty}</p>
                   <p>{quiz.maker}</p>
-                  <p>{quiz.makedDate}</p>
                 </Link>
               </div>
             ))

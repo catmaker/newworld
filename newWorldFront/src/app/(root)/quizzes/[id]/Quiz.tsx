@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { postCheckQuizAPI } from "@/app/lib/api/quizzes";
-import Header from "@/app/components/header/page";
 import styles from "@/app/assets/scss/section/_quizPage.module.scss";
 import { useRouter } from "next/navigation";
 const Quiz = ({ quiz, quizId, nickname }: any) => {
@@ -35,7 +34,6 @@ const Quiz = ({ quiz, quizId, nickname }: any) => {
   };
   return (
     <>
-      <Header></Header>
       <div className={styles.background}>
         <div className={styles.quiz_contents_box}>
           <h1 className={styles.quiz_title}>{quiz.quizTitle}</h1>
