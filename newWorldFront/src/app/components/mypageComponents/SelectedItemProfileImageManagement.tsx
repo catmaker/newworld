@@ -2,16 +2,15 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import styles from "@/app/assets/scss/section/_mypage.module.scss";
-import { postUserProfileImageAPI } from "@/app/lib/api/mypageapi";
+import { updateUserProfileAPI } from "@/app/lib/api/mypageapi";
 import { ProfileImageManagement } from "@/app/types/mypage";
-
+import { useSession } from "next-auth/react";
 const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
   profilePicture,
 }) => {
   const [preview, setPreview] = useState(profilePicture);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [nickname, setNickname] = useState("");
-
   const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
@@ -23,17 +22,23 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
       }
     }
   };
+  const { data: session } = useSession();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    // if (selectedFile) {
-    //   try {
-    //     await postUserProfileImageAPI(selectedFile);
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // }
+    if (selectedFile) {
+      const data = {
+        file: selectedFile,
+        nickname: session?.user?.nickname,
+      };
+      console.log(data);
+      try {
+        await updateUserProfileAPI(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
   };
 
   return (

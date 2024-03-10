@@ -33,7 +33,7 @@ export const postUserChangePwAPI = async (data: any) => {
   }
 };
 
-export const postUserProfileImageAPI = async (data: File) => {
+export const updateUserProfileAPI = async (data: any) => {
   try {
     // 보낼 데이터는 이미지 파일 (File 객체 JPG,PNG)
     const response = await axios.post(
