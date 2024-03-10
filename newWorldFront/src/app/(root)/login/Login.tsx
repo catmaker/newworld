@@ -81,22 +81,20 @@ const Login = () => {
                 />
               </label>
             </div>
-            <div className={styles.button_container}>
-              <Link href={`/`}>
-                <button className={styles.forgot_password}>
-                  Forgot Password?
-                </button>
-              </Link>
-              <Link href={`/signup`}>
-                <button onClick={handleSubmit} className={styles.login_button}>
-                  로그인
-                </button>
-              </Link>
-              <Link href={`/signup`}>
-                <button className={styles.sign_button}>Sign Up</button>
-              </Link>
-            </div>
+            <button type="submit" className={styles.login_button}>
+              로그인
+            </button>
           </form>
+          <div className={styles.button_container}>
+            <Link href={`/signup`}>
+              <button className={styles.sign_button}>Sign Up</button>
+            </Link>{" "}
+            <Link href={`/`}>
+              <button className={styles.forgot_password}>
+                Forgot Password?
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
