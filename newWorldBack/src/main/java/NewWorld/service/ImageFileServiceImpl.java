@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedOutputStream;
@@ -21,6 +22,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 @Slf4j
 public class ImageFileServiceImpl implements ImageFileService {
 
@@ -28,7 +30,7 @@ public class ImageFileServiceImpl implements ImageFileService {
     private final UserRepository userRepository;
 
     @Value("${url.downLoad.path}")
-    private String dowmLoadPath;
+    private String downLoadPath;
 
     /**
      * Saves the uploaded image file.
@@ -47,17 +49,12 @@ public class ImageFileServiceImpl implements ImageFileService {
         }
 
         String originalFilename = uploadFile.getOriginalFilename();
-        String path = dowmLoadPath + File.separator+ originalFilename;
+        String path = downLoadPath + File.separator+ originalFilename;
 
         ImageFileDto imageFileDto = ImageFileDto.of(path, originalFilename);
         ImageFile imageFile = ImageFile.of(imageFileDto);
 
-        if(user.getImageFile() != null){
-            user.saveImage(imageFile);
-        }else{
-           imageFile = imageFileRepository.save(imageFile);
-           user.saveImage(imageFile);
-        }
+        user.saveImage(imageFile);
 
         File file = new File(path);
 

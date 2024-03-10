@@ -62,25 +62,6 @@ public class UserPageController {
         return ResponseEntity.status(result.getStatus()).body(result);
     }
 
-    @PostMapping("/getUserProfileImage")
-    public ResponseEntity<byte[]> getUserProfileImage(@RequestBody UserDto userDto) throws CustomError {
-
-        ResponseEntity<byte[]> result;
-        UserDto userInfo = userService.getUserInfo(userDto);
-        File imageFile = userInfo.getImageFile();
-
-        try{
-            HttpHeaders header = new HttpHeaders();
-
-            header.add("Content-Type", Files.probeContentType(imageFile.toPath()));
-
-            result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(imageFile), header, HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return result;
-    }
-
     @PostMapping("/postUserProfileImage")
     public ResponseEntity<byte[]> updateUserProfileImage(@RequestPart(name = "image") MultipartFile uploadFile, HttpServletRequest request, @RequestParam(name = "nickname") String nickname) throws CustomError, IOException {
 

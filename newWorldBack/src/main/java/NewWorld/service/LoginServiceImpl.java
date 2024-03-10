@@ -1,14 +1,17 @@
 package NewWorld.service;
 
+import NewWorld.domain.ImageFile;
 import NewWorld.domain.User;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.CustomError;
 import NewWorld.exception.ErrorCode;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -23,6 +26,8 @@ public class LoginServiceImpl implements LoginService {
 
     private final UserRepository userRepository;
 
+    @Value("${url.downLoad.path}")
+    private String downLoadPath;
     /**
      * 로그인
      *
@@ -49,6 +54,13 @@ public class LoginServiceImpl implements LoginService {
         }
 
         UserDto userDto = UserDto.of(user);
+
+        if(user.getImageFile() != null){
+            ImageFile imageFile = user.getImageFile();
+            String path = downLoadPath + File.separator + imageFile.getPath();
+            userDto.setImageFilePath(path);
+        }
+
         UserDto info = userDto.hideInfo();
 
         return info;

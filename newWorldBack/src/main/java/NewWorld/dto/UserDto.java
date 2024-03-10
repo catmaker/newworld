@@ -44,11 +44,11 @@ public class UserDto {
 
     private int point;
 
-    private File imageFile;
+    private String imageFilePath;
 
 
     @Builder
-    public UserDto(String name, String userId, String nickname, String phoneNumber, String userPassword, String birthday, String signupDate, int attendance, int puzzleCount, int point, File imageFile) {
+    public UserDto(String name, String userId, String nickname, String phoneNumber, String userPassword, String birthday, String signupDate, int attendance, int puzzleCount, int point, String imageFile) {
         this.name = name;
         this.userId = userId;
         this.nickname = nickname;
@@ -59,7 +59,7 @@ public class UserDto {
         this.attendance = attendance;
         this.puzzleCount = puzzleCount;
         this.point = point;
-        this.imageFile = imageFile;
+        this.imageFilePath = imageFile;
     }
 
     /**

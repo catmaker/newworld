@@ -9,10 +9,12 @@ import NewWorld.exception.ErrorCode;
 import NewWorld.repository.UserQuizSolvedDateRepository;
 import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +28,10 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
     private final UserQuizSolvedDateRepository userQuizSolvedDateRepository;
+
+    @Value("${url.downLoad.path}")
+    private String downLoadPath;
     /**
      * 회원가입 아이디 중복체크
      *
@@ -139,14 +143,12 @@ public class UserServiceImpl implements UserService {
         }
         UserDto result = UserDto.of(user);
 
-//        ImageFile imageFile = user.getImageFile();
-//        String fileName = imageFile.getFileName();
-//        //추후업로드경로필요
-//        String path = imageFile.getPath();
-//        File file = new File(path, fileName);
-//
-//        if(!file.isFile()) return null;
-//        result.setImageFile(file);
+        if(user.getImageFile() != null){
+            ImageFile imageFile = user.getImageFile();
+            String path = downLoadPath + File.separator + imageFile.getPath();
+            result.setImageFilePath(path);
+        }
+
         List<UserQuizSolvedDate> quizList = userQuizSolvedDateRepository.findAllByUser(user).orElse(null);
         if (quizList == null) {
             result.setPuzzleCount(0);
