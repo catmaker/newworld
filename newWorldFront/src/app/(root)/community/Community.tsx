@@ -10,7 +10,7 @@ interface Post {
   userNickName: string;
   views: number;
   likes: number;
-  id: number;
+  postId: number;
 }
 
 const Community = (data: any) => {
@@ -50,6 +50,8 @@ const Community = (data: any) => {
         (a: Post, b: Post) => Date.parse(b.makedDate) - Date.parse(a.makedDate)
       );
     filteredPosts = noticePosts.concat(otherPosts);
+  } else if (selectedCategory === "추천") {
+    filteredPosts.sort((a: Post, b: Post) => b.likes - a.likes);
   } else {
     filteredPosts.sort(
       (a: Post, b: Post) => Date.parse(b.makedDate) - Date.parse(a.makedDate)
@@ -63,8 +65,8 @@ const Community = (data: any) => {
           <li onClick={() => handleCategoryClick("전체")}>전체</li>
           <li onClick={() => handleCategoryClick("ANNOUNCEMENT")}>공지사항</li>
           <li onClick={() => handleCategoryClick("추천")}>추천</li>
-          <li onClick={() => handleCategoryClick("질문")}>질문</li>
-          <li onClick={() => handleCategoryClick("기타")}>기타</li>
+          <li onClick={() => handleCategoryClick("QUESTION")}>질문</li>
+          <li onClick={() => handleCategoryClick("NORMAL")}>기타</li>
           <li>
             <Link href={"/community/post"}>글쓰기</Link>
           </li>
@@ -78,8 +80,11 @@ const Community = (data: any) => {
               let formattedDate = date.toLocaleDateString("ko-KR");
               formattedDate = formattedDate.slice(0, -1);
               return (
-                <Link href={`/community/${item.id}`}>
-                  <div className={styles.contents_Layout_item} key={item.id}>
+                <Link href={`/community/${item.postId}`}>
+                  <div
+                    className={styles.contents_Layout_item}
+                    key={item.postId}
+                  >
                     <div className={styles.contents_Layout_item_category}>
                       {item.postType}
                     </div>

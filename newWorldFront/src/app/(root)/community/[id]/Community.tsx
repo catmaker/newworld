@@ -14,9 +14,9 @@ type Comment = {
 const Community = ({ communityList, userNickname }: any) => {
   const [postComments, setPostComments] = useState("");
   const [commentsList, setCommentsList] = useState(
-    communityList.comments || []
+    communityList?.comments || []
   );
-  const [like, setLike] = useState(communityList.like);
+  const [like, setLike] = useState(communityList?.like);
 
   if (!communityList) {
     return null; // or return a loading indicator
@@ -64,16 +64,19 @@ const Community = ({ communityList, userNickname }: any) => {
       setLike(response.data);
     }
   };
-  // 유저 닉네임이랑 comment의 userNickName이랑 같으면 삭제버튼 보이게
-  console.log(commentsList);
 
+  const isMaker = communityList.nickname === userNickname;
+  console.log(commentsList[0].user);
   const deleteCommentHandler = async (commentId: number) => {};
 
   return (
     <div className={styles.background}>
       <div className={styles.content_box}>
         <div className={styles.title_box}>
-          <div className={styles.title}>{title}</div>
+          <div className={styles.title}>
+            {title}
+            {isMaker && <button className={styles.edit_button}>수정</button>}
+          </div>{" "}
           <div className={styles.title_sub}>
             <div className={styles.nickname_box}>
               <div>{nickname}</div>
@@ -100,12 +103,17 @@ const Community = ({ communityList, userNickname }: any) => {
               <div key={comment.id}>
                 <p>{comment.userNickName || "Anonymous"}</p>
                 <p>{comment.comment}</p>
-                <p>{new Date(comment.makedDate).toLocaleString()}</p>
-                {comment.userNickName === userNickname && (
-                  <button onClick={() => deleteCommentHandler(comment.id)}>
-                    삭제
-                  </button>
-                )}
+                <p className={styles.flex}>
+                  {new Date(comment.makedDate).toLocaleString()}{" "}
+                  {comment.userNickName === userNickname && (
+                    <button
+                      className={styles.edit_button}
+                      onClick={() => deleteCommentHandler(comment.id)}
+                    >
+                      삭제
+                    </button>
+                  )}
+                </p>
               </div>
             ))}
           </div>
