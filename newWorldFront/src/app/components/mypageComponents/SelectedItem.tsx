@@ -8,8 +8,6 @@ import Badge from "./Badge";
 type SelectedItemProps = SelectedItemComponentProps & MypageProps;
 const SelectedItem: React.FC<SelectedItemProps> = ({
   selectedItem,
-  dummy,
-  dummy2,
   handleFileChange,
   currentItems,
   totalPages,
@@ -18,14 +16,15 @@ const SelectedItem: React.FC<SelectedItemProps> = ({
   session,
   quizzes,
 }) => {
-  const { name, id, nickname, point, signupDate, puzzleCount, imageFile } =
+  const { name, id, nickname, point, signupDate, puzzleCount, imageFilePath } =
     session;
+  console.log("imageFile", imageFilePath);
   return (
     <>
       {selectedItem === "개인정보 관리" && <InfoManagement session={session} />}
       {selectedItem === "프로필 관리" && (
         <ProfileImageManagement
-          profilePicture={imageFile}
+          profilePicture={imageFilePath}
           handleFileChange={handleFileChange}
         />
       )}

@@ -44,7 +44,6 @@ export const authOptions: NextAuthOptions = {
               signupDate: result.signupDate,
               puzzleCount: result.puzzleCount,
               point: result.point,
-              imageFilePath: result.imageFilePath,
             };
           } else {
             // 검증이 실패하면 null을 반환합니다.

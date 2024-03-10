@@ -10,8 +10,16 @@ const page = async () => {
   const session = (await getServerSession(authOptions)) as MySession;
 
   if (session && session.user) {
-    const { name, id, nickname, point, signupDate, puzzleCount, imageFile } =
-      session.user;
+    const {
+      name,
+      id,
+      nickname,
+      point,
+      signupDate,
+      puzzleCount,
+      imageFilePath,
+    } = session.user;
+    console.log(imageFilePath);
     return (
       <div>
         <Mypage
@@ -22,7 +30,7 @@ const page = async () => {
             point,
             signupDate,
             puzzleCount,
-            imageFile,
+            imageFilePath,
           }}
         />
       </div>

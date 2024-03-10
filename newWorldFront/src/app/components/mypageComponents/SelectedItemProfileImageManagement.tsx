@@ -1,8 +1,11 @@
 // ProfileManagement.tsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "@/app/assets/scss/section/_mypage.module.scss";
-import { updateUserProfileAPI } from "@/app/lib/api/mypageapi";
+import {
+  getUserProfileImageAPI,
+  updateUserProfileAPI,
+} from "@/app/lib/api/mypageapi";
 import { ProfileImageManagement } from "@/app/types/mypage";
 import { signOut, useSession } from "next-auth/react";
 import { MySession } from "@/app/types/Session";
@@ -11,11 +14,20 @@ import { useRouter } from "next/navigation";
 const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
   profilePicture,
 }) => {
-  console.log(profilePicture);
   const router = useRouter();
-  const [preview, setPreview] = useState(profilePicture);
+  const [preview, setPreview] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [nickname, setNickname] = useState("");
+  useEffect(() => {
+    userProfileImage();
+  }, []);
+  const userProfileImage = async () => {
+    const result = await getUserProfileImageAPI({
+      nickname: session?.user.nickname,
+    });
+    console.log(result);
+    setPreview(result?.data);
+  };
   const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
@@ -50,8 +62,9 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
         console.log(res);
         if (res.status === 200) {
           alert("프로필 이미지 업데이트에 성공했습니다. 다시 로그인해주세요.");
-          signOut();
-          router.push("/login");
+          userProfileImage();
+          // signOut();
+          // router.push("/login");
         }
       } catch (error) {
         console.error(error);
@@ -66,6 +79,7 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
           프로필 사진을 변경할 수 있습니다. 최적 사이즈는 200x200 입니다.
         </p>
       </div>
+      <img src={preview} alt="" />
       <Image src={preview} alt="Profile" width={200} height={200} />
       <div>
         <form onSubmit={handleSubmit}>
