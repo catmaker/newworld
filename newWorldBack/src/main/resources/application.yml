@@ -1,3 +1,7 @@
+url:
+  downLoad:
+    path: "resources/upload"
+
 spring:
   docker:
     compose:
@@ -20,3 +24,5 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+
