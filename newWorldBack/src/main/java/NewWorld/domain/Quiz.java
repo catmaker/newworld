@@ -33,6 +33,7 @@ public class Quiz {
 
     private String title;
 
+    @Column(length = 500)
     private String detail;
 
     @Enumerated(EnumType.STRING)

@@ -28,6 +28,7 @@ public class Post {
 
     private String title;
 
+    @Column(length = 500)
     private String detail;
 
     private LocalDateTime makedDate;
