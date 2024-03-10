@@ -6,6 +6,7 @@ import { updateUserProfileAPI } from "@/app/lib/api/mypageapi";
 import { ProfileImageManagement } from "@/app/types/mypage";
 import { useSession } from "next-auth/react";
 import { MySession } from "@/app/types/Session";
+import axios from "axios";
 const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
   profilePicture,
 }) => {
@@ -29,19 +30,26 @@ const SelectedItemProfileImageManagement: React.FC<ProfileImageManagement> = ({
     event.preventDefault();
 
     if (selectedFile) {
-      const data = {
-        file: selectedFile,
-        nickname: session?.user?.nickname,
-      };
-      console.log(data);
+      const formData = new FormData();
+      formData.append("image", selectedFile);
+      formData.append("nickname", session?.user?.nickname || "");
       try {
-        await updateUserProfileAPI(data);
+        const res = await axios.post(
+          "http://localhost:8080/postUserProfileImage",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        console.log(res);
       } catch (error) {
         console.error(error);
       }
     }
   };
-
   return (
     <div className={styles.profile_box}>
       <div>

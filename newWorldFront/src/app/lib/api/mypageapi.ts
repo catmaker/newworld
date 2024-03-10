@@ -1,5 +1,6 @@
-import axios from ".";
-import { postUserProfileInterface } from "@/app/types/mypage";
+import axios from "axios";
+import FormData from "form-data";
+import { IncomingForm } from "formidable";
 // myPageAPI
 export const getUserProfileAPI = async () => {
   try {
@@ -36,29 +37,21 @@ export const postUserChangePwAPI = async (data: any) => {
 export const updateUserProfileAPI = async (data: any) => {
   try {
     const formData = new FormData();
-    formData.append("file", data.file);
-    formData.append("nickname", data.nickname);
+    formData.append("image", data.image);
+
     const response = await axios.post(
       "http://localhost:8080/postUserProfileImage",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
+      formData
     );
 
-    console.log(`Content-Type: ${response.config.headers["Content-Type"]}`);
     console.log(response);
     alert("프로필 이미지 업데이트에 성공했습니다.");
     return response;
   } catch (error) {
-    console.error(`Content-Type: ${error.config.headers["Content-Type"]}`);
     console.error(error);
     alert("프로필 이미지 업데이트에 실패했습니다.");
   }
 };
-
 export const withdrawal = async (data: { nickname: string }) => {
   try {
     const response = await axios.post("http://localhost:8080/withdrawal", data);
