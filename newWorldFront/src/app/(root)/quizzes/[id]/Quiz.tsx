@@ -1,17 +1,19 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { postCheckQuizAPI } from "@/app/lib/api/quizzes";
+import { deleteQuizAPI, postCheckQuizAPI } from "@/app/lib/api/quizzes";
 import styles from "@/app/assets/scss/section/_quizPage.module.scss";
 import { useRouter } from "next/navigation";
 const Quiz = ({ quiz, quizId, nickname }: any) => {
   const router = useRouter();
   const [answer, setAnswer] = useState("");
   const [hintIndex, setHintIndex] = useState(-1);
+
   if (!quiz || !Array.isArray(quiz.hints)) {
     console.error("quiz or quiz.hints is not an array:", quiz);
     return null;
   }
   console.log(quiz);
+  const isMaker = quiz.maker === nickname;
   const checkAnswer = async () => {
     const data = {
       quizId: quizId,
@@ -30,6 +32,22 @@ const Quiz = ({ quiz, quizId, nickname }: any) => {
       if (hintIndex < quiz.hints.length - 1) {
         setHintIndex(hintIndex + 1);
       }
+    }
+  };
+  const deleteQuiz = async () => {
+    const data = {
+      quizId: quizId,
+      nickname: nickname,
+    };
+    console.log(data);
+    const response = await deleteQuizAPI(data);
+    if (response?.data === "success") {
+      console.log(response);
+      alert("삭제되었습니다!");
+      router.push("/quizzes");
+    } else {
+      console.log(response);
+      alert("삭제에 실패했습니다!");
     }
   };
   return (
@@ -68,13 +86,22 @@ const Quiz = ({ quiz, quizId, nickname }: any) => {
                   ))}
               </div>
             </div>
-            <button
-              className={styles.button}
-              type="submit"
-              onClick={checkAnswer}
-            >
-              제출
-            </button>
+            {isMaker ? (
+              <>
+                <div>제작자는 풀 수 없다냥!</div>
+                <button className={styles.button} onClick={deleteQuiz}>
+                  퀴즈 삭제
+                </button>
+              </>
+            ) : (
+              <button
+                className={styles.button}
+                type="submit"
+                onClick={checkAnswer}
+              >
+                제출
+              </button>
+            )}
           </div>
         </div>
       </div>

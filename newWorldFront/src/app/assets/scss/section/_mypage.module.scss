@@ -371,16 +371,16 @@
     height: 10%;
     background-color: var(--greyShades10);
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
     cursor: pointer;
     div {
       display: flex;
       justify-content: center;
     }
     &:hover {
-      background-color: #1b1d24;
       transition: all 0.3s ease-in-out;
-      padding: 8px;
+      scale: 1.01;
     }
   }
 }

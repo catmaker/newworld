@@ -47,3 +47,14 @@ export const postMakeQuizAPI = async (data: any) => {
     console.error(error);
   }
 };
+
+export const deleteQuizAPI = async (data: any) => {
+  try {
+    // 보낼 데이터는 퍼즐 id
+    const response = await axios.post("http://localhost:8080/deleteQuiz", data);
+
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
