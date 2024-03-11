@@ -34,7 +34,7 @@ export const postUserChangePwAPI = async (data: any) => {
 
 export const updateUserProfileAPI = async (data: {
   nickname: string;
-  url: string;
+  imageFilePath: string;
 }) => {
   try {
     const response = await axios.post(

@@ -2,6 +2,7 @@
 import styles from "@/app/assets/scss/section/_communityPosting.module.scss";
 import { useState } from "react";
 import {
+  deletePostsCommentAPI,
   postsCommunityCommentsAPI,
   postsLikeAPI,
 } from "@/app/lib/api/community";
@@ -10,6 +11,7 @@ type Comment = {
   userNickName: string;
   comment: string;
   makedDate: string;
+  commentId: number;
 };
 
 const Community = ({ communityList, userNickname }: any) => {
@@ -18,7 +20,7 @@ const Community = ({ communityList, userNickname }: any) => {
     communityList?.comments || []
   );
   const [like, setLike] = useState(communityList?.like);
-
+  console.log(communityList);
   if (!communityList) {
     return null; // or return a loading indicator
   }
@@ -67,7 +69,21 @@ const Community = ({ communityList, userNickname }: any) => {
   };
 
   const isMaker = communityList.nickname === userNickname;
-  const deleteCommentHandler = async (commentId: number) => {};
+  const deleteCommentHandler = async (commentId: number) => {
+    const data = {
+      commentId: commentId,
+      postId: postId,
+      nickname: userNickname,
+    };
+    console.log(data);
+    const response = await deletePostsCommentAPI(data);
+    if (response) {
+      alert("댓글이 삭제되었습니다.");
+      setCommentsList((prevComments: Comment[]) =>
+        prevComments.filter((comment) => comment.commentId !== commentId)
+      );
+    }
+  };
 
   return (
     <div className={styles.background}>
