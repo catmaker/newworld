@@ -20,9 +20,9 @@ import { useRouter } from "next/navigation";
 interface TiptapProps {
   content: string;
   nickname: string;
-  originTitle: string;
-  originCategory: string;
-  originDetail: string;
+  originTitle?: string;
+  originCategory?: string;
+  originDetail?: string;
 }
 
 const Tiptap = ({
@@ -82,7 +82,7 @@ const Tiptap = ({
       console.log("수정 버튼이 클릭되었습니다.");
     } else {
       // 게시글 등록 로직
-      if (title.trim() === "") {
+      if (title?.trim() === "") {
         alert("제목을 입력해주세요.");
         return;
       }
