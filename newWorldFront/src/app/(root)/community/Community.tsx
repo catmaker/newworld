@@ -7,7 +7,7 @@ interface Post {
   makedDate: string;
   postType: string;
   title: string;
-  userNickName: string;
+  nickname: string;
   views: number;
   likes: number;
   postId: number;
@@ -100,10 +100,10 @@ const Community = (data: any) => {
                             : "#898c92",
                       }}
                     >
-                      {item.userNickName}
+                      {item.nickname}
                     </div>
                     <div className={styles.contents_Layout_item_timestamp}>
-                      {formattedDate} {/* 수정된 부분 */}
+                      {formattedDate}
                     </div>
                     <div className={styles.contents_Layout_item_view}>
                       👁️‍🗨️{item.views}
