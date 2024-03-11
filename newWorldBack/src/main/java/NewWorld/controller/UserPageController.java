@@ -71,21 +71,9 @@ public class UserPageController {
 
 
     @PostMapping("/postUserProfileImage")
-    public ResponseEntity<byte[]> updateUserProfileImage(@RequestPart(name = "image") MultipartFile uploadFile, HttpServletRequest request, @RequestParam(name = "nickname") String nickname) throws CustomError, IOException {
-
-        ResponseEntity<byte[]> result;
-        File imageFile = imageFileService.saveImageFile(uploadFile, nickname);
-
-        try{
-            HttpHeaders header = new HttpHeaders();
-
-            header.add("Content-Type", Files.probeContentType(imageFile.toPath()));
-
-            result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(imageFile), header, HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return result;
+    public ResponseEntity<String> updateUserProfileImage(@RequestBody UserDto userDto) throws CustomError, IOException {
+        String imageFile = imageFileService.saveImageFile(userDto);
+        return ResponseEntity.ok().body(imageFile);
     }
 
     @PostMapping("/getUserClearQuizzes")

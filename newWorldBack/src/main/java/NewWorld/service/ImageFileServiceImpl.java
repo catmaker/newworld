@@ -3,6 +3,7 @@ package NewWorld.service;
 import NewWorld.domain.ImageFile;
 import NewWorld.domain.User;
 import NewWorld.dto.ImageFileDto;
+import NewWorld.dto.UserDto;
 import NewWorld.exception.CustomError;
 import NewWorld.exception.ErrorCode;
 import NewWorld.repository.ImageFileRepository;
@@ -39,35 +40,19 @@ public class ImageFileServiceImpl implements ImageFileService {
      * @return The status of the save operation. Possible values are "s" for success and "f" for failure.
      */
     @Override
-    public File saveImageFile(MultipartFile uploadFile,  String userNickname) throws CustomError, IOException {
-        User user = userRepository.findByNickname(userNickname)
+    public String saveImageFile(UserDto userDto) throws CustomError, IOException {
+        User user = userRepository.findByNickname(userDto.getNickname())
                 .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
 
-        // 이미지 파일만 업로드
-        if (!Objects.requireNonNull(uploadFile.getContentType()).startsWith("image")) {
-            log.warn("this file is not image type");
-        }
 
-        String originalFilename = uploadFile.getOriginalFilename();
-        String path = downLoadPath + File.separator+ originalFilename;
+        String path = userDto.getImageFilePath();
 
-        ImageFileDto imageFileDto = ImageFileDto.of(path, originalFilename);
+        ImageFileDto imageFileDto = ImageFileDto.of(path);
         ImageFile imageFile = ImageFile.of(imageFileDto);
 
         user.saveImage(imageFile);
 
-        File file = new File(path);
-
-        try {
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-            bos.write(uploadFile.getBytes());
-            bos.close();
-
-        } catch (Exception e) {
-           throw e;
-        }
-
-        return file;
+        return path;
     }
 
 }
