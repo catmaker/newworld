@@ -21,11 +21,11 @@ public class ImageFileDto {
         this.fileName = fileName;
     }
 
-    public static ImageFileDto of(String path, String originalFilename) {
+    public static ImageFileDto of(String path) {
         return ImageFileDto.builder()
                 .path(path)
-                .originalPath(originalFilename)
-                .fileName(originalFilename)
+                .originalPath(path)
+                .fileName(path)
                 .build();
     }
 }
