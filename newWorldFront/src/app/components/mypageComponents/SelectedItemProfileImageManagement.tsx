@@ -45,7 +45,7 @@ const SelectedItemProfileImageManagement: React.FC<
   const handleFileChange = async () => {
     if (typeof ImgSrc === "string" && session?.user?.nickname) {
       const data = {
-        url: ImgSrc,
+        imageFilePath: ImgSrc,
         nickname: session.user.nickname,
       };
       const response = await updateUserProfileAPI(data);

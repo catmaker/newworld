@@ -40,7 +40,7 @@ export const postsDeleteAPI = async (data: string) => {
   }
 };
 
-export const postsUpdateAPI = async (data: string) => {
+export const postsUpdateAPI = async (data: {}) => {
   try {
     // 보낼 데이터는 게시글 id, 카테고리, 제목, 내용
     const response = await axios.post(
@@ -92,6 +92,20 @@ export const postsCommunityCommentsAPI = async (data: any) => {
     // 보낼 데이터는 게시글 id, 댓글 내용
     const response = await axios.post(
       "http://localhost:8080/postsCommunityComments",
+      data
+    );
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deletePostsCommentAPI = async (data: any) => {
+  try {
+    // 보낼 데이터는 게시글 id, 댓글 id, 닉네임
+    const response = await axios.post(
+      "http://localhost:8080/deletePostsComment",
       data
     );
     console.log(response);

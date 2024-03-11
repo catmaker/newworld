@@ -2,13 +2,16 @@
 import styles from "@/app/assets/scss/section/_communityPosting.module.scss";
 import { useState } from "react";
 import {
+  deletePostsCommentAPI,
   postsCommunityCommentsAPI,
   postsLikeAPI,
 } from "@/app/lib/api/community";
+import Link from "next/link";
 type Comment = {
   userNickName: string;
   comment: string;
   makedDate: string;
+  commentId: number;
 };
 
 const Community = ({ communityList, userNickname }: any) => {
@@ -17,7 +20,7 @@ const Community = ({ communityList, userNickname }: any) => {
     communityList?.comments || []
   );
   const [like, setLike] = useState(communityList?.like);
-
+  console.log(communityList);
   if (!communityList) {
     return null; // or return a loading indicator
   }
@@ -66,8 +69,21 @@ const Community = ({ communityList, userNickname }: any) => {
   };
 
   const isMaker = communityList.nickname === userNickname;
-  console.log(commentsList[0].user);
-  const deleteCommentHandler = async (commentId: number) => {};
+  const deleteCommentHandler = async (commentId: number) => {
+    const data = {
+      commentId: commentId,
+      postId: postId,
+      nickname: userNickname,
+    };
+    console.log(data);
+    const response = await deletePostsCommentAPI(data);
+    if (response) {
+      alert("댓글이 삭제되었습니다.");
+      setCommentsList((prevComments: Comment[]) =>
+        prevComments.filter((comment) => comment.commentId !== commentId)
+      );
+    }
+  };
 
   return (
     <div className={styles.background}>
@@ -75,7 +91,11 @@ const Community = ({ communityList, userNickname }: any) => {
         <div className={styles.title_box}>
           <div className={styles.title}>
             {title}
-            {isMaker && <button className={styles.edit_button}>수정</button>}
+            {isMaker && (
+              <Link href={`/community/${postId}/fix`}>
+                <button className={styles.edit_button}>수정</button>
+              </Link>
+            )}
           </div>{" "}
           <div className={styles.title_sub}>
             <div className={styles.nickname_box}>
