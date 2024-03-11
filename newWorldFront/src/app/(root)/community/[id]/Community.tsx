@@ -5,6 +5,7 @@ import {
   postsCommunityCommentsAPI,
   postsLikeAPI,
 } from "@/app/lib/api/community";
+import Link from "next/link";
 type Comment = {
   userNickName: string;
   comment: string;
@@ -66,7 +67,6 @@ const Community = ({ communityList, userNickname }: any) => {
   };
 
   const isMaker = communityList.nickname === userNickname;
-  console.log(commentsList[0].user);
   const deleteCommentHandler = async (commentId: number) => {};
 
   return (
@@ -75,7 +75,11 @@ const Community = ({ communityList, userNickname }: any) => {
         <div className={styles.title_box}>
           <div className={styles.title}>
             {title}
-            {isMaker && <button className={styles.edit_button}>수정</button>}
+            {isMaker && (
+              <Link href={`/community/${postId}/fix`}>
+                <button className={styles.edit_button}>수정</button>
+              </Link>
+            )}
           </div>{" "}
           <div className={styles.title_sub}>
             <div className={styles.nickname_box}>

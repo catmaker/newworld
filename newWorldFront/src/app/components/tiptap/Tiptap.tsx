@@ -15,18 +15,28 @@ import { Paragraph } from "@tiptap/extension-paragraph";
 import { Text as TiptapText } from "@tiptap/extension-text";
 import { Color } from "@tiptap/extension-color";
 
-import { postsCreateAPI } from "@/app/lib/api/community";
+import { postsCreateAPI, postsUpdateAPI } from "@/app/lib/api/community";
 import { useRouter } from "next/navigation";
 interface TiptapProps {
   content: string;
   nickname: string;
+  originTitle: string;
+  originCategory: string;
+  originDetail: string;
 }
 
-const Tiptap = ({ content, nickname }: TiptapProps) => {
+const Tiptap = ({
+  content,
+  nickname,
+  originTitle,
+  originDetail,
+  originCategory,
+}: TiptapProps) => {
   const router = useRouter();
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(originTitle); // 원래의 제목을 초기값으로 설정
   const [selectedOption, setSelectedOption] = useState("QUESTION");
   const lowlight = createLowlight(common);
+  const isEditMode = !!originDetail;
   const editor = useEditor({
     extensions: [
       Color,
@@ -41,9 +51,7 @@ const Tiptap = ({ content, nickname }: TiptapProps) => {
         lowlight,
       }),
     ],
-    content: `
-   
-  `,
+    content: originDetail,
   });
   const getEditorContent = () => {
     return editor?.getHTML();
@@ -63,6 +71,27 @@ const Tiptap = ({ content, nickname }: TiptapProps) => {
 
   const handleRegisterClick = async (e: any) => {
     e.preventDefault();
+    if (isEditMode) {
+      const data = await postsUpdateAPI({
+        postId: 1,
+        title: title,
+        detail: getEditorContent(),
+        postType: selectedOption,
+        nickname: nickname,
+      });
+      console.log("수정 버튼이 클릭되었습니다.");
+    } else {
+      // 게시글 등록 로직
+      if (title.trim() === "") {
+        alert("제목을 입력해주세요.");
+        return;
+      }
+      if (getEditorContent() === "") {
+        alert("내용을 입력해주세요.");
+        return;
+      }
+    }
+
     const editorContent = getEditorContent();
     console.log(title);
     console.log(editorContent);
@@ -85,7 +114,6 @@ const Tiptap = ({ content, nickname }: TiptapProps) => {
       console.error(error);
     }
   };
-
   return (
     <>
       <div className="border-2">
@@ -121,12 +149,25 @@ const Tiptap = ({ content, nickname }: TiptapProps) => {
           className={styles.editor}
         />
       </div>
-      <div className={styles.button_box}>
-        <button className={styles.tiptap_button}>취소</button>
-        <button onClick={handleRegisterClick} className={styles.tiptap_button}>
-          등록
-        </button>
-      </div>
+      <>
+        <div className={styles.button_box}>
+          {isEditMode ? (
+            <button
+              onClick={handleRegisterClick}
+              className={styles.tiptap_button}
+            >
+              수정
+            </button>
+          ) : (
+            <button
+              onClick={handleRegisterClick}
+              className={styles.tiptap_button}
+            >
+              등록
+            </button>
+          )}
+        </div>
+      </>
     </>
   );
 };

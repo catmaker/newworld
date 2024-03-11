@@ -40,7 +40,7 @@ export const postsDeleteAPI = async (data: string) => {
   }
 };
 
-export const postsUpdateAPI = async (data: string) => {
+export const postsUpdateAPI = async (data: {}) => {
   try {
     // 보낼 데이터는 게시글 id, 카테고리, 제목, 내용
     const response = await axios.post(
