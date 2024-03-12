@@ -1,7 +1,9 @@
 package NewWorld.service;
 
+import NewWorld.dto.CheckDto;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.CustomError;
+import NewWorld.exception.ErrorCode;
 
 /**
  * 2024.01.14 jeonil
@@ -28,27 +30,16 @@ public interface LoginService {
 
     /**
      * 아이디 찾기
-     * @param userName
-     * @param phoneNumber
+     * @param checkDto
      * @return
      */
-    public String findUserId(String userName, String phoneNumber) throws CustomError;
+    public String findUserId(CheckDto checkDto) throws CustomError;
 
     /**
      * 비밀번호 찾기
-     * @param loginId
-     * @param userName
-     * @param phoneNumber
+     * @param checkDto
      * @return
      */
-    public Boolean findUserPw(String loginId, String userName, String phoneNumber) throws CustomError;
+    public ErrorCode checkUserPw(CheckDto checkDto) throws CustomError;
 
-    /**
-     * 비밀번호 변경
-     * @param loginId
-     * @param userName
-     * @param newPassword
-     * @return
-     */
-    public void updateUserPw(String loginId, String userName, String phoneNumber, String newPassword) throws CustomError;
 }

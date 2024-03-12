@@ -1,7 +1,10 @@
 package NewWorld.controller;
 
+import NewWorld.dto.CheckDto;
 import NewWorld.dto.LoginDto;
 import NewWorld.dto.UserDto;
+import NewWorld.exception.CustomError;
+import NewWorld.exception.ErrorCode;
 import NewWorld.service.LoginService;
 import lombok.RequiredArgsConstructor;
 
@@ -32,6 +35,19 @@ public class LoginController {
         } catch (Exception e) {
             return null;
         }
+        return ResponseEntity.ok().body(result);
+    }
+
+    @PostMapping("/passwordCheck")
+    public  ResponseEntity<ErrorCode> passwordCheck(@RequestBody CheckDto checkDto) throws CustomError {
+        ErrorCode result = loginService.checkUserPw(checkDto);
+
+        return ResponseEntity.status(result.getStatus()).body(result);
+    }
+
+    @PostMapping("/findUserId")
+    public  ResponseEntity<String> findUserId(@RequestBody CheckDto checkDto) throws CustomError {
+        String result = loginService.findUserId(checkDto);
         return ResponseEntity.ok().body(result);
     }
 }

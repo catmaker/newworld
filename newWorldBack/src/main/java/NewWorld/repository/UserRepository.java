@@ -39,11 +39,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     /**
      * 회원조회(비번찾기)
      * @param loginId
-     * @param userName
      * @param phoneNumber
      * @return
      */
-    Optional<User> findByUserIdAndNameAndPhoneNumber(String loginId, String userName, String phoneNumber);
+    Optional<User> findByUserIdAndPhoneNumber(String loginId, String phoneNumber);
 
     /**
      * 닉네임조회

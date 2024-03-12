@@ -2,6 +2,8 @@ package NewWorld.service;
 
 import NewWorld.domain.ImageFile;
 import NewWorld.domain.User;
+import NewWorld.dto.ChangeInfoDto;
+import NewWorld.dto.CheckDto;
 import NewWorld.dto.UserDto;
 import NewWorld.exception.CustomError;
 import NewWorld.exception.ErrorCode;
@@ -25,6 +27,7 @@ import java.util.Optional;
 public class LoginServiceImpl implements LoginService {
 
     private final UserRepository userRepository;
+    private final UserService userService;
 
     @Value("${url.downLoad.path}")
     private String downLoadPath;
@@ -75,13 +78,12 @@ public class LoginServiceImpl implements LoginService {
 
     /**
      * 회원아이디 찾기
-     * @param userName
-     * @param phoneNumber
+     * @param checkDto
      * @return
      */
     @Override
-    public String findUserId(String userName, String phoneNumber) throws CustomError {
-        User user = findUserforChageInfo(null, userName, phoneNumber);
+    public String findUserId(CheckDto checkDto) throws CustomError {
+        User user = findUserforChageInfo(null, checkDto.getName(), checkDto.getPhoneNumber());
         String userId = user.getUserId();
 
         return userId;
@@ -89,29 +91,15 @@ public class LoginServiceImpl implements LoginService {
 
     /**
      * 회원비밀번호 확인
-     * @param loginId
-     * @param userName
-     * @param phoneNumber
+     * @param checkDto
      * @return
      */
     @Override
-    public Boolean findUserPw(String loginId, String userName, String phoneNumber) throws CustomError {
-        User user = findUserforChageInfo(loginId, userName, phoneNumber);
-        return user != null;
+    public ErrorCode checkUserPw(CheckDto checkDto) throws CustomError {
+        User user = findUserforChageInfo(checkDto.getUserId(), null, checkDto.getPhoneNumber());
+        return user !=null?  ErrorCode.SUCCESS : ErrorCode.USER_NOT_FOUND;
     }
 
-    /**
-     * 회원비밀번호 변경
-     * @param loginId
-     * @param userName
-     * @param newPassword
-     * @return
-     */
-    @Override
-    public void updateUserPw(String loginId, String userName, String phoneNumber, String newPassword) throws CustomError {
-        User user = findUserforChageInfo(loginId, userName, phoneNumber);
-        user.changePassword(newPassword);
-    }
 
     /**
      * 회원체크
@@ -138,7 +126,7 @@ public class LoginServiceImpl implements LoginService {
             user = userRepository.findByNameAndPhoneNumber( userName, phoneNumber)
                     .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));
         }else{
-            user = userRepository.findByUserIdAndNameAndPhoneNumber(loginId, userName, phoneNumber)
+            user = userRepository.findByUserIdAndPhoneNumber(loginId, phoneNumber)
                     .orElseThrow(()->new CustomError(ErrorCode.USER_NOT_FOUND));;
         }
 
