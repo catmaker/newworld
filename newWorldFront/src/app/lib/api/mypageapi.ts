@@ -92,13 +92,13 @@ export const postUserChangeInfoAPI = async (data: {
   }
 };
 
-export const getUserProfileImageAPI = async (data: any) => {
+export const getUserProfileImageAPI = async (data: object) => {
   try {
     const response = await axios.post(
       "http://localhost:8080/getUserProfileImage",
       data
     );
-    console.log(response);
+    console.log(response.data);
     return response;
   } catch (error) {
     console.error(error);
