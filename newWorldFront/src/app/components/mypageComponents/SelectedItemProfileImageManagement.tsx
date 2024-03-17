@@ -2,11 +2,9 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "@/app/assets/scss/section/_mypage.module.scss";
-import { uploadImage } from "@/app/utils/cloudinaryUpload";
 import { ProfileImageManagement } from "@/app/types/mypage";
 import { signOut, useSession } from "next-auth/react";
 import { MySession } from "@/app/types/Session";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { CldUploadWidget } from "next-cloudinary";
 import {
@@ -22,7 +20,7 @@ const SelectedItemProfileImageManagement: React.FC<
   const router = useRouter();
   const [preview, setPreview] = useState("");
   const [file, setFile] = useState<File | null>(null);
-  const [ImgSrc, setImgSrc] = useState<string | { secure_url: string }>("");
+  const [ImgSrc, setImgSrc] = useState<string>("");
 
   const [nickname, setNickname] = useState("");
   useEffect(() => {

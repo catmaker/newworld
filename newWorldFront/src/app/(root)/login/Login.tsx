@@ -2,8 +2,7 @@
 import React, { useState } from "react";
 import styles from "@/app/assets/scss/section/_login.module.scss";
 import Link from "next/link";
-import { signIn as nextAuthSignIn, signIn } from "next-auth/react";
-import { useSession } from "next-auth/react";
+import { signIn as signIn } from "next-auth/react";
 
 const Login = () => {
   const [typing, setTyping] = useState(false);
@@ -49,7 +48,6 @@ const Login = () => {
       }
     }
   };
-  const { data: session } = useSession();
   return (
     <div className={styles.container}>
       <div className={styles.login_box}>
@@ -89,7 +87,7 @@ const Login = () => {
             <Link href={`/signup`}>
               <button className={styles.sign_button}>Sign Up</button>
             </Link>{" "}
-            <Link href={`/`}>
+            <Link href={`/forgot`}>
               <button className={styles.forgot_password}>
                 Forgot Password?
               </button>
