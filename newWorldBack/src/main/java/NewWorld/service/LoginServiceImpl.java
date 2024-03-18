@@ -27,7 +27,7 @@ import java.util.Optional;
 public class LoginServiceImpl implements LoginService {
 
     private final UserRepository userRepository;
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @Value("${url.downLoad.path}")
     private String downLoadPath;
@@ -100,6 +100,13 @@ public class LoginServiceImpl implements LoginService {
         return user !=null?  ErrorCode.SUCCESS : ErrorCode.USER_NOT_FOUND;
     }
 
+    @Override
+    public ErrorCode chagePassword(CheckDto checkDto) throws CustomError {
+        User user = userRepository.findByUserIdAndPhoneNumber(checkDto.getUserId(), checkDto.getPhoneNumber())
+                .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
+
+        return userService.changeUserPassword(user.getUserPassword(), checkDto.getNewPassword(), user);
+    }
 
     /**
      * 회원체크

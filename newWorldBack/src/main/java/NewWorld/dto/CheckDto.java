@@ -11,5 +11,7 @@ public class CheckDto {
 
     private String userId;
 
+    private String newPassword;
+
     private String phoneNumber;
 }

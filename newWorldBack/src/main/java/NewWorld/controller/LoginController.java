@@ -45,6 +45,13 @@ public class LoginController {
         return ResponseEntity.status(result.getStatus()).body(result);
     }
 
+    @PostMapping("/chagePassword")
+    public  ResponseEntity<ErrorCode> chagePassword(@RequestBody CheckDto checkDto) throws CustomError {
+        ErrorCode result = loginService.chagePassword(checkDto);
+
+        return ResponseEntity.status(result.getStatus()).body(result);
+    }
+
     @PostMapping("/findUserId")
     public  ResponseEntity<String> findUserId(@RequestBody CheckDto checkDto) throws CustomError {
         String result = loginService.findUserId(checkDto);

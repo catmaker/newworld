@@ -42,4 +42,12 @@ public interface LoginService {
      */
     public ErrorCode checkUserPw(CheckDto checkDto) throws CustomError;
 
+    /**
+     * 비밀번호 변경
+     * @param checkDto
+     * @return
+     */
+    public ErrorCode chagePassword(CheckDto checkDto) throws CustomError;
+
+
 }

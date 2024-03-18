@@ -139,16 +139,11 @@ public class UserServiceImpl implements UserService {
 
         User user = userRepository.findUserByUserIdAndUserPassword(changeInfoDto.getUserId(), changeInfoDto.getOriginPassword())
                 .orElse(null);
-        if(user == null){
-           return ErrorCode.USER_NOT_FOUND;
-        }
-        if(changeInfoDto.getNewPassword().equals(user.getUserPassword())){
-            return ErrorCode.NOT_CHANGE;
-        }
 
-        user.changePassword(changeInfoDto.getNewPassword());
-        return ErrorCode.SUCCESS;
+        return changeUserPassword(changeInfoDto.getOriginPassword(), changeInfoDto.getNewPassword(), user);
     }
+
+
 
     /**
      * user기본정보 조회
@@ -234,6 +229,18 @@ public class UserServiceImpl implements UserService {
             return ErrorCode.USER_NICKNAME_DUPLICATION;
         }
 
+        return ErrorCode.SUCCESS;
+    }
+
+    public ErrorCode changeUserPassword(String originPassword, String newPassword, User user) {
+        if(user == null){
+            return ErrorCode.USER_NOT_FOUND;
+        }
+        if(newPassword.equals(originPassword)){
+            return ErrorCode.NOT_CHANGE;
+        }
+
+        user.changePassword(newPassword);
         return ErrorCode.SUCCESS;
     }
 }
