@@ -2,28 +2,31 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "@/app/assets/scss/section/_mypage.module.scss";
-import { uploadImage } from "@/app/utils/cloudinaryUpload";
 import { ProfileImageManagement } from "@/app/types/mypage";
 import { signOut, useSession } from "next-auth/react";
 import { MySession } from "@/app/types/Session";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { CldUploadWidget } from "next-cloudinary";
-import { updateUserProfileAPI } from "@/app/lib/api/mypageapi";
+import {
+  getUserProfileAPI,
+  getUserProfileImageAPI,
+  updateUserProfileAPI,
+} from "@/app/lib/api/mypageapi";
 const SelectedItemProfileImageManagement: React.FC<
   ProfileImageManagement
 > = ({}) => {
+  const { data: session } = useSession() as { data: MySession | null };
+
   const router = useRouter();
   const [preview, setPreview] = useState("");
   const [file, setFile] = useState<File | null>(null);
-  const [ImgSrc, setImgSrc] = useState<string | { secure_url: string }>("");
+  const [ImgSrc, setImgSrc] = useState<string>("");
 
   const [nickname, setNickname] = useState("");
-  const { data: session } = useSession() as { data: MySession | null };
   useEffect(() => {
-    console.log(file);
-    console.log(ImgSrc);
-  }, [file, ImgSrc]);
+    fetchData();
+  }, []);
+
   // const handleFileChange = async (
   //   event: React.ChangeEvent<HTMLInputElement>
   // ) => {
@@ -60,6 +63,15 @@ const SelectedItemProfileImageManagement: React.FC<
       console.error("url이 없거나 nickname이 없습니다.");
     }
   };
+  const fetchData = async () => {
+    const data = {
+      nickname: session?.user?.nickname,
+    };
+    const response = await getUserProfileImageAPI(data);
+    console.log(response?.data);
+    setImgSrc(response?.data); // 이미지 URL을 preview 상태에 설정
+  };
+
   return (
     <div className={styles.profile_box}>
       <div>
@@ -68,9 +80,7 @@ const SelectedItemProfileImageManagement: React.FC<
           프로필 사진을 변경할 수 있습니다. 최적 사이즈는 200x200 입니다.
         </p>
       </div>
-
-      <Image src={preview} alt="Profile" width={200} height={200} />
-      <div></div>
+      <Image src={ImgSrc} alt="Profile" width={200} height={200} />
       <div>
         <CldUploadWidget
           uploadPreset="iyb69bsk"

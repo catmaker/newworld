@@ -20,13 +20,16 @@ export const authOptions: NextAuthOptions = {
           // credentials 객체에는 사용자가 입력한 아이디와 비밀번호가 포함되어 있습니다.
           const { userId, userPassword } = credentials;
           // 여기서 사용자가 입력한 아이디와 비밀번호를 검증합니다.
-          const res = await fetch("http://localhost:8080/loginMember", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(credentials),
-          });
+          const res = await fetch(
+            "https://port-0-newworldback-fi1xh2blu173lac.sel5.cloudtype.app/loginMember",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(credentials),
+            }
+          );
           const result = await res.json();
           console.log(result);
           // 이미 /loginMember에서 비교는 다 끝난 상황이므로, text인지 null인지만 확인하면 됩니다.

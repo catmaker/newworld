@@ -55,6 +55,8 @@ public class UserPageController {
         return ResponseEntity.status(result.getStatus()).body(result);
     }
 
+
+
     @PostMapping("/postUserChangeInfo")
     public ResponseEntity<ErrorCode> updateInfo(@RequestBody ChangeInfoDto changeInfoDto) throws Exception {
         ErrorCode result = userService.updateUserInfo(changeInfoDto);
