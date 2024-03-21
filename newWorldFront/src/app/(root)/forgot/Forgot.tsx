@@ -6,10 +6,10 @@ const Forgot = () => {
     <>
       <div className={styles.background}>
         <div className={styles.contents}>
-          <Link href={`/`}>
+          <Link href={`/`} className={styles.forgot_id}>
             <div>아이디를 잊어버렸어요.</div>
           </Link>
-          <Link href={`/`}>
+          <Link href={`/`} className={styles.forgot_password}>
             <div>패스워드를 모르겠어요.</div>
           </Link>
         </div>
