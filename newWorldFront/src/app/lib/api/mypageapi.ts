@@ -4,7 +4,9 @@ import FormData from "form-data";
 export const getUserProfileAPI = async () => {
   try {
     // 닉네임 / 이미지 / 포인트 / 가입일
-    const response = await axios.get("http://localhost:8080/getUserProfile");
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/getUserProfile`
+    );
     console.log(response.data);
     console.log(response.data.image);
     console.log(response.data.point);
@@ -20,7 +22,7 @@ export const postUserChangePwAPI = async (data: any) => {
     // 보낼 데이터는 현재 비밀번호, 새 비밀번호, 닉네임
     console.log(data);
     const response = await axios.post(
-      "http://localhost:8080/postUserChangePw",
+      `${process.env.NEXT_PUBLIC_API_URL}/postUserChangePw`,
       data
     );
     console.log(response);
@@ -38,7 +40,7 @@ export const updateUserProfileAPI = async (data: {
 }) => {
   try {
     const response = await axios.post(
-      "http://localhost:8080/postUserProfileImage",
+      `${process.env.NEXT_PUBLIC_API_URL}/postUserProfileImage`,
       data
     );
 
@@ -52,7 +54,10 @@ export const updateUserProfileAPI = async (data: {
 };
 export const withdrawal = async (data: { nickname: string }) => {
   try {
-    const response = await axios.post("http://localhost:8080/withdrawal", data);
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/withdrawal`,
+      data
+    );
     console.log(response);
     return response;
   } catch (error) {
@@ -66,7 +71,7 @@ export const getUserClearQuizzes = async (data: any) => {
     // 게임 제목 / 클리어 날짜 / 난이도
     console.log(data);
     const response = await axios.post(
-      "http://localhost:8080/getUserClearQuizzes",
+      `${process.env.NEXT_PUBLIC_API_URL}/getUserClearQuizzes`,
       data
     );
     console.log(response.data);
@@ -82,7 +87,7 @@ export const postUserChangeInfoAPI = async (data: {
 }) => {
   try {
     const response = await axios.post(
-      "http://localhost:8080/postUserChangeInfo",
+      `${process.env.NEXT_PUBLIC_API_URL}/postUserChangeInfo`,
       data
     );
     console.log(response);
@@ -95,7 +100,7 @@ export const postUserChangeInfoAPI = async (data: {
 export const getUserProfileImageAPI = async (data: object) => {
   try {
     const response = await axios.post(
-      "http://localhost:8080/getUserProfileImage",
+      `${process.env.NEXT_PUBLIC_API_URL}/getUserProfileImage`,
       data
     );
     console.log(response.data);
