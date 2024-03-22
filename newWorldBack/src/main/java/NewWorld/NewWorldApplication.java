@@ -13,13 +13,4 @@ public class NewWorldApplication {
 		SpringApplication.run(NewWorldApplication.class, args);
 	}
 
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("https://newworld-lovat.vercel.app");
-			}
-		};
-	}
 }
