@@ -16,7 +16,6 @@ const page = async (props: any) => {
     return redirect("/login");
   }
   const communityList = await getPostAPI(newObject);
-  console.log(communityList);
   return (
     <Community
       communityList={communityList}

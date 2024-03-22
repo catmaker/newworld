@@ -50,10 +50,8 @@ const Mypage: React.FC<CombinedProps> = ({ session }) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) {
-      console.log("No file selected");
       return;
     }
-    console.log(file.name);
   };
 
   useEffect(() => {
@@ -74,7 +72,6 @@ const Mypage: React.FC<CombinedProps> = ({ session }) => {
       },
     });
     const data = await res.json();
-    console.log(data);
   };
   useEffect(() => {
     fetchData();

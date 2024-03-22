@@ -18,7 +18,6 @@ const SelectedItem: React.FC<SelectedItemProps> = ({
 }) => {
   const { name, id, nickname, point, signupDate, puzzleCount, imageFilePath } =
     session;
-  console.log("imageFile", imageFilePath);
   return (
     <>
       {selectedItem === "개인정보 관리" && <InfoManagement session={session} />}

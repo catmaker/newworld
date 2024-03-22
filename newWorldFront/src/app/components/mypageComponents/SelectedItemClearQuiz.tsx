@@ -13,7 +13,6 @@ const SelectedItemClearQuiz: React.FC<ClearQuizProps> = ({
   session,
   quizzes,
 }) => {
-  console.log(quizzes);
   return (
     <div className={styles.clear_quiz}>
       <div>

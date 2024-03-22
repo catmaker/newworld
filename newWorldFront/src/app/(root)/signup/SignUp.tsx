@@ -110,7 +110,6 @@ const SignUp = () => {
       phoneNumber: PhoneNumberField.value,
       birthday: BirthdayField.value.replaceAll("-", ""),
     };
-    console.log(data);
     try {
       const response = await postJoinAPI(data);
       if (response?.status === 200) {

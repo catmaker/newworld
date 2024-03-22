@@ -79,7 +79,6 @@ const Tiptap = ({
         postType: selectedOption,
         nickname: nickname,
       });
-      console.log("수정 버튼이 클릭되었습니다.");
     } else {
       // 게시글 등록 로직
       if (title?.trim() === "") {
@@ -93,10 +92,7 @@ const Tiptap = ({
     }
 
     const editorContent = getEditorContent();
-    console.log(title);
-    console.log(editorContent);
-    console.log(selectedOption);
-    console.log(nickname);
+
     try {
       const data = await postsCreateAPI({
         title: title,
@@ -104,10 +100,8 @@ const Tiptap = ({
         postType: selectedOption,
         nickname: nickname,
       });
-      console.log(data);
 
       if (data?.status === 200) {
-        console.log("게시글 등록 성공");
         router.push(`/community/${data.data.postId}`);
       }
     } catch (error) {

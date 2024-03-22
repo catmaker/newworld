@@ -5,7 +5,6 @@ import { RankingProps } from "@/app/types/Ranking";
 
 const page = async () => {
   const data = await getTotalRankingAPI(); // 변수를 업데이트
-  console.log(data);
   return (
     <>
       <Ranking total={data} />

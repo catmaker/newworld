@@ -5,7 +5,6 @@ export const getCommunityAPI = async (page: number) => {
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/getCommunity?page=${page}`
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -33,7 +32,6 @@ export const postsDeleteAPI = async (data: string) => {
       `${process.env.NEXT_PUBLIC_API_URL}/postsDelete`,
       data
     );
-    console.log(response);
     return response;
   } catch (error) {
     console.error(error);
@@ -47,7 +45,6 @@ export const postsUpdateAPI = async (data: {}) => {
       `${process.env.NEXT_PUBLIC_API_URL}/postsUpdate`,
       data
     );
-    console.log(response);
     return response;
   } catch (error) {
     console.error(error);
@@ -61,7 +58,6 @@ export const postsViewAPI = async (data: string) => {
       `${process.env.NEXT_PUBLIC_API_URL}/postsView`,
       data
     );
-    console.log(response);
     return response;
   } catch (error) {
     console.error(error);
@@ -75,7 +71,6 @@ export const postsLikeAPI = async (data: any) => {
       `${process.env.NEXT_PUBLIC_API_URL}/postsLike`,
       data
     );
-    console.log(response);
     return response;
   } catch (error) {
     console.error(error);
@@ -84,12 +79,10 @@ export const postsLikeAPI = async (data: any) => {
 
 export const getPostAPI = async (postId: any) => {
   try {
-    console.log(postId);
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/getPost`,
       postId
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     // console.error(error);
@@ -103,7 +96,6 @@ export const postsCommunityCommentsAPI = async (data: any) => {
       ` ${process.env.NEXT_PUBLIC_API_URL}/postsCommunityComments`,
       data
     );
-    console.log(response);
     return response;
   } catch (error) {
     console.error(error);
@@ -117,7 +109,6 @@ export const deletePostsCommentAPI = async (data: any) => {
       `${process.env.NEXT_PUBLIC_API_URL}/deletePostsComment`,
       data
     );
-    console.log(response);
     return response;
   } catch (error) {
     console.error(error);

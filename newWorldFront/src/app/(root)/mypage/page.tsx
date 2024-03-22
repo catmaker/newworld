@@ -19,7 +19,6 @@ const page = async () => {
       puzzleCount,
       imageFilePath,
     } = session.user;
-    console.log(imageFilePath);
     return (
       <div>
         <Mypage

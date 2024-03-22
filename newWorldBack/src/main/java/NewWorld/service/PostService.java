@@ -18,7 +18,7 @@ public interface PostService {
      * @param pageable
      * @return
      */
-    List<PostDto> getAllPost(Pageable pageable);
+    List<PostDto> getAllPost();
     public PostDto getPost(PostDto postDto) throws CustomError;
     public PostDto makePost(PostDto postDto) throws CustomError;
     public PostDto changePost(PostDto postDto);

@@ -12,7 +12,6 @@ const Quiz = ({ quiz, quizId, nickname }: any) => {
     console.error("quiz or quiz.hints is not an array:", quiz);
     return null;
   }
-  console.log(quiz);
   const isMaker = quiz.maker === nickname;
   const checkAnswer = async () => {
     const data = {
@@ -20,14 +19,11 @@ const Quiz = ({ quiz, quizId, nickname }: any) => {
       answer: answer,
       nickname: nickname,
     };
-    console.log(data);
     const response = await postCheckQuizAPI(data);
     if (response?.data === "success") {
-      console.log(response);
       alert("정답입니다!");
       router.push("/quizzes");
     } else {
-      console.log(response);
       alert("틀렸습니다!");
       if (hintIndex < quiz.hints.length - 1) {
         setHintIndex(hintIndex + 1);
@@ -39,14 +35,11 @@ const Quiz = ({ quiz, quizId, nickname }: any) => {
       quizId: quizId,
       nickname: nickname,
     };
-    console.log(data);
     const response = await deleteQuizAPI(data);
     if (response?.data === "success") {
-      console.log(response);
       alert("삭제되었습니다!");
       router.push("/quizzes");
     } else {
-      console.log(response);
       alert("삭제에 실패했습니다!");
     }
   };

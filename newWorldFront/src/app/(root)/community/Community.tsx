@@ -14,9 +14,7 @@ interface Post {
 }
 
 const Community = (data: any) => {
-  console.log(data);
   const [posts, setPosts] = useState(data.data || []);
-  console.log(posts);
   const [currentPage, setCurrentPage] = useState(1);
   const { selectedCategory, handleCategoryClick } = UseCategory(
     "전체",
@@ -35,7 +33,6 @@ const Community = (data: any) => {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
-  console.log(currentPosts);
   const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
 
   if (selectedCategory === "전체") {

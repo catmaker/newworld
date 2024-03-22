@@ -31,7 +31,6 @@ export const authOptions: NextAuthOptions = {
             }
           );
           const result = await res.json();
-          console.log(result);
           // 이미 /loginMember에서 비교는 다 끝난 상황이므로, text인지 null인지만 확인하면 됩니다.
           if (res.status !== 200) {
             throw new Error("로그인 실패");
@@ -39,7 +38,6 @@ export const authOptions: NextAuthOptions = {
           if (result) {
             // 검증이 성공하면 사용자 객체를 반환합니다.
             // 이 객체는 JWT의 `user` 속성에 저장됩니다.
-            console.log(result);
             return {
               id: userId,
               name: result.name,
