@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import static NewWorld.common.ResponseEntityConstants.RESPONSE_ENTITY_NO_CONTENT;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class GameController {
 
