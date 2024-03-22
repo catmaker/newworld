@@ -7,10 +7,7 @@ export const getUserProfileAPI = async () => {
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/getUserProfile`
     );
-    console.log(response.data);
-    console.log(response.data.image);
-    console.log(response.data.point);
-    console.log(response.data.signupDate);
+
     return response.data;
   } catch (error) {
     console.error(error);
@@ -20,12 +17,10 @@ export const getUserProfileAPI = async () => {
 export const postUserChangePwAPI = async (data: any) => {
   try {
     // 보낼 데이터는 현재 비밀번호, 새 비밀번호, 닉네임
-    console.log(data);
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/postUserChangePw`,
       data
     );
-    console.log(response);
     alert("비밀번호가 변경되었습니다. 다시 로그인해주세요.");
     return response;
   } catch (error) {
@@ -44,7 +39,6 @@ export const updateUserProfileAPI = async (data: {
       data
     );
 
-    console.log(response);
     alert("프로필 이미지 업데이트에 성공했습니다.");
     return response;
   } catch (error) {
@@ -58,7 +52,6 @@ export const withdrawal = async (data: { nickname: string }) => {
       `${process.env.NEXT_PUBLIC_API_URL}/withdrawal`,
       data
     );
-    console.log(response);
     return response;
   } catch (error) {
     console.error(error);
@@ -69,12 +62,10 @@ export const withdrawal = async (data: { nickname: string }) => {
 export const getUserClearQuizzes = async (data: any) => {
   try {
     // 게임 제목 / 클리어 날짜 / 난이도
-    console.log(data);
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/getUserClearQuizzes`,
       data
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -90,7 +81,6 @@ export const postUserChangeInfoAPI = async (data: {
       `${process.env.NEXT_PUBLIC_API_URL}/postUserChangeInfo`,
       data
     );
-    console.log(response);
     return response;
   } catch (error) {
     console.error(error);
@@ -103,7 +93,6 @@ export const getUserProfileImageAPI = async (data: object) => {
       `${process.env.NEXT_PUBLIC_API_URL}/getUserProfileImage`,
       data
     );
-    console.log(response.data);
     return response;
   } catch (error) {
     console.error(error);

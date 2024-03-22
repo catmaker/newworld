@@ -9,7 +9,6 @@ const WelcomeMessage: React.FC<WelcomeMessageProps> = ({ session }) => {
   let name, id, nickname, signupDate, puzzleCount, point;
   if (session) {
     ({ name, id, nickname, signupDate, puzzleCount, point } = session);
-    console.log(name, id, nickname, signupDate, puzzleCount, point);
   } else {
     return redirect("/login");
   }

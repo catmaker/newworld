@@ -21,7 +21,6 @@ interface QuizList {
 }
 const Quizzes = (data: Quiz) => {
   const { data: session } = useSession() as { data: MySession | null };
-  console.log(session);
   const userNickname = session?.user?.nickname;
   const [quizList, setQuizList] = React.useState(data.data); // useState를 사용하여 quizList를 상태 변수로 만듭니다.
   const [difficulty, setDifficulty] = useState("전체"); // useState를 사용하여 difficulty를 상태 변수로 만듭니다.
@@ -41,13 +40,11 @@ const Quizzes = (data: Quiz) => {
 
         // res 배열에서 puzzleTitle을 추출하여 새 배열을 생성합니다.
         const solvedPuzzleTitles = res.map((item: any) => item.puzzleTitle);
-        console.log(solvedPuzzleTitles);
 
         // quizList에서 title이 solvedPuzzleTitles에 없는 항목만 남깁니다.
         const newQuizList = quizList.filter(
           (quiz) => !solvedPuzzleTitles.includes(quiz.title)
         );
-        console.log(newQuizList);
 
         setQuizList(newQuizList); // setQuizList를 사용하여 quizList 상태를 업데이트합니다.
       }

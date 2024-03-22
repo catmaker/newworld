@@ -48,7 +48,6 @@ const Post = ({ session }: { session: Session }) => {
         alert("퀴즈가 등록되었습니다.");
         router.push("/quizzes");
       }
-      console.log(response);
     } catch (error) {
       console.error(error);
     }

@@ -64,7 +64,6 @@ const SelectedItemInfoManagement: React.FC<MypageProps> = ({ session }) => {
     };
     try {
       const response = await withdrawal(data);
-      console.log(response);
       if (response) {
         alert("회원탈퇴가 완료되었습니다.");
         signOut();

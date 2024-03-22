@@ -4,7 +4,6 @@ import styles from "@/app/assets/scss/section/_communityPost.module.scss";
 import Tiptap from "@/app/components/tiptap/Tiptap";
 
 const Post = (session: any) => {
-  console.log(session.session.user.nickname);
   const userNickName = session.session.user.nickname;
   return (
     <div className={styles.background}>

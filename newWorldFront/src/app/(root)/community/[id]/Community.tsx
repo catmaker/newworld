@@ -20,7 +20,6 @@ const Community = ({ communityList, userNickname }: any) => {
     communityList?.comments || []
   );
   const [like, setLike] = useState(communityList?.like);
-  console.log(communityList);
   if (!communityList) {
     return null; // or return a loading indicator
   }
@@ -75,7 +74,6 @@ const Community = ({ communityList, userNickname }: any) => {
       postId: postId,
       nickname: userNickname,
     };
-    console.log(data);
     const response = await deletePostsCommentAPI(data);
     if (response) {
       alert("댓글이 삭제되었습니다.");

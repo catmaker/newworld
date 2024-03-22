@@ -11,8 +11,6 @@ const page = async (props: any) => {
 
   const newObject = { postId: postId };
 
-  console.log(newObject);
-  console.log(session);
   return (
     <div>
       <Post userNickName={userNickName} postId={newObject} />

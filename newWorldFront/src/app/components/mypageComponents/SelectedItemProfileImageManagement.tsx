@@ -54,7 +54,6 @@ const SelectedItemProfileImageManagement: React.FC<
       const response = await updateUserProfileAPI(data);
       try {
         if (response) {
-          console.log(response);
         }
       } catch (error) {
         console.error("이미지 업로드 중 에러", error);
@@ -68,7 +67,6 @@ const SelectedItemProfileImageManagement: React.FC<
       nickname: session?.user?.nickname,
     };
     const response = await getUserProfileImageAPI(data);
-    console.log(response?.data);
     setImgSrc(response?.data); // 이미지 URL을 preview 상태에 설정
   };
 

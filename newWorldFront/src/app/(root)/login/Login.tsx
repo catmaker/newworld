@@ -39,7 +39,6 @@ const Login = () => {
         callbackUrl: `${window.location.origin}/`,
         redirect: false,
       });
-      console.log(result);
       if (result?.status === 200) {
         alert("로그인 성공");
         window.location.href = "/";
