@@ -30,6 +30,7 @@ import java.util.List;
 import static NewWorld.common.ResponseEntityConstants.RESPONSE_ENTITY_NO_CONTENT;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class UserPageController {
 
