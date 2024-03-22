@@ -12,6 +12,7 @@ import NewWorld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,11 +31,11 @@ public class PostServiceimpl implements PostService {
     private final LikeRepository likeRepository;
 
     @Override
-    public List<PostDto> getAllPost(Pageable pageable) {
+    public List<PostDto> getAllPost() {
         List<PostDto> result = new ArrayList<>();
-        Page<Post> posts = postRepository.findAll(pageable);
+        List<Post> posts = postRepository.findAll(Sort.by("makedDate"));
 
-        posts.getContent().stream().forEach(s->result.add(PostDto.of(s)));
+        posts.stream().forEach(s->result.add(PostDto.of(s)));
         return result;
     }
 
