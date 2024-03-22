@@ -27,9 +27,9 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/getCommunity")
-    public ResponseEntity<List<PostDto>> findPostList(@RequestParam(required = false, defaultValue = "0", value = "page") int pageNo) {
-        Pageable pageable = PageRequest.of(pageNo, 5, Sort.by("makedDate"));
-        List<PostDto> allPost = postService.getAllPost(pageable);
+    public ResponseEntity<List<PostDto>> findPostList() {
+
+        List<PostDto> allPost = postService.getAllPost();
 
         return ResponseEntity.ok().body(allPost);
     }
