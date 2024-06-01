@@ -79,11 +79,9 @@ export const postUserChangeInfoAPI = async (data: {
   try {
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/postUserChangeInfo`,
-      data,
+      data, // 데이터를 전달
       {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        withCredentials: true, // 설정 객체에 'withCredentials: true'를 추가
       }
     );
     return response;
