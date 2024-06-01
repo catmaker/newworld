@@ -79,7 +79,12 @@ export const postUserChangeInfoAPI = async (data: {
   try {
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/postUserChangeInfo`,
-      data
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
     );
     return response;
   } catch (error) {
